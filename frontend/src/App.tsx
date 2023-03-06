@@ -5,6 +5,7 @@ import "./App.css";
 import Main from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import MyPage from "./pages/MyPage";
+import GamebtiPage from "./pages/GamebtiPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/" element={<Main />} />
       <Route path="/signin" element={<SignInPage />} />
       <Route path="/mypage/:nickname" element={<MyPage />} />
+      <Route path="/gamebti" element={<GamebtiPage />} />
     </Routes>
   );
 }
