@@ -35,7 +35,7 @@ const DUMMY_TOPGAME: Game[] = [
 ];
 const TopRankGame = () => {
   return (
-    <div style={{ border: "5px solid black", padding: "10px" }}>
+    <div style={{ border: "5px solid black", padding: "10px", margin: "10px" }}>
       <h1>이 컴포넌트는 가장인기있는 게임 나타내기</h1>
       {DUMMY_TOPGAME.map((item: Game, index: number) => (
         <div key={index}>
