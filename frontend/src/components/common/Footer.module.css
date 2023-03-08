@@ -1,3 +1,49 @@
-.Footer {
-  
+.footer {
+  background-color: #141e29 ;
+
+}
+.div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.leftDiv {
+  width: 70%;
+}
+
+.footerLink {
+  display: flex;
+  justify-content: flex-start;
+  width: 50%;
+  margin-bottom: 30px;
+}
+
+.footerLink a {
+  color: white;
+  text-decoration: none;
+}
+
+.rightDiv {
+  width: 30%;
+  display:flex;
+  justify-content: flex-end;
+  margin-right: 5%;
+  align-items: center;
+}
+.logoImg {
+  width: 200px;
+}
+
+.admin {
+  color: white;
+  display: flex;
+}
+
+.adminHtag {
+  color: white
+}
+
+.copyright {
+  align-items: center;
+  color: white;
 }
