@@ -1,5 +1,5 @@
 import React from "react";
-
+import logo from "../../asset/logo.png";
 interface Game {
   id: number;
   name: string;
@@ -44,6 +44,9 @@ const TopRankGame = () => {
           {/* <hr /> */}
         </div>
       ))}
+      <div>
+        <img src={logo} alt="" />
+      </div>
     </div>
   );
 };
