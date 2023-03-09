@@ -21,23 +21,36 @@ const MenuBar = () => {
 
   return (
     <div className={styles.navBar}>
-      <img src={logo} alt="" onClick={home} className={styles.logo} />
+      <div className={styles.navLogo}>
+        <img src={logo} alt="" onClick={home} className={styles.logo} />
+      </div>
       <div className={styles.links}>
         <Link to="/game-news">게임 뉴스</Link>
-        <Link to="/sale-info">할인 정보</Link>
-        <Link to="/gamebti">GameBTI</Link>
-        {/* <Link to="/mypage/:nickName">마이페이지</Link> */}
-
-        {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
-        {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
-        {login ? (
-          <img src={defaultImg} alt="" />
-        ) : (
-          <a onClick={loginHandler} href="/">
-            로그인
-          </a>
-        )}
       </div>
+      <div className={styles.links}>
+        <Link to="/sale-info">할인 정보</Link>
+      </div>
+      <div className={styles.links}>
+        <Link to="/gamebti">GameBTI</Link>
+      </div>
+      <div className={styles.searchBox}>
+        <input type="text" />
+        <span></span>
+      </div>
+      {/* <Link to="/mypage/:nickName">마이페이지</Link> */}
+
+      {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
+      {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
+      {login ? (
+        <div className={styles.navProfile}>
+          <p>닉네임</p>
+          <img src={defaultImg} alt="" />
+        </div>
+      ) : (
+        <a className={styles.linkSignIn} onClick={loginHandler} href="/">
+          로그인
+        </a>
+      )}
     </div>
   );
 };
