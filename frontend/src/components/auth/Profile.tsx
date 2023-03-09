@@ -1,7 +1,12 @@
 import React from "react";
 
+import styles from "./Profile.module.css";
 const Profile = () => {
-  return <div>프로필입니다. 마이페이지에 들어갈 프로필</div>;
+  return (
+    <div className={styles.profile}>
+      <h1>프로필 페이지 입니다.</h1>
+    </div>
+  );
 };
 
 export default Profile;
