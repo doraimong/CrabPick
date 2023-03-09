@@ -15,7 +15,7 @@ const MenuBar = () => {
     "https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2022/01/22/j0CUgPfqy6Fn637784817551514147.jpg";
 
   const loginHandler = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();;
+    e.preventDefault();
     setLogin(true);
   };
 
@@ -27,20 +27,30 @@ const MenuBar = () => {
       <div className={styles.links}>
         <Link to="/game-news">게임 뉴스</Link>
       </div>
-      <div className={styles.links}>        <Link to="/sale-info">할인 정보</Link>
-        <Link to="/gamebti">GameBTI</Link>
-        {/* <Link to="/mypage/:nickName">마이페이지</Link> */}
-
-        {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
-        {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
-        {login ? (
-          <img src={defaultImg} alt="" />
-        ) : (
-          <a onClick={loginHandler} href="/">
-            로그인
-          </a>
-        )}
+      <div className={styles.links}>
+        <Link to="/sale-info">할인 정보</Link>
       </div>
+      <div className={styles.links}>
+        <Link to="/gamebti">GameBTI</Link>
+      </div>
+      <div className={styles.searchBox}>
+        <input type="text" />
+        <span></span>
+      </div>
+      {/* <Link to="/mypage/:nickName">마이페이지</Link> */}
+
+      {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
+      {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
+      {login ? (
+        <div className={styles.navProfile}>
+          <p>닉네임</p>
+          <img src={defaultImg} alt="" />
+        </div>
+      ) : (
+        <a className={styles.linkSignIn} onClick={loginHandler} href="/">
+          로그인
+        </a>
+      )}
     </div>
   );
 };
