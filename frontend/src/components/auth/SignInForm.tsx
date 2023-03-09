@@ -1,9 +1,9 @@
 import React from "react";
-
+import styles from "./SignInForm.module.css";
 const SignInForm = () => {
   return (
-    <div>
-      <h1>로그인 폼입니다. 스팀 로그인 구현</h1>
+    <div className={styles.form}>
+      <h1>로그인 폼입니다.</h1>
     </div>
   );
 };
