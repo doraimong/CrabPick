@@ -29,3 +29,11 @@
 .links a:hover {
   color: yellow;
 }
+
+.links img {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 5%;
+}
