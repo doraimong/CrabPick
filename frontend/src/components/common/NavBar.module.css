@@ -1,22 +1,19 @@
 .navBar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 20px;
+  place-items: center ;
   background-color: #141e29;
 }
 
-.logo {
-  width: 290px;
-  margin-bottom: 0;
-  margin-right: 10%;
-  cursor: pointer;
+.navLogo {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
-.links {
-  width: 40%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 5%;
+.logo {
+  height: 104px;
+  cursor: pointer;
 }
 
 .links a {
@@ -30,10 +27,32 @@
   color: yellow;
 }
 
-.links img {
-  width: 10%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 5%;
+.linkSignIn {
+  grid-column: 8;
+  color: #979797;
+  text-decoration: none;
+  font-size: 15pt;
+  font-weight: bold;
+}
+.linkSignIn:hover {
+  cursor: pointer;
+  color: yellow;
+}
+
+
+.navProfile {
+  display: grid;
+  place-items: center ;
+  grid-column: 8;
+}
+/* 
+.navNickname {
+  
+} */
+
+.navProfile img {
+  width: 40%;
+  border-radius: 20%;
+  place-items: center ;
+  cursor: pointer;
 }
