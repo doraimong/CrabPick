@@ -1,5 +1,13 @@
 .footer {
   background-color: #141e29 ;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 1%;
+  /* position: sticky; */
+  bottom: 0;
+  margin: 0 auto
+  /* width: 100%; */
 
 }
 .div {
@@ -16,6 +24,7 @@
   justify-content: flex-start;
   width: 50%;
   margin-bottom: 30px;
+  margin-top: 10px
 }
 
 .footerLink a {
@@ -27,7 +36,6 @@
   width: 30%;
   display:flex;
   justify-content: flex-end;
-  margin-right: 5%;
   align-items: center;
 }
 .logoImg {
@@ -37,6 +45,7 @@
 .admin {
   color: white;
   display: flex;
+  margin-bottom: 5%;
 }
 
 .adminHtag {
@@ -44,6 +53,7 @@
 }
 
 .copyright {
-  align-items: center;
+  display: flex;
   color: white;
+  justify-content: center;
 }

@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.copyright}>
-        Copyright 2023 CrabPICK All right reserved.
+        Copyright 2023. CrabPICK All right reserved.
       </div>
     </div>
   );
