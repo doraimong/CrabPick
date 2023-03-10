@@ -7,7 +7,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class AddMemberReqDto {
+public class MemberAddReqDto {
 
     private String name;
     private String email;
