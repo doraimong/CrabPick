@@ -10,4 +10,5 @@ import lombok.Getter;
 public class SteamLibraryRespDto {
 
     private Long id;
+    private Long gameId;
 }

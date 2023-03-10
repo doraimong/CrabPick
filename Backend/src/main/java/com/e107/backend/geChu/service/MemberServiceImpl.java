@@ -31,7 +31,6 @@ public class MemberServiceImpl implements MemberService{
         List<Member> list = memberRepository.findAll();
         for (Member m : list) {
             log.info("MEMBER_INFO=========================================================");
-            log.info("{}", m);
             respList.add(MemberRespDto.of(m));
         }
         return respList;

@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final MemberRepository memberRepository;
     private final MemberServiceImpl memberServiceImpl;
 
     @GetMapping
