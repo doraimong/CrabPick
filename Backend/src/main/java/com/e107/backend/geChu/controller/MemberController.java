@@ -20,9 +20,9 @@ public class MemberController {
     private final MemberServiceImpl memberServiceImpl;
 
     @GetMapping
-    public ResponseEntity<String> getMember() {
+    public ResponseEntity<List<MemberRespDto>> getMember() {
         List<MemberRespDto> list = memberServiceImpl.findAllMember();
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PostMapping

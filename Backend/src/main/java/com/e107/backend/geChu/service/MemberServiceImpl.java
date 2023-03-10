@@ -32,15 +32,8 @@ public class MemberServiceImpl implements MemberService{
         for (Member m : list) {
             log.info("MEMBER_INFO=========================================================");
             log.info("{}", m);
-            respList.add(CardInfoRespDto.builder()
-                    .cardId(p.getId())
-                    .cardNo(p.getCardNo().substring(0, 4))
-                    .name(p.getName())
-                    .validDate(p.getValidDate())
-                    .build());
-
-
+            respList.add(MemberRespDto.of(m));
         }
-        return null;
+        return respList;
     }
 }
