@@ -25,14 +25,15 @@ public class MemberRespDto {
     private List<SteamLibraryRespDto> steamLibraries = new ArrayList<>();
 
 
-//    public static MemberRespDto of(Member m) {
-//        return MemberRespDto.builder()
-//                .id(m.getId())
-//                .name(m.getName())
-//                .email(m.getEmail())
-//                .steamToken(m.getSteamToken())
-//                .steamNickname(m.getSteamNickname())
-//                .friends(m.getFriends())
-//
-//    }
+    public static MemberRespDto of(Member m) {
+        return MemberRespDto.builder()
+                .id(m.getId())
+                .name(m.getName())
+                .email(m.getEmail())
+                .steamToken(m.getSteamToken())
+                .steamNickname(m.getSteamNickname())
+                .friends(m.getFriends())
+                .build();
+
+    }
 }
