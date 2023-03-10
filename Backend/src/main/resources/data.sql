@@ -9,3 +9,6 @@ insert into bookmark values (1, 1, 1)
 insert into rating values (1, 3, 1, 1)
 insert into steam_library values (1, 1, 1)
 insert into game_comment values (1,'내용', '2013-08-05 18:19:03', 1, 1)
+
+--                 ID  AUTHOR_ID    CONTENT  IS_RECOMMEND  LANGUAGE  PLAYTIME_ALL PLAYTIME_AT_REVIEW  VOTES_UP
+insert into review values (1, 1, 'CONTNET', true, 'korean', 123.5, 5.5, 33)

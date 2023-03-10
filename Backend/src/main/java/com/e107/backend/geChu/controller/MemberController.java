@@ -1,28 +1,33 @@
 package com.e107.backend.geChu.controller;
 
-import com.e107.backend.geChu.dto.request.AddMemberReqDto;
+import com.e107.backend.geChu.dto.request.MemberAddReqDto;
 import com.e107.backend.geChu.domain.repository.MemberRepository;
+import com.e107.backend.geChu.dto.response.MemberRespDto;
+import com.e107.backend.geChu.service.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
-public class UserController {
+public class MemberController {
 
     private final MemberRepository memberRepository;
+    private final MemberServiceImpl memberServiceImpl;
 
     @GetMapping
     public ResponseEntity<String> getMember() {
-
+        List<MemberRespDto> list = memberServiceImpl.findAllMember();
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<String> addMember(@RequestBody AddMemberReqDto dto) {
-        memberRepository.save(dto.toEntity());
+    public ResponseEntity<String> addMember(@RequestBody MemberAddReqDto dto) {
+        memberServiceImpl.saveMember(dto.toEntity());
         return new ResponseEntity<>("ZZ", HttpStatus.OK);
     }
 }
