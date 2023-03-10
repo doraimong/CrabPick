@@ -1,20 +1,40 @@
 .navBar {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  grid-gap: 20px;
+  grid-gap: 1.5rem;
   place-items: center ;
   background-color: #141e29;
 }
 
+
+
+/* 로고 */
+/* 로고를 담는 div */
 .navLogo {
   grid-column-start: 1;
   grid-column-end: 3;
 }
-
+/* 로고 그림 */
 .logo {
-  height: 104px;
+  width: 15rem;
   cursor: pointer;
 }
+
+
+
+/* 네비게이션의 메뉴들 */
+.links {
+  color: #979797;
+  text-decoration: none;
+  font-size: 15pt;
+  font-weight: bold;
+}
+
+.links:hover {
+  color: yellow;
+  cursor: pointer;
+}
+
 
 .links a {
   color: #979797;
@@ -27,6 +47,7 @@
   color: yellow;
 }
 
+/* 로그인 버튼 */
 .linkSignIn {
   grid-column: 8;
   color: #979797;
@@ -39,78 +60,15 @@
   color: yellow;
 }
 
-.search-box input[type="text"] {
-  border: none;
-  background: none;
-  z-index: 1;
-  width: 25px;
-  height: 25px;
-  transition: all .25s ease-in .25s;
-  color: transparent;
-  font-size: .75rem;
-  line-height:25px;
-}
 
-.search-box input[type="text"]:hover {
-  cursor: pointer;
-}
-
-.search-box input[type="text"]:hover:focus {
-  cursor: text;
-}
-
-.search-box input[type="text"]:hover + span {
-  background: rgba(255,255,255,0.2);
-}
-
-.search-box input[type="text"]:focus {
-  width: 200px;
-  padding: 0 10px;
-  outline: none;
-  color: black;
-  background:none;
-}
-
-.search-box input[type="text"]:focus + span {
-  width: 200px;
-}
-
-.search-box input[type="text"]:focus + span::before {
-  width: 2px;
-  opacity: 0;
-  transition: all .25s ease-in;
-}
-
-.search-box input[type="text"] + span {
-  z-index: -1;
-  position: absolute;
-  border: 2px solid white;
-  top: 0;
-  width: 25px;
-  height: 25px;
-  transition: all .25s ease-in .25s;
-  border-radius: 25px;
-  left: 0;
-}
-
-.search-box input[type="text"] + span::before {
-  transition: all .25s ease-in .5s;
-  transform-origin: left top;
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 5px;
-  border-radius: 5px;
-  background: white;
-  transform: rotate(45deg) translate(26px, -2px);
-}
+/* 검색 */
 
 
+/* 프로필 */
 .navProfile {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  padding: 5px;
+  padding: 0.5rem;
   grid-column: 8;
 }
 
@@ -118,11 +76,13 @@
   color: #979797;
   font-size: 13pt;
   font-weight: bold;
+  padding: 0.5rem;
   cursor: pointer;
+  border: none;
 }
 
 .navProfile img {
-  width: 40%;
+  width: 3.5rem;
   border-radius: 20%;
   cursor: pointer;
 }
