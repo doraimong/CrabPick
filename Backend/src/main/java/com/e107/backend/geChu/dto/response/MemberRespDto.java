@@ -40,7 +40,12 @@ public class MemberRespDto {
                                 .gameId(bookmark.getGame().getId())
                                 .build())
                                 .collect(Collectors.toList()))
+                .steamLibraries(m.getSteamLibraries().stream()
+                        .map(library -> SteamLibraryRespDto.builder()
+                                .id(library.getId())
+                                .gameId(library.getGame().getId())
+                                .build())
+                                .collect(Collectors.toList()))
                 .build();
-
     }
 }
