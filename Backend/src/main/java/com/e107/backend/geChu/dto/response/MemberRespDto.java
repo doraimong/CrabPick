@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -33,6 +34,12 @@ public class MemberRespDto {
                 .steamToken(m.getSteamToken())
                 .steamNickname(m.getSteamNickname())
                 .friends(m.getFriends())
+                .bookmarks(m.getBookmarks().stream()
+                        .map(bookmark -> BookmarkRespDto.builder()
+                                .id(bookmark.getId())
+                                .gameId(bookmark.getGame().getId())
+                                .build())
+                                .collect(Collectors.toList()))
                 .build();
 
     }
