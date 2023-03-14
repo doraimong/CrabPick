@@ -25,7 +25,7 @@ def makegames():
     if not os.path.exists(f"{os.path.dirname(__file__)}/games.csv"):
         with open(f"{os.path.dirname(__file__)}/games.csv", "a", newline='', encoding="utf-8") as games:
             csv_writer = csv.writer(games)
-            csv_writer.writerow([None, "name","age_limit","developers","genre","release","avg_playtime","mood","word_cloud","steam_link","image_link","trailer_link"])
+            csv_writer.writerow([None, "appid","name","age_limit","developers","genre","release","avg_playtime","mood","word_cloud","steam_link","image_link","trailer_link"])
     try:
         with open(f"{os.path.dirname(__file__)}/applist.csv", "r", encoding="utf-8") as f:
             with open(f"{os.path.dirname(__file__)}/games.csv", "a", newline='', encoding="utf-8") as ff:
@@ -72,7 +72,7 @@ def makegames():
                                         trailer_link = None
                                     # csv 쓰기
                                     games = csv.writer(ff)
-                                    games.writerow([games_line, name, age_limit, developers, genre, release, None, None, None, steam_link, image_link, trailer_link])
+                                    games.writerow([games_line, appid[0],name, age_limit, developers, genre, release, None, None, None, steam_link, image_link, trailer_link])
                                     print(games_line)
                                     games_line += 1
                         # 시간 딜레이 하기
