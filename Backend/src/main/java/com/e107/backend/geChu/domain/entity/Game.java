@@ -44,4 +44,12 @@ public class Game {
 
     @Comment("스팀 링크")
     private String steamLink;
+
+    @Comment("리뷰 링크")
+    private String reviewLink;
+
+    @Comment("이미지 링크")
+    private String imgUrl;
+    @Comment("트레일러 링크")
+    private String trailer_url;
 }

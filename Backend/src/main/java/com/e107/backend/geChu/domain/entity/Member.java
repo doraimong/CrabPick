@@ -1,7 +1,6 @@
 package com.e107.backend.geChu.domain.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -18,20 +17,20 @@ public class Member {
     @GeneratedValue
     private Long id;
 
-    @Comment("유저 이름")
+    @org.hibernate.annotations.Comment("유저 이름")
     private String name;
 
     @Email
-    @Comment("유저 이메일")
+    @org.hibernate.annotations.Comment("유저 이메일")
     private String email;
 
-    @Comment("스팀 토큰")
+    @org.hibernate.annotations.Comment("스팀 토큰")
     private String steamToken;
 
-    @Comment("스팀 닉네임")
+    @org.hibernate.annotations.Comment("스팀 닉네임")
     private String steamNickname;
 
-    @Comment("스팀 친구목록")
+    @org.hibernate.annotations.Comment("스팀 친구목록")
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String> friends;
 
@@ -41,15 +40,11 @@ public class Member {
 
     @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<GameComment> gameComments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SteamLibrary> steamLibraries = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Rating> ratings = new ArrayList<>();
 
 
 }

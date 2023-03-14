@@ -1,10 +1,15 @@
 package com.e107.backend.geChu.service;
 
 import com.e107.backend.geChu.domain.entity.Member;
+import com.e107.backend.geChu.domain.entity.SteamLibrary;
 import com.e107.backend.geChu.domain.repository.MemberRepository;
+import com.e107.backend.geChu.dto.response.CommentRespDto;
 import com.e107.backend.geChu.dto.response.MemberRespDto;
+import com.e107.backend.geChu.dto.response.SteamLibraryRespDto;
+import com.e107.backend.global.common.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -34,5 +39,28 @@ public class MemberServiceImpl implements MemberService{
             respList.add(MemberRespDto.of(m));
         }
         return respList;
+    }
+
+    @Override
+    public MemberRespDto findMemberById(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CommonException(2, "Member객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        return MemberRespDto.of(member);
+    }
+
+    @Override
+    public List<CommentRespDto> findAllReview(Long memberId) {
+        return memberRepository.findAllComment(memberId);
+    }
+
+    @Override
+    public List<SteamLibraryRespDto> findAllGame(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CommonException(2, "Member객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        List<SteamLibraryRespDto> list = new ArrayList<>();
+        for (SteamLibrary s : member.getSteamLibraries()) {
+            list.add(SteamLibraryRespDto.of(s));
+        }
+        return list;
     }
 }
