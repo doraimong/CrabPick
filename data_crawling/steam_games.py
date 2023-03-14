@@ -1,8 +1,8 @@
-import pandas as pd
-import os
-import requests
 import csv
+import os
 import time
+
+import requests
 
 # def makeapplist():
 
