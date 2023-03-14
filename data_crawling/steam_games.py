@@ -21,16 +21,20 @@ import requests
 
 #     data.to_csv("./applist.csv", encoding="utf-8-sig", index=False)
 
+roooooot = '~/data/'
+
+
+
 def makegames():
-    if not os.path.exists(f"{os.path.dirname(__file__)}/games.csv"):
-        with open(f"{os.path.dirname(__file__)}/games.csv", "a", newline='', encoding="utf-8") as games:
+    if not os.path.exists(f"{roooooot}/games.csv"):
+        with open(f"{roooooot}/games.csv", "a", newline='', encoding="utf-8") as games:
             csv_writer = csv.writer(games)
             csv_writer.writerow([None, "appid","name","age_limit","developers","genre","release","avg_playtime","mood","word_cloud","steam_link","image_link","trailer_link"])
     try:
-        with open(f"{os.path.dirname(__file__)}/applist.csv", "r", encoding="utf-8") as f:
-            with open(f"{os.path.dirname(__file__)}/games.csv", "a", newline='', encoding="utf-8") as ff:
-                if os.path.exists(f"{os.path.dirname(__file__)}/error_log.txt"):
-                    with open(f"{os.path.dirname(__file__)}/error_log.txt", "r", encoding="utf-8") as log:
+        with open(f"{roooooot}/applist.csv", "r", encoding="utf-8") as f:
+            with open(f"{roooooot}/games.csv", "a", newline='', encoding="utf-8") as ff:
+                if os.path.exists(f"{roooooot}/error_log.txt"):
+                    with open(f"{roooooot}/error_log.txt", "r", encoding="utf-8") as log:
                         log_lines = log.readlines()
                         applist_line, games_line = map(int, log_lines[-1].split())
                 else:
@@ -86,11 +90,11 @@ def makegames():
                         raise Exception("API fail")
                         break
     except KeyboardInterrupt as e:
-        with open(f"{os.path.dirname(__file__)}/error_log.txt", "a", encoding="utf-8") as f:
+        with open(f"{roooooot}/error_log.txt", "a", encoding="utf-8") as f:
             f.writelines(["Manualy shutdown" + "\n", f"{applist_line} {games_line}", "\n"])
             print(e)
     except Exception as e:
-        with open(f"{os.path.dirname(__file__)}/error_log.txt", "a", encoding="utf-8") as f:
+        with open(f"{roooooot}/error_log.txt", "a", encoding="utf-8") as f:
             f.writelines([e.__str__() + "\n", f"{applist_line} {games_line}", "\n"])
             print(e)
         
