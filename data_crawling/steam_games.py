@@ -21,7 +21,7 @@ import requests
 
 #     data.to_csv("./applist.csv", encoding="utf-8-sig", index=False)
 
-roooooot = '~/data/'
+roooooot = '/home/ubuntu/data'
 
 
 
