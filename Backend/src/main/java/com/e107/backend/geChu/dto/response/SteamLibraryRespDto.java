@@ -1,0 +1,14 @@
+package com.e107.backend.geChu.dto.response;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+@Builder
+public class SteamLibraryRespDto {
+
+    private Long id;
+    private Long gameId;
+}
