@@ -23,7 +23,6 @@ public class MemberRespDto {
     private String steamNickname;
     private List<String> friends;
     private List<BookmarkRespDto> bookmarks = new ArrayList<>();
-    private List<SteamLibraryRespDto> steamLibraries = new ArrayList<>();
 
 
     public static MemberRespDto of(Member m) {
@@ -38,12 +37,6 @@ public class MemberRespDto {
                         .map(bookmark -> BookmarkRespDto.builder()
                                 .id(bookmark.getId())
                                 .gameId(bookmark.getGame().getId())
-                                .build())
-                                .collect(Collectors.toList()))
-                .steamLibraries(m.getSteamLibraries().stream()
-                        .map(library -> SteamLibraryRespDto.builder()
-                                .id(library.getId())
-                                .gameId(library.getGame().getId())
                                 .build())
                                 .collect(Collectors.toList()))
                 .build();
