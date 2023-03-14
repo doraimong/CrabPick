@@ -85,6 +85,10 @@ def makegames():
                         print(r.status_code)
                         raise Exception("API fail")
                         break
+    except KeyboardInterrupt as e:
+        with open(f"{os.path.dirname(__file__)}/error_log.txt", "a", encoding="utf-8") as f:
+            f.writelines(["Manualy shutdown" + "\n", f"{applist_line} {games_line}", "\n"])
+            print(e)
     except Exception as e:
         with open(f"{os.path.dirname(__file__)}/error_log.txt", "a", encoding="utf-8") as f:
             f.writelines([e.__str__() + "\n", f"{applist_line} {games_line}", "\n"])
