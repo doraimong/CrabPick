@@ -2,6 +2,7 @@ package com.e107.backend.geChu.controller;
 
 import com.e107.backend.geChu.dto.response.CommentRespDto;
 import com.e107.backend.geChu.dto.response.GameDetailRespDto;
+import com.e107.backend.geChu.dto.response.GameOwnedMemberRespDto;
 import com.e107.backend.geChu.service.CommentService;
 import com.e107.backend.geChu.service.GameService;
 import lombok.RequiredArgsConstructor;

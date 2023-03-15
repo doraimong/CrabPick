@@ -5,9 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -33,9 +31,9 @@ public class Member {
     private String steamNickname;
 
     @org.hibernate.annotations.Comment("스팀 친구목록")
-    @ElementCollection(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
-    private Set<MyFriend> friends = new HashSet<>();
+    private List<Friend> friends = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
