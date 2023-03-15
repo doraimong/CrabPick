@@ -1,6 +1,5 @@
 import React from "react";
-import { Carousel } from "antd";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { Carousel, Icon } from "antd";
 
 import styles from "./RecommendCarousel.module.css";
 
@@ -18,23 +17,12 @@ const RecommendCarousel: React.FC<MyCarouselProps> = ({
   images,
   autoplay = true,
 }) => {
-  const prevButton = (
-    <button className={styles.prevButton}>
-      <LeftOutlined />
-    </button>
-  );
-  const nextButton = (
-    <button className={styles.nextButton}>
-      <RightOutlined />
-    </button>
-  );
+  // const Arrow = { type };
   return (
     <div className={styles.recommendCarousel}>
       <Carousel
         // autoplay={autoplay}
         dots={true}
-        prevArrow={prevButton}
-        nextArrow={nextButton}
       >
         {images.map((image: Image) => (
           <div key={image.id} className={styles.carouselContent}>
