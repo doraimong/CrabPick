@@ -1,0 +1,42 @@
+.recommendCarousel {
+  /* text-align: center; */
+  /* align-items: center; */
+  /* display: flex; */
+  /* justify-content: center; */
+  position: relative;
+}
+
+.prevButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #000;
+  left: 10px;
+}
+
+.nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #000;
+  right: 10px;
+}
+
+.carouselContent {
+  display: flex !important;
+  justify-content: center;
+}
+
+.carouselContent div h1 {
+  color: white;
+}
