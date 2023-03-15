@@ -31,12 +31,12 @@ public class MemberController {
         return new ResponseEntity<>(memberServiceImpl.findMemberById(memberId), HttpStatus.OK);
     }
 
-    @GetMapping("/review/{memberId}")
+    @GetMapping("/{memberId}/review")
     public ResponseEntity<List<CommentRespDto>> getReview(@PathVariable Long memberId) {
         return new ResponseEntity<>(memberServiceImpl.findAllReview(memberId), HttpStatus.OK);
     }
 
-    @GetMapping("/game/{memberId}")
+    @GetMapping("/{memberId}/game")
     public ResponseEntity<List<SteamLibraryRespDto>> getGame(@PathVariable Long memberId) {
         return new ResponseEntity<>(memberServiceImpl.findAllGame(memberId), HttpStatus.OK);
     }
