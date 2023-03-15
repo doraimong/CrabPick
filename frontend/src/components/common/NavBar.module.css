@@ -1,4 +1,39 @@
-.NavBar {
+.navBar {
   display: flex;
   justify-content: space-between;
+  background-color: #141e29;
+}
+
+.logo {
+  width: 290px;
+  margin-bottom: 0;
+  margin-right: 10%;
+  cursor: pointer;
+}
+
+.links {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 5%;
+}
+
+.links a {
+  color: #979797;
+  text-decoration: none;
+  font-size: 15pt;
+  font-weight: bold;
+}
+
+.links a:hover {
+  color: yellow;
+}
+
+.links img {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 5%;
 }
