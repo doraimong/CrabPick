@@ -21,8 +21,7 @@ import requests
 
 #     data.to_csv("./applist.csv", encoding="utf-8-sig", index=False)
 
-roooooot = '/home/ubuntu/data'
-
+roooooot = os.path.dirname(__file__)
 
 
 def makegames():
@@ -49,7 +48,13 @@ def makegames():
                     start = time.time()
                     r = requests.get(f"https://store.steampowered.com/api/appdetails?appids={appid[0]}")
                     if r.status_code == 200:
-                        apps = r.json()
+                        try:
+                            apps = r.json()
+                        except:
+                            with open(f"{roooooot}/error_log.txt", "a", encoding="utf-8") as f:
+                                f.writelines([f"JSON Decode Error {appid}"])
+                                print(e)
+                            continue
                         for app in apps.values():
                             if app["success"]: # 요청 성공 실패 여부
                                 data = app["data"]
