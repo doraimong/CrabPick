@@ -53,7 +53,6 @@ def makegames():
                         except:
                             with open(f"{roooooot}/error_log.txt", "a", encoding="utf-8") as f:
                                 f.writelines([f"JSON Decode Error {appid}"])
-                                print(e)
                             continue
                         for app in apps.values():
                             if app["success"]: # 요청 성공 실패 여부

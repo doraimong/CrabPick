@@ -17,7 +17,7 @@ try:
                 games_line = 1
             games = csv.reader(game_f)
             review_csv = csv.writer(review_f)
-            review_csv.writerow([None,"game_id", "review_id", "author", "voted_up", "language"])
+            review_csv.writerow([None,"game_id", "review_id", "author", "voted_up", "language", "steam_purchase"])
             query = {
                 "json": 1,    
                 "num_per_page": 100,    
@@ -46,8 +46,9 @@ try:
                                     author = review["author"]
                                     voted_up = review["voted_up"]
                                     language = review["language"]
-                                    review_csv.writerow([review_line, game[1], review_id, author, voted_up, language])
-                                    # print(i)
+                                    steam_purchase = review["steam_purchase"]
+                                    review_csv.writerow([review_line, game[1], review_id, author, voted_up, language, steam_purchase])
+                                    print(review_line, game[1])
                                     end = time.time()
                                     time.sleep(1.5 - end + start)
                                     review_line += 1
