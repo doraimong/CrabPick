@@ -27,6 +27,8 @@ public class GameDetailRespDto {
     private String imgUrl;
     private String trailer_url;
     private List<CommentRespDto> comments;
+    private List<GameOwnedMemberRespDto> ownedMembers;
+//    private List<>
 
     public static GameDetailRespDto of(Game g) {
         return GameDetailRespDto.builder()
@@ -46,5 +48,8 @@ public class GameDetailRespDto {
 
     public void setComments(List<CommentRespDto> list) {
         this.comments = list;
+    }
+    public void setOwnedMembers(List<GameOwnedMemberRespDto> list) {
+        this.ownedMembers = list;
     }
 }

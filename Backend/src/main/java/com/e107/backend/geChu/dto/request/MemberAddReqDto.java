@@ -1,7 +1,10 @@
 package com.e107.backend.geChu.dto.request;
 
 import com.e107.backend.geChu.domain.entity.Member;
+import com.e107.backend.geChu.domain.entity.MyFriend;
 import lombok.*;
+
+import java.util.HashSet;
 import java.util.List;
 
 @Getter
@@ -13,7 +16,7 @@ public class MemberAddReqDto {
     private String email;
     private String steamToken;
     private String steamNickname;
-    private List<String> friends;
+    private HashSet<MyFriend> friends;
 
     public Member toEntity() {
         return Member.builder()

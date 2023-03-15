@@ -1,8 +1,9 @@
 insert into member values (1, 'email', 'name', 'steamNickname', 'steamToken')
 insert into member values (2, 'email2', 'name2', 'steamNickname2', 'steamToken')
-insert into member_friends values(1, 'a')
-insert into member_friends values(1, 'b')
-insert into member_friends values(1, 'c')
+insert into member values (3, 'email2', 'name2', 'steamNickname2', 'steamToken')
+insert into member_friends values(1, 1, 'aa')
+insert into member_friends values(1, 2, 'bb')
+insert into member_friends values(1, 3, 'ccc')
 
 --                      ID  AGE_LIMIT  AVG_PLAYTIME  DEVELOPER 	GENRE  MOOD  NAME  RELEASE  STEAM_LINK  WORD_CLOUD
 insert into game values (1, 19, 1.5, 'developer', 'genre', 'imgurl', 'mood', 'name', '2012-01-01','reviewlink', 'steamlingk','trailerurl', 'wordcloud')
@@ -12,6 +13,10 @@ insert into bookmark values (1, 1, 1)
 insert into steam_library values (1, 1, 'url1',1, 'name', 1,3,1)
 insert into steam_library values (2, 2, 'url2',3, 'name2',1,1,1)
 insert into steam_library values (3, 3, 'url3', 7,'name3',1,2,1)
+insert into steam_library values (4, 3, 'url3', 7,'name3',1,2,2)
+insert into steam_library values (5, 2, 'url3', 2,'name3',1,1,2)
+insert into steam_library values (6, 1, 'url3', 5,'name3',1,1,3)
+
 insert into comment values (1,'내용', '2013-08-05 18:19:03', 2, 1)
 insert into comment values (2,'내용2', '2013-08-05 20:19:03', 1, 1)
 insert into comment values (3,'내용3', '2013-08-05 20:19:03', 1, 1)

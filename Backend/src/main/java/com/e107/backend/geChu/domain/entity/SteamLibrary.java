@@ -29,7 +29,7 @@ public class SteamLibrary {
     private String imgUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private Member member;
 
 }
