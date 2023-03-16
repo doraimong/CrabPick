@@ -1,34 +1,52 @@
 import React from "react";
 import RecommendCarousel from "./RecommendCarousel";
 
+import footballmanager from "../../asset/DUMMY/footballmanager.jpg";
+import battlegrounds from "../../asset/DUMMY/battlegrounds.jpg";
+import hogwarts from "../../asset/DUMMY/hogwarts.jpg";
 const RecommendGame = () => {
-  const images = [
+  const games = [
     {
-      url: "https://via.placeholder.com/150",
-      description: ["Title 1", "Genre 1", "Director 1"],
+      url: footballmanager,
+      title: "Football Manager 2023",
+      id: 1,
+      genre: "시뮬레이션, 스포츠",
+      etc: "SEGA",
+      // description: ["Football Manager 2023", "시뮬레이션, 스포츠", "SEGA"],
     },
     {
-      url: "https://via.placeholder.com/150",
-      description: ["Title 2", "Genre 2", "Director 2"],
+      url: battlegrounds,
+      title: "PUBG: BATTLEGROUNDS",
+      id: 2,
+      genre: "액션, 어드벤처, 무료, 대규모 멀티플레이어",
+      etc: "KRAFTON, Inc.",
+      // description: {
+      //   title: "PUBG: BATTLEGROUNDS",
+      //   genre: "액션, 어드벤처, 무료, 대규모 멀티플레이어",
+
+      //   etc: "KRAFTON, Inc.",
+      // },
     },
     {
-      url: "https://via.placeholder.com/150",
-      description: ["Title 3", "Genre 3", "Director 3"],
-    },
-    {
-      url: "https://via.placeholder.com/150",
-      description: ["Title 4", "Genre 4", "Director 4"],
-    },
-    {
-      url: "https://via.placeholder.com/150",
-      description: ["Title 5", "Genre 5", "Director 5"],
+      url: hogwarts,
+      title: "호그와트 레거시",
+      id: 3,
+      genre: "액션, 어드벤처, RPG",
+      etc: "Avalanche Software",
+      // description: [
+      //   "호그와트 레거시",
+      //   "액션, 어드벤처, RPG",
+      //   "Avalanche Software",
+      // ],
     },
   ];
 
   return (
     <div>
-      <h3>홍길동 님을 위한 게임을 추천해드릴께요</h3>
-      <RecommendCarousel images={images} />
+      <h2>홍길동 님을 위한 게임을 추천해드릴께요</h2>
+      <div style={{ width: "70%", margin: "0 auto" }}>
+        <RecommendCarousel games={games} />
+      </div>
       <br />
     </div>
   );

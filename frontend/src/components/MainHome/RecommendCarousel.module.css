@@ -1,8 +1,9 @@
 .carousel {
   display: flex !important;
   justify-content: center;
+  height: 30vh;
 }
 
-.slick-active {
-  background-color: blue !important;
+.carousel img {
+  margin-right: 5%;
 }
