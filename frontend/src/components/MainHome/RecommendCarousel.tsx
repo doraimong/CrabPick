@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel, Icon } from "antd";
+import { Carousel } from "antd";
 
 import styles from "./RecommendCarousel.module.css";
 
