@@ -44,9 +44,7 @@ const TopRankGame = () => {
           {/* <hr /> */}
         </div>
       ))}
-      <div>
-        <img src={logo} alt="" />
-      </div>
+      <div>{/* <img src={logo} alt="" /> */}</div>
     </div>
   );
 };
