@@ -1,0 +1,50 @@
+.detail {
+    height: 90vh;
+}
+
+.gameDetail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: aliceblue;
+    border: solid black;
+    height: 50vh;
+}
+
+.gameImage {
+    display: flex;
+    flex-direction: column;
+    background-color: skyblue;
+    border: solid black;
+}
+
+.bigImage {
+    height: 75%;
+    background-color: aquamarine;
+    border: solid black;
+}
+
+
+
+.smallImages {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-auto-columns: auto;   
+}
+
+.smallImage {
+    background-color: papayawhip;
+    border: solid red;
+}
+
+.simmilarGames {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: aliceblue;
+    height: 20vh;
+}
+
+.simmilarGame {
+    background-color: blanchedalmond;
+    border: solid black;    
+}
