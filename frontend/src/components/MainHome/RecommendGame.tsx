@@ -1,39 +1,35 @@
 import React from "react";
 import RecommendCarousel from "./RecommendCarousel";
-// interface Game {
-//   name: string;
-//   genre: string;
-//   url: string;
-// }
-
-// const DUMMY_GAME = [
-//   {
-//     name: "추천게임1",
-//     genre: "장르1",
-//     url: "url1",
-//   },
-//   {
-//     name: "추천게임2",
-//     genre: "장르2",
-//     url: "url2",
-//   },
-//   {
-//     name: "추천게임3",
-//     genre: "장르3",
-//     url: "url3",
-//   },
-// ];
-
-const images = [
-  { id: 1, src: "https://via.placeholder.com/600x400?text=First+slide" },
-  { id: 2, src: "https://via.placeholder.com/600x400?text=Second+slide" },
-  { id: 3, src: "https://via.placeholder.com/600x400?text=Third+slide" },
-];
 
 const RecommendGame = () => {
+  const images = [
+    {
+      url: "https://via.placeholder.com/150",
+      description: ["Title 1", "Genre 1", "Director 1"],
+    },
+    {
+      url: "https://via.placeholder.com/150",
+      description: ["Title 2", "Genre 2", "Director 2"],
+    },
+    {
+      url: "https://via.placeholder.com/150",
+      description: ["Title 3", "Genre 3", "Director 3"],
+    },
+    {
+      url: "https://via.placeholder.com/150",
+      description: ["Title 4", "Genre 4", "Director 4"],
+    },
+    {
+      url: "https://via.placeholder.com/150",
+      description: ["Title 5", "Genre 5", "Director 5"],
+    },
+  ];
+
   return (
     <div>
+      <h3>홍길동 님을 위한 게임을 추천해드릴께요</h3>
       <RecommendCarousel images={images} />
+      <br />
     </div>
   );
 };
