@@ -65,6 +65,10 @@ try:
                                     time.sleep(1.5 - end + start)
                                     review_line += 1
                                 query["cursor"] = result["cursor"]
+                        elif r.status_code == 429:
+                            time.sleep(300)
+                        elif r.status_code > 500:
+                            time.sleep(1200)
                 games_line += 1
 except KeyboardInterrupt as e:
         with open(f"{roooooot}/error_log2.txt", "a", encoding="utf-8") as f:
