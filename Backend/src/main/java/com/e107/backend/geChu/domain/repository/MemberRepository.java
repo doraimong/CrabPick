@@ -14,8 +14,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
             "from Member m left join  m.comments a left join  m.steamLibraries b on a.game.id = b.gameId where m.id = :memberId order by a.game.id")
     List<CommentRespDto> findAllComment(@Param("memberId") Long memberId);
 
-    @Query(value = "select new com.e107.backend.geChu.dto.response.GameOwnedMemberRespDto(f.id, f.name) " +
-            "from m.friends f left join m.steamLibraries s on f.id = s.member.id where s.gameId = :gameId")
-    List<GameOwnedMemberRespDto> findOwnedFriend(@Param("gameId") Long gameId);
+    @Query("select new com.e107.backend.geChu.dto.response.GameOwnedMemberRespDto(f.id, f.name, f.member.id, s.member.name, s.gameId)" +
+            " from Member m join m.friends f join m.steamLibraries s where s.gameId = :gameId and m.id = :memberId")
+    List<GameOwnedMemberRespDto> findOwnedFriend(@Param("memberId") Long memberId, @Param("gameId") Long gameId);
+
 
 }
