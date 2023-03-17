@@ -1,6 +1,6 @@
 insert into member values (1, 'email', 'name', 'steamNickname', 'steamToken')
-insert into member values (2, 'email2', 'name2', 'steamNickname2', 'steamToken')
-insert into member values (3, 'email2', 'name2', 'steamNickname2', 'steamToken')
+insert into member values (2, 'email2', 'name2', 'steamNickname2', 'steamToken2')
+insert into member values (3, 'email3', 'name3', 'steamNickname3', 'steamToken3')
 insert into friend values(1, 'bb', 2)
 insert into friend values(2, 'ccc', 1)
 insert into friend values(3, 'ddd', 1)

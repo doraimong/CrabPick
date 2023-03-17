@@ -5,6 +5,7 @@ import com.e107.backend.geChu.domain.entity.Member;
 import com.e107.backend.geChu.domain.entity.SteamLibrary;
 import com.e107.backend.geChu.domain.repository.FriendRepository;
 import com.e107.backend.geChu.domain.repository.MemberRepository;
+import com.e107.backend.geChu.domain.repository.SteamLibraryRepository;
 import com.e107.backend.geChu.dto.response.*;
 import com.e107.backend.global.common.CommonException;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class MemberServiceImpl implements MemberService{
 
     private final MemberRepository memberRepository;
     private final FriendRepository friendRepository;
+    private final SteamLibraryRepository steamLibraryRepository;
 
     @Override
     public void saveMember(Member member) {
@@ -75,6 +77,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId) {
-        return memberRepository.findOwnedFriend(gameId);
+//        return friendRepository.findOwnedFriend(memberId, gameId);
+        return memberRepository.findOwnedFriend(memberId, gameId);
     }
 }
