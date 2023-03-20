@@ -2,6 +2,7 @@ package com.e107.backend.geChu.controller;
 
 import com.e107.backend.geChu.dto.response.CommentRespDto;
 import com.e107.backend.geChu.dto.response.GameDetailRespDto;
+import com.e107.backend.geChu.dto.response.GameListRespDto;
 import com.e107.backend.geChu.dto.response.GameOwnedMemberRespDto;
 import com.e107.backend.geChu.service.CommentService;
 import com.e107.backend.geChu.service.GameService;
@@ -23,6 +24,13 @@ public class GameController {
     private final GameService gameService;
     private final CommentService commentService;
 
+
+    @GetMapping
+    public ResponseEntity<List<GameListRespDto>> getGameList() {
+        List<GameListRespDto> list = gameService.findAllGame();
+     return new ResponseEntity<>(list, HttpStatus.OK);
+
+    }
     @GetMapping("/{gameId}")
     public ResponseEntity<GameDetailRespDto> getGame(@PathVariable Long gameId) {
         GameDetailRespDto dto = gameService.findGameById(gameId);
