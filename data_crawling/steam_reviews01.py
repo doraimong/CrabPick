@@ -24,6 +24,10 @@ try:
                 games_line = 1
             games = csv.reader(game_f)
             review_csv = csv.writer(review_f)
+            start_line = games_line
+            while start_line:
+                    next(games)   # 첫 줄 스킵
+                    start_line -= 1
             query = {
                 "json": 1,    
                 "num_per_page": 100,    
