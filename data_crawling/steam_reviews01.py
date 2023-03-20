@@ -59,10 +59,13 @@ try:
                                     steam_purchase = review["steam_purchase"]
                                     review_csv.writerow([review_line, game[1], review_id, author, voted_up, language, steam_purchase])
                                     print(review_line, game[1])
-                                    end = time.time()
-                                    time.sleep(1.5 - end + start)
                                     review_line += 1
                                 query["cursor"] = result["cursor"]
+                            # 시간 딜레이 하기
+                            end = time.time()
+                            gap = 1.5 - end + start
+                            if gap > 0 :
+                                time.sleep(gap) 
                         elif r.status_code == 429:
                             time.sleep(300)
                         elif r.status_code > 500:
