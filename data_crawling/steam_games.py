@@ -64,8 +64,8 @@ def makegames():
                                         developers = data["developers"]
                                     else:
                                         developers = None
-                                    if "genre" in data.keys(): 
-                                        genre = data["genre"]
+                                    if "genres" in data.keys(): 
+                                        genre = data["genres"]
                                     else:
                                         genre = None
                                     release = data["release_date"]["date"]
