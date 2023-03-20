@@ -90,8 +90,10 @@ def makegames():
                             time.sleep(gap) 
                         applist_line += 1
                     elif r.status_code == 429:
+                        print("API Fail")
                         time.sleep(300)
                     elif r.status_code > 500:
+                        print("Server Error")
                         time.sleep(1200)
     except KeyboardInterrupt as e:
         with open(f"{roooooot}/error_log.txt", "a", encoding="utf-8") as f:
