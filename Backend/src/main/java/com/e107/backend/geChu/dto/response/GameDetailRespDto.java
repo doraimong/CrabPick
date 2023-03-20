@@ -28,7 +28,6 @@ public class GameDetailRespDto {
     private String trailer_url;
     private List<CommentRespDto> comments;
     private List<GameOwnedMemberRespDto> ownedMembers;
-//    private List<>
 
     public static GameDetailRespDto of(Game g) {
         return GameDetailRespDto.builder()

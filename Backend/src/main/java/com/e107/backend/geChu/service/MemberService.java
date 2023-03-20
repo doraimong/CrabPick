@@ -2,6 +2,7 @@ package com.e107.backend.geChu.service;
 
 import com.e107.backend.geChu.domain.entity.Member;
 import com.e107.backend.geChu.dto.response.CommentRespDto;
+import com.e107.backend.geChu.dto.response.GameOwnedMemberRespDto;
 import com.e107.backend.geChu.dto.response.MemberRespDto;
 import com.e107.backend.geChu.dto.response.SteamLibraryRespDto;
 
@@ -13,4 +14,5 @@ public interface MemberService {
     MemberRespDto findMemberById(Long memberId);
     List<CommentRespDto> findAllReview(Long memberId);
     List<SteamLibraryRespDto> findAllGame(Long memberId);
+    List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId);
 }

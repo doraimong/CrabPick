@@ -1,11 +1,12 @@
 package com.e107.backend.geChu.service;
 
+import com.e107.backend.geChu.domain.entity.Friend;
 import com.e107.backend.geChu.domain.entity.Member;
 import com.e107.backend.geChu.domain.entity.SteamLibrary;
+import com.e107.backend.geChu.domain.repository.FriendRepository;
 import com.e107.backend.geChu.domain.repository.MemberRepository;
-import com.e107.backend.geChu.dto.response.CommentRespDto;
-import com.e107.backend.geChu.dto.response.MemberRespDto;
-import com.e107.backend.geChu.dto.response.SteamLibraryRespDto;
+import com.e107.backend.geChu.domain.repository.SteamLibraryRepository;
+import com.e107.backend.geChu.dto.response.*;
 import com.e107.backend.global.common.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,8 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService{
 
     private final MemberRepository memberRepository;
+    private final FriendRepository friendRepository;
+    private final SteamLibraryRepository steamLibraryRepository;
 
     @Override
     public void saveMember(Member member) {
@@ -45,7 +48,15 @@ public class MemberServiceImpl implements MemberService{
     public MemberRespDto findMemberById(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new CommonException(2, "Member객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-        return MemberRespDto.of(member);
+        MemberRespDto dto = MemberRespDto.of(member);
+        List<Friend> flist = friendRepository.findByMemberId(memberId);
+        List<FriendRespDto> respList = new ArrayList<>();
+        for (Friend f : flist) {
+            log.info("FRIEND_INFO=========================================================");
+            respList.add(FriendRespDto.of(f));
+        }
+        dto.setFriend(respList);
+        return dto;
     }
 
     @Override
@@ -62,5 +73,11 @@ public class MemberServiceImpl implements MemberService{
             list.add(SteamLibraryRespDto.of(s));
         }
         return list;
+    }
+
+    @Override
+    public List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId) {
+//        return friendRepository.findOwnedFriend(memberId, gameId);
+        return memberRepository.findOwnedFriend(memberId, gameId);
     }
 }
