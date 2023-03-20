@@ -19,7 +19,7 @@ spring:
   #      driver-class-name: com.mysql.cj.jdbc.Driver
 
   # ???
-     url: jdbc:mysql://43.201.60.130:7777/crabpick?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+     url: jdbc:mysql://43.201.60.130:3306/crabpick?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
      username: root
      password: ssafy123!
      driver-class-name: com.mysql.cj.jdbc.Driver
