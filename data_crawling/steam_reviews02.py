@@ -21,7 +21,7 @@ try:
                         games_line, review_line = map(int, log_lines[-1].split())
             else:
                 review_line = 1
-                games_line = 42000          # 나누는 지점
+                games_line = 59711          # 나누는 지점
             games = csv.reader(game_f)
             review_csv = csv.writer(review_f)
             start_line = games_line
