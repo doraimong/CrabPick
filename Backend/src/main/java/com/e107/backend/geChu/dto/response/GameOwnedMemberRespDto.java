@@ -10,4 +10,7 @@ import lombok.Getter;
 public class GameOwnedMemberRespDto {
     Long id;
     String name;
+    Long memberId;
+    String memberName;
+    Long gameId;
 }

@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,7 +22,9 @@ public class MemberRespDto {
     private String email;
     private String steamToken;
     private String steamNickname;
-    private Set<MyFriend> friends;
+
+    @Builder.Default
+    private List<FriendRespDto> friends = new ArrayList<>();
     @Builder.Default
     private List<BookmarkRespDto> bookmarks = new ArrayList<>();
 
@@ -35,7 +36,6 @@ public class MemberRespDto {
                 .email(m.getEmail())
                 .steamToken(m.getSteamToken())
                 .steamNickname(m.getSteamNickname())
-                .friends(m.getFriends())
                 .bookmarks(m.getBookmarks().stream()
                         .map(bookmark -> BookmarkRespDto.builder()
                                 .id(bookmark.getId())
@@ -43,5 +43,9 @@ public class MemberRespDto {
                                 .build())
                                 .collect(Collectors.toList()))
                 .build();
+    }
+
+    public void setFriend(List<FriendRespDto> friends) {
+        this.friends = friends;
     }
 }
