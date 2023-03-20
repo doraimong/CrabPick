@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -33,7 +32,7 @@ public class GameDetailRespDto {
         return GameDetailRespDto.builder()
                 .id(g.getId())
                 .genre(g.getGenre())
-                .release(g.getRelease())
+                .release(g.getReleaseDate())
                 .avgPlaytime(g.getAvgPlaytime())
                 .mood(g.getMood())
                 .ageLimit(g.getAgeLimit())

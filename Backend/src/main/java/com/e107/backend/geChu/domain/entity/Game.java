@@ -31,7 +31,7 @@ public class Game {
     private String genre;
 
     @Comment("출시일")
-    private LocalDate release;
+    private LocalDate releaseDate;
 
     @Comment("평균 플레이시간")
     private float avgPlaytime;
