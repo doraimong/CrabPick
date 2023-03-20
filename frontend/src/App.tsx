@@ -18,7 +18,7 @@ function App() {
       <Route path="/gamebti" element={<GamebtiPage />} />
       <Route path="/game-news" element={<GameNewsPage />} />
       <Route path="/sale-info" element={<SaleInfoPage />} />
-      <Route path="/detail" element={<DetailPage />} />
+      <Route path="/detail/:gameId" element={<DetailPage />} />
     </Routes>
   );
 }
