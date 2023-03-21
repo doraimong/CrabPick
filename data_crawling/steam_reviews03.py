@@ -25,7 +25,9 @@ try:
             if os.path.exists(f"{roooooot}/error_log_reviews03.txt"):
                     with open(f"{roooooot}/error_log_reviews03.txt", "r", encoding="utf-8") as log:
                         log_lines = log.readlines()
-                        games_line, review_line = map(int, log_lines[-1].split())
+                        games_line, review_line, query["cursor"] = log_lines[-1].split()
+                        games_line = int(games_line)
+                        review_line = int(review_line)
             else:
                 review_line = 1
                 games_line = 88888          # 나누는 지점
