@@ -1,50 +1,53 @@
-import React from "react";
-import logo from "../../asset/logo.png";
-interface Game {
-  id: number;
-  name: string;
-  genre: string;
-  img: string;
-}
+import React, { useState } from "react";
 
-const DUMMY_TOPGAME: Game[] = [
-  {
-    id: 1,
-    name: "게임1",
-    genre: "공포",
-    img: "url 들어가기",
-  },
-  {
-    id: 2,
-    name: "게임2",
-    genre: "SF",
-    img: "url 들어가기",
-  },
-  {
-    id: 3,
-    name: "게임3",
-    genre: "sdfdf",
-    img: "url 들어가기",
-  },
-  {
-    id: 4,
-    name: "게임4",
-    genre: "sdfsdf",
-    img: "url 들어가기",
-  },
-];
+import TopRankGameCarousel from "./TopRankGameCarousel";
+
+import footballmanager from "../../asset/DUMMY/footballmanager.jpg";
+import battlegrounds from "../../asset/DUMMY/battlegrounds.jpg";
+import hogwarts from "../../asset/DUMMY/hogwarts.jpg";
+
 const TopRankGame = () => {
+  const games = [
+    {
+      url: footballmanager,
+      title: "Football Manager 2023",
+      id: 1,
+      genre: "시뮬레이션, 스포츠",
+      etc: "SEGA",
+      // description: ["Football Manager 2023", "시뮬레이션, 스포츠", "SEGA"],
+    },
+    {
+      url: battlegrounds,
+      title: "PUBG: BATTLEGROUNDS",
+      id: 2,
+      genre: "액션, 어드벤처, 무료, 대규모 멀티플레이어",
+      etc: "KRAFTON, Inc.",
+      // description: {
+      //   title: "PUBG: BATTLEGROUNDS",
+      //   genre: "액션, 어드벤처, 무료, 대규모 멀티플레이어",
+
+      //   etc: "KRAFTON, Inc.",
+      // },
+    },
+    {
+      url: hogwarts,
+      title: "호그와트 레거시",
+      id: 3,
+      genre: "액션, 어드벤처, RPG",
+      etc: "Avalanche Software",
+      // description: [
+      //   "호그와트 레거시",
+      //   "액션, 어드벤처, RPG",
+      //   "Avalanche Software",
+      // ],
+    },
+  ];
   return (
-    <div style={{ border: "5px solid black", padding: "10px", margin: "10px" }}>
-      <h1>이 컴포넌트는 가장인기있는 게임 나타내기</h1>
-      {DUMMY_TOPGAME.map((item: Game, index: number) => (
-        <div key={index}>
-          <h3>이름: {item.name}</h3>
-          <p>장르: {item.genre}</p>
-          {/* <hr /> */}
-        </div>
-      ))}
-      <div>{/* <img src={logo} alt="" /> */}</div>
+    <div style={{ paddingBottom: "50px" }}>
+      <h2>TOP RANKED GAMES</h2>
+      <div style={{ width: "70%", margin: "0 auto" }}>
+        <TopRankGameCarousel games={games} />
+      </div>
     </div>
   );
 };
