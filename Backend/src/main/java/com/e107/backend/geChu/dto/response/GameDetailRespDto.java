@@ -39,11 +39,11 @@ public class GameDetailRespDto {
                 .avgPlaytime(g.getAvgPlaytime())
                 .mood(g.getMood())
                 .ageLimit(g.getAgeLimit())
-                .developer(g.getDeveloper())
+                .developer(g.getDevelopers())
                 .reviewLink(g.getReviewLink())
                 .wordCloud(g.getWordCloud())
-                .trailer_url(g.getTrailer_url())
-                .imgUrl(g.getImgUrl())
+                .trailer_url(g.getTrailerLink())
+                .imgUrl(g.getImgLink())
                 .build();
     }
 
