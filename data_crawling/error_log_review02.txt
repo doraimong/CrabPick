@@ -1,0 +1,2 @@
+Manualy shutdown
+60042 10468 *
