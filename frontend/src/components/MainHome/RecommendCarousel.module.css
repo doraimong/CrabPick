@@ -1,9 +1,20 @@
 .carousel {
   display: flex !important;
-  justify-content: center;
+  justify-content: space-around;
   height: 30vh;
+
 }
 
-.carousel img {
+/* .carousel img {
   margin-right: 5%;
+} */
+
+
+.centerimg {
+  display: flex !important;
+  justify-content: center;
 }
+
+/* .image {
+  margin-right: 10px;
+} */
