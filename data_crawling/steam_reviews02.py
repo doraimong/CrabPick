@@ -33,7 +33,6 @@ try:
                 "num_per_page": 100,    
                 "cursor": None,    
                 }
-            review_line = 1
             for game in games:
                 if game[1].isnumeric():
                     while True:
@@ -83,4 +82,6 @@ except Exception as e:
     with open(f"{roooooot}/error_log_review02.txt", "a", encoding="utf-8") as f:
         f.writelines([e.__str__() + "\n", f"{games_line} {review_line}", "\n"])
         print(e)
-    
+finally:
+    with open(f"{roooooot}/error_log_review02.txt", "a", encoding="utf-8") as f:
+        f.writelines(["job done." + "\n", f"{games_line} {review_line}", "\n"])
