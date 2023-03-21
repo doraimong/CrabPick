@@ -8,13 +8,13 @@ import requests
 roooooot = os.path.dirname(__file__)
 
 try:
-    if not os.path.exists(f"{roooooot}/reviews.csv"):
+    if not os.path.exists(f"{roooooot}/reviews01.csv"):
         with open(f"{roooooot}/reviews.csv", "a", newline='', encoding="utf-8") as games:
             csv_writer = csv.writer(games)
             csv_writer.writerow([None,"game_id", "review_id", "author", "voted_up", "language", "steam_purchase"])
 
     with open(f"{roooooot}/games.csv", "r", newline='', encoding="utf-8") as game_f:
-        with open(f"{roooooot}/reviews.csv", "w", newline='', encoding="utf-8") as review_f:
+        with open(f"{roooooot}/reviews01.csv", "a", newline='', encoding="utf-8") as review_f:
             if os.path.exists(f"{roooooot}/error_log_review01.txt"):
                     with open(f"{roooooot}/error_log_review01.txt", "r", encoding="utf-8") as log:
                         log_lines = log.readlines()
