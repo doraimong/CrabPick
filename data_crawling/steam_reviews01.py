@@ -33,8 +33,9 @@ try:
                 "num_per_page": 100,    
                 "cursor": None,    
                 }
-            review_line = 1
             for game in games:
+                if games_line >= 59711: # 나누는 지점 도달 시 종료
+                    break
                 if game[1].isnumeric():
                     while True:
                         url = f"https://store.steampowered.com/appreviews/{game[1]}?" + parse.urlencode(query)
@@ -83,4 +84,6 @@ except Exception as e:
     with open(f"{roooooot}/error_log_review01.txt", "a", encoding="utf-8") as f:
         f.writelines([e.__str__() + "\n", f"{games_line} {review_line}", "\n"])
         print(e)
-    
+finally:
+    with open(f"{roooooot}/error_log_review01.txt", "a", encoding="utf-8") as f:
+        f.writelines(["job done." + "\n", f"{games_line} {review_line}", "\n"])
