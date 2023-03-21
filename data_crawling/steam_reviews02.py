@@ -2,10 +2,11 @@ import csv
 import os
 import time
 from urllib import parse
+import rooooot
 
 import requests
 
-roooooot = os.path.dirname(__file__)
+roooooot = rooooot.roooooot
 
 try:
     if not os.path.exists(f"{roooooot}/reviews02.csv"):
