@@ -1,0 +1,8 @@
+API fail
+201 103
+error
+358 178
+HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /api/appdetails?appids=1395660 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000020F89D53890>: Failed to establish a new connection: [Errno 11002] getaddrinfo failed'))
+2764 1466
+Manualy shutdown
+9789 5406
