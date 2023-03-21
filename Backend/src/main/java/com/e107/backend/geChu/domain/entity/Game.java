@@ -20,6 +20,8 @@ public class Game {
 
     @Comment("게임이름")
     private String name;
+    @Comment("게임 아이디")
+    private Long appId;
 
     @Comment("연령제한")
     private Long ageLimit;

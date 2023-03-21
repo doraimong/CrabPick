@@ -4,6 +4,7 @@ import com.e107.backend.geChu.domain.entity.Game;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import org.hibernate.annotations.Comment;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class GameDetailRespDto {
 
     private Long id;
+    private Long appId;
     private Long ageLimit;
     private String developer;
     private String genre;
@@ -32,6 +34,7 @@ public class GameDetailRespDto {
         return GameDetailRespDto.builder()
                 .id(g.getId())
                 .genre(g.getGenre())
+                .appId(g.getAppId())
                 .release(g.getReleaseDate())
                 .avgPlaytime(g.getAvgPlaytime())
                 .mood(g.getMood())
