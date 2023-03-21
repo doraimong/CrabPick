@@ -9,20 +9,20 @@ import requests
 roooooot = rooooot.roooooot
 
 try:
-    if not os.path.exists(f"{roooooot}/reviews02.csv"):
+    if not os.path.exists(f"{roooooot}/reviews03.csv"):
         with open(f"{roooooot}/reviews.csv", "a", newline='', encoding="utf-8") as games:
             csv_writer = csv.writer(games)
             csv_writer.writerow([None,"game_id", "review_id", "author", "voted_up", "language", "steam_purchase"])
 
     with open(f"{roooooot}/games.csv", "r", newline='', encoding="utf-8") as game_f:
-        with open(f"{roooooot}/reviews02.csv", "a", newline='', encoding="utf-8") as review_f:
-            if os.path.exists(f"{roooooot}/error_log_review02.txt"):
-                    with open(f"{roooooot}/error_log_review02.txt", "r", encoding="utf-8") as log:
+        with open(f"{roooooot}/reviews03.csv", "a", newline='', encoding="utf-8") as review_f:
+            if os.path.exists(f"{roooooot}/error_log_reviews03.txt"):
+                    with open(f"{roooooot}/error_log_reviews03.txt", "r", encoding="utf-8") as log:
                         log_lines = log.readlines()
                         games_line, review_line = map(int, log_lines[-1].split())
             else:
                 review_line = 1
-                games_line = 59711          # 나누는 지점
+                games_line = 100000          # 나누는 지점
             games = csv.reader(game_f)
             review_csv = csv.writer(review_f)
             start_line = games_line
@@ -35,8 +35,6 @@ try:
                 "cursor": None,    
                 }
             for game in games:
-                if games_line >= 100000: # 나누는 지점 도달 시 종료
-                    break
                 if game[1].isnumeric():
                     while True:
                         url = f"https://store.steampowered.com/appreviews/{game[1]}?" + parse.urlencode(query)
@@ -47,7 +45,7 @@ try:
                             try:
                                 result = r.json()
                             except:
-                                with open(f"{roooooot}/error_log_review02.txt", "a", encoding="utf-8") as f:
+                                with open(f"{roooooot}/error_log_reviews03.txt", "a", encoding="utf-8") as f:
                                     f.writelines([f"JSON Decode Error {game[1]}\n"])
                                 continue
                             # print(result)
@@ -78,13 +76,13 @@ try:
                             time.sleep(1200)
                 games_line += 1
 except KeyboardInterrupt as e:
-        with open(f"{roooooot}/error_log_review02.txt", "a", encoding="utf-8") as f:
+        with open(f"{roooooot}/error_log_reviews03.txt", "a", encoding="utf-8") as f:
             f.writelines(["Manualy shutdown" + "\n", f"{games_line} {review_line}", "\n"])
             print(e)
 except Exception as e:
-    with open(f"{roooooot}/error_log_review02.txt", "a", encoding="utf-8") as f:
+    with open(f"{roooooot}/error_log_reviews03.txt", "a", encoding="utf-8") as f:
         f.writelines([e.__str__() + "\n", f"{games_line} {review_line}", "\n"])
         print(e)
 finally:
-    with open(f"{roooooot}/error_log_review02.txt", "a", encoding="utf-8") as f:
+    with open(f"{roooooot}/error_log_reviews03.txt", "a", encoding="utf-8") as f:
         f.writelines(["job done." + "\n", f"{games_line} {review_line}", "\n"])
