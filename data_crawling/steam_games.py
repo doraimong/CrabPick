@@ -64,8 +64,8 @@ def makegames():
                                         developers = data["developers"]
                                     else:
                                         developers = None
-                                    if "genre" in data.keys(): 
-                                        genre = data["genre"]
+                                    if "genres" in data.keys(): 
+                                        genre = data["genres"]
                                     else:
                                         genre = None
                                     release = data["release_date"]["date"]
@@ -89,10 +89,12 @@ def makegames():
                         if gap > 0 :
                             time.sleep(gap) 
                         applist_line += 1
-                    else:
-                        print(r.status_code)
-                        raise Exception("API fail")
-                        break
+                    elif r.status_code == 429:
+                        print("API Fail")
+                        time.sleep(300)
+                    elif r.status_code > 500:
+                        print("Server Error")
+                        time.sleep(1200)
     except KeyboardInterrupt as e:
         with open(f"{roooooot}/error_log.txt", "a", encoding="utf-8") as f:
             f.writelines(["Manualy shutdown" + "\n", f"{applist_line} {games_line}", "\n"])
@@ -101,7 +103,6 @@ def makegames():
         with open(f"{roooooot}/error_log.txt", "a", encoding="utf-8") as f:
             f.writelines([e.__str__() + "\n", f"{applist_line} {games_line}", "\n"])
             print(e)
-        
 
 
 makegames()
