@@ -42,12 +42,12 @@ const RecommendGame = () => {
   ];
 
   return (
-    <div>
-      <h2>홍길동 님을 위한 게임을 추천해드릴께요</h2>
-      <div style={{ width: "70%", margin: "0 auto" }}>
-        <RecommendCarousel games={games} />
-      </div>
-      <br />
+    <div style={{ paddingBottom: "50px" }}>
+      <h2>CRABPICK GAMES</h2>
+      {/* <div style={{ width: "70%", margin: "0 auto" }}> */}
+      <RecommendCarousel games={games} />
+      {/* </div> */}
+      {/* <br /> */}
     </div>
   );
 };
