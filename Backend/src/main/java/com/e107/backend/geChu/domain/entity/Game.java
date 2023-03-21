@@ -3,6 +3,7 @@ package com.e107.backend.geChu.domain.entity;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +20,7 @@ public class Game {
     private Long id;
 
     @Comment("게임이름")
+    @Column(unique = true)
     private String name;
     @Comment("게임 아이디")
     private Long appId;
