@@ -35,7 +35,7 @@ try:
                 "cursor": None,    
                 }
             for game in games:
-                if games_line >= 100000: # 나누는 지점 도달 시 종료
+                if games_line >= 120000: # 나누는 지점 도달 시 종료
                     break
                 if game[1].isnumeric():
                     while True:

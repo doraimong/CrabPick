@@ -7,7 +7,7 @@ import rooooot
 import requests
 
 roooooot = rooooot.roooooot
-
+print(roooooot)
 try:
     if not os.path.exists(f"{roooooot}/reviews03.csv"):
         with open(f"{roooooot}/reviews.csv", "a", newline='', encoding="utf-8") as games:
@@ -22,7 +22,7 @@ try:
                         games_line, review_line = map(int, log_lines[-1].split())
             else:
                 review_line = 1
-                games_line = 100000          # 나누는 지점
+                games_line = 120000          # 나누는 지점
             games = csv.reader(game_f)
             review_csv = csv.writer(review_f)
             start_line = games_line
