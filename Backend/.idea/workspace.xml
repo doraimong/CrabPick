@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0948164c-ead8-49b5-9606-6824626248f9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/BackendApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Bookmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Bookmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Friend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Friend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/SteamLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/entity/SteamLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/CommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/FriendRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/FriendRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/GameRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/GameRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/MemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/SteamLibraryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/domain/repository/SteamLibraryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/request/MemberAddReqDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/request/MemberAddReqDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/BookmarkRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/BookmarkRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/CommentRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/CommentRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/FriendRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/FriendRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/GameDetailRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/GameDetailRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/GameListRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/GameListRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/GameOwnedMemberRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/GameOwnedMemberRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/MemberRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/MemberRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/RatingRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/RatingRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/SteamLibraryRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/dto/response/SteamLibraryRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/CommentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/GameServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/GameServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/geChu/service/MemberServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e107/backend/global/common/CommonException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e107/backend/global/common/CommonException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/e107/backend/BackendApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/e107/backend/BackendApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/deploy_conf/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/deploy_conf/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/public/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/public/robots.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.test.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/MainHome/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/MainHome/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/MainHome/RecommendGame.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/MainHome/RecommendGame.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/MainHome/TopRankGame.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/MainHome/TopRankGame.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/auth/Profile.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/auth/Profile.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/auth/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/auth/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/auth/SignInForm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/auth/SignInForm.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/auth/SignInForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/auth/SignInForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/common/Footer.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/common/Footer.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/common/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/common/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/common/NavBar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/common/NavBar.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/common/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/common/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/gamebti/Gamebti.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/gamebti/Gamebti.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/gamebti/Gamebti.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/gamebti/Gamebti.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layout/GamebtiLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layout/GamebtiLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layout/MainLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layout/MainLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layout/MyPageLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layout/MyPageLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layout/SignLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layout/SignLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/GamebtiPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/GamebtiPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/HomePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/MyPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/MyPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/Page.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/Page.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/SignInPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/SignInPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/react-app-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/react-app-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/reportWebVitals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/reportWebVitals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/setupTests.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/setupTests.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2MksbGS92n7bbJq5yLNRW8avrpF" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;4f9724b3204f4d9eb05b2dfda8b89bfd&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.e107.backend.geChu.service" />
+      <recent name="com.e107.backend.geChu.dto.response" />
+      <recent name="com.e107.backend.geChu.dto.request" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Backend.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.e107.backend.BackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0948164c-ead8-49b5-9606-6824626248f9" name="Changes" comment="" />
+      <created>1678322984667</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678322984667</updated>
+      <workItem from="1678322986440" duration="18514000" />
+      <workItem from="1678410462048" duration="6988000" />
+      <workItem from="1678669064228" duration="17961000" />
+      <workItem from="1678769421755" duration="8073000" />
+      <workItem from="1678841658670" duration="18259000" />
+      <workItem from="1679016137623" duration="19927000" />
+      <workItem from="1679271817632" duration="3471000" />
+      <workItem from="1679288418809" duration="6545000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
