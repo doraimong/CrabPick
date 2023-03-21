@@ -1,0 +1,56 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  datasource:
+
+    # ???
+    # url: jdbc:h2:tcp://localhost/~/datajpa
+    # username: sa
+    # password:
+    # driver-class-name: org.h2.Driver
+
+  # Batch ???
+  #      url: jdbc:mysql://localhost:3306/hishop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+  #      username: root
+  #      password: e101ssafy!@
+  #      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # ???
+     url: jdbc:mysql://43.201.60.130:3306/crabpick?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+     username: root
+     password: ssafy123!
+     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    # database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+#  profiles:
+#    active:
+
+#  batch:
+#    job.enabled: true # true: ? ??? job ?? ?
+#    jdbc.initialize-schema: always
+
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.hibernate.type: trace
+#    org.springframework.batch: debug
+#    com.zaxxer.hikari.HikariConfig: DEBUG
+#    com.zaxxer.hikari: TRACE
+#    org.springframework : debug
+#    org.springframework.web : debug
