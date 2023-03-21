@@ -3,6 +3,7 @@ import os
 import time
 
 import requests
+import rooooot
 
 # def makeapplist():
 
@@ -21,7 +22,7 @@ import requests
 
 #     data.to_csv("./applist.csv", encoding="utf-8-sig", index=False)
 
-roooooot = os.path.dirname(__file__)
+roooooot = rooooot.roooooot
 
 
 def makegames():
