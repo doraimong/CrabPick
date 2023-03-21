@@ -25,7 +25,7 @@ public class Game {
     private Long ageLimit;
 
     @Comment("개발사")
-    private String developer;
+    private String developers;
 
     @Comment("장르")
     private String genre;
@@ -49,7 +49,7 @@ public class Game {
     private String reviewLink;
 
     @Comment("이미지 링크")
-    private String imgUrl;
+    private String imgLink;
     @Comment("트레일러 링크")
-    private String trailer_url;
+    private String trailerLink;
 }
