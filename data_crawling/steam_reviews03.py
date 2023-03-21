@@ -2,9 +2,10 @@ import csv
 import os
 import time
 from urllib import parse
-import rooooot
 
 import requests
+
+import rooooot
 
 roooooot = rooooot.roooooot
 print(roooooot)
@@ -16,6 +17,11 @@ try:
 
     with open(f"{roooooot}/games.csv", "r", newline='', encoding="utf-8") as game_f:
         with open(f"{roooooot}/reviews03.csv", "a", newline='', encoding="utf-8") as review_f:
+            query = {
+                "json": 1,    
+                "num_per_page": 100,
+                "filter": "recent",   
+                }
             if os.path.exists(f"{roooooot}/error_log_reviews03.txt"):
                     with open(f"{roooooot}/error_log_reviews03.txt", "r", encoding="utf-8") as log:
                         log_lines = log.readlines()
@@ -29,11 +35,7 @@ try:
             while start_line:
                     next(games)   # 첫 줄 스킵
                     start_line -= 1
-            query = {
-                "json": 1,    
-                "num_per_page": 100,    
-                "cursor": None,    
-                }
+            
             for game in games:
                 if game[1].isnumeric():
                     while True:
@@ -51,8 +53,8 @@ try:
                             # print(result)
                             if result["success"] != 1:
                                 break
-                            if query["cursor"] == result["cursor"]:
-                                query["cursor"] = None
+                            if "cursor" in query.keys() and query["cursor"] == result["cursor"]:
+                                del query["cursor"]
                                 break
                             else:
                                 for review in result["reviews"]:
@@ -76,13 +78,13 @@ try:
                             time.sleep(1200)
                 games_line += 1
 except KeyboardInterrupt as e:
-        with open(f"{roooooot}/error_log_reviews03.txt", "a", encoding="utf-8") as f:
-            f.writelines(["Manualy shutdown" + "\n", f"{games_line} {review_line}", "\n"])
+        with open(f"{roooooot}/error_log_review03.txt", "a", encoding="utf-8") as f:
+            f.writelines(["Manualy shutdown" + "\n", f"{games_line} {review_line} {result['cursor'] if 'cursor' in query.keys() else None}", "\n"])
             print(e)
 except Exception as e:
-    with open(f"{roooooot}/error_log_reviews03.txt", "a", encoding="utf-8") as f:
-        f.writelines([e.__str__() + "\n", f"{games_line} {review_line}", "\n"])
+    with open(f"{roooooot}/error_log_review03.txt", "a", encoding="utf-8") as f:
+        f.writelines([e.__str__() + "\n", f"{games_line} {review_line} {result['cursor'] if 'cursor' in query.keys() else None}", "\n"])
         print(e)
-finally:
-    with open(f"{roooooot}/error_log_reviews03.txt", "a", encoding="utf-8") as f:
-        f.writelines(["job done." + "\n", f"{games_line} {review_line}", "\n"])
+else:
+    with open(f"{roooooot}/error_log_review03.txt", "a", encoding="utf-8") as f:
+        f.writelines(["job done." + "\n", f"{games_line} {review_line} {result['cursor'] if 'cursor' in query.keys() else None}", "\n"])

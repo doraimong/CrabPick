@@ -16,24 +16,26 @@ try:
 
     with open(f"{roooooot}/games.csv", "r", newline='', encoding="utf-8") as game_f:
         with open(f"{roooooot}/reviews02.csv", "a", newline='', encoding="utf-8") as review_f:
+            query = {
+                "json": 1,    
+                "num_per_page": 100,
+                "filter": "recent",   
+                }
             if os.path.exists(f"{roooooot}/error_log_review02.txt"):
                     with open(f"{roooooot}/error_log_review02.txt", "r", encoding="utf-8") as log:
                         log_lines = log.readlines()
-                        games_line, review_line = map(int, log_lines[-1].split())
+                        games_line, review_line, query["cursor"] = log_lines[-1].split()
+                        games_line = int(games_line)
+                        review_line = int(review_line)
             else:
                 review_line = 1
-                games_line = 59711          # 나누는 지점
+                games_line = 60025           # 나누는 지점
             games = csv.reader(game_f)
             review_csv = csv.writer(review_f)
             start_line = games_line
             while start_line:
                     next(games)   # 첫 줄 스킵
                     start_line -= 1
-            query = {
-                "json": 1,    
-                "num_per_page": 100,    
-                "cursor": None,    
-                }
             for game in games:
                 if games_line >= 88888: # 나누는 지점 도달 시 종료
                     break
@@ -53,8 +55,8 @@ try:
                             # print(result)
                             if result["success"] != 1:
                                 break
-                            if query["cursor"] == result["cursor"]:
-                                query["cursor"] = None
+                            if "cursor" in query.keys() and query["cursor"] == result["cursor"]:
+                                del query["cursor"]
                                 break
                             else:
                                 for review in result["reviews"]:
@@ -79,12 +81,12 @@ try:
                 games_line += 1
 except KeyboardInterrupt as e:
         with open(f"{roooooot}/error_log_review02.txt", "a", encoding="utf-8") as f:
-            f.writelines(["Manualy shutdown" + "\n", f"{games_line} {review_line}", "\n"])
+            f.writelines(["Manualy shutdown" + "\n", f"{games_line} {review_line} {result['cursor'] if 'cursor' in query.keys() else None}", "\n"])
             print(e)
 except Exception as e:
     with open(f"{roooooot}/error_log_review02.txt", "a", encoding="utf-8") as f:
-        f.writelines([e.__str__() + "\n", f"{games_line} {review_line}", "\n"])
+        f.writelines([e.__str__() + "\n", f"{games_line} {review_line} {result['cursor'] if 'cursor' in query.keys() else None}", "\n"])
         print(e)
-finally:
+else:
     with open(f"{roooooot}/error_log_review02.txt", "a", encoding="utf-8") as f:
-        f.writelines(["job done." + "\n", f"{games_line} {review_line}", "\n"])
+        f.writelines(["job done." + "\n", f"{games_line} {review_line} {result['cursor'] if 'cursor' in query.keys() else None}", "\n"])
