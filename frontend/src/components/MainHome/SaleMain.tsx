@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-
-import TopRankGameCarousel from "./TopRankGameCarousel";
+import React from "react";
+import SaleCarousel from "./SaleCarousel";
 
 import footballmanager from "../../asset/DUMMY/footballmanager.jpg";
 import battlegrounds from "../../asset/DUMMY/battlegrounds.jpg";
 import hogwarts from "../../asset/DUMMY/hogwarts.jpg";
-
-const TopRankGame = () => {
-  const games = [
+const SaleMain = () => {
+  const salegames = [
     {
       url: footballmanager,
       title: "Football Manager 2023",
@@ -43,13 +41,22 @@ const TopRankGame = () => {
     },
   ];
   return (
-    <div style={{ paddingBottom: "50px" }}>
-      <h2>TOP RANKED GAMES</h2>
-      <div style={{ width: "70%", margin: "0 auto" }}>
-        <TopRankGameCarousel games={games} />
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <h2>세일 정보</h2>
+        </div>
+        <div
+          style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+        >
+          더 보러 가기
+        </div>
+      </div>
+      <div style={{ marginBottom: "100px" }}>
+        <SaleCarousel salegames={salegames} />
       </div>
     </div>
   );
 };
 
-export default TopRankGame;
+export default SaleMain;

@@ -1,43 +1,53 @@
 import React from "react";
+import RecommendCarousel from "./RecommendCarousel";
 
-interface Game {
-  name: string;
-  genre: string;
-  url: string;
-}
-const DUMMY_GAME = [
-  {
-    name: "추천게임1",
-    genre: "장르1",
-    url: "url1",
-  },
-  {
-    name: "추천게임2",
-    genre: "장르2",
-    url: "url2",
-  },
-  {
-    name: "추천게임3",
-    genre: "장르3",
-    url: "url3",
-  },
-];
+import footballmanager from "../../asset/DUMMY/footballmanager.jpg";
+import battlegrounds from "../../asset/DUMMY/battlegrounds.jpg";
+import hogwarts from "../../asset/DUMMY/hogwarts.jpg";
 const RecommendGame = () => {
+  const games = [
+    {
+      url: footballmanager,
+      title: "Football Manager 2023",
+      id: 1,
+      genre: "시뮬레이션, 스포츠",
+      etc: "SEGA",
+      // description: ["Football Manager 2023", "시뮬레이션, 스포츠", "SEGA"],
+    },
+    {
+      url: battlegrounds,
+      title: "PUBG: BATTLEGROUNDS",
+      id: 2,
+      genre: "액션, 어드벤처, 무료, 대규모 멀티플레이어",
+      etc: "KRAFTON, Inc.",
+      // description: {
+      //   title: "PUBG: BATTLEGROUNDS",
+      //   genre: "액션, 어드벤처, 무료, 대규모 멀티플레이어",
+
+      //   etc: "KRAFTON, Inc.",
+      // },
+    },
+    {
+      url: hogwarts,
+      title: "호그와트 레거시",
+      id: 3,
+      genre: "액션, 어드벤처, RPG",
+      etc: "Avalanche Software",
+      // description: [
+      //   "호그와트 레거시",
+      //   "액션, 어드벤처, RPG",
+      //   "Avalanche Software",
+      // ],
+    },
+  ];
+
   return (
-    <div
-      style={{
-        border: "5px solid black",
-        padding: "10px",
-        margin: "10px",
-      }}
-    >
-      <h1>유저한테 추천해줄 게임 나타내는 컴포넌트</h1>
-      {DUMMY_GAME.map((item: Game, index: number) => (
-        <div key={index}>
-          <h1>이름: {item.name}</h1>
-          <p>장르: {item.genre}</p>
-        </div>
-      ))}
+    <div style={{ paddingBottom: "50px" }}>
+      <h2>CRABPICK GAMES</h2>
+      {/* <div style={{ width: "70%", margin: "0 auto" }}> */}
+      <RecommendCarousel games={games} />
+      {/* </div> */}
+      {/* <br /> */}
     </div>
   );
 };

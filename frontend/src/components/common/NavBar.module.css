@@ -1,23 +1,40 @@
 .navBar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 1.5rem;
+  place-items: center ;
   background-color: #141e29;
 }
 
+
+
+/* 로고 */
+/* 로고를 담는 div */
+.navLogo {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+/* 로고 그림 */
 .logo {
-  width: 290px;
-  margin-bottom: 0;
-  margin-right: 10%;
+  width: 15rem;
   cursor: pointer;
 }
 
+
+
+/* 네비게이션의 메뉴들 */
 .links {
-  width: 40%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 5%;
+  color: #979797;
+  text-decoration: none;
+  font-size: 15pt;
+  font-weight: bold;
 }
+
+.links:hover {
+  color: yellow;
+  cursor: pointer;
+}
+
 
 .links a {
   color: #979797;
@@ -30,10 +47,42 @@
   color: yellow;
 }
 
-.links img {
-  width: 10%;
+/* 로그인 버튼 */
+.linkSignIn {
+  grid-column: 8;
+  color: #979797;
+  text-decoration: none;
+  font-size: 15pt;
+  font-weight: bold;
+}
+.linkSignIn:hover {
+  cursor: pointer;
+  color: yellow;
+}
+
+
+/* 검색 */
+
+
+/* 프로필 */
+.navProfile {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-right: 5%;
+  padding: 0.5rem;
+  grid-column: 8;
+}
+
+.navProfile p {
+  color: #979797;
+  font-size: 13pt;
+  font-weight: bold;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: none;
+}
+
+.navProfile img {
+  width: 3.5rem;
+  border-radius: 20%;
+  cursor: pointer;
 }
