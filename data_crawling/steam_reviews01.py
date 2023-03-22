@@ -37,7 +37,7 @@ try:
                     next(games)   # 첫 줄 스킵
                     start_line -= 1
             for game in games:
-                if games_line >= 59711: # 나누는 지점 도달 시 종료
+                if games_line >= 47451: # 나누는 지점 도달 시 종료
                     break
                 if game[1].isnumeric():
                     while True:
