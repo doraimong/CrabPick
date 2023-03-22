@@ -6,9 +6,7 @@ insert into friend values(2, 'ccc', 1)
 insert into friend values(3, 'ddd', 1)
 
 --                      ID  AGE_LIMIT  AVG_PLAYTIME  DEVELOPER 	GENRE  MOOD  NAME  RELEASE  STEAM_LINK  WORD_CLOUD
-insert into game values (1, 19, 1.5, 'developer', 'genre', 'imgurl', 'mood', 'name', '2012-01-01','reviewlink', 'steamlingk','trailerurl', 'wordcloud')
-insert into game values (2, 15, 11, 'developer2', 'genre2', 'imgurl2', 'mood2', 'name2', '2015-01-01' ,'reviewlink2','steamlingk2', 'trailerurl2','wordcloud2')
-insert into game values (3, 7, 5, 'developer3', 'genre3', 'imgurl3', 'mood3', 'name3', '2012-01-01' ,'reviewlink3', 'steamlink3', 'trailerurl3','wordcloud3')
+insert into game (ID, APP_ID, AGE_LIMIT,AVG_PLAYTIME,DEVELOPERS,GENRE,IMG_LINK,MOOD,NAME,RELEASE_DATE,REVIEW_LINK,STEAM_LINK,TRAILER_LINK,WORD_CLOUD) values (1, 4100, 19, 1.5, 'developer', 'genre', 'imgurl', 'mood', 'name', '2012-01-01','reviewlink', 'steamlingk','trailerurl', 'wordcloud'), (2, 4200, 15, 11, 'developer2', 'genre2', 'imgurl2', 'mood2', 'name2', '2015-01-01' ,'reviewlink2','steamlingk2', 'trailerurl2','wordcloud2'), (3, 4300, 7, 5, 'developer3', 'genre3', 'imgurl3', 'mood3', 'name3', '2012-01-01' ,'reviewlink3', 'steamlink3', 'trailerurl3','wordcloud3')
 insert into bookmark values (1, 1, 1)
 insert into steam_library values (1, 1, 'url1',1, 'name', 1,3,1)
 insert into steam_library values (2, 2, 'url2',3, 'name2',1,1,1)
