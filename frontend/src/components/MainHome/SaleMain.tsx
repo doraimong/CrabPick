@@ -62,7 +62,7 @@ const SaleMain = () => {
           }}
           onClick={goToSaleInfo}
         >
-          <span className={styles.spantag}>더 보러 가기</span>
+          {/* <span className={styles.spantag}>더 보러 가기</span> */}
         </div>
       </div>
       <div style={{ marginBottom: "100px" }}>
