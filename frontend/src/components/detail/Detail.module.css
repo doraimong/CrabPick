@@ -1,0 +1,86 @@
+.detail {
+    background-color: blueviolet;
+}
+
+.stars {
+    
+}
+
+.evaluate {
+  display: flex;
+  background-color: red;
+}
+
+.average {
+    align-items: center;
+}
+
+.gameDetail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: aliceblue;
+  border: solid black;
+  height: 50vh;
+}
+
+.gameImage {
+  display: flex;
+  flex-direction: column;
+  background-color: skyblue;
+  border: solid black;
+}
+
+.bigImage {
+  height: 75%;
+  background-color: aquamarine;
+  border: solid black;
+}
+
+.smallImages {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-columns: auto;
+}
+
+.smallImage {
+  background-color: papayawhip;
+  border: solid red;
+}
+
+.simmilarGames {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background-color: aliceblue;
+  height: 20vh;
+}
+
+.simmilarGame {
+  background-color: blanchedalmond;
+  border: solid black;
+}
+
+.detailInfo {
+  color: black;
+}
+
+.rateBar {
+  height: 2em;
+  width: 50%;
+  border-radius: 0%;
+}
+
+.rateBar::-webkit-meter-bar{
+    background-color: red;
+    border-radius:0%
+}
+
+.rateBar::-webkit-meter-even-less-good-value{
+    background-color: green;
+}
+.rateBar::-webkit-meter-suboptimum-value{
+    background-color: green;
+}
+.rateBar::-webkit-meter-optimum-value{
+    background-color: green;
+}

@@ -12,17 +12,19 @@
 }
 .div {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   width: 100%;
 }
 .leftDiv {
   width: 70%;
+  /* justify-content: center; */
 }
 
 .footerLink {
   display: flex;
   justify-content: flex-start;
   width: 50%;
+  height: 10%;
   margin-bottom: 30px;
   margin-top: 10px
 }
