@@ -20,9 +20,9 @@ public class Game {
     private Long id;
 
     @Comment("게임이름")
-    @Column(unique = true)
     private String name;
     @Comment("게임 아이디")
+    @Column(unique = true)
     private Long appId;
 
     @Comment("연령제한")
