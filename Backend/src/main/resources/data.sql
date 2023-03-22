@@ -1,9 +1,5 @@
-insert into member values (1, 'email', 'name', 'steamNickname', 'steamToken')
-insert into member values (2, 'email2', 'name2', 'steamNickname2', 'steamToken2')
-insert into member values (3, 'email3', 'name3', 'steamNickname3', 'steamToken3')
-insert into friend values(1, 'bb', 2)
-insert into friend values(2, 'ccc', 1)
-insert into friend values(3, 'ddd', 1)
+insert into member values (1, 'email', 'name', 'steamNickname', 'steamToken'),(2, 'email2', 'name2', 'steamNickname2', 'steamToken2'),(3, 'email3', 'name3', 'steamNickname3', 'steamToken3')
+insert into friend values(1, 'bb', 2),(2, 'ccc', 1),(3, 'ddd', 1)
 
 --                      ID  AGE_LIMIT  AVG_PLAYTIME  DEVELOPER 	GENRE  MOOD  NAME  RELEASE  STEAM_LINK  WORD_CLOUD
 insert into game values (1, 19, 1.5, 'developer', 'genre', 'imgurl', 'mood', 'name', '2012-01-01','reviewlink', 'steamlingk','trailerurl', 'wordcloud')
