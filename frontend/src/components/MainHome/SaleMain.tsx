@@ -42,8 +42,17 @@ const SaleMain = () => {
   ];
   return (
     <div>
-      <h2>세일 정보</h2>
-      <div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <h2>세일 정보</h2>
+        </div>
+        <div
+          style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+        >
+          더 보러 가기
+        </div>
+      </div>
+      <div style={{ marginBottom: "100px" }}>
         <SaleCarousel salegames={salegames} />
       </div>
     </div>
