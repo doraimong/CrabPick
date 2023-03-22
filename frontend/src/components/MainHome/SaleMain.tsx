@@ -1,10 +1,13 @@
 import React from "react";
 import SaleCarousel from "./SaleCarousel";
+import { useNavigate } from "react-router-dom";
 
 import footballmanager from "../../asset/DUMMY/footballmanager.jpg";
 import battlegrounds from "../../asset/DUMMY/battlegrounds.jpg";
 import hogwarts from "../../asset/DUMMY/hogwarts.jpg";
+import styles from "./SaleCarousel.module.css";
 const SaleMain = () => {
+  const navigate = useNavigate();
   const salegames = [
     {
       url: footballmanager,
@@ -40,6 +43,11 @@ const SaleMain = () => {
       // ],
     },
   ];
+
+  const goToSaleInfo = () => {
+    navigate("/sale-info");
+    window.scrollTo(0, 0);
+  };
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -47,9 +55,14 @@ const SaleMain = () => {
           <h2>세일 정보</h2>
         </div>
         <div
-          style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            // cursor: "pointer",
+          }}
+          onClick={goToSaleInfo}
         >
-          더 보러 가기
+          {/* <span className={styles.spantag}>더 보러 가기</span> */}
         </div>
       </div>
       <div style={{ marginBottom: "100px" }}>
