@@ -19,7 +19,7 @@ public class GameListRespDto {
         return GameListRespDto.builder()
                 .id(g.getId())
                 .name(g.getName())
-                .imgUrl(g.getImgLink())
+                .imgUrl(g.getImageLink())
                 .genre(g.getGenre())
                 .build();
     }
