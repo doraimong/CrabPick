@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/api/member")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MemberController {
 
     private final MemberService memberService;
