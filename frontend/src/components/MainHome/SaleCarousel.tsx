@@ -4,10 +4,11 @@ import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import styles from "./RecommendCarousel.module.css";
+import classes from "./RecommendCarousel.module.css";
+import styles from "./SaleCarousel.module.css";
 
 interface Props {
-  games: {
+  salegames: {
     url: string;
     title: string;
     id: number;
@@ -16,7 +17,7 @@ interface Props {
   }[];
 }
 
-const Carousel: React.FC<Props> = ({ games }) => {
+const Carousel: React.FC<Props> = ({ salegames }) => {
   const navigate = useNavigate();
   const settings = {
     className: "center",
@@ -28,13 +29,20 @@ const Carousel: React.FC<Props> = ({ games }) => {
   };
   return (
     <Slider {...settings}>
-      {games.map((game, index) => (
-        <div className={styles.centerimg} key={index}>
+      {salegames.map((game, index) => (
+        <div className={classes.centerimg} key={index}>
           <div>
             <img src={game.url} alt="" />
-            <h3 style={{ textAlign: "center", marginTop: "0" }}>
+            {/* <h3 style={{ textAlign: "center", marginTop: "0" }}>
               {game.title}
-            </h3>
+            </h3> */}
+            <div className={styles.discount_block}>
+              <div className={styles.discount_pct}>-33%</div>
+              <div className={styles.discount_prices}>
+                <div className={styles.discount_original_price}>￦ 41,000</div>
+                <div className={styles.discount_final_price}>￦ 27,470</div>
+              </div>
+            </div>
           </div>
         </div>
       ))}
