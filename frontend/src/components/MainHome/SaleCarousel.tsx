@@ -39,7 +39,11 @@ const Carousel: React.FC<Props> = ({ salegames }) => {
             <div className={styles.discount_block}>
               <div className={styles.discount_pct}>-33%</div>
               <div className={styles.discount_prices}>
-                <div className={styles.discount_original_price}>￦ 41,000</div>
+                <div
+                  className={`${styles.discount_original_price} ${styles.cancelled_price}`}
+                >
+                  ￦ 41,000
+                </div>
                 <div className={styles.discount_final_price}>￦ 27,470</div>
               </div>
             </div>
