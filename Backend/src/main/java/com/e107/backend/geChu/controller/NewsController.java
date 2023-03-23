@@ -1,7 +1,6 @@
 package com.e107.backend.geChu.controller;
 
 import com.e107.backend.geChu.dto.response.NewsRespDto;
-import com.e107.backend.geChu.service.GameService;
 import com.e107.backend.geChu.service.NewsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
