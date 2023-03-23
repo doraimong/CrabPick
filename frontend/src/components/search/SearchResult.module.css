@@ -1,3 +1,7 @@
 .SearchResult {
-  height: 100vh;
+  height: 10vh;
+}
+
+.SearchGame {
+  background: blue;
 }
