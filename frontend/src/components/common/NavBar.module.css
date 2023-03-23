@@ -55,7 +55,18 @@
 /* 검색 */
 .search {
   display: flex;
+  position: relative;
   grid-column-start: 7;
+}
+
+.dropDown {
+  position: absolute;
+  z-index: 20;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  color: black
 }
 
 
