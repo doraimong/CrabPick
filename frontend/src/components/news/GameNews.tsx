@@ -196,7 +196,7 @@ class GameNewsList extends Component<{}, State> {
                   <div className={styles.article}>
                     <div className={styles.article_left}>
                       <img src={item.img} alt="" />
-                      <div>
+                      <div style={{ marginLeft: "5%" }}>
                         <h3>{item.subject}</h3>
                       </div>
                     </div>
