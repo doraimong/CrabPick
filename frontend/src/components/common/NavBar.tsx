@@ -9,8 +9,8 @@ const MenuBar = () => {
   const navigate = useNavigate();
 
   // 로그인 기능 없을 때 임시
-  const [login, setLogin] = useState<Boolean>(false);
   const [drop, setDrop] = useState<Boolean>(false);
+  const [searchInput, setSearchInput] = useState<string>("");
   const home = () => {
     navigate("/");
   };
@@ -18,10 +18,19 @@ const MenuBar = () => {
   const dropDown = () => {
     setDrop(true);
   };
-  const searchHandler = (e: any) => {
-    console.log("실행");
-    e.dialog.showModal();
+  const searchInputHandler = (e: any) => {
+    setSearchInput(e.target.value);
   };
+
+  const searchHandler = (e: any) => {
+    navigate("/search", { state: searchInput });
+  };
+
+  const pressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      navigate("/search", { state: searchInput });
+    } 
+  }
 
   // 프로필 사진
   const defaultImg =
@@ -29,10 +38,6 @@ const MenuBar = () => {
 
   // 로그인 버튼 클릭
   // 로그인 기능 없을 때 임시
-  const loginHandler = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    setLogin(true);
-  };
 
   return (
     <>
@@ -44,27 +49,17 @@ const MenuBar = () => {
           <Link to="/game-news">게임 뉴스</Link>
         </div>
         {/* 검색 */}
-        <div className={styles.links}>
-          <div onClick={searchHandler}>검색</div>
-          <dialog>검색</dialog>
+        <div className={styles.search}>
+          <input type="text" onChange={searchInputHandler} onKeyDown={pressEnter}/>
+          <input type="button" value="검색" onClick={searchHandler}></input>
         </div>
         {/* <Link to="/mypage/:nickName">마이페이지</Link> */}
 
         {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
         {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
-        {login ? (
-          <div className={styles.navProfile}>
-            <p onClick={dropDown}>
-              닉네임
-              {/* <DropdownTriggerExample /> */}
-            </p>
-            <img src={defaultImg} alt="" />
-          </div>
-        ) : (
-          <a className={styles.linkSignIn} onClick={loginHandler} href="/">
-            로그인
-          </a>
-        )}
+        <div className={styles.links}>
+          <Link to="/signin">로그인</Link>
+        </div>
       </div>
       {drop ? <DropdownTrigger /> : <></>}
     </>
