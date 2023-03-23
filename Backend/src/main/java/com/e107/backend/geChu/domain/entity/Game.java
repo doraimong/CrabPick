@@ -20,9 +20,9 @@ public class Game {
     private Long id;
 
     @Comment("게임이름")
-    @Column(unique = true)
     private String name;
     @Comment("게임 아이디")
+    @Column(unique = true)
     private Long appId;
 
     @Comment("연령제한")
@@ -35,7 +35,7 @@ public class Game {
     private String genre;
 
     @Comment("출시일")
-    private LocalDate releaseDate;
+    private String releaseDate;
 
     @Comment("평균 플레이시간")
     private float avgPlaytime;
@@ -53,7 +53,7 @@ public class Game {
     private String reviewLink;
 
     @Comment("이미지 링크")
-    private String imgLink;
+    private String imageLink;
     @Comment("트레일러 링크")
     private String trailerLink;
 }

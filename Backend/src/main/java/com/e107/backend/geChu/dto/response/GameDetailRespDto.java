@@ -19,7 +19,7 @@ public class GameDetailRespDto {
     private Long ageLimit;
     private String developer;
     private String genre;
-    private LocalDate release;
+    private String release;
     private float avgPlaytime;
     private String mood;
     private String wordCloud;
@@ -43,7 +43,7 @@ public class GameDetailRespDto {
                 .reviewLink(g.getReviewLink())
                 .wordCloud(g.getWordCloud())
                 .trailer_url(g.getTrailerLink())
-                .imgUrl(g.getImgLink())
+                .imgUrl(g.getImageLink())
                 .build();
     }
 
