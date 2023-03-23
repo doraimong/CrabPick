@@ -20,13 +20,17 @@ const MenuBar = () => {
   };
   const searchInputHandler = (e: any) => {
     setSearchInput(e.target.value);
-    console.log(searchInput);
   };
 
   const searchHandler = (e: any) => {
     navigate("/search", { state: searchInput });
-    console.log(e, searchInput);
   };
+
+  const pressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      navigate("/search", { state: searchInput });
+    } 
+  }
 
   // 프로필 사진
   const defaultImg =
@@ -34,9 +38,6 @@ const MenuBar = () => {
 
   // 로그인 버튼 클릭
   // 로그인 기능 없을 때 임시
-  const loginHandler = (e: React.MouseEvent<HTMLElement>) => {
-    navigate("/signin");
-  };
 
   return (
     <>
@@ -49,16 +50,16 @@ const MenuBar = () => {
         </div>
         {/* 검색 */}
         <div className={styles.search}>
-          <input type="text" onChange={searchInputHandler} />
+          <input type="text" onChange={searchInputHandler} onKeyDown={pressEnter}/>
           <input type="button" value="검색" onClick={searchHandler}></input>
         </div>
         {/* <Link to="/mypage/:nickName">마이페이지</Link> */}
 
         {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
         {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
-        <a className={styles.linkSignIn} onClick={loginHandler} href="/">
-          로그인
-        </a>
+        <div className={styles.links}>
+          <Link to="/signin">로그인</Link>
+        </div>
       </div>
       {drop ? <DropdownTrigger /> : <></>}
     </>
