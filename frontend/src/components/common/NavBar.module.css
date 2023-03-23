@@ -66,6 +66,10 @@
 
 
 /* 검색 */
+.search {
+  display: flex;
+  grid-column-start: 7;
+}
 
 
 /* 프로필 */
