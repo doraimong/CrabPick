@@ -43,13 +43,6 @@ const MenuBar = () => {
         <div className={styles.links}>
           <Link to="/game-news">게임 뉴스</Link>
         </div>
-        <div className={styles.links}>
-          <Link to="/sale-info">할인 정보</Link>
-        </div>
-        <div className={styles.links}>
-          <Link to="/gamebti">GameBTI</Link>
-        </div>
-
         {/* 검색 */}
         <div className={styles.links}>
           <div onClick={searchHandler}>검색</div>
@@ -73,11 +66,7 @@ const MenuBar = () => {
           </a>
         )}
       </div>
-      {drop ? (
-        <DropdownTrigger/>
-      ) : (
-        <></>
-      )}
+      {drop ? <DropdownTrigger /> : <></>}
     </>
   );
 };

@@ -4,8 +4,12 @@
   grid-gap: 1.5rem;
   place-items: center ;
   background-color: #141e29;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
 }
-
 
 
 /* 로고 */
@@ -31,7 +35,7 @@
 }
 
 .links:hover {
-  color: yellow;
+  color: rgb(240,70,35);
   cursor: pointer;
 }
 
@@ -44,7 +48,7 @@
 }
 
 .links a:hover {
-  color: yellow;
+  color:rgb(240,70,35);
 }
 
 /* 로그인 버튼 */
@@ -57,7 +61,7 @@
 }
 .linkSignIn:hover {
   cursor: pointer;
-  color: yellow;
+  color: rgb(240,70,35);
 }
 
 
