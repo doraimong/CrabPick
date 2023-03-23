@@ -31,7 +31,7 @@ const Carousel: React.FC<Props> = ({ salegames }) => {
     <Slider {...settings}>
       {salegames.map((game, index) => (
         <div className={classes.centerimg} key={index}>
-          <div>
+          <div onClick={() => navigate(`/detail/${game.id}`)}>
             <img src={game.url} alt="" />
             {/* <h3 style={{ textAlign: "center", marginTop: "0" }}>
               {game.title}

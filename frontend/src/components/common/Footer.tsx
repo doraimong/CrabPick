@@ -9,9 +9,9 @@ const Footer = () => {
       <div className={styles.div}>
         <div className={styles.leftDiv}>
           <div className={styles.footerLink}>
-            <Link to="/">메인페이지</Link>
+            <Link to="/">메인 페이지</Link>
             <hr />
-            <Link to="/">게임 검색</Link>
+            <Link to="/game-news">게임 뉴스</Link>
             <hr />
             <Link to="/">마이페이지</Link>
           </div>

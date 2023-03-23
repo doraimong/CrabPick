@@ -27,12 +27,11 @@ const Carousel: React.FC<Props> = ({ games }) => {
     speed: 500,
   };
 
-  const goToDetail = () => {};
   return (
     <Slider {...settings}>
       {games.map((game, index) => (
         <div className={styles.centerimg} key={index}>
-          <div onClick={goToDetail}>
+          <div onClick={() => navigate(`/detail/${game.id}`)}>
             <img src={game.url} alt="" />
             <h3 style={{ textAlign: "center", marginTop: "0" }}>
               {game.title}
