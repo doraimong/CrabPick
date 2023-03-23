@@ -51,21 +51,12 @@
   color:rgb(240,70,35);
 }
 
-/* 로그인 버튼 */
-.linkSignIn {
-  grid-column: 8;
-  color: #979797;
-  text-decoration: none;
-  font-size: 15pt;
-  font-weight: bold;
-}
-.linkSignIn:hover {
-  cursor: pointer;
-  color: rgb(240,70,35);
-}
-
 
 /* 검색 */
+.search {
+  display: flex;
+  grid-column-start: 7;
+}
 
 
 /* 프로필 */
