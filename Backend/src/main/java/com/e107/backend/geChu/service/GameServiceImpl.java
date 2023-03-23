@@ -1,11 +1,9 @@
 package com.e107.backend.geChu.service;
 
 import com.e107.backend.geChu.domain.entity.Game;
-import com.e107.backend.geChu.domain.entity.SteamLibrary;
 import com.e107.backend.geChu.domain.repository.GameRepository;
 import com.e107.backend.geChu.dto.response.GameDetailRespDto;
 import com.e107.backend.geChu.dto.response.GameListRespDto;
-import com.e107.backend.geChu.dto.response.SteamLibraryRespDto;
 import com.e107.backend.global.common.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
