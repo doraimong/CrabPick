@@ -18,6 +18,10 @@
   margin-right: 5%;
 }
 
+.newsli:hover {
+  transform: scale(1.02);
+}
+
 
 .newsa {
   color: white;
@@ -51,6 +55,19 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 20px auto
+}
+
+.morebutton button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.morebutton button:hover {
+  background-color: #388e3c;
 }
