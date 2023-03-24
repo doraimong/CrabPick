@@ -1,0 +1,7 @@
+리뷰 크롤링 3 번
+
+562114,541200,94349992,"{'steamid': '76561198114618018', 'num_games_owned': 257, 'num_reviews': 5, 'playtime_forever': 1387, 'playtime_last_two_weeks': 101, 'playtime_at_review': 586, 'last_played': 1679194506}",False,english,True
+562115,541200,94349054,"{'steamid': '76561198252782636', 'num_games_owned': 46, 'num_reviews': 7, 'playtime_forever': 1744, 'playtime_last_two_weeks': 0, 'playtime_at_review': 810, 'last_played': 1676756337}",True,english,True
+562146,541200,94280727,"{'steamid': '76561198101512374', 'num_games_owned': 381, 'num_reviews': 4, 'playtime_forever': 532, 'playtime_last_two_weeks': 0, 'playtime_at_review': 442, 'last_played': 1638846709}",True,english,True
+562147,541200,94280432,"{'steamid': '76561198318668360', 'num_games_owned': 277, 'num_reviews': 11, 'playtime_forever': 746, 'playtime_last_two_weeks': 0, 'playtime_at_review': 197, 'last_played': 1653000258}",True,english,True
+
