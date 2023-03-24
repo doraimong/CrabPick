@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./Footer.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../asset/logo.png";
-
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 const Footer = () => {
   return (
     <div className={styles.footer}>
@@ -11,7 +13,9 @@ const Footer = () => {
           <div className={styles.footerLink}>
             <Link to="/">메인 페이지</Link>
             <hr />
-            <Link to="/game-news">게임 뉴스</Link>
+            <Link to="/game-news" onClick={scrollToTop}>
+              게임 뉴스
+            </Link>
             <hr />
             <Link to="/">마이페이지</Link>
           </div>
