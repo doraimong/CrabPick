@@ -23,17 +23,17 @@ const Footer = () => {
           <div>
             <h3 className={styles.adminHtag}>개발자들</h3>
             <div className={styles.admin}>
-              <p>강동훈: 포지션</p>
+              <p>강동훈: Backend</p>
               <hr />
-              <p>박종현: 포지션</p>
+              <p>박종현: Backend</p>
               <hr />
-              <p>배우찬: 포지션</p>
+              <p>배우찬: Frontend</p>
               <hr />
-              <p>이승한: 포지션</p>
+              <p>이승한: Frontend</p>
               <hr />
-              <p>조용재: 포지션</p>
+              <p>조용재: Backend</p>
               <hr />
-              <p>최홍준: 포지션</p>
+              <p>최홍준: CI/CD</p>
             </div>
           </div>
         </div>
