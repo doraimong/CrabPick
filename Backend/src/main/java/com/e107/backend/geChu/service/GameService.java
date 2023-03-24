@@ -9,4 +9,6 @@ public interface GameService {
     GameDetailRespDto findGameById(Long gameId);
 
     List<GameListRespDto> findAllGame();
+
+
 }

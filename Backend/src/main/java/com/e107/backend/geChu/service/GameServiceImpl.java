@@ -11,14 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 @Slf4j
-public class GameServiceImpl implements GameService{
+public class GameServiceImpl implements GameService {
     private final GameRepository gameRepository;
 
     @Override
@@ -30,11 +30,9 @@ public class GameServiceImpl implements GameService{
 
     @Override
     public List<GameListRespDto> findAllGame() {
-        List<Game> resp = gameRepository.findAll();
-        List<GameListRespDto> list = new ArrayList<>();
-        for (Game g: resp) {
-            list.add(GameListRespDto.of(g));
-        }
-        return list;
+        return gameRepository.findAll().stream().map(GameListRespDto::of).collect(Collectors.toList());
     }
 }
+
+
+
