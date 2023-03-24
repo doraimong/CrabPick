@@ -24,7 +24,6 @@ public class GameDetailRespDto {
     private String mood;
     private String wordCloud;
     private String steamLink;
-    private String reviewLink;
     private String imgUrl;
     private String trailer_url;
     private List<CommentRespDto> comments;
@@ -40,7 +39,6 @@ public class GameDetailRespDto {
                 .mood(g.getMood())
                 .ageLimit(g.getAgeLimit())
                 .developer(g.getDevelopers())
-                .reviewLink(g.getReviewLink())
                 .wordCloud(g.getWordCloud())
                 .trailer_url(g.getTrailerLink())
                 .imgUrl(g.getImageLink())
