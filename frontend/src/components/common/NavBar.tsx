@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import DropdownTrigger from "./DropDown";
@@ -8,16 +8,13 @@ import styles from "./NavBar.module.css";
 const MenuBar = () => {
   const navigate = useNavigate();
 
-  // 로그인 기능 없을 때 임시
-  const [drop, setDrop] = useState<Boolean>(false);
+  const [dropSearch, setDropSearch] = useState<Boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
+
   const home = () => {
     navigate("/");
   };
 
-  const dropDown = () => {
-    setDrop(true);
-  };
   const searchInputHandler = (e: any) => {
     setSearchInput(e.target.value);
   };
@@ -27,10 +24,18 @@ const MenuBar = () => {
   };
 
   const pressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       navigate("/search", { state: searchInput });
-    } 
-  }
+    }
+  };
+
+  useEffect(() => {
+    if (searchInput !== "") {
+      setDropSearch(true);
+    } else {
+      setDropSearch(false);
+    }
+  }, [searchInput]);
 
   // 프로필 사진
   const defaultImg =
@@ -50,8 +55,13 @@ const MenuBar = () => {
         </div>
         {/* 검색 */}
         <div className={styles.search}>
-          <input type="text" onChange={searchInputHandler} onKeyDown={pressEnter}/>
+          <input
+            type="text"
+            onChange={searchInputHandler}
+            onKeyDown={pressEnter}
+          />
           <input type="button" value="검색" onClick={searchHandler}></input>
+          {/* <div className={styles.dropDown}>{dropSearch ? <DropdownTrigger /> : null}</div> */}
         </div>
         {/* <Link to="/mypage/:nickName">마이페이지</Link> */}
 
@@ -61,7 +71,6 @@ const MenuBar = () => {
           <Link to="/signin">로그인</Link>
         </div>
       </div>
-      {drop ? <DropdownTrigger /> : <></>}
     </>
   );
 };
