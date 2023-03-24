@@ -1268,36 +1268,12 @@
 562113,541200,94360901,"{'steamid': '76561198809508149', 'num_games_owned': 37, 'num_reviews': 17, 'playtime_forever': 1004, 'playtime_last_two_weeks': 0, 'playtime_at_review': 184, 'last_played': 1668784835}",True,english,True
 562114,541200,94359501,"{'steamid': '76561198069065913', 'num_games_owned': 290, 'num_reviews': 2, 'playtime_forever': 1051, 'playtime_last_two_weeks': 0, 'playtime_at_review': 721, 'last_played': 1653599884}",True,english,True
 562115,541200,94350266,"{'steamid': '76561198382995553', 'num_games_owned': 89, 'num_reviews': 16, 'playtime_forever': 912, 'playtime_last_two_weeks': 0, 'playtime_at_review': 460, 'last_played': 1640313395}",True,english,True
-562116,541200,94349992,"{'steamid': '76561198114618018', 'num_games_owned': 257, 'num_reviews': 5, 'playtime_forever': 1387, 'playtime_last_two_weeks': 101, 'playtime_at_review': 586, 'last_played': 1679194506}",False,english,True
-562117,541200,94349054,"{'steamid': '76561198252782636', 'num_games_owned': 46, 'num_reviews': 7, 'playtime_forever': 1744, 'playtime_last_two_weeks': 0, 'playtime_at_review': 810, 'last_played': 1676756337}",True,english,True
-562118,541200,94347459,"{'steamid': '76561198367051405', 'num_games_owned': 290, 'num_reviews': 14, 'playtime_forever': 710, 'playtime_last_two_weeks': 0, 'playtime_at_review': 351, 'last_played': 1670855049}",True,english,True
-562119,541200,94341126,"{'steamid': '76561198084661861', 'num_games_owned': 785, 'num_reviews': 22, 'playtime_forever': 1830, 'playtime_last_two_weeks': 0, 'playtime_at_review': 847, 'last_played': 1665371128}",True,english,True
-562120,541200,94337935,"{'steamid': '76561198100586456', 'num_games_owned': 340, 'num_reviews': 28, 'playtime_forever': 1301, 'playtime_last_two_weeks': 0, 'playtime_at_review': 1013, 'last_played': 1641845033}",True,english,True
-562121,541200,94323818,"{'steamid': '76561198371695125', 'num_games_owned': 101, 'num_reviews': 13, 'playtime_forever': 837, 'playtime_last_two_weeks': 0, 'playtime_at_review': 780, 'last_played': 1676602466}",True,english,True
-562122,541200,94316861,"{'steamid': '76561198420421796', 'num_games_owned': 99, 'num_reviews': 9, 'playtime_forever': 1046, 'playtime_last_two_weeks': 0, 'playtime_at_review': 613, 'last_played': 1677394699}",True,english,True
-562123,541200,94315179,"{'steamid': '76561198843648705', 'num_games_owned': 219, 'num_reviews': 18, 'playtime_forever': 594, 'playtime_last_two_weeks': 0, 'playtime_at_review': 238, 'last_played': 1675392145}",True,english,True
-562124,541200,94306485,"{'steamid': '76561198872417526', 'num_games_owned': 11, 'num_reviews': 2, 'playtime_forever': 1487, 'playtime_last_two_weeks': 0, 'playtime_at_review': 1207, 'last_played': 1657422561}",True,english,True
-562125,541200,94305362,"{'steamid': '76561198152563415', 'num_games_owned': 215, 'num_reviews': 65, 'playtime_forever': 215, 'playtime_last_two_weeks': 0, 'playtime_at_review': 167, 'last_played': 1626548673}",True,english,True
-562126,541200,94303278,"{'steamid': '76561198870263365', 'num_games_owned': 18, 'num_reviews': 5, 'playtime_forever': 420, 'playtime_last_two_weeks': 0, 'playtime_at_review': 276, 'last_played': 1649892958}",True,english,True
-562127,541200,94301792,"{'steamid': '76561198084120176', 'num_games_owned': 258, 'num_reviews': 35, 'playtime_forever': 643, 'playtime_last_two_weeks': 0, 'playtime_at_review': 390, 'last_played': 1658802706}",True,english,True
-562128,541200,94300545,"{'steamid': '76561198433165623', 'num_games_owned': 72, 'num_reviews': 16, 'playtime_forever': 2916, 'playtime_last_two_weeks': 0, 'playtime_at_review': 2030, 'last_played': 1677452335}",True,english,True
-562129,541200,94298980,"{'steamid': '76561198824471520', 'num_games_owned': 32, 'num_reviews': 4, 'playtime_forever': 483, 'playtime_last_two_weeks': 0, 'playtime_at_review': 149, 'last_played': 1664654577}",True,english,True
-562130,541200,94298757,"{'steamid': '76561198222912064', 'num_games_owned': 209, 'num_reviews': 4, 'playtime_forever': 1157, 'playtime_last_two_weeks': 0, 'playtime_at_review': 994, 'last_played': 1637876661}",True,english,True
-562131,541200,94298245,"{'steamid': '76561198169221178', 'num_games_owned': 221, 'num_reviews': 7, 'playtime_forever': 400, 'playtime_last_two_weeks': 0, 'playtime_at_review': 145, 'last_played': 1657929477}",True,english,True
-562132,541200,94297172,"{'steamid': '76561198132011077', 'num_games_owned': 142, 'num_reviews': 26, 'playtime_forever': 1907, 'playtime_last_two_weeks': 0, 'playtime_at_review': 368, 'last_played': 1671147684}",True,english,True
-562133,541200,94294267,"{'steamid': '76561198110334818', 'num_games_owned': 246, 'num_reviews': 19, 'playtime_forever': 1235, 'playtime_last_two_weeks': 0, 'playtime_at_review': 623, 'last_played': 1655406654}",True,english,True
-562134,541200,94292670,"{'steamid': '76561198450136329', 'num_games_owned': 117, 'num_reviews': 13, 'playtime_forever': 155, 'playtime_last_two_weeks': 0, 'playtime_at_review': 34, 'last_played': 1678298790}",True,english,True
-562135,541200,94291986,"{'steamid': '76561198319277870', 'num_games_owned': 78, 'num_reviews': 6, 'playtime_forever': 4183, 'playtime_last_two_weeks': 0, 'playtime_at_review': 1681, 'last_played': 1670893323}",True,english,True
-562136,541200,94291797,"{'steamid': '76561198880973037', 'num_games_owned': 26, 'num_reviews': 2, 'playtime_forever': 2864, 'playtime_last_two_weeks': 0, 'playtime_at_review': 429, 'last_played': 1671072870}",True,english,True
-562137,541200,94290902,"{'steamid': '76561198208905761', 'num_games_owned': 636, 'num_reviews': 4, 'playtime_forever': 4110, 'playtime_last_two_weeks': 88, 'playtime_at_review': 1879, 'last_played': 1679457252}",True,english,True
-562138,541200,94290334,"{'steamid': '76561198139960397', 'num_games_owned': 225, 'num_reviews': 19, 'playtime_forever': 2630, 'playtime_last_two_weeks': 0, 'playtime_at_review': 1600, 'last_played': 1670812478}",True,english,True
-562139,541200,94288419,"{'steamid': '76561198858081375', 'num_games_owned': 39, 'num_reviews': 13, 'playtime_forever': 2464, 'playtime_last_two_weeks': 11, 'playtime_at_review': 880, 'last_played': 1678651491}",True,english,True
-562140,541200,94287383,"{'steamid': '76561197985486156', 'num_games_owned': 439, 'num_reviews': 61, 'playtime_forever': 180, 'playtime_last_two_weeks': 0, 'playtime_at_review': 126, 'last_played': 1654361158}",True,english,True
-562141,541200,94287347,"{'steamid': '76561198068078395', 'num_games_owned': 378, 'num_reviews': 24, 'playtime_forever': 62, 'playtime_last_two_weeks': 0, 'playtime_at_review': 55, 'last_played': 1659711976}",True,english,True
-562142,541200,94285724,"{'steamid': '76561198062589536', 'num_games_owned': 93, 'num_reviews': 8, 'playtime_forever': 324, 'playtime_last_two_weeks': 0, 'playtime_at_review': 219, 'last_played': 1635782570}",True,english,True
-562143,541200,94285107,"{'steamid': '76561198242515808', 'num_games_owned': 18, 'num_reviews': 1, 'playtime_forever': 2259, 'playtime_last_two_weeks': 61, 'playtime_at_review': 861, 'last_played': 1678674885}",True,english,True
-562144,541200,94284629,"{'steamid': '76561198271888710', 'num_games_owned': 77, 'num_reviews': 11, 'playtime_forever': 2393, 'playtime_last_two_weeks': 0, 'playtime_at_review': 64, 'last_played': 1655846279}",True,english,True
-562145,541200,94283590,"{'steamid': '76561198803018823', 'num_games_owned': 98, 'num_reviews': 6, 'playtime_forever': 928, 'playtime_last_two_weeks': 0, 'playtime_at_review': 324, 'last_played': 1675588691}",True,english,True
+
+
+
+
+
+
 562146,541200,94283215,"{'steamid': '76561199015578398', 'num_games_owned': 70, 'num_reviews': 4, 'playtime_forever': 3028, 'playtime_last_two_weeks': 0, 'playtime_at_review': 1764, 'last_played': 1671659629}",True,english,True
 562147,541200,94280906,"{'steamid': '76561198102014693', 'num_games_owned': 503, 'num_reviews': 10, 'playtime_forever': 1011, 'playtime_last_two_weeks': 0, 'playtime_at_review': 748, 'last_played': 1675632952}",True,english,True
 562148,541200,94280727,"{'steamid': '76561198101512374', 'num_games_owned': 381, 'num_reviews': 4, 'playtime_forever': 532, 'playtime_last_two_weeks': 0, 'playtime_at_review': 442, 'last_played': 1638846709}",True,english,True
