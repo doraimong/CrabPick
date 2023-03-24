@@ -31,7 +31,8 @@ const MenuBar = () => {
 
   useEffect(() => {
     if (searchInput !== "") {
-      setDropSearch(true);
+      setDropSearch(true)
+      const serachList = 1;
     } else {
       setDropSearch(false);
     }
@@ -61,7 +62,7 @@ const MenuBar = () => {
             onKeyDown={pressEnter}
           />
           <input type="button" value="검색" onClick={searchHandler}></input>
-          <div className={styles.dropDown}>{dropSearch ? <DropdownTrigger /> : null}</div>
+          <div className={styles.dropDown}>{dropSearch ? <DropdownTrigger  searchList = {searchInput} /> : null}</div>
         </div>
         {/* <Link to="/mypage/:nickName">마이페이지</Link> */}
 
