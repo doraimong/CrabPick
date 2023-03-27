@@ -32,13 +32,14 @@ public class Game {
     private String developers;
 
     @Comment("장르")
+    @Column(columnDefinition = "TEXT")
     private String genre;
 
     @Comment("출시일")
     private String releaseDate;
 
     @Comment("평균 플레이시간")
-    private float avgPlaytime;
+    private Float avgPlaytime;
 
     @Comment("분위기")
     private String mood;
@@ -49,11 +50,11 @@ public class Game {
     @Comment("스팀 링크")
     private String steamLink;
 
-    @Comment("리뷰 링크")
-    private String reviewLink;
-
     @Comment("이미지 링크")
+    @Column(columnDefinition = "TEXT")
     private String imageLink;
+
     @Comment("트레일러 링크")
+    @Column(columnDefinition = "TEXT")
     private String trailerLink;
 }
