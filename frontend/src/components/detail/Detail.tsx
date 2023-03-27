@@ -1,9 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import styles from "./Detail.module.css";
 import deleteImg from "../../asset/deleteImg.png";
+import axios from "axios";
 // import Comment from "./Comment";
-
 const Detail = () => {
+  // console.log("detail page");
+  const { gameId } = useParams();
+
+  console.log(gameId, "게임id params에서 받아옴");
+
+  useEffect(() => {
+    axios
+      // .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
+      .get(`http://j8e107.p.ssafy.io:8080/api/game/1433570`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const [commentList, setCommentList] = useState<
     { id: number; nickname: string; content: string }[]
   >([]);
@@ -143,6 +161,8 @@ const Detail = () => {
                     borderBottom: "1px solid #ccc",
                     margin: "10px",
                     padding: "10px",
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-all",
                   }}
                 >
                   <div>{comment.nickname}</div>
@@ -154,7 +174,7 @@ const Detail = () => {
                         {comment.content}
                       </span>
                     </div>
-                    <div>
+                    <div style={{ alignItems: "end", display: "flex" }}>
                       {/* 삭제 */}
                       <img
                         src={deleteImg}
