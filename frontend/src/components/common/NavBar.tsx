@@ -13,6 +13,7 @@ const MenuBar = () => {
 
   const home = () => {
     navigate("/");
+    window.scrollTo(0, 0);
   };
 
   const searchInputHandler = (e: any) => {
@@ -31,7 +32,7 @@ const MenuBar = () => {
 
   useEffect(() => {
     if (searchInput !== "") {
-      setDropSearch(true)
+      setDropSearch(true);
       const serachList = 1;
     } else {
       setDropSearch(false);
