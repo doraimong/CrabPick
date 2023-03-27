@@ -10,11 +10,10 @@ import styles from "./RecommendCarousel.module.css";
 
 interface Props {
   games: {
-    url: string;
-    title: string;
     id: number;
-    genre: string;
-    etc: string;
+    appId: number;
+    genre: [];
+    name: string;
   }[];
 }
 function SampleNextArrow(props: any) {
@@ -41,8 +40,7 @@ function SamplePrevArrow(props: any) {
 }
 const Carousel: React.FC<Props> = ({ games }) => {
   const navigate = useNavigate();
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
-
+  // const [currentSlide, setCurrentSlide] = useState<number>(0);
   const settings: Settings = {
     dots: true,
     infinite: true,
@@ -56,19 +54,25 @@ const Carousel: React.FC<Props> = ({ games }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
+  // console.log(games[2]?.genre?.split("}")[0].split("'description':")[1]);
+  console.log(games[2]);
+  // console.log(games[2]?.genre?.split("}").split("'description':"));
   return (
     <Slider {...settings}>
-      {games.map((game, index) => (
+      {games.map((game: any, index) => (
         <div
           key={index}
           className={styles.carousel}
-          onClick={() => navigate(`/detail/${game.id}`)}
+          onClick={() => navigate(`/detail/${game.appId}`)}
         >
-          <img src={game.url} alt={`Slide ${index}`} className={styles.image} />
+          <img
+            src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
+            alt={`Slide ${index}`}
+            className={styles.image}
+          />
           <div>
-            <h1>{game.title}</h1>
-            <h4>{game.genre}</h4>
-            <h4>{game.etc}</h4>
+            <h1>{game.name}</h1>
+            <div></div>
           </div>
         </div>
       ))}
