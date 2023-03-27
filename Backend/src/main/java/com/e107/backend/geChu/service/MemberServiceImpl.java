@@ -75,9 +75,9 @@ public class MemberServiceImpl implements MemberService{
         return list;
     }
 
-    @Override
-    public List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId) {
+//    @Override
+//    public List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId) {
 //        return friendRepository.findOwnedFriend(memberId, gameId);
-        return memberRepository.findOwnedFriend(memberId, gameId);
-    }
+//        return memberRepository.findOwnedFriend(memberId, gameId);
+//    }
 }

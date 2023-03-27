@@ -47,16 +47,6 @@ public class MemberController {
         return new ResponseEntity<>(memberService.findAllGame(memberId), HttpStatus.OK);
     }
 
-    @GetMapping("/{memberId}/game/{gameId}")
-    public ResponseEntity<GameDetailRespDto> getGame(@PathVariable Long memberId, @PathVariable Long gameId ) {
-        GameDetailRespDto dto = gameService.findGameById(gameId);
-        List<CommentRespDto> l = commentService.findCommentByGameId(gameId);
-        List<GameOwnedMemberRespDto> m = memberService.findGameOwnerById(memberId, gameId);
-        log.info("==={}",m.size());
-        dto.setComments(l);
-        dto.setOwnedMembers(m);
-        return new ResponseEntity<>(dto, HttpStatus.OK);
-    }
 
     @PostMapping
     public ResponseEntity<String> addMember(@RequestBody MemberAddReqDto dto) {
