@@ -7,19 +7,22 @@ import SearchLayout from "../layout/SearchLayout";
 import SearchResult from "../components/search/SearchResult";
 import { useLocation } from "react-router-dom";
 
-
-const SearchPage = (gameList: any) => {
+const SearchPage = () => {
   const { state } = useLocation();
-  const filteredgame = gameList.gameList.filter((itemList:any) => {
-    return itemList.name.toUpperCase().includes(state.toUpperCase())
-  })
+  // console.log('state', state);
+  // console.log('filteredGameList', state.filteredGameList);
   return (
     <SearchLayout>
-      <div className={styles.page}>
-        검색 : {state}
-        {filteredgame.map((game: any, i: number) => (
-          <SearchResult key={i} game={game} />
-        ))}
+      <div className={styles.SearchPage}>
+        검색 : {state.searchInput}
+        {state.filteredGameList ? (
+          state.filteredGameList.map((game: any, i: number) => (
+            console.log(i),
+            <SearchResult key={i} game={game} />
+          ))
+        ) : (
+          <><br></br>검색 결과가 없습니다</>
+        )}
       </div>
     </SearchLayout>
   );
