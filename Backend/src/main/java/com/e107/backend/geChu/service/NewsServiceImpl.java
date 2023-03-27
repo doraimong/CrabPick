@@ -26,4 +26,9 @@ public class NewsServiceImpl implements NewsService{
         }
         return resp;
     }
+
+    // 뉴스업데이트 기능 추가 필요
+    public void updateNews(){
+
+    }
 }

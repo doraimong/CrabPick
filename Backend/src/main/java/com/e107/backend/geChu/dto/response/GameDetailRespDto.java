@@ -17,6 +17,7 @@ public class GameDetailRespDto {
     private Long id;
     private Long appId;
     private Long ageLimit;
+    private String name;
     private String developer;
     private String genre;
     private String release;
@@ -33,6 +34,7 @@ public class GameDetailRespDto {
                 .id(g.getId())
                 .genre(g.getGenre())
                 .appId(g.getAppId())
+                .name(g.getName())
                 .release(g.getReleaseDate())
                 .avgPlaytime(g.getAvgPlaytime())
                 .mood(g.getMood())
