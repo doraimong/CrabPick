@@ -1,23 +1,18 @@
-import React from 'react'
-import { Dropdown, Icon } from 'semantic-ui-react'
-import './DropDown.css'
+import React, { useState } from "react";
+import { Dropdown, Icon } from "semantic-ui-react";
+import "./DropDown.css";
 
-const options = [
-  {
-    key: 'user',
-    disabled: true,
-  },
-  { key: 'profile', text: 'Your Profile' },
-  { key: 'stars', text: 'Your Stars' },
-  { key: 'explore', text: 'Explore' },
-  { key: 'integrations', text: 'Integrations' },
-  { key: 'help', text: 'Help' },
-  { key: 'settings', text: 'Settings' },
-  { key: 'sign-out', text: 'Sign Out' },
-]
+const DropdownTrigger = (searchList: any) => {
+  const options: any = [];
+  searchList.filteredGameList.map((item: any, i: number) => {
+    options.push({
+      key: i,
+      text: item.name,
+      // 게임 이미지. 이미지가 별로라 안넣음. 게임 포스터 이미지가 없는듯
+      // image: { avartar: true, src: { img } },
+    });
+  });
+  return <Dropdown options={options} />;
+};
 
-const DropdownTrigger = () => (
-  <Dropdown options={options} />
-)
-
-export default DropdownTrigger
+export default DropdownTrigger;
