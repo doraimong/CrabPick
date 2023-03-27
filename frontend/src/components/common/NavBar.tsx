@@ -88,7 +88,6 @@ const MenuBar = () => {
     });
     setFilteredGameList(filteredGame);
   }, [searchInput]);
-
   return (
     <>
       <div className={styles.navBar}>
@@ -110,7 +109,7 @@ const MenuBar = () => {
           />
           <input type="button" value="검색" onClick={searchHandler}></input>
           <div className={styles.dropDown}>
-            {dropSearch && searchInput !== "" ? (
+            {searchInput !== "" && dropSearch ? (
               <DropdownTrigger filteredGameList={filteredGameList} />
             ) : null}
           </div>
