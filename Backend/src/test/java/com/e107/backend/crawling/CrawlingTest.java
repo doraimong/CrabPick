@@ -25,43 +25,46 @@ import java.io.IOException;
 public class CrawlingTest {
     @Autowired
     private NewsRepository newsRepository;
+
     @Test
     @Transactional
     @Rollback(false)
     public void crawling() throws IOException {
-        String url = "https://www.gamemeca.com/news.php?p=1";
-        Document doc = Jsoup.connect(url).get();
-        Elements elem = doc.select("ul[class=\"list_news\"] li");
-        int i = 0;
-        for(Element e: elem){
-
-            Elements s = e.select("strong[class=\"tit_thumb_h\"]");
-            Elements s1 = e.select("strong[class=\"tit_thumb\"]");
-            if(s.hasText()) {
-                News news = newsRepository.findById(i + 1L).orElseThrow();
-                String subject = s.text();
-                System.out.println(subject);
-                String imageLink = e.select("a img").attr("src");
-                System.out.println(imageLink);
-                String link = "https://www.gamemeca.com" + s.select("a").attr("href");
-                System.out.println(link);
-                String date = e.select("div[class=\"day_news\"]").text();
-                System.out.println(date);
-                news.setAttribute(subject, link, imageLink, date);
+        String url;
+        int j = 0;
+        for (int i = 1; i <= 2; i++) {
+            url = "https://www.gamemeca.com/news.php?p=" + i;
+            Document doc = Jsoup.connect(url).get();
+            Elements elem = doc.select("ul[class=\"list_news\"] li");
+            for (Element e : elem) {
+                Elements s = e.select("strong[class=\"tit_thumb_h\"]");
+                Elements s1 = e.select("strong[class=\"tit_thumb\"]");
+                if (s.hasText()) {
+                    News news = newsRepository.findById(j + 1L).orElseThrow();
+                    String subject = s.text();
+                    System.out.println(subject);
+                    String imageLink = e.select("a img").attr("src");
+                    System.out.println(imageLink);
+                    String link = "https://www.gamemeca.com" + s.select("a").attr("href");
+                    System.out.println(link);
+                    String date = e.select("div[class=\"day_news\"]").text();
+                    System.out.println(date);
+                    news.setAttribute(subject, link, imageLink, date);
+                }
+                if (s1.hasText()) {
+                    News news = newsRepository.findById(j + 1L).orElseThrow();
+                    String subject = s1.text();
+                    System.out.println(subject);
+                    String imageLink = e.select("a img").attr("src");
+                    System.out.println(imageLink);
+                    String link = "https://www.gamemeca.com" + s1.select("a").attr("href");
+                    System.out.println(link);
+                    String date = e.select("div[class=\"day_news\"]").text();
+                    System.out.println(date);
+                    news.setAttribute(subject, link, imageLink, date);
+                }
+                j++;
             }
-            if(s1.hasText()) {
-                News news = newsRepository.findById(i + 1L).orElseThrow();
-                String subject = s1.text();
-                System.out.println(subject);
-                String imageLink = e.select("a img").attr("src");
-                System.out.println(imageLink);
-                String link = "https://www.gamemeca.com" + s1.select("a").attr("href");
-                System.out.println(link);
-                String date = e.select("div[class=\"day_news\"]").text();
-                System.out.println(date);
-                news.setAttribute(subject, link, imageLink, date);
-            }
-            i++;
         }
 
     }
