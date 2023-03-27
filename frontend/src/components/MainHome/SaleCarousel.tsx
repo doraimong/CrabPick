@@ -27,11 +27,16 @@ const Carousel: React.FC<Props> = ({ salegames }) => {
     slidesToShow: 3,
     speed: 500,
   };
+
+  const handleClick = (id: number) => {
+    navigate(`/detail/${id}`);
+    window.scrollTo(0, 0);
+  };
   return (
     <Slider {...settings}>
       {salegames.map((game, index) => (
         <div className={classes.centerimg} key={index}>
-          <div onClick={() => navigate(`/detail/${game.id}`)}>
+          <div onClick={() => handleClick(game.id)}>
             <img src={game.url} alt="" />
             {/* <h3 style={{ textAlign: "center", marginTop: "0" }}>
               {game.title}
