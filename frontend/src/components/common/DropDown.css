@@ -2,3 +2,8 @@
     background-color: red;
     z-index: 50;
 } */
+
+.a:hover {
+  background: red;
+  z-index: 50;
+}
