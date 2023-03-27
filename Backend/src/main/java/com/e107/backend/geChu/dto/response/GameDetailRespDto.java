@@ -20,14 +20,13 @@ public class GameDetailRespDto {
     private String developer;
     private String genre;
     private String release;
-    private float avgPlaytime;
+    private Float avgPlaytime;
     private String mood;
     private String wordCloud;
     private String steamLink;
     private String imgUrl;
     private String trailer_url;
     private List<CommentRespDto> comments;
-    private List<GameOwnedMemberRespDto> ownedMembers;
 
     public static GameDetailRespDto of(Game g) {
         return GameDetailRespDto.builder()
@@ -40,6 +39,7 @@ public class GameDetailRespDto {
                 .ageLimit(g.getAgeLimit())
                 .developer(g.getDevelopers())
                 .wordCloud(g.getWordCloud())
+                .steamLink(g.getSteamLink())
                 .trailer_url(g.getTrailerLink())
                 .imgUrl(g.getImageLink())
                 .build();
@@ -47,8 +47,5 @@ public class GameDetailRespDto {
 
     public void setComments(List<CommentRespDto> list) {
         this.comments = list;
-    }
-    public void setOwnedMembers(List<GameOwnedMemberRespDto> list) {
-        this.ownedMembers = list;
     }
 }

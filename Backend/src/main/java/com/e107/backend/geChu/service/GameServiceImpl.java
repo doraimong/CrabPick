@@ -7,6 +7,7 @@ import com.e107.backend.geChu.dto.response.GameListRespDto;
 import com.e107.backend.global.common.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +23,19 @@ public class GameServiceImpl implements GameService {
     private final GameRepository gameRepository;
 
     @Override
-    public GameDetailRespDto findGameById(Long gameId) {
-        Game game = gameRepository.findById(gameId)
-                .orElseThrow(() -> new CommonException(2, "Game객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+    public GameDetailRespDto findGameByAppId(Long gameId) {
+        Game game = gameRepository.findByAppId(gameId);
+        if (game == null) {
+            throw new CommonException(2, "Game객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
         return GameDetailRespDto.of(game);
     }
 
+
     @Override
-    public List<GameListRespDto> findAllGame() {
-        return gameRepository.findAll().stream().map(GameListRespDto::of).collect(Collectors.toList());
+    public List<GameListRespDto> findAllGame(Pageable pageable) {
+        return gameRepository.findAll(pageable).stream().map(GameListRespDto::of).collect(Collectors.toList());
     }
 }
 
