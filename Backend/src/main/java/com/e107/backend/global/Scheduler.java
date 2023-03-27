@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class Scheduler {
 
     private final NewsService newsService;
-    @Scheduled(fixedRate = 60000) // 메소드 호출이 종료되는 시간에서 10000ms(10초) 이후 재 호출
+    @Scheduled(fixedRate = 60000 * 5) // 메소드 호출이 종료되는 시간에서 5분 이후 재 호출
     public void doFixedRateJob() throws IOException {
         System.out.println("fixedRate");
         System.out.println("news update job start : " + LocalTime.now());

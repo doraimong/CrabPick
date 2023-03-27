@@ -44,20 +44,21 @@ public class NewsServiceImpl implements NewsService{
             for (Element e : elem) {
                 Elements s = e.select("strong[class=\"tit_thumb_h\"]");
                 Elements s1 = e.select("strong[class=\"tit_thumb\"]");
+                News news = newsRepository.findById(j + 1L).orElseThrow();
+                String imageLink = e.select("a img").attr("src");
+                String date = e.select("div[class=\"day_news\"]").text();
+                if (news.getSubject().equals(s.text()) || news.getSubject().equals(s1.text())) {
+                    log.info("NOT CHANGED");
+                    return;
+                }
                 if (s.hasText()) {
-                    News news = newsRepository.findById(j + 1L).orElseThrow();
                     String subject = s.text();
-                    String imageLink = e.select("a img").attr("src");
                     String link = "https://www.gamemeca.com" + s.select("a").attr("href");
-                    String date = e.select("div[class=\"day_news\"]").text();
                     news.setAttribute(subject, link, imageLink, date);
                 }
                 if (s1.hasText()) {
-                    News news = newsRepository.findById(j + 1L).orElseThrow();
                     String subject = s1.text();
-                    String imageLink = e.select("a img").attr("src");
                     String link = "https://www.gamemeca.com" + s1.select("a").attr("href");
-                    String date = e.select("div[class=\"day_news\"]").text();
                     news.setAttribute(subject, link, imageLink, date);
                 }
                 j++;
