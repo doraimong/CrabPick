@@ -60,13 +60,17 @@ const MenuBar = () => {
   // 검색하기
   const searchHandler = (e: any) => {
     setDropSearch(false);
-    navigate("/search", { state: { searchInput : searchInput, filteredGameList: filteredGameList } });
+    navigate("/search", {
+      state: { searchInput: searchInput, filteredGameList: filteredGameList },
+    });
   };
   // Enter로 검색하기
   const pressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-    setDropSearch(false);
-    navigate("/search", { state: { searchInput : searchInput, filteredGameList: filteredGameList } });
+      setDropSearch(false);
+      navigate("/search", {
+        state: { searchInput: searchInput, filteredGameList: filteredGameList },
+      });
     }
   };
   // 검색창을 이용중인지 확인하여 dropdown 하기
@@ -79,19 +83,10 @@ const MenuBar = () => {
 
   // 검색창에 쓴 값으로 게임리스트 필터링 하기
   useEffect(() => {
-<<<<<<< HEAD
-    if (searchInput !== "") {
-      setDropSearch(true);
-      const serachList = 1;
-    } else {
-      setDropSearch(false);
-    }
-=======
     const filteredGame = gameList.filter((itemList: any) => {
       return itemList.name.toUpperCase().includes(searchInput.toUpperCase());
     });
     setFilteredGameList(filteredGame);
->>>>>>> ca5dc63e27edd13e88af477cafca9a267d0fbdd3
   }, [searchInput]);
 
   return (
