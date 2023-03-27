@@ -14,5 +14,5 @@ public interface MemberService {
     MemberRespDto findMemberById(Long memberId);
     List<CommentRespDto> findAllReview(Long memberId);
     List<SteamLibraryRespDto> findAllGame(Long memberId);
-    List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId);
+//    List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId);
 }
