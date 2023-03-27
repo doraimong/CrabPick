@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Detail.module.css";
+import deleteImg from "../../asset/deleteImg.png";
+// import Comment from "./Comment";
 
 const Detail = () => {
+  const [commentList, setCommentList] = useState<
+    { id: number; nickname: string; content: string }[]
+  >([]);
+  const [nextCommentId, setNextCommentId] = useState(1);
+  const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const textarea = event.currentTarget.querySelector("textarea");
+    if (textarea) {
+      const commentText = textarea.value.trim();
+      if (commentText) {
+        setCommentList((prevList) => [
+          ...prevList,
+          { id: nextCommentId, nickname: "Guest", content: commentText },
+        ]);
+        setNextCommentId(nextCommentId + 1);
+        textarea.value = "";
+      }
+    }
+  };
+  const deleteComment = (id: number) => {
+    setCommentList((prevList) =>
+      prevList.filter((comment) => comment.id !== id)
+    );
+  };
+
   return (
     <div className={styles.detail}>
       <div>
@@ -64,11 +91,87 @@ const Detail = () => {
         <div>★★★★☆</div>
       </div>
       <div id="코멘트란">
-        <div>
+        <div style={{ width: "100%" }}>
           <h2>코멘트</h2>
+          {/* <Comment /> */}
+          <div>
+            <form onSubmit={submitComment}>
+              <textarea
+                style={{
+                  width: "100%",
+                  resize: "none",
+                  height: "100px",
+                  fontSize: "16px",
+                  // padding: "10px",
+                  // border: "1px solid #ccc",
+                  margin: "0",
+                  padding: "0",
+                  borderRadius: "4px",
+                }}
+              ></textarea>
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <input
+                  type="submit"
+                  value="등록"
+                  style={{
+                    backgroundColor: "#4caf50",
+                    color: "white",
+                    padding: "10px",
+                    fontSize: "16px",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                  }}
+                />
+              </div>
+            </form>
+          </div>
         </div>
         <div id="코멘트">
-          <div>첫 코멘트</div>
+          {commentList.length === 0 ? (
+            <div style={{ margin: "10px", textAlign: "center" }}>
+              아직 댓글이 없습니다.
+            </div>
+          ) : (
+            <div>
+              <div style={{ margin: "10px" }}>댓글 {commentList.length}개</div>
+              {commentList.map((comment, index) => (
+                <div
+                  key={index}
+                  style={{
+                    // border: "1px solid black",
+                    borderBottom: "1px solid #ccc",
+                    margin: "10px",
+                    padding: "10px",
+                  }}
+                >
+                  <div>{comment.nickname}</div>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div>
+                      <span style={{ fontSize: "30px" }}>
+                        {comment.content}
+                      </span>
+                    </div>
+                    <div>
+                      {/* 삭제 */}
+                      <img
+                        src={deleteImg}
+                        style={{
+                          background: "none",
+                          width: "50px",
+                          cursor: "pointer",
+                        }}
+                        alt=""
+                        onClick={() => deleteComment(comment.id)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
