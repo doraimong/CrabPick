@@ -7,7 +7,7 @@ import axios from "axios";
 const Detail = () => {
   // console.log("detail page");
   const { gameId } = useParams();
-
+  const [gameData, setGameData] = useState<[]>([]);
   console.log(gameId, "게임id params에서 받아옴");
 
   useEffect(() => {
@@ -15,13 +15,14 @@ const Detail = () => {
       // .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
       .get(`http://j8e107.p.ssafy.io:8080/api/game/1433570`)
       .then((res) => {
-        console.log(res.data);
+        setGameData(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  console.log("sef", gameData);
   const [commentList, setCommentList] = useState<
     { id: number; nickname: string; content: string }[]
   >([]);
