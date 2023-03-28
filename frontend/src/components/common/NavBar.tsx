@@ -122,7 +122,7 @@ const MenuBar = () => {
 
         {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
         {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
-        {!!!isLoggedIn && (
+        {!isLoggedIn && (
           <div className={styles.links}>
             <Link to="/signin">로그인</Link>
           </div>
