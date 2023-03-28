@@ -12,16 +12,6 @@ import DetailPage from "./pages/DetailPage";
 import SearchPage from "./pages/SearchPage";
 import axios from "axios";
 function App() {
-  // const [gameList, setGameList] = useState<[]>([]);
-  // useEffect(() => {
-  //   const response = axios
-  //     .get("/api/game")
-  //     .then((res) => {
-  //       setGameList(res.data);
-  //     })
-  //     .catch(() => {
-  //     });
-  // }, []);
 
   return (
     <Routes>
