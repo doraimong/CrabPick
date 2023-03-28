@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import DropdownTrigger from "./DropDown";
@@ -10,26 +10,7 @@ const MenuBar = () => {
 
   const [dropSearch, setDropSearch] = useState<Boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
-  const [gameList, setGameList] = useState<any>([
-    // {
-    //   id: 1,
-    //   name: "name",
-    //   imgUrl: "imgurl",
-    //   genre: "genre",
-    // },
-    // {
-    //   id: 2,
-    //   name: "name2",
-    //   imgUrl: "imgurl2",
-    //   genre: "genre2",
-    // },
-    // {
-    //   id: 3,
-    //   name: "name3",
-    //   imgUrl: "imgurl3",
-    //   genre: "genre3",
-    // },
-  ]);
+  const [gameList, setGameList] = useState<any>([]);
   const [filteredGameList, setFilteredGameList] = useState<any>();
 
   // 전체 게임 목록 가져오기
@@ -77,8 +58,24 @@ const MenuBar = () => {
   const getFocus = () => {
     setDropSearch(true);
   };
-  const loseFocus = () => {
-    setDropSearch(false);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // 클릭하면 실행
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  // 검색창 이외의 곳을 클릭 하였는지 확인
+  const handleClickOutside = (event: any) => {
+    if (dropdownRef.current && dropdownRef.current.contains(event.target)) {
+      setDropSearch(true);
+    } else {
+      setDropSearch(false);
+    }
   };
 
   // 검색창에 쓴 값으로 게임리스트 필터링 하기
@@ -98,13 +95,12 @@ const MenuBar = () => {
           <Link to="/game-news">게임 뉴스</Link>
         </div>
         {/* 검색 */}
-        <div className={styles.search}>
+        <div className={styles.search} ref={dropdownRef}>
           <input
             type="text"
             onChange={searchInputHandler}
             onKeyDown={pressEnter}
             onFocus={getFocus}
-            onBlur={loseFocus}
             value={searchInput}
           />
           <input type="button" value="검색" onClick={searchHandler}></input>
