@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../store/auth-context";
 import DropdownTrigger from "./DropDown";
 import logo from "../../asset/logo.png";
 import styles from "./NavBar.module.css";
@@ -13,10 +14,17 @@ const MenuBar = () => {
   const [gameList, setGameList] = useState<any>([]);
   const [filteredGameList, setFilteredGameList] = useState<any>();
 
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
+
+  const logoutHandler = () => {
+    authCtx.logout();
+    navigate("/");
+  };
   // 전체 게임 목록 가져오기
   useEffect(() => {
     async function getGameList() {
-      const response = await axios
+      await axios
         .get("http://j8e107.p.ssafy.io:8080/api/game")
         .then((res) => {
           setGameList(res.data);
@@ -114,9 +122,11 @@ const MenuBar = () => {
 
         {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
         {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
-        <div className={styles.links}>
-          <Link to="/signin">로그인</Link>
-        </div>
+        {!!!isLoggedIn && (
+          <div className={styles.links}>
+            <Link to="/signin">로그인</Link>
+          </div>
+        )}
       </div>
     </>
   );
