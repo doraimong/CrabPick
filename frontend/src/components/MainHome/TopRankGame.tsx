@@ -14,7 +14,6 @@ const TopRankGame = () => {
       .then((response) => response.json())
       .then((data) => {
         setGames(data);
-        console.log(data);
       })
       .catch((error) => console.log(error));
   }, []);

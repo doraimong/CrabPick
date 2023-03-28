@@ -8,7 +8,6 @@ const Detail = () => {
   // console.log("detail page");
   const { gameId } = useParams();
   const [gameData, setGameData] = useState<[]>([]);
-  console.log(gameId, "게임id params에서 받아옴");
 
   useEffect(() => {
     axios
@@ -75,7 +74,7 @@ const Detail = () => {
           </div>
         </div>
         <div id="세부정보" className={styles.detailInfo}>
-          <p>장르</p>
+          <p>장르 : </p>
           <p>제작사</p>
           <p>연령제한</p>
           <p>출시일</p>
