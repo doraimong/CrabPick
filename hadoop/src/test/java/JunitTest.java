@@ -2,6 +2,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 public class JunitTest {
 
     @Test
@@ -83,5 +87,27 @@ public class JunitTest {
         System.out.println(steamid);
 //        System.out.println(playtime_forever);
 
+    }
+
+    @Test
+    public void divided_for_what() {
+        try {
+            File f = new File("C:\\Users\\SSAFY\\Desktop\\project02\\Git\\hadoop\\data\\part-r-00000");
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            System.out.println("file content: ");
+
+            String r=br.readLine();
+            while(r != null){
+                String[] elem = r.split("\t");
+                for (String val: elem) {
+                    System.out.println(val);
+                }
+                r = br.readLine();
+            }
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
