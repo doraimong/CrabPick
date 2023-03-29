@@ -11,6 +11,8 @@ const Detail = () => {
   const [gameGenre, setGameGenre] = useState<string>("");
   const [gameDeveloper, setGameDeveloper] = useState<string>("");
   const [gameRelease, setGameRelease] = useState<string>("");
+  const [gameTrailer, setGameTrailer] = useState<string>("");
+  const [selectedImage, setSelectedImage] = useState<string>(gameTrailer);
 
   interface months {
     [key: string]: string;
@@ -71,6 +73,22 @@ const Detail = () => {
           releaseDate[0] +
           "일"
       );
+
+      // const trailerA = gameData.trailer_url.slice(
+      //   1,
+      //   gameData.trailer_url.length - 1
+      // );
+      // const trailerB = trailerA.replaceAll("'", '"');
+      // const trailerC = trailerB.replaceAll("True", "true");
+      // console.log("trailerC", trailerC);
+      // const trailerD = JSON.parse(trailerC.trim())[0];
+
+      // if (trailerD.mp4) {
+      //   setGameTrailer(trailerD.mp4[480]);
+      // } else {
+      //   setGameTrailer(trailerD.webm[480]);
+      // }
+      // setSelectedImage(gameTrailer);
     }
   }, [gameData]);
 
@@ -110,7 +128,12 @@ const Detail = () => {
       </div>
       <div id="게임소개" className={styles.gameDetail}>
         <div id="게임이미지" className={styles.gameImage}>
-          <div id="큰이미지" className={styles.bigImage}></div>
+          <video
+            controls
+            src={selectedImage}
+            id="큰이미지"
+            className={styles.bigImage}
+          ></video>
           <div id="작은이미지들" className={styles.smallImages}>
             <div id="첫번째작은이미지" className={styles.smallImage}>
               1
