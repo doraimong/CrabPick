@@ -6,7 +6,6 @@ import steamlogo from "../../asset/steamlogo.png";
 import axios from "axios";
 // import Comment from "./Comment";
 const Detail = () => {
-  // console.log("detail page");
   const { gameId } = useParams();
   const [gameData, setGameData] = useState<any>(null);
   const [gameGenre, setGameGenre] = useState<string>("");
@@ -41,7 +40,7 @@ const Detail = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [gameId]);
 
   useEffect(() => {
     if (gameData) {
@@ -75,10 +74,6 @@ const Detail = () => {
     }
   }, [gameData]);
 
-  // useEffect(() => {
-
-  // })
-
   const [commentList, setCommentList] = useState<
     { id: number; nickname: string; content: string }[]
   >([]);
@@ -108,11 +103,10 @@ const Detail = () => {
     window.open(`https://store.steampowered.com/app/${gameData?.appId}/`);
   };
 
-  console.log(gameData);
   return (
     <div className={styles.detail}>
       <div>
-        <h1>게임 제목</h1>
+        <h1>{gameData?.name}</h1>
       </div>
       <div id="게임소개" className={styles.gameDetail}>
         <div id="게임이미지" className={styles.gameImage}>
@@ -171,13 +165,13 @@ const Detail = () => {
           <div id="좋아요"></div>
         </div>
       </div>
-      <h2>비슷한 게임들</h2>
+      {/* <h2>비슷한 게임들</h2>
       <div id="비슷한게임들" className={styles.simmilarGames}>
         <div id="첫번째비슷한게임" className={styles.simmilarGame}></div>
         <div id="두번째비슷한게임" className={styles.simmilarGame}></div>
         <div id="세번째비슷한게임" className={styles.simmilarGame}></div>
         <div id="네번째비슷한게임" className={styles.simmilarGame}></div>
-      </div>
+      </div> */}
       <div id="평점">
         <div id="" className={styles.evaluate}>
           <div>평점</div>
