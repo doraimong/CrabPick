@@ -42,6 +42,11 @@ const MenuBar = () => {
     window.scrollTo(0, 0);
   };
 
+  const goMypage = () => {
+    navigate(`/mypage/${authCtx.userId}`);
+    window.scrollTo(0, 0);
+  };
+
   // 검색창에 쓴 값 저장하기
   const searchInputHandler = (e: any) => {
     setSearchInput(e.target.value);
@@ -122,9 +127,19 @@ const MenuBar = () => {
 
         {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
         {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
-        {!isLoggedIn && (
+        {!isLoggedIn ? (
           <div className={styles.links}>
             <Link to="/signin">로그인</Link>
+          </div>
+        ) : (
+          <div style={{ display: "flex" }}>
+            <img
+              src="https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg"
+              alt=""
+              style={{ width: "30%" }}
+              onClick={goMypage}
+            />
+            {/* <div onClick={logoutHandler}>로그아웃</div> */}
           </div>
         )}
       </div>

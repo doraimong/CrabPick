@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import DetailLayout from "../layout/DetailLayout";
 import Detail from "../components/detail/Detail";
 

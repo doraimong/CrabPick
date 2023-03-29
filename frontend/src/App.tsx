@@ -5,7 +5,7 @@ import "./App.css";
 import Main from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import MyPage from "./pages/MyPage";
-import GamebtiPage from "./pages/GamebtiPage";
+// import GamebtiPage from "./pages/GamebtiPage";
 import GameNewsPage from "./pages/GameNewsPage";
 // import SaleInfoPage from "./pages/SaleInfoPage";
 import DetailPage from "./pages/DetailPage";
@@ -19,8 +19,9 @@ function App() {
       <Route path="/" element={<Main />} />
       {/* 내비게이션 가드 설정 */}
       {!authCtx.isLoggedIn && <Route path="/signin" element={<SignInPage />} />}
-      {!authCtx.isLoggedIn && (
-        <Route path="/mypage/:nickname" element={<MyPage />} />
+
+      {authCtx.isLoggedIn && (
+        <Route path="/mypage/:userId" element={<MyPage />} />
       )}
 
       <Route path="/game-news" element={<GameNewsPage />} />
