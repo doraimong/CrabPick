@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'org.example'
-version '1.0-SNAPSHOT'
+version '3.0'
 
 repositories {
     mavenCentral()
@@ -20,7 +20,7 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20230227'
 
     // https://mvnrepository.com/artifact/junit/junit
-//    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    // testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation("junit:junit:4.13.2")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
 
