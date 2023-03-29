@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./DropDown.css";
-
+  
 const DropdownTrigger = (searchList: any) => {
   const navigate = useNavigate();
+
   function goToDetail(id: number) {
     navigate(`/detail/${id}`);
   }
