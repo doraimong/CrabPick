@@ -12,7 +12,7 @@ const MenuBar = () => {
   const [dropSearch, setDropSearch] = useState<Boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
   const [gameList, setGameList] = useState<any>([]);
-  const [filteredGameList, setFilteredGameList] = useState<any>();
+  const [filteredGameList, setFilteredGameList] = useState<any>(null);
 
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
@@ -67,6 +67,13 @@ const MenuBar = () => {
       });
     }
   };
+
+  useEffect(() => {
+    setDropSearch(false);
+    setSearchInput("")
+    window.scrollTo(0, 0);
+  },[window.location.pathname]);
+
   // 검색창을 이용중인지 확인하여 dropdown 하기
   const getFocus = () => {
     setDropSearch(true);
@@ -98,6 +105,7 @@ const MenuBar = () => {
     });
     setFilteredGameList(filteredGame);
   }, [searchInput]);
+
   return (
     <>
       <div className={styles.navBar}>
