@@ -7,21 +7,21 @@ import axios from "axios";
 const Detail = () => {
   // console.log("detail page");
   const { gameId } = useParams();
-
-  console.log(gameId, "게임id params에서 받아옴");
+  const [gameData, setGameData] = useState<[]>([]);
 
   useEffect(() => {
     axios
       // .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
       .get(`http://j8e107.p.ssafy.io:8080/api/game/1433570`)
       .then((res) => {
-        console.log(res.data);
+        setGameData(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  console.log("sef", gameData);
   const [commentList, setCommentList] = useState<
     { id: number; nickname: string; content: string }[]
   >([]);
@@ -74,7 +74,7 @@ const Detail = () => {
           </div>
         </div>
         <div id="세부정보" className={styles.detailInfo}>
-          <p>장르</p>
+          <p>장르 : </p>
           <p>제작사</p>
           <p>연령제한</p>
           <p>출시일</p>

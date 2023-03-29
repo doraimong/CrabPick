@@ -32,7 +32,6 @@ function SamplePrevArrow(props: any) {
   return (
     <div
       className={className}
-      // style={{ ...style, display: "block", background: "green" }}
       style={{ ...style, display: "block" }}
       onClick={onClick}
     />
@@ -40,7 +39,6 @@ function SamplePrevArrow(props: any) {
 }
 const Carousel: React.FC<Props> = ({ games }) => {
   const navigate = useNavigate();
-  // const [currentSlide, setCurrentSlide] = useState<number>(0);
   const settings: Settings = {
     dots: true,
     infinite: true,
@@ -54,9 +52,17 @@ const Carousel: React.FC<Props> = ({ games }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
-  // console.log(games[2]?.genre?.split("}")[0].split("'description':")[1]);
-  console.log(games[2]);
-  // console.log(games[2]?.genre?.split("}").split("'description':"));
+  const slider = (game: any) => {
+    const a = game.genre;
+    const b = a.replaceAll("'", '"');
+    const c = JSON.parse(b);
+    const genre = [];
+    for (let i = 0; i < c.length; i++) {
+      genre.push(c[i].description);
+    }
+    return genre.join(", ");
+  };
+
   return (
     <Slider {...settings}>
       {games.map((game: any, index) => (
@@ -72,6 +78,7 @@ const Carousel: React.FC<Props> = ({ games }) => {
           />
           <div>
             <h1>{game.name}</h1>
+            {slider(game)}
             <div></div>
           </div>
         </div>
