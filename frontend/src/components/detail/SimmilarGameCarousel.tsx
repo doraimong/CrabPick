@@ -37,7 +37,7 @@ function SamplePrevArrow(props: any) {
     />
   );
 }
-const Carousel: React.FC<Props> = ({ games }) => {
+const SimmilarGameCarousel: React.FC<Props> = ({ games }) => {
   const navigate = useNavigate();
   const settings: Settings = {
     dots: true,
@@ -87,4 +87,4 @@ const Carousel: React.FC<Props> = ({ games }) => {
   );
 };
 
-export default Carousel;
+export default SimmilarGameCarousel;

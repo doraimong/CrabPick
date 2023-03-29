@@ -1,35 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import Main from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import MyPage from "./pages/MyPage";
-import GamebtiPage from "./pages/GamebtiPage";
+// import GamebtiPage from "./pages/GamebtiPage";
 import GameNewsPage from "./pages/GameNewsPage";
 // import SaleInfoPage from "./pages/SaleInfoPage";
 import DetailPage from "./pages/DetailPage";
 import SearchPage from "./pages/SearchPage";
-import axios from "axios";
-function App() {
-  // const [gameList, setGameList] = useState<[]>([]);
-  // useEffect(() => {
-  //   const response = axios
-  //     .get("/api/game")
-  //     .then((res) => {
-  //       setGameList(res.data);
-  //     })
-  //     .catch(() => {
-  //     });
-  // }, []);
 
+import AuthContext from "./store/auth-context";
+function App() {
+  const authCtx = useContext(AuthContext);
   return (
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route path="/signin" element={<SignInPage />} />
-      <Route path="/mypage/:nickname" element={<MyPage />} />
+      {/* 내비게이션 가드 설정 */}
+      {!authCtx.isLoggedIn && <Route path="/signin" element={<SignInPage />} />}
+
+      {authCtx.isLoggedIn && <Route path="/mypage" element={<MyPage />} />}
+
       <Route path="/game-news" element={<GameNewsPage />} />
-      <Route path="/search" element= {<SearchPage /> } />
+      <Route path="/search" element={<SearchPage />} />
       {/* <Route path="/sale-info" element={<SaleInfoPage />} /> */}
       <Route path="/detail/:gameId" element={<DetailPage />} />
     </Routes>

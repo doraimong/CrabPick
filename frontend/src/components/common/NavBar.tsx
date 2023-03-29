@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../store/auth-context";
 import DropdownTrigger from "./DropDown";
 import logo from "../../asset/logo.png";
 import styles from "./NavBar.module.css";
@@ -10,32 +11,20 @@ const MenuBar = () => {
 
   const [dropSearch, setDropSearch] = useState<Boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
-  const [gameList, setGameList] = useState<any>([
-    // {
-    //   id: 1,
-    //   name: "name",
-    //   imgUrl: "imgurl",
-    //   genre: "genre",
-    // },
-    // {
-    //   id: 2,
-    //   name: "name2",
-    //   imgUrl: "imgurl2",
-    //   genre: "genre2",
-    // },
-    // {
-    //   id: 3,
-    //   name: "name3",
-    //   imgUrl: "imgurl3",
-    //   genre: "genre3",
-    // },
-  ]);
+  const [gameList, setGameList] = useState<any>([]);
   const [filteredGameList, setFilteredGameList] = useState<any>();
 
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
+
+  const logoutHandler = () => {
+    authCtx.logout();
+    navigate("/");
+  };
   // 전체 게임 목록 가져오기
   useEffect(() => {
     async function getGameList() {
-      const response = await axios
+      await axios
         .get("http://j8e107.p.ssafy.io:8080/api/game")
         .then((res) => {
           setGameList(res.data);
@@ -50,6 +39,11 @@ const MenuBar = () => {
   // home으로 이동
   const home = () => {
     navigate("/");
+    window.scrollTo(0, 0);
+  };
+
+  const goMypage = () => {
+    navigate(`/mypage`);
     window.scrollTo(0, 0);
   };
 
@@ -77,8 +71,24 @@ const MenuBar = () => {
   const getFocus = () => {
     setDropSearch(true);
   };
-  const loseFocus = () => {
-    setDropSearch(false);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // 클릭하면 실행
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // 검색창 이외의 곳을 클릭 하였는지 확인
+  const handleClickOutside = (event: any) => {
+    if (dropdownRef.current && dropdownRef.current.contains(event.target)) {
+      setDropSearch(true);
+    } else {
+      setDropSearch(false);
+    }
   };
 
   // 검색창에 쓴 값으로 게임리스트 필터링 하기
@@ -98,13 +108,12 @@ const MenuBar = () => {
           <Link to="/game-news">게임 뉴스</Link>
         </div>
         {/* 검색 */}
-        <div className={styles.search}>
+        <div className={styles.search} ref={dropdownRef}>
           <input
             type="text"
             onChange={searchInputHandler}
             onKeyDown={pressEnter}
             onFocus={getFocus}
-            onBlur={loseFocus}
             value={searchInput}
           />
           <input type="button" value="검색" onClick={searchHandler}></input>
@@ -118,9 +127,21 @@ const MenuBar = () => {
 
         {/* 로그인X -> 로그인 링크 /  로그인 O -> 프로필 사진 */}
         {/* {login? <img>프로필 사진</img> : <Link to="/signin">로그인</Link> } */}
-        <div className={styles.links}>
-          <Link to="/signin">로그인</Link>
-        </div>
+        {!isLoggedIn ? (
+          <div className={styles.links}>
+            <Link to="/signin">로그인</Link>
+          </div>
+        ) : (
+          <div style={{ display: "flex" }}>
+            <img
+              src="https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg"
+              alt=""
+              style={{ width: "30%" }}
+              onClick={goMypage}
+            />
+            {/* <div onClick={logoutHandler}>로그아웃</div> */}
+          </div>
+        )}
       </div>
     </>
   );

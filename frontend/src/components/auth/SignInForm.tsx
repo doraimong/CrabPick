@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../../store/auth-context";
+import { useNavigate } from "react-router-dom";
 import styles from "./SignInForm.module.css";
 
 import steamlogo from "../../asset/steamlogo.png";
 import loginbuttonlogo from "../../asset/loginbuttonlogo.png";
 const SignInForm = () => {
   const [login, setLogin] = useState<Boolean>(false);
+  const navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
 
-  const loginHandler = () => {};
+  const loginHandler = (event: any) => {
+    event.preventDefault();
+    authCtx.login("sdfsdf334232", 412, 2);
+    navigate("/");
+  };
 
   return (
     <div className={styles.form}>
