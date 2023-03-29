@@ -9,3 +9,10 @@
   margin-right: 10%;
   height: 100%;
 }
+
+.NoResult {
+  height: 80vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

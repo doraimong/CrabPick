@@ -1,7 +1,18 @@
 /* .detail {
-    background-color: blueviolet;
+  background-color: blueviolet;
 } */
 
+.average {
+    align-items: center;
+    margin-left: 2em;
+}
+
+
+.bigImage {
+  height: 75%;
+  background-color: aquamarine;
+  border: solid black;
+}
 
 .detailInfo {
   margin-left: 2%;
@@ -10,10 +21,6 @@
 .evaluate {
   display: flex;
   background-color: red;
-}
-
-.average {
-    align-items: center;
 }
 
 .gameDetail {
@@ -37,12 +44,6 @@
   z-index: 5;
   color: black;
   background-color: blue;
-}
-
-.bigImage {
-  height: 75%;
-  background-color: aquamarine;
-  border: solid black;
 }
 
 .smallImages {
