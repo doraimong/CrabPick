@@ -43,7 +43,7 @@ const MenuBar = () => {
   };
 
   const goMypage = () => {
-    navigate(`/mypage/${authCtx.userId}`);
+    navigate(`/mypage`);
     window.scrollTo(0, 0);
   };
 
