@@ -2,25 +2,82 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import styles from "./Detail.module.css";
 import deleteImg from "../../asset/deleteImg.png";
+import steamlogo from "../../asset/steamlogo.png";
 import axios from "axios";
 // import Comment from "./Comment";
 const Detail = () => {
   // console.log("detail page");
   const { gameId } = useParams();
+  const [gameData, setGameData] = useState<any>(null);
+  const [gameGenre, setGameGenre] = useState<string>("");
+  const [gameDeveloper, setGameDeveloper] = useState<string>("");
+  const [gameRelease, setGameRelease] = useState<string>("");
 
-  console.log(gameId, "게임id params에서 받아옴");
+  interface months {
+    [key: string]: string;
+  }
+
+  const month: months = {
+    "Jan,": "1",
+    "Feb,": "2",
+    "Mar,": "3",
+    "Apr,": "4",
+    "May,": "5",
+    "Jun,": "6",
+    "Jul,": "7",
+    "Aug,": "8",
+    "Sep,": "9",
+    "Oct,": "10",
+    "Nov,": "11",
+    "Dec,": "12",
+  };
 
   useEffect(() => {
     axios
-      // .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
-      .get(`http://j8e107.p.ssafy.io:8080/api/game/1433570`)
+      .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
       .then((res) => {
-        console.log(res.data);
+        setGameData(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (gameData) {
+      const genreA = gameData.genre;
+      const genreB = genreA.replaceAll("'", '"');
+      const genreC = JSON.parse(genreB);
+      const genre = [];
+      for (let i = 0; i < genreC.length; i++) {
+        genre.push(genreC[i].description);
+      }
+      setGameGenre(genre.join(", "));
+
+      const developerA = gameData.developer;
+      const developerB = developerA.replaceAll("'", '"');
+      const developerC = JSON.parse(developerB);
+      const developer = [];
+      for (let i = 0; i < developerC.length; i++) {
+        developer.push(developerC[i]);
+      }
+      setGameDeveloper(developer.join(", "));
+
+      const releaseDate = gameData?.release.split(" ");
+      setGameRelease(
+        releaseDate[2] +
+          "년 " +
+          month[releaseDate[1]] +
+          "월 " +
+          releaseDate[0] +
+          "일"
+      );
+    }
+  }, [gameData]);
+
+  // useEffect(() => {
+
+  // })
 
   const [commentList, setCommentList] = useState<
     { id: number; nickname: string; content: string }[]
@@ -47,6 +104,11 @@ const Detail = () => {
     );
   };
 
+  const steam = () => {
+    window.open(`https://store.steampowered.com/app/${gameData?.appId}/`);
+  };
+
+  console.log(gameData);
   return (
     <div className={styles.detail}>
       <div>
@@ -74,12 +136,19 @@ const Detail = () => {
           </div>
         </div>
         <div id="세부정보" className={styles.detailInfo}>
-          <p>장르</p>
-          <p>제작사</p>
-          <p>연령제한</p>
-          <p>출시일</p>
+          <p>장르 : {gameGenre}</p>
+          <p>제작사 : {gameDeveloper}</p>
+          <p>
+            연령제한 :{" "}
+            {gameData && gameData.ageLimit === 0
+              ? "없음"
+              : gameData
+              ? gameData.ageLimmit + "세"
+              : null}
+          </p>
+          <p>출시일 : {gameRelease}</p>
           <p>평가 비율</p>
-          <div id="평가비율">
+          <div id="평가비율" className={styles.ratio}>
             <meter
               min="0"
               max="100"
@@ -90,7 +159,15 @@ const Detail = () => {
               className={styles.rateBar}
             ></meter>
           </div>
-          <div id="스팀링크"></div>
+          <br />
+          <div id="스팀링크">
+            <img
+              src={steamlogo}
+              alt=""
+              onClick={steam}
+              className={styles.steamlogo}
+            />
+          </div>
           <div id="좋아요"></div>
         </div>
       </div>
