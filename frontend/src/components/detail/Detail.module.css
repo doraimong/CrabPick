@@ -2,8 +2,9 @@
     background-color: blueviolet;
 } */
 
-.stars {
-    
+
+.detailInfo {
+  margin-left: 2%;
 }
 
 .evaluate {
@@ -28,6 +29,14 @@
   flex-direction: column;
   background-color: skyblue;
   border: solid black;
+}
+
+
+.goodRatio {
+  display: absolute;
+  z-index: 5;
+  color: black;
+  background-color: blue;
 }
 
 .bigImage {
@@ -70,6 +79,13 @@
   border-radius: 0%;
 }
 
+.rateBar ::after {
+  content : attr(value);
+  top:-17px;
+  left:40px;
+  position:relative;
+}
+
 .rateBar::-webkit-meter-bar{
     background-color: red;
     border-radius:0%
@@ -83,4 +99,17 @@
 }
 .rateBar::-webkit-meter-optimum-value{
     background-color: green;
+}
+
+.ratio {
+  display: flex;
+}
+
+
+.steamlogo {
+  width: 2em;
+}
+
+.steamlogo:hover {
+  cursor: pointer;
 }
