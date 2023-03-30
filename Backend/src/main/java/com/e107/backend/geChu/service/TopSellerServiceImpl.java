@@ -78,9 +78,7 @@ public class TopSellerServiceImpl implements TopSellerService{
         ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
         org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
         org.json.JSONObject jo2 = (org.json.JSONObject) jo.get(gameId.toString());
-        System.out.println(jo2);
         String jo5 = jo2.get("success").toString();
-        System.out.println(jo5);
         if(jo5.equals("false")){
             System.out.println("CHKKK");
             return false;
