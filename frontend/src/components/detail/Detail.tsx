@@ -5,6 +5,8 @@ import deleteImg from "../../asset/deleteImg.png";
 import steamlogo from "../../asset/steamlogo.png";
 import axios from "axios";
 // import Comment from "./Comment";
+
+const MAX_ROWS = 5; // 최대 줄 수
 const Detail = () => {
   const { gameId } = useParams();
   const [gameData, setGameData] = useState<any>(null);
@@ -16,6 +18,22 @@ const Detail = () => {
   const [selectedVideo, setSelectedVideo] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState<string>("");
 
+  const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
+  const handleCommentChange = (event: any) => {
+    setCommentRows(event.target.value);
+    // 입력된 텍스트의 줄 수 체크
+    const rows = event.target.value.split("\n").length;
+    if (rows <= MAX_ROWS) {
+      setCommentRows(rows);
+    }
+  };
+
+  const handleKeyPress = (event: any) => {
+    // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
+    if (event.key === "Enter" && commentRows >= MAX_ROWS) {
+      event.preventDefault();
+    }
+  };
   interface months {
     [key: string]: string;
   }
@@ -228,6 +246,10 @@ const Detail = () => {
           <div>
             <form onSubmit={submitComment}>
               <textarea
+                maxLength={150}
+                onChange={handleCommentChange}
+                onKeyPress={handleKeyPress}
+                rows={commentRows}
                 style={{
                   width: "100%",
                   resize: "none",
