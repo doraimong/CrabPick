@@ -6,6 +6,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class GameSimilarity {
 
     // Reduce Class
     public static class SimilarityReduce
-            extends Reducer<Text, Text, Text, SortedMapWritable<IntWritable>> {
+            extends Reducer<Text, Text, Text, Text> {
 
         @Override
         public void reduce(Text key, Iterable<Text> values, Context context)
@@ -56,34 +57,23 @@ public class GameSimilarity {
             for (Text value: values) {
                 String str = value.toString();
                 if (gameCount.containsKey(str)) {
-                    gameCount.replace(str, gameCount.get(str) -1);
+                    gameCount.replace(str, gameCount.get(str) + 1);
                 }
                 else {
-                    gameCount.put(str, -1);
+                    gameCount.put(str, 1);
                 }
             }
-            List<Map.Entry<String, Integer>> nlist = new ArrayList<>(gameCount.entrySet());
 
             if (gameCount.size() > 0) {
-                HashMap<Integer, String> tempMap = new HashMap<>();
-                for (HashMap.Entry<String, Integer> pair : nlist) {
-                    int tempKey = -pair.getValue();
-                    String tempValue = pair.getKey();
-                    if (tempMap.containsKey(tempKey)) {
-                        tempMap.replace(tempKey, tempMap.get(tempKey) + " " + tempValue);
-                    }
-                    else {
-                        tempMap.put(tempKey, tempValue);
-                    }
+                // sorting map by value
+                List<Map.Entry<String, Integer>> nlist = new ArrayList<>(gameCount.entrySet());
+                nlist.sort(Map.Entry.comparingByValue());
+                // forming reduce output
+                String result = "";
+                for(Map.Entry<String, Integer> entry : nlist){
+                    result = entry.getKey() + ":" + entry.getValue().toString() + " " + result;
                 }
-                // reduce output forming
-                List<Map.Entry<Integer, String>> resultList = new ArrayList<>(tempMap.entrySet());
-                SortedMapWritable<IntWritable> resultMap = new SortedMapWritable<>();
-
-                for (HashMap.Entry<Integer, String> pair : resultList) {
-                    resultMap.put(new IntWritable(pair.getKey()), new Text(pair.getValue()));
-                }
-                context.write(key, resultMap);
+                context.write(key, new Text(result));
             }
 
 
@@ -102,7 +92,9 @@ public class GameSimilarity {
 
         Job job = new Job(conf, "GameSimilarity");
         job.setJarByClass(GameSimilarity.class);
-
+        // seperator change
+        job.setOutputFormatClass(TextOutputFormat.class);
+        conf.set("mapreduce.textoutputformat.separator", ",");
         // let hadoop know my map and reduce classes
         job.setMapperClass(GameSimilarity.SimilarityMap.class);
         job.setReducerClass(GameSimilarity.SimilarityReduce.class);
@@ -116,7 +108,7 @@ public class GameSimilarity {
         job.setMapOutputValueClass(Text.class);
         // job output data setting
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(SortedMapWritable.class);
+        job.setOutputValueClass(Text.class);
 
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
