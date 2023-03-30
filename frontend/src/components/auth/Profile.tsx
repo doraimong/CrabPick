@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 
 import styles from "./Profile.module.css";
+import steamlogo from "../../asset/steamlogo.png";
 const Profile = () => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
@@ -11,6 +12,7 @@ const Profile = () => {
     authCtx.logout();
     navigate("/");
   };
+
   return (
     <div className={styles.profile}>
       <div
@@ -32,7 +34,7 @@ const Profile = () => {
           }}
           onClick={logoutHandler}
         >
-          <span>로그아웃</span>
+          <span className={styles.logout}>로그아웃</span>
         </div>
       </div>
       <hr />
@@ -42,10 +44,29 @@ const Profile = () => {
           alt=""
           style={{ marginRight: "30px" }}
         />
-        <div>
-          <h2>닉네임</h2>
-          <p>한 줄 소개~~~ 뭐 잡다한거~~~</p>
-          <p>수정하러가기~</p>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <h2>닉네임</h2>
+            <p>한 줄 소개~~~ 뭐 잡다한거~~~</p>
+          </div>
+          {/* <p>수정하러가기~</p> */}
+          <div className={styles.editdiv}>
+            <a
+              href="https://store.steampowered.com/account/"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.edit}
+            >
+              <img src={steamlogo} alt="" style={{ width: "30px" }} />
+              <span>Steam에서 수정하기</span>
+            </a>
+          </div>
         </div>
       </div>
       <div>

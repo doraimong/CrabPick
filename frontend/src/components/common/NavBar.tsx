@@ -70,9 +70,9 @@ const MenuBar = () => {
 
   useEffect(() => {
     setDropSearch(false);
-    setSearchInput("")
+    setSearchInput("");
     window.scrollTo(0, 0);
-  },[window.location.pathname]);
+  }, [window.location.pathname]);
 
   // 검색창을 이용중인지 확인하여 dropdown 하기
   const getFocus = () => {
@@ -140,7 +140,7 @@ const MenuBar = () => {
             <Link to="/signin">로그인</Link>
           </div>
         ) : (
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex" }} className={styles.navProfile}>
             <img
               src="https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg"
               alt=""
