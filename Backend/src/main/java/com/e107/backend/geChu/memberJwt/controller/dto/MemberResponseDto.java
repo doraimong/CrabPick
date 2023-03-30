@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class MemberResponseDto {
     private String email;
 
-    //!! of ->
+    //!! 생성자
     public static MemberResponseDto of(Member member) {
         return new MemberResponseDto(member.getEmail());
     }
