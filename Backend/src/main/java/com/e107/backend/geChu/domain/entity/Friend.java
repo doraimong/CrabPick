@@ -1,7 +1,6 @@
 package com.e107.backend.geChu.domain.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
@@ -10,19 +9,13 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Rating {
+public class Friend {
     @Id
     @GeneratedValue
     private Long id;
 
-    @Comment("별점")
-    private Long Point;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_id")
-    private Game game;
+    private String name;
 }

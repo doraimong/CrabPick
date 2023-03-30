@@ -7,7 +7,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @Builder
-public class GameCommentRespDto {
-
-    private Long id;
+public class GameOwnedMemberRespDto {
+    Long id;
+    String name;
+    Long memberId;
+    String memberName;
+    Long gameId;
 }

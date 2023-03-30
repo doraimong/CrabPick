@@ -1,8 +1,10 @@
 package com.e107.backend.geChu.dto.request;
 
 import com.e107.backend.geChu.domain.entity.Member;
+import com.e107.backend.geChu.domain.entity.Friend;
 import lombok.*;
-import java.util.List;
+
+import java.util.HashSet;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -13,7 +15,6 @@ public class MemberAddReqDto {
     private String email;
     private String steamToken;
     private String steamNickname;
-    private List<String> friends;
 
     public Member toEntity() {
         return Member.builder()
@@ -21,6 +22,6 @@ public class MemberAddReqDto {
                 .email(this.email)
                 .steamToken(this.steamToken)
                 .steamNickname(this.steamNickname)
-                .friends(this.friends).build();
+                .build();
     }
 }

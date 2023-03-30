@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
@@ -21,9 +22,11 @@ public class MemberRespDto {
     private String email;
     private String steamToken;
     private String steamNickname;
-    private List<String> friends;
+
+    @Builder.Default
+    private List<FriendRespDto> friends = new ArrayList<>();
+    @Builder.Default
     private List<BookmarkRespDto> bookmarks = new ArrayList<>();
-    private List<SteamLibraryRespDto> steamLibraries = new ArrayList<>();
 
 
     public static MemberRespDto of(Member m) {
@@ -33,19 +36,16 @@ public class MemberRespDto {
                 .email(m.getEmail())
                 .steamToken(m.getSteamToken())
                 .steamNickname(m.getSteamNickname())
-                .friends(m.getFriends())
                 .bookmarks(m.getBookmarks().stream()
                         .map(bookmark -> BookmarkRespDto.builder()
                                 .id(bookmark.getId())
                                 .gameId(bookmark.getGame().getId())
                                 .build())
                                 .collect(Collectors.toList()))
-                .steamLibraries(m.getSteamLibraries().stream()
-                        .map(library -> SteamLibraryRespDto.builder()
-                                .id(library.getId())
-                                .gameId(library.getGame().getId())
-                                .build())
-                                .collect(Collectors.toList()))
                 .build();
+    }
+
+    public void setFriend(List<FriendRespDto> friends) {
+        this.friends = friends;
     }
 }
