@@ -8,4 +8,6 @@ public interface TopSellerService {
     List<TopSellerRespDto> findAllTopSeller();
 
     void updateTopSeller();
+
+    boolean isGame(Long gameId);
 }
