@@ -45,7 +45,7 @@ const Detail = () => {
         console.log(err);
       });
   }, [gameId]);
-
+  // console.log("gameData", gameData);
   useEffect(() => {
     setSelectedVideo("");
     if (gameData) {
@@ -59,20 +59,15 @@ const Detail = () => {
       const trailerD = trailerC.replaceAll("False", "false");
       const trailerE = trailerD.replaceAll('"s', "'");
       const trailerF = trailerE.replaceAll('" ', "' ");
-      console.log("trailerD", trailerD);
+      // console.log("trailerD", trailerD);
       const trailerG = JSON.parse(trailerF.trim());
-      if (trailerG.length > 1) {
-        setGameVideo(trailerG[0].mp4[480]);
-      } else {
-        setGameVideo(trailerG.mp4[480]);
-      }
-
-      if (gameVideo !== "") {
-        setSelectedVideo(gameVideo);
-      }
+      console.log("trailerG", trailerG);
+      setGameVideo(trailerG);
+      console.log("gameVideo", gameVideo);
+      console.log(trailerG[0])
+      setSelectedVideo(trailerG[0].mp4[480]);
     }
-  }, [gameData, gameVideo, selectedVideo]);
-
+  }, [gameData, selectedVideo]);
   useEffect(() => {
     if (gameData) {
       const genreA = gameData.genre;
