@@ -1,10 +1,8 @@
 package com.e107.backend.geChu.domain.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,14 +10,14 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GameComment {
+public class Comment {
     @Id
     @GeneratedValue
     private Long id;
 
     private LocalDateTime createdAt;
 
-    @Comment("리뷰내용")
+    @org.hibernate.annotations.Comment("리뷰내용")
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
