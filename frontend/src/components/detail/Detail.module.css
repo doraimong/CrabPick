@@ -1,43 +1,38 @@
-/* .detail {
-  background-color: blueviolet;
-} */
-
-.average {
-    align-items: center;
-    margin-left: 2em;
+.detail {
+  color: white;
 }
 
+.average {
+  align-items: center;
+  margin-left: 2em;
+}
 
 .bigImage {
   height: 75%;
-  background-color: aquamarine;
   border: solid black;
 }
 
 .detailInfo {
   margin-left: 2%;
+  color: white;
 }
 
 .evaluate {
   display: flex;
-  background-color: red;
 }
 
 .gameDetail {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background-color: aliceblue;
   border: solid black;
-  height: 50vh;
+  color: white;
 }
 
 .gameImage {
   display: flex;
   flex-direction: column;
-  background-color: skyblue;
   border: solid black;
 }
-
 
 .goodRatio {
   display: absolute;
@@ -53,7 +48,6 @@
 }
 
 .smallImage {
-  background-color: papayawhip;
   border: solid red;
 }
 
@@ -70,10 +64,6 @@
   border: solid black;
 }
 
-.detailInfo {
-  color: black;
-}
-
 .rateBar {
   height: 2em;
   width: 50%;
@@ -81,31 +71,30 @@
 }
 
 .rateBar ::after {
-  content : attr(value);
-  top:-17px;
-  left:40px;
-  position:relative;
+  content: attr(value);
+  top: -17px;
+  left: 40px;
+  position: relative;
 }
 
-.rateBar::-webkit-meter-bar{
-    background-color: red;
-    border-radius:0%
+.rateBar::-webkit-meter-bar {
+  background-color: red;
+  border-radius: 0%;
 }
 
-.rateBar::-webkit-meter-even-less-good-value{
-    background-color: green;
+.rateBar::-webkit-meter-even-less-good-value {
+  background-color: green;
 }
-.rateBar::-webkit-meter-suboptimum-value{
-    background-color: green;
+.rateBar::-webkit-meter-suboptimum-value {
+  background-color: green;
 }
-.rateBar::-webkit-meter-optimum-value{
-    background-color: green;
+.rateBar::-webkit-meter-optimum-value {
+  background-color: green;
 }
 
 .ratio {
   display: flex;
 }
-
 
 .steamlogo {
   width: 2em;
