@@ -11,8 +11,10 @@ const Detail = () => {
   const [gameGenre, setGameGenre] = useState<string>("");
   const [gameDeveloper, setGameDeveloper] = useState<string>("");
   const [gameRelease, setGameRelease] = useState<string>("");
-  const [gameTrailer, setGameTrailer] = useState<string>("");
-  const [selectedImage, setSelectedImage] = useState<string>(gameTrailer);
+  const [gameVideo, setGameVideo] = useState<string>("");
+  const [gameImage, setGameImage] = useState<[]>([]);
+  const [selectedVideo, setSelectedVideo] = useState<string>("");
+  const [selectedImage, setSelectedImage] = useState<string>("");
 
   interface months {
     [key: string]: string;
@@ -45,6 +47,33 @@ const Detail = () => {
   }, [gameId]);
 
   useEffect(() => {
+    setSelectedVideo("");
+    if (gameData) {
+      let trailerA = gameData.trailer_url;
+      const count = trailerA.split("id").length - 1;
+      if (count < 2) {
+        trailerA = trailerA.slice(1, trailerA.length - 1);
+      }
+      const trailerB = trailerA.replaceAll("'", '"');
+      const trailerC = trailerB.replaceAll("True", "true");
+      const trailerD = trailerC.replaceAll("False", "false");
+      const trailerE = trailerD.replaceAll('"s', "'");
+      const trailerF = trailerE.replaceAll('" ', "' ");
+      console.log("trailerD", trailerD);
+      const trailerG = JSON.parse(trailerF.trim());
+      if (trailerG.length > 1) {
+        setGameVideo(trailerG[0].mp4[480]);
+      } else {
+        setGameVideo(trailerG.mp4[480]);
+      }
+
+      if (gameVideo !== "") {
+        setSelectedVideo(gameVideo);
+      }
+    }
+  }, [gameData, gameVideo, selectedVideo]);
+
+  useEffect(() => {
     if (gameData) {
       const genreA = gameData.genre;
       const genreB = genreA.replaceAll("'", '"');
@@ -73,22 +102,6 @@ const Detail = () => {
           releaseDate[0] +
           "일"
       );
-
-      // const trailerA = gameData.trailer_url.slice(
-      //   1,
-      //   gameData.trailer_url.length - 1
-      // );
-      // const trailerB = trailerA.replaceAll("'", '"');
-      // const trailerC = trailerB.replaceAll("True", "true");
-      // console.log("trailerC", trailerC);
-      // const trailerD = JSON.parse(trailerC.trim())[0];
-
-      // if (trailerD.mp4) {
-      //   setGameTrailer(trailerD.mp4[480]);
-      // } else {
-      //   setGameTrailer(trailerD.webm[480]);
-      // }
-      // setSelectedImage(gameTrailer);
     }
   }, [gameData]);
 
@@ -128,12 +141,18 @@ const Detail = () => {
       </div>
       <div id="게임소개" className={styles.gameDetail}>
         <div id="게임이미지" className={styles.gameImage}>
-          <video
-            controls
-            src={selectedImage}
-            id="큰이미지"
-            className={styles.bigImage}
-          ></video>
+          {selectedVideo !== "" ? (
+            <video
+              controls
+              autoPlay
+              muted
+              src={selectedVideo}
+              id="큰이미지"
+              className={styles.bigImage}
+            ></video>
+          ) : (
+            <img src={selectedImage}></img>
+          )}
           <div id="작은이미지들" className={styles.smallImages}>
             <div id="첫번째작은이미지" className={styles.smallImage}>
               1
@@ -164,7 +183,7 @@ const Detail = () => {
               : null}
           </p>
           <p>출시일 : {gameRelease}</p>
-          <p>평가 비율</p>
+          {/* <p>평가 비율</p>
           <div id="평가비율" className={styles.ratio}>
             <meter
               min="0"
@@ -175,7 +194,7 @@ const Detail = () => {
               id="평가비율바"
               className={styles.rateBar}
             ></meter>
-          </div>
+          </div> */}
           <br />
           <div id="스팀링크">
             <img
