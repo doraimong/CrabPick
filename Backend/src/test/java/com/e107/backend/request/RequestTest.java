@@ -73,6 +73,22 @@ public class RequestTest {
                     .imageLink(((org.json.JSONObject) j).get("large_capsule_image").toString())
                     .build());
         }
+    }
 
+    @Test
+    public void getGameApp() throws ParseException {
+        String url = "https://store.steampowered.com/api/appdetails?appids=1983089";
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders header = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(header);
+
+        UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
+        ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
+        org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
+        org.json.JSONObject jo2 = (org.json.JSONObject) jo.get("1983089");
+        org.json.JSONObject jo3 = (org.json.JSONObject) jo2.get("data");
+        String jo4 = jo3.get("type").toString();
+        System.out.println(jo4);
     }
 }
