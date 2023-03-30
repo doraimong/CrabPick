@@ -1,9 +1,7 @@
 package com.e107.backend.geChu.service;
 
-import com.e107.backend.geChu.domain.entity.News;
 import com.e107.backend.geChu.domain.entity.TopSeller;
 import com.e107.backend.geChu.domain.repository.TopSellerRepository;
-import com.e107.backend.geChu.dto.response.NewsRespDto;
 import com.e107.backend.geChu.dto.response.TopSellerRespDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +51,9 @@ public class TopSellerServiceImpl implements TopSellerService{
             if(topSellerRepository.existsByGameId(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))){
                 continue;
             }
+            if(!isGame(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))){
+                continue;
+            }
             topSellerRepository.save(TopSeller.builder()
                     .gameId(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))
                     .name(((org.json.JSONObject) j).get("name").toString())
@@ -63,6 +64,33 @@ public class TopSellerServiceImpl implements TopSellerService{
                     .build());
         }
 
+    }
+
+    @Override
+    public boolean isGame(Long gameId){
+        String url = "https://store.steampowered.com/api/appdetails?appids=" + gameId + "&l=koreana";
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders header = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(header);
+
+        UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
+        ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
+        org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
+        org.json.JSONObject jo2 = (org.json.JSONObject) jo.get(gameId.toString());
+        System.out.println(jo2);
+        String jo5 = jo2.get("success").toString();
+        System.out.println(jo5);
+        if(jo5.equals("false")){
+            System.out.println("CHKKK");
+            return false;
+        }
+        org.json.JSONObject jo3 = (org.json.JSONObject) jo2.get("data");
+        String jo4 = jo3.get("type").toString();
+        if(jo4.equals("game")){
+            return true;
+        }
+        return false;
     }
 
 }
