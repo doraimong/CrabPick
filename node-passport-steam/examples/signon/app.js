@@ -71,6 +71,9 @@ passport.use(
 );
 
 var app = express();
+const cors = require("cors");
+
+app.use(cors({ origin: "http://localhost:3000" }));
 
 // configure Express
 app.set("views", __dirname + "/views"); //템플릿 파일이 저장된 디렉토리 경로를 설정합니다
