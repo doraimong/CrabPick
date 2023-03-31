@@ -27,6 +27,8 @@ interface months {
   [key: string]: string;
 }
 
+
+const MAX_ROWS = 5; // 최대 줄 수
 const Detail = () => {
   const { gameId } = useParams();
   const [gameData, setGameData] = useState<gameData>();
@@ -272,6 +274,10 @@ const Detail = () => {
           <div>
             <form onSubmit={submitComment}>
               <textarea
+                maxLength={150}
+                onChange={handleCommentChange}
+                onKeyPress={handleKeyPress}
+                rows={commentRows}
                 style={{
                   width: "100%",
                   resize: "none",
