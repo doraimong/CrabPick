@@ -5,20 +5,37 @@ import deleteImg from "../../asset/deleteImg.png";
 import steamlogo from "../../asset/steamlogo.png";
 import axios from "axios";
 // import Comment from "./Comment";
+
+interface gameData {
+  ageLimit: number;
+  appId: number;
+  avgPlaytime: object;
+  comments: [];
+  developer: string;
+  genre: string;
+  id: number;
+  imgUrl: string;
+  mood: string;
+  name: string;
+  release: string;
+  steamLink: string;
+  trailer_url: string;
+  wordCloud: string;
+}
+
+interface months {
+  [key: string]: string;
+}
+
 const Detail = () => {
   const { gameId } = useParams();
-  const [gameData, setGameData] = useState<any>(null);
+  const [gameData, setGameData] = useState<gameData>();
   const [gameGenre, setGameGenre] = useState<string>("");
   const [gameDeveloper, setGameDeveloper] = useState<string>("");
   const [gameRelease, setGameRelease] = useState<string>("");
-  const [gameVideo, setGameVideo] = useState<string>("");
-  const [gameImage, setGameImage] = useState<[]>([]);
-  const [selectedVideo, setSelectedVideo] = useState<string>("");
-  const [selectedImage, setSelectedImage] = useState<string>("");
-
-  interface months {
-    [key: string]: string;
-  }
+  const [gameImage, setGameImage] = useState<any>();
+  const [selectedImage, setSelectedImage] = useState<any>("");
+  const [selectedIdx, setSelectedIdx] = useState<number>(0);
 
   const month: months = {
     "Jan,": "1",
@@ -45,9 +62,9 @@ const Detail = () => {
         console.log(err);
       });
   }, [gameId]);
-  // console.log("gameData", gameData);
+
   useEffect(() => {
-    setSelectedVideo("");
+    setSelectedImage("");
     if (gameData) {
       let trailerA = gameData.trailer_url;
       const count = trailerA.split("id").length - 1;
@@ -59,15 +76,44 @@ const Detail = () => {
       const trailerD = trailerC.replaceAll("False", "false");
       const trailerE = trailerD.replaceAll('"s', "'");
       const trailerF = trailerE.replaceAll('" ', "' ");
-      // console.log("trailerD", trailerD);
       const trailerG = JSON.parse(trailerF.trim());
-      console.log("trailerG", trailerG);
-      setGameVideo(trailerG);
-      console.log("gameVideo", gameVideo);
-      console.log(trailerG[0])
-      setSelectedVideo(trailerG[0].mp4[480]);
+      if (trailerG.length) {
+        setGameImage(trailerG);
+      } else {
+        setGameImage([trailerG]);
+      }
     }
-  }, [gameData, selectedVideo]);
+  }, [gameData]);
+
+  useEffect(() => {
+    if (gameData) {
+      let imageA = gameData.imgUrl;
+      const count = imageA.split("id").length - 1;
+      if (count < 2) {
+        imageA = imageA.slice(1, imageA.length - 1);
+      }
+      const imageB = imageA.replaceAll("'", '"');
+      const imageC = imageB.replaceAll("True", "true");
+      const imageD = imageC.replaceAll("False", "false");
+      const imageE = imageD.replaceAll('"s', "'");
+      const imageF = imageE.replaceAll('" ', "' ");
+      const imageG = JSON.parse(imageF.trim());
+      setGameImage((gameImage: any) => [...gameImage, ...imageG]);
+    }
+  }, [gameData]);
+
+  useEffect(() => {
+    if (gameData) {
+      setSelectedImage(gameImage[0]);
+    }
+  }, [gameImage]);
+
+  useEffect(() => {
+    if (gameImage) {
+      setSelectedImage(gameImage[selectedIdx]);
+    }
+  }, [selectedIdx, gameImage]);
+
   useEffect(() => {
     if (gameData) {
       const genreA = gameData.genre;
@@ -136,34 +182,37 @@ const Detail = () => {
       </div>
       <div id="게임소개" className={styles.gameDetail}>
         <div id="게임이미지" className={styles.gameImage}>
-          {selectedVideo !== "" ? (
+          {selectedImage && selectedImage.thumbnail ? (
             <video
               controls
               autoPlay
               muted
-              src={selectedVideo}
+              src={selectedImage.mp4[480]}
               id="큰이미지"
               className={styles.bigImage}
             ></video>
           ) : (
-            <img src={selectedImage}></img>
+            <img src={selectedImage.path_thumbnail}></img>
           )}
           <div id="작은이미지들" className={styles.smallImages}>
-            <div id="첫번째작은이미지" className={styles.smallImage}>
-              1
-            </div>
-            <div id="두번째작은이미지" className={styles.smallImage}>
-              2
-            </div>
-            <div id="세번째작은이미지" className={styles.smallImage}>
-              3
-            </div>
-            <div id="네번째작은이미지" className={styles.smallImage}>
-              4
-            </div>
-            <div id="다섯번째작은이미지" className={styles.smallImage}>
-              5
-            </div>
+            {gameImage
+              ? gameImage.map((image: any, idx: number) => {
+                  let thumbnail = "";
+                  if (image.thumbnail) {
+                    thumbnail = image.thumbnail;
+                  } else {
+                    thumbnail = image.path_thumbnail;
+                  }
+                  return (
+                    <img
+                      key={idx}
+                      src={thumbnail}
+                      onClick={() => setSelectedIdx(idx)}
+                      className={styles.smallImage}
+                    ></img>
+                  );
+                })
+              : null}
           </div>
         </div>
         <div id="세부정보" className={styles.detailInfo}>
@@ -174,7 +223,7 @@ const Detail = () => {
             {gameData && gameData.ageLimit === 0
               ? "없음"
               : gameData
-              ? gameData.ageLimmit + "세"
+              ? gameData.ageLimit + "세"
               : null}
           </p>
           <p>출시일 : {gameRelease}</p>
