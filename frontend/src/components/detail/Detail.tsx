@@ -148,6 +148,23 @@ const Detail = () => {
     }
   }, [gameData]);
 
+  const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
+  const handleCommentChange = (event: any) => {
+    setCommentRows(event.target.value);
+    // 입력된 텍스트의 줄 수 체크
+    const rows = event.target.value.split("\n").length;
+    if (rows <= MAX_ROWS) {
+      setCommentRows(rows);
+    }
+  };
+
+  const handleKeyPress = (event: any) => {
+    // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
+    if (event.key === "Enter" && commentRows >= MAX_ROWS) {
+      event.preventDefault();
+    }
+  };
+
   const [commentList, setCommentList] = useState<
     { id: number; nickname: string; content: string }[]
   >([]);
