@@ -1,5 +1,8 @@
 /**
  * Basic example demonstrating passport-steam usage within Express framework
+ * 방법 조사
+ * 1. 리액트 소켓 <-> 서버 소켓 통신
+ *
  */
 var express = require("express"),
   passport = require("passport"),
@@ -7,6 +10,7 @@ var express = require("express"),
   session = require("express-session"),
   SteamStrategy = require("../../").Strategy;
 console.log("##app.js -> head====================");
+var userInfoAllTime;
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -45,8 +49,11 @@ passport.use(
     function (identifier, profile, done) {
       console.log("리리1##app.js -> passport.use - new SteamStrategy"); //@@ 리턴1.
       console.log(identifier);
-      console.log("----------------------");
+      console.log("----------passport.use(new SteamStrategy)------------");
       console.log(profile);
+      userInfoAllTime = profile;
+      console.log("----------------------------------------------------");
+      console.log(done);
       // asynchronous verification, for effect...
       process.nextTick(function () {
         // To keep the example simple, the user's Steam profile is returned to
@@ -87,7 +94,7 @@ app.use(express.static(__dirname + "/../../public"));
 app.get("/", function (req, res) {
   console.log("리리5##app.js -> /"); //@@리턴5.
   //res.redirect("/auth/steam");
-  //res.render("index", { user: req.user });
+  res.render("index", { user: req.user });
 });
 
 app.get("/account", ensureAuthenticated, function (req, res) {
@@ -116,8 +123,14 @@ app.get("/auth/steam", passport.authenticate("steam", { failureRedirect: "/" }),
   //@@3. steam로그인 페이지로 으로 이동
   console.log("##app.js -> /auth/steam");
   console.log("app.js -> /auth/steam");
+  console.log("----------app.get('/auth/steam')------------");
   console.log(res.data);
   //res.redirect("/");
+});
+
+app.get("/auth/userinfo", (req, res) => {
+  console.log("##app.js -> /auth/test");
+  res.send(userInfoAllTime);
 });
 
 // GET /auth/steam/return
@@ -130,6 +143,7 @@ app.get("/auth/steam", passport.authenticate("steam", { failureRedirect: "/" }),
 그렇지 않으면 기본 경로 함수가 호출되며, 이 예에서는 홈 페이지로 사용자를 리디렉션합니다. */
 app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: "/" }), function (req, res) {
   console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
+  console.log("----------app.get('/auth/steam/return')------------");
   console.log(res.data);
   res.redirect("/");
 });
