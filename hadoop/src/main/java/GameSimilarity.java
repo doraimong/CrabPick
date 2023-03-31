@@ -33,7 +33,6 @@ public class GameSimilarity {
             String[] dataLineElements = dataLine.split("\t", 2);
 
             String[] gameIds = dataLineElements[1].split("\t");
-
             // GameSimilarity mapping
             for (String A: gameIds) {
                 for (String B: gameIds) {
@@ -63,17 +62,21 @@ public class GameSimilarity {
                     gameCount.put(str, 1);
                 }
             }
+            final double n = 84390;
+
 
             if (gameCount.size() > 0) {
                 // sorting map by value
                 List<Map.Entry<String, Integer>> nlist = new ArrayList<>(gameCount.entrySet());
+                int df = nlist.size();
+                double eq = (n/(1+df));
                 nlist.sort(Map.Entry.comparingByValue());
                 // forming reduce output
-                String result = "";
+                StringBuilder result = new StringBuilder();
                 for(Map.Entry<String, Integer> entry : nlist){
-                    result = entry.getKey() + ":" + entry.getValue().toString() + " " + result;
+                    result.insert(0, entry.getKey() + ":" + (entry.getValue() * (Math.log(eq) / Math.log(500))) + " ");
                 }
-                context.write(key, new Text(result));
+                context.write(key, new Text(result.toString()));
             }
 
 
@@ -92,14 +95,14 @@ public class GameSimilarity {
 
         Job job = new Job(conf, "GameSimilarity");
         job.setJarByClass(GameSimilarity.class);
-        // seperator change
+        // separator change
         job.setOutputFormatClass(TextOutputFormat.class);
         conf.set("mapreduce.textoutputformat.separator", ",");
         // let hadoop know my map and reduce classes
         job.setMapperClass(GameSimilarity.SimilarityMap.class);
         job.setReducerClass(GameSimilarity.SimilarityReduce.class);
         // set multi reduce task
-        job.setNumReduceTasks(5);
+        job.setNumReduceTasks(10);
         // file input output setting
         FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
         FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));

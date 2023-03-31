@@ -110,4 +110,15 @@ public class JunitTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void calc_test() {
+        double n = 80000;
+        long tf = 11000;
+        long df = 60000;
+        double in_eq = (n/(1+df));
+        System.out.println(in_eq);
+        double value = tf * (Math.log10(in_eq) / Math.log10(500));
+        System.out.println(value);
+    }
 }
