@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import styles from "./Detail.module.css";
 import deleteImg from "../../asset/deleteImg.png";
 import steamlogo from "../../asset/steamlogo.png";
@@ -27,7 +28,6 @@ interface months {
   [key: string]: string;
 }
 
-
 const MAX_ROWS = 5; // 최대 줄 수
 const Detail = () => {
   const { gameId } = useParams();
@@ -54,6 +54,8 @@ const Detail = () => {
     "Dec,": "12",
   };
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
@@ -61,6 +63,7 @@ const Detail = () => {
         setGameData(res.data);
       })
       .catch((err) => {
+        navigate("/");
         console.log(err);
       });
   }, [gameId]);
