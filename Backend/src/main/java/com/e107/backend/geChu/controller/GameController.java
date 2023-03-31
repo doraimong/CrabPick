@@ -1,11 +1,9 @@
 package com.e107.backend.geChu.controller;
 
-import com.e107.backend.geChu.dto.response.CommentRespDto;
-import com.e107.backend.geChu.dto.response.GameDetailRespDto;
-import com.e107.backend.geChu.dto.response.GameListRespDto;
-import com.e107.backend.geChu.dto.response.GameOwnedMemberRespDto;
+import com.e107.backend.geChu.dto.response.*;
 import com.e107.backend.geChu.service.CommentService;
 import com.e107.backend.geChu.service.GameService;
+import com.e107.backend.geChu.service.TopSellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,6 +20,7 @@ public class GameController {
 
     private final GameService gameService;
     private final CommentService commentService;
+    private final TopSellerService topSellerService;
 
 
     @GetMapping
@@ -29,6 +28,12 @@ public class GameController {
      return new ResponseEntity<>(gameService.findAllGame(pageable), HttpStatus.OK);
 
     }
+
+    @GetMapping("/top")
+    public ResponseEntity<List<TopSellerRespDto>> getTopGameList() {
+        return new ResponseEntity<>(topSellerService.findAllTopSeller(), HttpStatus.OK);
+    }
+
     @GetMapping("/{gameId}")
     public ResponseEntity<GameDetailRespDto> getGame(@PathVariable Long gameId) {
         GameDetailRespDto dto = gameService.findGameByAppId(gameId);
