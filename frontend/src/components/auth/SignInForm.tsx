@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import { useNavigate } from "react-router-dom";
 import styles from "./SignInForm.module.css";
-
+import axios from "axios";
 import steamlogo from "../../asset/steamlogo.png";
 import loginbuttonlogo from "../../asset/loginbuttonlogo.png";
 const SignInForm = () => {
@@ -10,10 +10,20 @@ const SignInForm = () => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
-  const loginHandler = (event: any) => {
-    event.preventDefault();
-    authCtx.login("sdfsdf334232", 412, 2);
-    navigate("/");
+  const loginHandler = () => {
+    // event.preventDefault();
+
+    // authCtx.login("sdfsdf334232", 412, 2);
+    // navigate("/");
+
+    axios.get("http://localhost:4000/auth/steam").then((response) => {
+      console.log("리스폰스", response);
+      // window.location.href = response.data;
+      axios.get("http://localhost:4000/auth/userinfo").then((res) => {
+        console.log(res.data);
+        window.location.href = res.data;
+      });
+    });
   };
 
   return (
