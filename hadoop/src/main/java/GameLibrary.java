@@ -93,6 +93,8 @@ public class GameLibrary {
         // let hadoop know my map and reduce classes
         job.setMapperClass(GameLibrary.LibraryMap.class);
         job.setReducerClass(GameLibrary.LibraryReduce.class);
+        // set multi reduce task
+        job.setNumReduceTasks(10);
 
         FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
         FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
