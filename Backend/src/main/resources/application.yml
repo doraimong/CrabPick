@@ -5,31 +5,36 @@ spring:
       settings:
         web-allow-others: true
   datasource:
+    # ???
+
+    #     url: jdbc:h2:tcp://localhost/~/datajpa
+    #     username: sa
+    #     password:
+    #     driver-class-name: org.h2.Driver
+
+    # Batch ???
+    #      url: jdbc:mysql://localhost:3306/hishop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    #      username: root
+    #      password: e101ssafy!@
+    #      driver-class-name: com.mysql.cj.jdbc.Driver
 
     # ???
-#     url: jdbc:h2:tcp://localhost/~/datajpa
-#     username: sa
-#     password:
-#     driver-class-name: org.h2.Driver
-
-  # Batch ???
-  #      url: jdbc:mysql://localhost:3306/hishop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-  #      username: root
-  #      password: e101ssafy!@
-  #      driver-class-name: com.mysql.cj.jdbc.Driver
-
-  # ???
-     url: jdbc:mysql://43.201.60.130:3306/crabpick?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-     username: root
-     password: ssafy123!
-     driver-class-name: com.mysql.cj.jdbc.Driver
+    #      url: jdbc:mysql://13.125.42.187:3306/hishop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    #      username: e101
+    #      password: e101ssafy!@
+    #      driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/crabpick?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ssafy
+    password: ssafy
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
-    # database-platform: org.hibernate.dialect.H2Dialect
+    #    database-platform: org.hibernate.dialect.H2Dialect
+
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         format_sql: true
@@ -54,3 +59,10 @@ logging:
 #    com.zaxxer.hikari: TRACE
 #    org.springframework : debug
 #    org.springframework.web : debug
+
+jwt:
+  header: Authorization
+  #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
+  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token-validity-in-seconds: 86400
