@@ -16,13 +16,14 @@ const SignInForm = () => {
     // authCtx.login("sdfsdf334232", 412, 2);
     // navigate("/");
 
-    axios.get("http://localhost:4000/auth/steam").then((response) => {
+    axios.get("http://localhost:4000/auth/userinfo").then((response) => {
       console.log("리스폰스", response);
+
       // window.location.href = response.data;
-      axios.get("http://localhost:4000/auth/userinfo").then((res) => {
-        console.log(res.data);
-        window.location.href = res.data;
-      });
+      // axios.get("http://localhost:4000/auth/userinfo").then((res) => {
+      //   console.log(res.data);
+      //   window.location.href = res.data;
+      // });
     });
   };
 
