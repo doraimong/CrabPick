@@ -73,7 +73,13 @@ passport.use(
 var app = express();
 const cors = require("cors");
 
-app.use(cors());
+app.use(cors("*"));
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   res.header("Access-Control-Allow-Credentials", true);
+//   next();
+// });
 
 // configure Express
 app.set("views", __dirname + "/views"); //템플릿 파일이 저장된 디렉토리 경로를 설정합니다
@@ -122,22 +128,18 @@ app.get("/logout", function (req, res) {
 인증 후, 스팀은 사용자를 /auth/steam/return에서 이 애플리케이션으로 다시 리디렉션합니다 */
 
 //@@1.리액트에서 신호가 와서 입장 //@@2.steam로그인 바로 리다이렉트
-app.get(
-  "/auth/steam",
-  passport.authenticate("steam", { failureRedirect: "/" }),
-  function (req, res) {
-    //@@3. steam로그인 페이지로 으로 이동
-    console.log("##app.js -> /auth/steam");
-    console.log("app.js -> /auth/steam");
-    console.log("----------app.get('/auth/steam')------------");
-    console.log(res.data);
-    res.redirect("http://localhost:3000/");
-  }
-);
+app.get("/auth/steam", passport.authenticate("steam", { failureRedirect: "/" }), function (req, res) {
+  //@@3. steam로그인 페이지로 으로 이동
+  console.log("##app.js -> /auth/steam");
+  console.log("app.js -> /auth/steam");
+  console.log("----------app.get('/auth/steam')------------");
+  console.log(res.data);
+  res.redirect("http://localhost:3000/"); //리액트로 리다이렉트
+});
 
 app.get("/auth/userinfo", (req, res) => {
   console.log("##app.js -> /auth/test");
-  res.send("77");
+  res.send(userInfoAllTime);
 });
 
 // GET /auth/steam/return
@@ -148,16 +150,12 @@ app.get("/auth/userinfo", (req, res) => {
 /*'passport.authenticate ()'을 사용합니다. 요청을 인증하는 경로 미들웨어로 지정합니다.  
 인증에 실패하면 사용자는 다시 로그인 페이지로 리디렉션됩니다.  
 그렇지 않으면 기본 경로 함수가 호출되며, 이 예에서는 홈 페이지로 사용자를 리디렉션합니다. */
-app.get(
-  "/auth/steam/return",
-  passport.authenticate("steam", { failureRedirect: "/" }),
-  function (req, res) {
-    console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
-    console.log("----------app.get('/auth/steam/return')------------");
-    console.log(res.data);
-    res.redirect("http://localhost:3000/");
-  }
-);
+app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: "/" }), function (req, res) {
+  console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
+  console.log("----------app.get('/auth/steam/return')------------");
+  console.log(res.data);
+  res.redirect("http://localhost:3000/"); //react로 리다이렉트
+});
 
 app.listen(4000);
 
