@@ -1,11 +1,13 @@
 package com.e107.backend.geChu.domain.entity;
 
+import com.e107.backend.geChu.security.entity.Authority;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -16,6 +18,30 @@ public class Member {
     @Id
     @GeneratedValue
     private Long id;
+
+    //////////////////////////////////park
+    //!!key 사용
+    @Column(name = "username", length = 50, unique = true)
+    private String username;
+
+    //!!steamid(번호) 사용
+    @Column(name = "password", length = 100)
+    private String password;
+
+    //!! 기타
+    @Column(name = "nickname", length = 50)
+    private String nickname;
+
+    @Column(name = "activated")
+    private boolean activated;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities;
+    //////////////////////////////////
 
     @org.hibernate.annotations.Comment("유저 이름")
     private String name;

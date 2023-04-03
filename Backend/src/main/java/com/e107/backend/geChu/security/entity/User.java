@@ -19,11 +19,11 @@ public class User {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long userId;
 
-   //!!personname 사용
+   //!!key 사용
    @Column(name = "username", length = 50, unique = true)
    private String username;
 
-   //!!key 사용
+   //!!steamid(번호) 사용
    @Column(name = "password", length = 100)
    private String password;
 
