@@ -20,4 +20,12 @@ public class CommentController {
         commentService.saveComment(memberId, gameId, dto.getContent());
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
+
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<String> deleteComment(@PathVariable Long commentId) {
+        commentService.deleteComment(commentId);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+
 }
