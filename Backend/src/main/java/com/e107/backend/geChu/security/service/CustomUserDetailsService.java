@@ -2,7 +2,6 @@ package com.e107.backend.geChu.security.service;
 
 import com.e107.backend.geChu.domain.entity.Member;
 import com.e107.backend.geChu.domain.repository.MemberRepository;
-import com.e107.backend.geChu.security.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,13 +18,11 @@ import java.util.stream.Collectors;
 @Component("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
-   private final UserRepository userRepository;
 
    private final MemberRepository memberRepository;
 
    //!! UserRepository를 주입받는다.
-   public CustomUserDetailsService(UserRepository userRepository, MemberRepository memberRepository) {
-      this.userRepository = userRepository;
+   public CustomUserDetailsService( MemberRepository memberRepository) {
       this.memberRepository = memberRepository;
    }
 
