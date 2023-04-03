@@ -37,7 +37,7 @@ function SamplePrevArrow(props: any) {
     />
   );
 }
-const Carousel: React.FC<Props> = ({ games }) => {
+const BestSellerCarousel: React.FC<Props> = ({ games }) => {
   const navigate = useNavigate();
   const settings: Settings = {
     dots: true,
@@ -52,16 +52,16 @@ const Carousel: React.FC<Props> = ({ games }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
-  const slider = (game: any) => {
-    const a = game.genre;
-    const b = a.replaceAll("'", '"');
-    const c = JSON.parse(b);
-    const genre = [];
-    for (let i = 0; i < c.length; i++) {
-      genre.push(c[i].description);
-    }
-    return genre.join(", ");
-  };
+//   const slider = (game: any) => {
+//     const a = game.genre;
+//     const b = a.replaceAll("'", '"');
+//     const c = JSON.parse(b);
+//     const genre = [];
+//     for (let i = 0; i < c.length; i++) {
+//       genre.push(c[i].description);
+//     }
+//     return genre.join(", ");
+//   };
 
   return (
     <Slider {...settings}>
@@ -69,17 +69,17 @@ const Carousel: React.FC<Props> = ({ games }) => {
         <div
           key={index}
           className={styles.carousel}
-          onClick={() => navigate(`/detail/${game.appId}`)}
+          onClick={() => navigate(`/detail/${game.gameId}`)}
         >
           <img
-            src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
-            // src={`https://cdn.akamai.steamstatic.com/steam/apps/${game.appId}/capsule_616x353.jpg?`}
+            src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameId}/header.jpg`}
+            // src={game.imageLink}
             alt={`Slide ${index}`}
             className={styles.image}
           />
           <div>
             <h1>{game.name}</h1>
-            {slider(game)}
+            {/* {slider(game)} */}
             <div></div>
           </div>
         </div>
@@ -88,4 +88,4 @@ const Carousel: React.FC<Props> = ({ games }) => {
   );
 };
 
-export default Carousel;
+export default BestSellerCarousel;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
+import Slider, { Settings } from "react-slick";
 import styles from "./Detail.module.css";
 import deleteImg from "../../asset/deleteImg.png";
 import steamlogo from "../../asset/steamlogo.png";
@@ -56,6 +57,7 @@ const Detail = () => {
 
   const navigate = useNavigate();
 
+  /////////////////////////////데이터 받아와서 저장하기////////////////////////////////////
   useEffect(() => {
     axios
       .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
@@ -151,6 +153,7 @@ const Detail = () => {
     }
   }, [gameData]);
 
+  /////////////////////////////코멘트////////////////////////////////////
   const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
   const handleCommentChange = (event: any) => {
     setCommentRows(event.target.value);
@@ -216,25 +219,30 @@ const Detail = () => {
           ) : (
             <img src={selectedImage.path_thumbnail}></img>
           )}
-          <div id="작은이미지들" className={styles.smallImages}>
-            {gameImage
-              ? gameImage.map((image: any, idx: number) => {
-                  let thumbnail = "";
-                  if (image.thumbnail) {
-                    thumbnail = image.thumbnail;
-                  } else {
-                    thumbnail = image.path_thumbnail;
-                  }
-                  return (
-                    <img
-                      key={idx}
-                      src={thumbnail}
-                      onClick={() => setSelectedIdx(idx)}
-                      className={styles.smallImage}
-                    ></img>
-                  );
-                })
-              : null}
+          <div id="스크롤" className={styles.smallImageBox}>
+            <div id="작은이미지들" className={styles.smallImages}>
+              {gameImage
+                ? gameImage.map((image: any, idx: number) => {
+                    let thumbnail = "";
+                    let isVideo = false
+                    if (image.thumbnail) {
+                      thumbnail = image.thumbnail;
+                      isVideo = true
+                    } else {
+                      thumbnail = image.path_thumbnail;
+                    }
+                    return (
+                      <img
+                        key={idx}
+                        src={thumbnail}
+                        onClick={() => setSelectedIdx(idx)}
+                        className={styles.smallImage}
+                      >
+                      </img>
+                    );
+                  })
+                : null}
+            </div>
           </div>
         </div>
         <div id="세부정보" className={styles.detailInfo}>
@@ -280,13 +288,13 @@ const Detail = () => {
         <div id="세번째비슷한게임" className={styles.simmilarGame}></div>
         <div id="네번째비슷한게임" className={styles.simmilarGame}></div>
       </div> */}
-      <div id="평점">
+      {/* <div id="평점">
         <div id="" className={styles.evaluate}>
           <div>평점</div>
           <div className={styles.average}>평균 별점</div>
         </div>
         <div>★★★★☆</div>
-      </div>
+      </div> */}
       <div id="코멘트란">
         <div style={{ width: "100%" }}>
           <h2>코멘트</h2>
