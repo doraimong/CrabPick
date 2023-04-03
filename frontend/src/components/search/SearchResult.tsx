@@ -14,9 +14,8 @@ const SearchResult = (game: any, i: number) => {
   return (
     <div className={styles.SearchResult} onClick={goToDetail}>
       <div className={styles.SearchGame}>
-        <p>{game.game.name}</p>
-        <br />
         <img src={url} alt="이미지 없음" />
+        <div className={styles.gameName}>{game.game.name}</div>
       </div>
     </div>
   );
