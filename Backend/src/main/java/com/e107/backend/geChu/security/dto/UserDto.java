@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class UserDto {
 
+    private Long id;
+
    @NotNull
    @Size(min = 3, max = 50)
    private String username;
@@ -37,8 +39,10 @@ public class UserDto {
       if(member == null) return null;
 
       return UserDto.builder()
+              .id(member.getId())
               .username(member.getUsername())
               .nickname(member.getNickname())
+
               .authorityDtoSet(member.getAuthorities().stream()
                       .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
                       .collect(Collectors.toSet()))
