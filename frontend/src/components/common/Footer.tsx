@@ -17,7 +17,7 @@ const Footer = () => {
               게임 뉴스
             </Link>
             <hr />
-            <Link to="/">마이페이지</Link>
+            <Link to="/mypage">마이페이지</Link>
           </div>
           <hr />
           <div>

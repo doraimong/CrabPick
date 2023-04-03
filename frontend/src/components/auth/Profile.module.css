@@ -6,3 +6,24 @@
 .profile h1 {
   margin: 0
 }
+
+.edit {
+  text-decoration: none;
+  color: white;
+  align-items: center;
+  display: flex;
+}
+
+.edit img {
+  margin-right: 10px;
+}
+
+.edit:hover {
+  color: yellow
+}
+
+.logout:hover {
+  color: red;
+  transform: scale(1.02)
+  
+}

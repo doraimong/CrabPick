@@ -1,16 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
+import axios from "axios";
 
 import styles from "./Profile.module.css";
+import steamlogo from "../../asset/steamlogo.png";
 const Profile = () => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
   const logoutHandler = () => {
-    authCtx.logout();
+    axios.get("http://localhost:4000/logout").then((response) => {
+      authCtx.logout();
+    });
+
     navigate("/");
   };
+
   return (
     <div className={styles.profile}>
       <div
@@ -32,20 +38,38 @@ const Profile = () => {
           }}
           onClick={logoutHandler}
         >
-          <span>로그아웃</span>
+          <span className={styles.logout}>로그아웃</span>
         </div>
       </div>
       <hr />
       <div style={{ display: "flex", marginTop: "30px" }}>
-        <img
-          src="https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg"
-          alt=""
-          style={{ marginRight: "30px" }}
-        />
-        <div>
-          <h2>닉네임</h2>
-          <p>한 줄 소개~~~ 뭐 잡다한거~~~</p>
-          <p>수정하러가기~</p>
+        <img src={authCtx.avatarfull} alt="" style={{ marginRight: "30px" }} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            {/* <h2>닉네임</h2> */}
+            <h2>{authCtx.userId}</h2>
+            <h2>{authCtx.userNickname}</h2>
+            <h2>{authCtx.avatarfull}</h2>
+            <p>한 줄 소개~~~ 뭐 잡다한거~~~</p>
+          </div>
+          {/* <p>수정하러가기~</p> */}
+          <div className={styles.editdiv}>
+            <a
+              href="https://store.steampowered.com/account/"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.edit}
+            >
+              <img src={steamlogo} alt="" style={{ width: "30px" }} />
+              <span>Steam에서 수정하기</span>
+            </a>
+          </div>
         </div>
       </div>
       <div>

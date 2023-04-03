@@ -73,6 +73,7 @@ const Carousel: React.FC<Props> = ({ games }) => {
         >
           <img
             src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
+            // src={`https://cdn.akamai.steamstatic.com/steam/apps/${game.appId}/capsule_616x353.jpg?`}
             alt={`Slide ${index}`}
             className={styles.image}
           />
