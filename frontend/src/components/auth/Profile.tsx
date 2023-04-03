@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
+import axios from "axios";
 
 import styles from "./Profile.module.css";
 import steamlogo from "../../asset/steamlogo.png";
@@ -9,7 +10,10 @@ const Profile = () => {
   const authCtx = useContext(AuthContext);
 
   const logoutHandler = () => {
-    authCtx.logout();
+    axios.get("http://localhost:4000/logout").then((response) => {
+      authCtx.logout();
+    });
+
     navigate("/");
   };
 
@@ -52,7 +56,9 @@ const Profile = () => {
           }}
         >
           <div>
-            <h2>닉네임</h2>
+            {/* <h2>닉네임</h2> */}
+            <h2>{authCtx.userId}</h2>
+            <h2>{authCtx.userNickname}</h2>
             <p>한 줄 소개~~~ 뭐 잡다한거~~~</p>
           </div>
           {/* <p>수정하러가기~</p> */}
