@@ -1,5 +1,6 @@
 package com.e107.backend.geChu.security.dto;
 
+import com.e107.backend.geChu.domain.entity.Member;
 import com.e107.backend.geChu.security.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -31,13 +32,14 @@ public class UserDto {
 
    private Set<AuthorityDto> authorityDtoSet;
 
-   public static UserDto from(User user) {
-      if(user == null) return null;
+   //////////////////////////////////////////park
+   public static UserDto from(Member member) {
+      if(member == null) return null;
 
       return UserDto.builder()
-              .username(user.getUsername())
-              .nickname(user.getNickname())
-              .authorityDtoSet(user.getAuthorities().stream()
+              .username(member.getUsername())
+              .nickname(member.getNickname())
+              .authorityDtoSet(member.getAuthorities().stream()
                       .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
                       .collect(Collectors.toSet()))
               .build();
