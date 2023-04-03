@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const AuthContext = React.createContext({
   token: "",
-  userSequence: 0,
+  userNickname: "",
   userId: 0,
   isLoggedIn: false,
   login: (token, userSequence, userId) => {},
@@ -11,39 +11,39 @@ const AuthContext = React.createContext({
 
 export const AuthContextProvider = (props) => {
   const initialToken = sessionStorage.getItem("token");
-  const initialUserSequence = sessionStorage.getItem("userSequence");
+  const initialUserNickname = sessionStorage.getItem("userNickname");
   const initialUserId = sessionStorage.getItem("userId");
 
   const [token, setToken] = useState(initialToken);
-  const [userSequence, setUserSequence] = useState(initialUserSequence);
+  const [userNickname, setUserNickname] = useState(initialUserNickname);
   const [userId, setUserId] = useState(initialUserId);
 
   // 로그인 여부 (토큰 여부)
   const userIsLoggedIn = !!token;
 
-  const loginHandler = (token, userSequence, userId) => {
+  const loginHandler = (token) => {
     setToken(token);
-    setUserSequence(userSequence);
-    setUserId(userId);
+    // setUserSequence(userSequence);
+    // setUserId(userId);
 
     sessionStorage.setItem("token", token);
-    sessionStorage.setItem("userSequence", userSequence);
-    sessionStorage.setItem("userId", userId);
+    // sessionStorage.setItem("userSequence", userSequence);
+    // sessionStorage.setItem("userId", userId);
   };
 
   const logoutHandler = () => {
     setToken(null);
-    setUserSequence(0);
-    setUserId(0);
+    // setUserSequence("");
+    // setUserId(0);
 
     sessionStorage.removeItem("token");
-    sessionStorage.removeItem("userSequence");
-    sessionStorage.removeItem("userId");
+    // sessionStorage.removeItem("userSequence");
+    // sessionStorage.removeItem("userId");
   };
 
   const contextValue = {
     token: token,
-    userSequence: userSequence,
+    userNickname: userNickname,
     userId: userId,
     isLoggedIn: userIsLoggedIn,
 
