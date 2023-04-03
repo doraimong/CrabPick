@@ -49,6 +49,13 @@ const MainLayout = ({ children }: Props) => {
         // 모달 띄워서 확인 누르면 회원가입 진행하도록
         // 모달 컴포넌트 만들기
         console.log(err);
+        // 만약 확인을 누르면 steaid와 primaryclanid(password)를 바디에 담아 axios 회원가입 요청
+        // 회원가입 성공하면
+        // 로그인 axios를 보내 저기 위에 있는 api/authenticate 그대로
+        // 실패하면
+        // console.log(err) 출력
+
+        // 20220403 집에서 하기
       });
   });
   // }, []);
