@@ -23,7 +23,7 @@ spring:
     #      username: e101
     #      password: e101ssafy!@
     #      driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/crabpick?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/crabpick1?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: ssafy
     password: ssafy
     driver-class-name: com.mysql.cj.jdbc.Driver
