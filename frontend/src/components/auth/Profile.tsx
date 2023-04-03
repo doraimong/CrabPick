@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 import axios from "axios";
@@ -43,11 +43,7 @@ const Profile = () => {
       </div>
       <hr />
       <div style={{ display: "flex", marginTop: "30px" }}>
-        <img
-          src="https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg"
-          alt=""
-          style={{ marginRight: "30px" }}
-        />
+        <img src={authCtx.avatarfull} alt="" style={{ marginRight: "30px" }} />
         <div
           style={{
             display: "flex",
@@ -59,6 +55,7 @@ const Profile = () => {
             {/* <h2>닉네임</h2> */}
             <h2>{authCtx.userId}</h2>
             <h2>{authCtx.userNickname}</h2>
+            <h2>{authCtx.avatarfull}</h2>
             <p>한 줄 소개~~~ 뭐 잡다한거~~~</p>
           </div>
           {/* <p>수정하러가기~</p> */}
