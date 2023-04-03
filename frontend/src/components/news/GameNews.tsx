@@ -55,7 +55,12 @@ class GameNewsList extends Component<{}, State> {
           <ul className={styles.newsul}>
             {news.slice(0, visibleNews).map((item) => (
               <li key={item.id} className={styles.newsli}>
-                <a href={item.url} target="_blank" className={styles.newsa}>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.newsa}
+                >
                   <div className={styles.article}>
                     <div className={styles.article_left}>
                       <img src={item.imageLink} alt="" />
