@@ -6,6 +6,10 @@ import styles from "./Detail.module.css";
 import deleteImg from "../../asset/deleteImg.png";
 import steamlogo from "../../asset/steamlogo.png";
 import axios from "axios";
+
+import { useContext } from "react";
+import AuthContext from "../../store/auth-context";
+
 // import Comment from "./Comment";
 
 interface gameData {
@@ -31,6 +35,7 @@ interface months {
 
 const MAX_ROWS = 5; // 최대 줄 수
 const Detail = () => {
+  const authCtx = useContext(AuthContext);
   const { gameId } = useParams();
   const [gameData, setGameData] = useState<gameData>();
   const [gameGenre, setGameGenre] = useState<string>("");
@@ -39,6 +44,45 @@ const Detail = () => {
   const [gameImage, setGameImage] = useState<any>();
   const [selectedImage, setSelectedImage] = useState<any>("");
   const [selectedIdx, setSelectedIdx] = useState<number>(0);
+
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/${authCtx.userId}/${gameId}`)
+      .then((res) => {
+        setIsFavorited(res.data.isFavorited);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [gameId, authCtx.userId]);
+  const handleFavorite = () => {
+    const url = `http://localhost:8080/api/${authCtx.userId}/${gameId}`;
+    // 즐겨 찾기가 되어 있다면
+    if (isFavorited) {
+      // 삭제하기
+      // axios
+      //   .delete(url)
+      //   .then(() => setIsFavorited(false))
+      //   .catch((err) => console.log(err));
+      setIsFavorited(false);
+    } else {
+      // 즐겨찾기 안되어 있을 때
+      // axios
+      //   .post(url, {
+      //     userId: authCtx.userId,
+      //     gameId: gameId,
+      //   })
+      //   .then((res) => {
+      //     setIsFavorited(true);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      setIsFavorited(true);
+    }
+  };
 
   const month: months = {
     "Jan,": "1",
@@ -204,6 +248,9 @@ const Detail = () => {
     <div className={styles.detail}>
       <div>
         <h1>{gameData?.name}</h1>
+        <button onClick={handleFavorite}>
+          {isFavorited ? <p>좋아요</p> : <p>좋아요X</p>}
+        </button>
       </div>
       <div id="게임소개" className={styles.gameDetail}>
         <div id="게임이미지" className={styles.gameImage}>
@@ -224,10 +271,10 @@ const Detail = () => {
               {gameImage
                 ? gameImage.map((image: any, idx: number) => {
                     let thumbnail = "";
-                    let isVideo = false
+                    let isVideo = false;
                     if (image.thumbnail) {
                       thumbnail = image.thumbnail;
-                      isVideo = true
+                      isVideo = true;
                     } else {
                       thumbnail = image.path_thumbnail;
                     }
@@ -237,8 +284,7 @@ const Detail = () => {
                         src={thumbnail}
                         onClick={() => setSelectedIdx(idx)}
                         className={styles.smallImage}
-                      >
-                      </img>
+                      ></img>
                     );
                   })
                 : null}

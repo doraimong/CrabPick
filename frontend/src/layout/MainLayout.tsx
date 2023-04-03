@@ -23,8 +23,7 @@ const MainLayout = ({ children }: Props) => {
     console.log("디테일 정보1 : " + response.data._json.steamid); // steamid : ex >76561199486116083
     console.log("디테일 정보2 : " + response.data.displayName); // steam displayname ex> pjh6947
     console.log("디테일 정보3 : " + response.data.key); // steam key ex>21680047922CC0CA013B6EFEC720919A
-    authCtx.userId = response.data._json.steamid;
-    authCtx.userNickname = response.data.displayName;
+
     axios
       .post("http://localhost:8080/api/authenticate", {
         username: response.data._json.steamid,
@@ -34,7 +33,16 @@ const MainLayout = ({ children }: Props) => {
         // console.log(res.data);
         // authCtx.token = res.data.token;
         // authCtx.userId = response.data._json.steamid;
-        authCtx.login(res.data.token);
+        authCtx.login(
+          res.data.token,
+          response.data._json.steamid,
+          response.data.displayName,
+          response.data._json.avatarfull
+        );
+        // authCtx.userSequence = res.data.user_id;
+        // authCtx.userId = response.data._json.steamid;
+        // authCtx.userNickname = response.data.displayName;
+        // authCtx.avatarfull = response.data._json.avatarfull;
       })
       .catch((err) => {
         // 처음 방문한 손님이니까 우리 유저 db에 없음
