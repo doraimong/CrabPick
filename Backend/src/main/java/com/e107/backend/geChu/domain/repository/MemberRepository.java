@@ -3,7 +3,6 @@ package com.e107.backend.geChu.domain.repository;
 import com.e107.backend.geChu.domain.entity.Member;
 import com.e107.backend.geChu.dto.response.CommentRespDto;
 import com.e107.backend.geChu.dto.response.GameOwnedMemberRespDto;
-import com.e107.backend.geChu.security.entity.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,7 +1,6 @@
 package com.e107.backend.geChu.security.dto;
 
 import com.e107.backend.geChu.domain.entity.Member;
-import com.e107.backend.geChu.security.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 

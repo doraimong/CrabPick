@@ -6,7 +6,6 @@ import com.e107.backend.geChu.security.dto.UserDto;
 import com.e107.backend.geChu.security.entity.Authority;
 import com.e107.backend.geChu.security.exception.DuplicateMemberException;
 import com.e107.backend.geChu.security.exception.NotFoundMemberException;
-import com.e107.backend.geChu.security.repository.UserRepository;
 import com.e107.backend.geChu.security.util.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,14 +19,12 @@ import java.util.Collections;
 public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     //!! 주입 받음
-    private final UserRepository userRepository;
 
     private final MemberRepository memberRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
+    public UserService( MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
     }
