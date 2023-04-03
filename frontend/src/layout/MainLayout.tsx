@@ -56,6 +56,24 @@ const MainLayout = ({ children }: Props) => {
         // console.log(err) 출력
 
         // 20220403 집에서 하기
+
+        // 회원 가입 시작
+        //- 회원 가입 준비물 userDto
+        //   let userDto = {
+        //     username: response.data._json.steamid,
+        //     password: response.data._json.primaryclanid,
+        //     nickname: response.data.displayName,
+        //   };
+        //   // 회원 가입 요청
+        //   axios
+        //     .post("http://localhost:8080/api/signup", userDto)
+        //     .then((res) => {
+        //       console.log("회원가입 성공", res.data);
+        //     })
+        //     .catch((err) => {
+        //       console.log("회원가입 실패", err);
+        //     });
+        //   // 회원 가입 끝
       });
   });
   // }, []);
