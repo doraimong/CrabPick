@@ -105,7 +105,7 @@ const MenuBar = () => {
     });
     setFilteredGameList(filteredGame);
   }, [searchInput]);
-
+  console.log(isLoggedIn)
   return (
     <>
       <div className={styles.navBar}>
@@ -147,7 +147,7 @@ const MenuBar = () => {
               style={{ width: "30%" }}
               onClick={goMypage}
             />
-            {/* <div onClick={logoutHandler}>로그아웃</div> */}
+            <div onClick={logoutHandler}>로그아웃</div>
           </div>
         )}
       </div>
