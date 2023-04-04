@@ -25,18 +25,21 @@ public class MemberController {
     private final GameService gameService;
     private final CommentService commentService;
 
+    // ## 사용 안함
     @GetMapping
     public ResponseEntity<List<MemberRespDto>> getAllMember() {
         List<MemberRespDto> list = memberService.findAllMember();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+//## userservice에서 옮기기
     @GetMapping("/{memberId}")
     public ResponseEntity<MemberRespDto> getMember(@PathVariable Long memberId) {
         MemberRespDto dto = memberService.findMemberById(memberId);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    //## 내 리뷰 보기
     @GetMapping("/{memberId}/review")
     public ResponseEntity<List<CommentRespDto>> getReview(@PathVariable Long memberId) {
         return new ResponseEntity<>(memberService.findAllReview(memberId), HttpStatus.OK);
