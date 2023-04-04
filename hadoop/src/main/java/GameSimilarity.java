@@ -68,13 +68,16 @@ public class GameSimilarity {
             if (gameCount.size() > 0) {
                 // sorting map by value
                 List<Map.Entry<String, Integer>> nlist = new ArrayList<>(gameCount.entrySet());
+                if (nlist.size() > 100) {
+                    nlist = nlist.subList(0, 100);
+                }
                 int df = nlist.size();
                 double eq = (n/(1+df));
                 nlist.sort(Map.Entry.comparingByValue());
                 // forming reduce output
                 StringBuilder result = new StringBuilder();
                 for(Map.Entry<String, Integer> entry : nlist){
-                    result.insert(0, entry.getKey() + ":" + (entry.getValue() * (Math.log(eq) / Math.log(500))) + " ");
+                    result.insert(0, entry.getKey() + ":" + String.format("%.4f", entry.getValue() * (Math.log(eq) / Math.log(500))) + " ");
                 }
                 context.write(key, new Text(result.toString()));
             }
