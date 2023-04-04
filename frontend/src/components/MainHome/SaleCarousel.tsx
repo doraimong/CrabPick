@@ -9,13 +9,15 @@ import styles from "./SaleCarousel.module.css";
 
 interface Props {
   salegames: {
-    url: string;
-    title: string;
-    id: number;
-    genre: string;
-    etc: string;
+    name: string;
+    gameId: number;
+    imageLink: string;
+    originalPrice: number;
+    finalPrice: number;
+    discountPercent: number;
   }[];
 }
+
 
 const Carousel: React.FC<Props> = ({ salegames }) => {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const Carousel: React.FC<Props> = ({ salegames }) => {
     centerMode: true,
     infinite: true,
     centerPadding: "10px",
-    slidesToShow: 3,
+    slidesToShow: 2,
     speed: 500,
   };
 
@@ -36,20 +38,20 @@ const Carousel: React.FC<Props> = ({ salegames }) => {
     <Slider {...settings}>
       {salegames.map((game, index) => (
         <div className={classes.centerimg} key={index}>
-          <div onClick={() => handleClick(game.id)}>
-            <img src={game.url} alt="" />
+          <div onClick={() => handleClick(game.gameId)}>
+            <img src={game.imageLink} alt="" />
             {/* <h3 style={{ textAlign: "center", marginTop: "0" }}>
               {game.title}
             </h3> */}
             <div className={styles.discount_block}>
-              <div className={styles.discount_pct}>-33%</div>
+              <div className={styles.discount_pct}>-{game.discountPercent}%</div>
               <div className={styles.discount_prices}>
                 <div
                   className={`${styles.discount_original_price} ${styles.cancelled_price}`}
                 >
-                  ￦ 41,000
+                  ￦ {game.originalPrice}
                 </div>
-                <div className={styles.discount_final_price}>￦ 27,470</div>
+                <div className={styles.discount_final_price}>￦ {game.finalPrice}</div>
               </div>
             </div>
           </div>
