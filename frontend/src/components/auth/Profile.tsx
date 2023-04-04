@@ -10,12 +10,11 @@ const Profile = () => {
   const authCtx = useContext(AuthContext);
 
   const logoutHandler = () => {
-    axios.get("http://localhost:4000/logout").then((response) => {
-      console.log("sdfdfs");
+    axios.get("http://j8e107.p.ssafy.io:8080/auth/logout").catch((response) => {
       authCtx.logout();
     });
-
-    navigate("/");
+    // authCtx.logout();
+    navigate('/')
   };
 
   return (
