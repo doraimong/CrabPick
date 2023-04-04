@@ -147,7 +147,6 @@ const MenuBar = () => {
               style={{ width: "30%" }}
               onClick={goMypage}
             />
-            <div onClick={logoutHandler}>로그아웃</div>
           </div>
         )}
       </div>
