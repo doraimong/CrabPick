@@ -35,7 +35,6 @@ export const AuthContextProvider = (props) => {
     setUserId(userId);
     setUserNickname(userNickname);
     setAvatarfull(avatarfull);
-    console.log('동작')
     sessionStorage.setItem("token", token);
     // sessionStorage.setItem("userSequence", userSequence);
     sessionStorage.setItem("userId", userId);

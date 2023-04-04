@@ -142,7 +142,7 @@ const MenuBar = () => {
         ) : (
           <div style={{ display: "flex" }} className={styles.navProfile}>
             <img
-              src="https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg"
+              src={authCtx.avatarfull}
               alt=""
               style={{ width: "30%" }}
               onClick={goMypage}
