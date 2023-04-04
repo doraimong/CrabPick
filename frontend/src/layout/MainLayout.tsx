@@ -39,10 +39,10 @@ const MainLayout = ({ children }: Props) => {
           response.data.displayName,
           response.data._json.avatarfull
         );
-        // authCtx.userSequence = res.data.user_id;
-        // authCtx.userId = response.data._json.steamid;
-        // authCtx.userNickname = response.data.displayName;
-        // authCtx.avatarfull = response.data._json.avatarfull;
+        authCtx.userSequence = res.data.user_id;
+        authCtx.userId = response.data._json.steamid;
+        authCtx.userNickname = response.data.displayName;
+        authCtx.avatarfull = response.data._json.avatarfull;
       })
       .catch((err) => {
         // 처음 방문한 손님이니까 우리 유저 db에 없음
