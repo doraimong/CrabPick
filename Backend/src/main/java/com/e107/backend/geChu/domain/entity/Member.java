@@ -20,15 +20,15 @@ public class Member {
     private Long id;
 
     //////////////////////////////////park
-    //!!key 사용
+    //!!steamid(번호 고유 id) 사용
     @Column(name = "username", length = 50, unique = true)
     private String username;
 
-    //!!steamid(번호) 사용
+    //!!primaryclanid 사용
     @Column(name = "password", length = 100)
     private String password;
 
-    //!! 기타
+    //!! displayname
     @Column(name = "nickname", length = 50)
     private String nickname;
 
@@ -43,18 +43,18 @@ public class Member {
     private Set<Authority> authorities;
     //////////////////////////////////
 
-    @org.hibernate.annotations.Comment("유저 이름")
-    private String name;
+//    @org.hibernate.annotations.Comment("유저 이름")
+//    private String name;
 
-    @Email
-    @org.hibernate.annotations.Comment("유저 이메일")
-    private String email;
+//    @Email
+//    @org.hibernate.annotations.Comment("유저 이메일")
+//    private String email;
 
-    @org.hibernate.annotations.Comment("스팀 토큰")
-    private String steamToken;
+//    @org.hibernate.annotations.Comment("스팀 토큰")
+//    private String steamToken;
 
-    @org.hibernate.annotations.Comment("스팀 닉네임")
-    private String steamNickname;
+//    @org.hibernate.annotations.Comment("스팀 닉네임")
+//    private String steamNickname;
 
     @org.hibernate.annotations.Comment("스팀 친구목록")
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
