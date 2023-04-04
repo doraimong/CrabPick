@@ -8,7 +8,7 @@ const AuthContext = React.createContext({
   avatarfull: "",
   loccountrycode: "",
   isLoggedIn: false,
-  login: (token, userId, userNickname, avatarfull) => {},
+  login: (token, userId, userNickname, avatarfull, user_id) => {},
   logout: () => {},
 });
 
@@ -29,18 +29,26 @@ export const AuthContextProvider = (props) => {
 
   // 로그인 여부 (토큰 여부)
   const userIsLoggedIn = !!token;
-  const loginHandler = (token, userId, userNickname, avatarfull) => {
+  const loginHandler = (
+    token,
+    userId,
+    userNickname,
+    avatarfull,
+    userSequence
+  ) => {
     setToken(token);
     // setUserSequence(userSequence);
     setUserId(userId);
     setUserNickname(userNickname);
     setAvatarfull(avatarfull);
-    console.log('동작')
+    setUserSequence(userSequence);
+    console.log("동작");
     sessionStorage.setItem("token", token);
     // sessionStorage.setItem("userSequence", userSequence);
     sessionStorage.setItem("userId", userId);
     sessionStorage.setItem("userNickname", userNickname);
     sessionStorage.setItem("avatarfull", avatarfull);
+    sessionStorage.setITem("userSequence", userSequence);
   };
 
   const logoutHandler = () => {
@@ -49,12 +57,14 @@ export const AuthContextProvider = (props) => {
     setUserId(0);
     setUserNickname("");
     setAvatarfull("");
+    setUserSequence(0);
 
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userSequence");
     sessionStorage.removeItem("userId");
     sessionStorage.removeItem("userNickname");
     sessionStorage.removeItem("avatarfull");
+    sessionStorage.removeItem("userSequence");
   };
 
   const contextValue = {
@@ -62,6 +72,7 @@ export const AuthContextProvider = (props) => {
     userNickname: userNickname,
     userSequence: userSequence,
     avatarfull: avatarfull,
+    userSequence: userSequence,
     // loccountrycode: loccountrycode,
     userId: userId,
     isLoggedIn: userIsLoggedIn,

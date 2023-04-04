@@ -28,22 +28,24 @@ const MainLayout = ({ children }: Props) => {
       .post("http://j8e107.p.ssafy.io:8080/api/authenticate", {
         username: response.data.id,
         // password: response.data._json.primaryclanid
-        password: 'password',
+        password: "password",
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         // authCtx.token = res.data.token;
         // authCtx.userId = response.data._json.steamid;
         authCtx.login(
           res.data.token,
           response.data.id,
           response.data.displayName,
-          response.data._json.avatarfull
+          response.data._json.avatarfull,
+          res.data.memberId
         );
         authCtx.userSequence = res.data.user_id;
         authCtx.userId = response.data.id;
         authCtx.userNickname = response.data.displayName;
         authCtx.avatarfull = response.data._json.avatarfull;
+        authCtx.userSequence = res.data.memberId;
       })
       .catch((err) => {
         // 처음 방문한 손님이니까 우리 유저 db에 없음
@@ -60,20 +62,20 @@ const MainLayout = ({ children }: Props) => {
 
         // 회원 가입 시작
         //- 회원 가입 준비물 userDto
-          let userDto = {
-            username: response.data.id,
-            password: 'password',
-            nickname: response.data.displayName,
-          };
-          // 회원 가입 요청
-          axios
-            .post("http://j8e107.p.ssafy.io:8080/api/signup", userDto)
-            .then((res) => {
-              console.log("회원가입 성공", res.data);
-            })
-            .catch((err) => {
-              console.log("회원가입 실패", err);
-            });
+        let userDto = {
+          username: response.data.id,
+          password: "password",
+          nickname: response.data.displayName,
+        };
+        // 회원 가입 요청
+        axios
+          .post("http://j8e107.p.ssafy.io:8080/api/signup", userDto)
+          .then((res) => {
+            console.log("회원가입 성공", res.data);
+          })
+          .catch((err) => {
+            console.log("회원가입 실패", err);
+          });
         //   // 회원 가입 끝
       });
   });
