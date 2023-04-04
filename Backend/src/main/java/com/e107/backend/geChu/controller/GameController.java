@@ -1,5 +1,6 @@
 package com.e107.backend.geChu.controller;
 
+import com.e107.backend.geChu.dto.request.MyGameReqDto;
 import com.e107.backend.geChu.dto.response.*;
 import com.e107.backend.geChu.service.CommentService;
 import com.e107.backend.geChu.service.GameService;
@@ -49,6 +50,12 @@ public class GameController {
     @GetMapping("/recommend/{gameId}")
     public ResponseEntity<List<GameListRespDto>> getRecommendGameList(@PathVariable Long gameId) {
         return new ResponseEntity<>(gameService.findRecommendGame(gameId), HttpStatus.OK);
+    }
+
+    @GetMapping("/recommend/user/{userId}")
+    public ResponseEntity<List<GameListRespDto>> getUserRecommendList(@PathVariable Long userId, @RequestBody MyGameReqDto dto) {
+
+        return null;
     }
 
 }
