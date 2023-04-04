@@ -29,21 +29,24 @@ const MainLayout = ({ children }: Props) => {
         username: response.data.id,
         // password: response.data._json.primaryclanid
         password: "password",
+        password: "password",
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         // authCtx.token = res.data.token;
         // authCtx.userId = response.data._json.steamid;
         authCtx.login(
           res.data.token,
           response.data.id,
           response.data.displayName,
-          response.data._json.avatarfull
+          response.data._json.avatarfull,
+          res.data.memberId
         );
         authCtx.userSequence = res.data.user_id;
         authCtx.userId = response.data.id;
         authCtx.userNickname = response.data.displayName;
         authCtx.avatarfull = response.data._json.avatarfull;
+        authCtx.userSequence = res.data.memberId;
       })
       .catch((err) => {
         // 처음 방문한 손님이니까 우리 유저 db에 없음

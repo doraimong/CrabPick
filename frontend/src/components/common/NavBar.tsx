@@ -105,7 +105,7 @@ const MenuBar = () => {
     });
     setFilteredGameList(filteredGame);
   }, [searchInput]);
-  console.log(isLoggedIn)
+  // console.log(isLoggedIn)
   return (
     <>
       <div className={styles.navBar}>
