@@ -25,9 +25,10 @@ const MainLayout = ({ children }: Props) => {
     console.log("디테일 정보3 : " + response.data.key); // steam key ex>21680047922CC0CA013B6EFEC720919A
 
     axios
-      .post("http://localhost:8080/api/authenticate", {
-        username: response.data._json.steamid,
-        password: response.data._json.primaryclanid,
+      .post("http://j8e107.p.ssafy.io:8080/api/authenticate", {
+        username: response.data.id,
+        // password: response.data._json.primaryclanid
+        password: 'password',
       })
       .then((res) => {
         // console.log(res.data);
@@ -35,12 +36,12 @@ const MainLayout = ({ children }: Props) => {
         // authCtx.userId = response.data._json.steamid;
         authCtx.login(
           res.data.token,
-          response.data._json.steamid,
+          response.data.id,
           response.data.displayName,
           response.data._json.avatarfull
         );
         authCtx.userSequence = res.data.user_id;
-        authCtx.userId = response.data._json.steamid;
+        authCtx.userId = response.data.id;
         authCtx.userNickname = response.data.displayName;
         authCtx.avatarfull = response.data._json.avatarfull;
       })
@@ -59,20 +60,20 @@ const MainLayout = ({ children }: Props) => {
 
         // 회원 가입 시작
         //- 회원 가입 준비물 userDto
-        //   let userDto = {
-        //     username: response.data._json.steamid,
-        //     password: response.data._json.primaryclanid,
-        //     nickname: response.data.displayName,
-        //   };
-        //   // 회원 가입 요청
-        //   axios
-        //     .post("http://localhost:8080/api/signup", userDto)
-        //     .then((res) => {
-        //       console.log("회원가입 성공", res.data);
-        //     })
-        //     .catch((err) => {
-        //       console.log("회원가입 실패", err);
-        //     });
+          let userDto = {
+            username: response.data.id,
+            password: 'password',
+            nickname: response.data.displayName,
+          };
+          // 회원 가입 요청
+          axios
+            .post("http://j8e107.p.ssafy.io:8080/api/signup", userDto)
+            .then((res) => {
+              console.log("회원가입 성공", res.data);
+            })
+            .catch((err) => {
+              console.log("회원가입 실패", err);
+            });
         //   // 회원 가입 끝
       });
   });
