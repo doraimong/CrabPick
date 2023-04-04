@@ -5,6 +5,8 @@ import Slider, { Settings } from "react-slick";
 import styles from "./Detail.module.css";
 import deleteImg from "../../asset/deleteImg.png";
 import steamlogo from "../../asset/steamlogo.png";
+import favorite from "../../asset/favorite.png";
+import no_favorite from "../../asset/no_favorite.png";
 import axios from "axios";
 
 import { useContext } from "react";
@@ -49,7 +51,7 @@ const Detail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/${authCtx.userId}/${gameId}`)
+      .get(`http://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`)
       .then((res) => {
         setIsFavorited(res.data.isFavorited);
       })
@@ -58,7 +60,7 @@ const Detail = () => {
       });
   }, [gameId, authCtx.userId]);
   const handleFavorite = () => {
-    const url = `http://localhost:8080/api/${authCtx.userId}/${gameId}`;
+    const url = `http://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`;
     // 즐겨 찾기가 되어 있다면
     if (isFavorited) {
       // 삭제하기
@@ -246,11 +248,38 @@ const Detail = () => {
 
   return (
     <div className={styles.detail}>
-      <div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <h1>{gameData?.name}</h1>
-        <button onClick={handleFavorite}>
-          {isFavorited ? <p>좋아요</p> : <p>좋아요X</p>}
-        </button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div style={{marginRight: "1rem"}}>좋아요</div>
+          <div
+            style={{
+              flexDirection: "column",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            onClick={handleFavorite}
+          >
+            {isFavorited ? (
+              <img
+                src={favorite}
+                style={{ background: "none", width: "2rem" }}
+                alt=""
+              />
+            ) : (
+              <img
+                src={no_favorite}
+                style={{ background: "none", width: "2rem" }}
+              ></img>
+            )}
+          </div>
+        </div>
       </div>
       <div id="게임소개" className={styles.gameDetail}>
         <div id="게임이미지" className={styles.gameImage}>
@@ -324,7 +353,6 @@ const Detail = () => {
               className={styles.steamlogo}
             />
           </div>
-          <div id="좋아요"></div>
         </div>
       </div>
       {/* <h2>비슷한 게임들</h2>
