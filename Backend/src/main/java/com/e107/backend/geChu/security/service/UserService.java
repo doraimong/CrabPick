@@ -1,11 +1,11 @@
 package com.e107.backend.geChu.security.service;
 
+import com.e107.backend.geChu.domain.entity.Member;
+import com.e107.backend.geChu.domain.repository.MemberRepository;
 import com.e107.backend.geChu.security.dto.UserDto;
 import com.e107.backend.geChu.security.entity.Authority;
-import com.e107.backend.geChu.security.entity.User;
 import com.e107.backend.geChu.security.exception.DuplicateMemberException;
 import com.e107.backend.geChu.security.exception.NotFoundMemberException;
-import com.e107.backend.geChu.security.repository.UserRepository;
 import com.e107.backend.geChu.security.util.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +19,13 @@ import java.util.Collections;
 public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     //!! 주입 받음
-    private final UserRepository userRepository;
+
+    private final MemberRepository memberRepository;
+
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
+    public UserService( MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+        this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -31,7 +33,7 @@ public class UserService {
     @Transactional
     public UserDto signup(UserDto userDto) {
         logger.debug("-signup(UserDto userDto)");
-        if (userRepository.findOneWithAuthoritiesByUsername(userDto.getUsername()).orElse(null) != null) {
+        if (memberRepository.findOneWithAuthoritiesByUsername(userDto.getUsername()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
@@ -39,7 +41,7 @@ public class UserService {
                 .authorityName("ROLE_USER")
                 .build();
 
-        User user = User.builder()
+        Member member = Member.builder()
                 .username(userDto.getUsername())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .nickname(userDto.getNickname())
@@ -47,7 +49,7 @@ public class UserService {
                 .activated(true)
                 .build();
 
-        return UserDto.from(userRepository.save(user));
+        return UserDto.from(memberRepository.save(member));
     }
 
 
@@ -56,7 +58,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserDto getUserWithAuthorities(String username) {
         logger.debug("-getUserWithAuthorities(String username)");
-        return UserDto.from(userRepository.findOneWithAuthoritiesByUsername(username).orElse(null));
+        return UserDto.from(memberRepository.findOneWithAuthoritiesByUsername(username).orElse(null));
     }
 
     //!! 현재 Security Context에 저장되어 있는 username에 해당하는 유저, 권한 정보를 가져옴
@@ -65,7 +67,7 @@ public class UserService {
         logger.debug("-getMyUserWithAuthorities()");
         return UserDto.from(
                 SecurityUtil.getCurrentUsername()
-                        .flatMap(userRepository::findOneWithAuthoritiesByUsername)
+                        .flatMap(memberRepository::findOneWithAuthoritiesByUsername)
                         .orElseThrow(() -> new NotFoundMemberException("Member not found"))
         );
     }
