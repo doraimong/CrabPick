@@ -1,6 +1,6 @@
 package com.e107.backend.geChu.security.controller;
 
-import com.e107.backend.geChu.security.config.CorsConfig;
+import com.e107.backend.geChu.domain.repository.MemberRepository;
 import com.e107.backend.geChu.security.dto.LoginDto;
 import com.e107.backend.geChu.security.dto.TokenDto;
 import com.e107.backend.geChu.security.jwt.JwtFilter;
@@ -28,9 +28,12 @@ public class AuthController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    private final MemberRepository memberRepository;
+
+    public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, MemberRepository memberRepository) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.memberRepository = memberRepository;
     }
 
     //!! 로그인
@@ -54,7 +57,9 @@ public class AuthController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
+        Long memberId = memberRepository.findByusername(loginDto.getUsername()).getId();
+
         //!! TokenDto을 이용해 response body에 넣어 반환
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new TokenDto(jwt, memberId), httpHeaders, HttpStatus.OK);
     }
 }
