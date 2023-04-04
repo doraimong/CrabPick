@@ -37,6 +37,12 @@ public class MemberController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @GetMapping("/comment/{memberId}")
+    public ResponseEntity<List<CommentRespDto>> getComment(@PathVariable Long memberId) {
+        List<CommentRespDto> dto = commentService.findCommentByMemberId(memberId);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
     @GetMapping("/{memberId}/review")
     public ResponseEntity<List<CommentRespDto>> getReview(@PathVariable Long memberId) {
         return new ResponseEntity<>(memberService.findAllReview(memberId), HttpStatus.OK);
