@@ -46,6 +46,8 @@ const Detail = () => {
   const [gameImage, setGameImage] = useState<any>();
   const [selectedImage, setSelectedImage] = useState<any>("");
   const [selectedIdx, setSelectedIdx] = useState<number>(0);
+  const [simmilarGames, setSimmilarGames] = useState<any>();
+  const [simmilarGamesImage, setSimmilarGamesImage] = useState<any>();
 
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -104,6 +106,7 @@ const Detail = () => {
   const navigate = useNavigate();
 
   /////////////////////////////데이터 받아와서 저장하기////////////////////////////////////
+  // 게임 데이터
   useEffect(() => {
     axios
       .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
@@ -116,6 +119,7 @@ const Detail = () => {
       });
   }, [gameId]);
 
+  // 게임 트레일러
   useEffect(() => {
     setSelectedImage("");
     if (gameData) {
@@ -138,6 +142,7 @@ const Detail = () => {
     }
   }, [gameData]);
 
+  // 게임 이미지
   useEffect(() => {
     if (gameData) {
       let imageA = gameData.imgUrl;
@@ -167,6 +172,7 @@ const Detail = () => {
     }
   }, [selectedIdx, gameImage]);
 
+  // 게임 장르
   useEffect(() => {
     if (gameData) {
       const genreA = gameData.genre;
@@ -198,6 +204,32 @@ const Detail = () => {
       );
     }
   }, [gameData]);
+
+  // 비슷한 게임
+  useEffect(() => {
+    axios
+      .get(`http://j8e107.p.ssafy.io:8080/api/game/recommend/${gameId}`)
+      .then((res) => {
+        setSimmilarGames(res.data.slice(0, 10));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [gameId]);
+
+  // 비슷한 게임 이미지
+  useEffect(() => {
+    if (gameData && simmilarGames) {
+      simmilarGames.map((game: any, idx: number) => {
+        console.log('여기', game)
+        setSimmilarGamesImage((simmilarGamesImage:any) => [...simmilarGamesImage, ...game.headerimg])
+        // setSimmilarGamesImage([...simmilarGamesImage, ...game.headerimg]);
+      });
+    }
+  }, [gameData, simmilarGames]);
+
+  console.log("simmilarGames", simmilarGames);
+  console.log("simmilarGamesImage", simmilarGamesImage);
 
   /////////////////////////////코멘트////////////////////////////////////
   const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
@@ -257,7 +289,7 @@ const Detail = () => {
             alignItems: "center",
           }}
         >
-          <div style={{marginRight: "1rem"}}>좋아요</div>
+          <div style={{ marginRight: "1rem" }}>좋아요</div>
           <div
             style={{
               flexDirection: "column",
