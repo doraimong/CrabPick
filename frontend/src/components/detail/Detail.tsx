@@ -232,6 +232,7 @@ const Detail = () => {
   console.log("simmilarGamesImage", simmilarGamesImage);
 
   /////////////////////////////코멘트////////////////////////////////////
+
   const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
   const handleCommentChange = (event: any) => {
     setCommentRows(event.target.value);
@@ -250,8 +251,19 @@ const Detail = () => {
   };
 
   const [commentList, setCommentList] = useState<
-    { id: number; nickname: string; content: string }[]
+    { id: number; memberName: string; content: string }[]
   >([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://j8e107.p.ssafy.io:8080/api/comment/${gameId}`)
+      .then((response) => {
+        setCommentList(response.data);
+        // console.log("sdfdsf");
+      })
+      .catch((err) => console.log(err));
+  }, [gameId]);
+
   const [nextCommentId, setNextCommentId] = useState(1);
   const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -259,9 +271,14 @@ const Detail = () => {
     if (textarea) {
       const commentText = textarea.value.trim();
       if (commentText) {
+        axios.post(`http://j8e107.p.ssafy.io:8080/api/comment`);
         setCommentList((prevList) => [
           ...prevList,
-          { id: nextCommentId, nickname: "Guest", content: commentText },
+          {
+            id: nextCommentId,
+            memberName: authCtx.userNickname,
+            content: commentText,
+          },
         ]);
         setNextCommentId(nextCommentId + 1);
         textarea.value = "";
@@ -462,7 +479,7 @@ const Detail = () => {
                     wordBreak: "break-all",
                   }}
                 >
-                  <div>{comment.nickname}</div>
+                  <div>{comment.memberName}</div>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
