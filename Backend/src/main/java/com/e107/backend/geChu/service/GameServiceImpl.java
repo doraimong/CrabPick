@@ -50,7 +50,7 @@ public class GameServiceImpl implements GameService {
         String[] arr = similarity.split(" ");
         ArrayList<GameListRespDto> list = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
-            String[] item = similarity.split(":");
+            String[] item = arr[i].split(":");
             Long id = Long.parseLong(item[0]);
             Game g = gameRepository.findByAppId(id);
             if (g == null) {
