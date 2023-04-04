@@ -9,7 +9,7 @@ const Main = () => {
   return (
     <MainLayout>
       <div className={styles.page}>
-        <RecommendGame />
+        {/* <RecommendGame /> */}
         {/* <TopRankGame /> */}
         <BestSellerGame />
         <SaleMain />
