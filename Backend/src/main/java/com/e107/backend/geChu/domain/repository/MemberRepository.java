@@ -24,4 +24,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     //!! @EntityGraph은 쿼리가 수행 될때 Lazy조회가 아닌 Eager 조회로 authorities정보를 같이 가져오게 된다.
     @EntityGraph(attributePaths = "authorities")
     Optional<Member> findOneWithAuthoritiesByUsername(String username);
+
+    Member findByusername(String username);
+
 }
