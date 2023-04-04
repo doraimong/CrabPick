@@ -51,8 +51,7 @@ public class CommentServiceImpl implements CommentService{
     public boolean saveComment(Long memberId, Long gameId, String content) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid member id"));
-        Game game = gameRepository.findById(gameId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid game id"));
+        Game game = gameRepository.findByAppId(gameId);
         if (game == null) {
             throw new IllegalArgumentException("Invalid game id");
         }

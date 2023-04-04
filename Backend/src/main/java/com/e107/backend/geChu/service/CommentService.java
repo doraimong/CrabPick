@@ -13,4 +13,5 @@ public interface CommentService {
     boolean saveComment(Long memberId, Long gameId, String content);
 
     boolean deleteComment(Long commentId);
+
 }
