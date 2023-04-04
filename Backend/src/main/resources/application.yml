@@ -27,6 +27,10 @@ spring:
     username: ssafy
     password: ssafy
     driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://43.201.60.130:3306/crabpick?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+#    username: root
+#    password: ssafy123!
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     database: mysql
@@ -34,7 +38,7 @@ spring:
     #    database-platform: org.hibernate.dialect.H2Dialect
 
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true

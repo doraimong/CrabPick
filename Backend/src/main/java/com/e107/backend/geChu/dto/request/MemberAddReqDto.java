@@ -11,17 +11,13 @@ import java.util.HashSet;
 @AllArgsConstructor
 public class MemberAddReqDto {
 
-    private String name;
-    private String email;
-    private String steamToken;
-    private String steamNickname;
+    private String username;
+    private String nickname;
 
     public Member toEntity() {
         return Member.builder()
-                .name(this.name)
-                .email(this.email)
-                .steamToken(this.steamToken)
-                .steamNickname(this.steamNickname)
+                .username(this.username)
+                .nickname(this.nickname)
                 .build();
     }
 }
