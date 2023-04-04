@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import BestSellerCarousel from "./BestSellerCarousel";
-
-import footballmanager from "../../asset/DUMMY/footballmanager.jpg";
-import battlegrounds from "../../asset/DUMMY/battlegrounds.jpg";
-import hogwarts from "../../asset/DUMMY/hogwarts.jpg";
 
 const BestSellerGame = () => {
   const [bestSellerGames, setBestSellerGames] = useState([]);
