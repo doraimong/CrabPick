@@ -15,4 +15,3 @@ insert into review values (1, 1, 'CONTNET', true, 'korean', 123.5, 5.5, 33)
 -- insert into user_authority (user_id, authority_name) values (1, 'ROLE_USER');
 -- insert into user_authority (user_id, authority_name) values (1, 'ROLE_ADMIN');
 -- insert into user_authority (user_id, authority_name) values (2, 'ROLE_USER');
---
