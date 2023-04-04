@@ -9,6 +9,10 @@ var express = require("express"),
   util = require("util"),
   session = require("express-session"),
   SteamStrategy = require("../../").Strategy;
+const fs = require("fs");
+const path = require("path");
+const https = require("https");
+
 console.log("##app.js -> head====================");
 var userInfoAllTime;
 // Passport session setup.
@@ -158,7 +162,17 @@ app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: 
   res.redirect("http://j8e107.p.ssafy.io/"); //react로 리다이렉트
 });
 
-app.listen(4000);
+const options = {
+  ca: fs.readFileSync(__dirname + "/fullchain2.pem"),
+  key: fs.readFileSync(__dirname + "/privkey2.pem"),
+};
+// console.log("파일 경로 : " + __filename);
+// console.log("파일 경로 : " + __dirname);
+// app.listen(4000);
+
+https.createServer(options, app).listen(4000, function () {
+  console.log("Steam login app listening on port 4000! Go to 4000/");
+});
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
