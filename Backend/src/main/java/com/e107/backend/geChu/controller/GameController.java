@@ -34,6 +34,11 @@ public class GameController {
         return new ResponseEntity<>(sellerService.findAllTopSeller(), HttpStatus.OK);
     }
 
+    @GetMapping("/discount")
+    public ResponseEntity<List<DiscountRespDto>> getDiscountList() {
+        return new ResponseEntity<>(sellerService.findAllDiscount(), HttpStatus.OK);
+    }
+
     @GetMapping("/{gameId}")
     public ResponseEntity<GameDetailRespDto> getGame(@PathVariable Long gameId) {
         GameDetailRespDto dto = gameService.findGameByAppId(gameId);
