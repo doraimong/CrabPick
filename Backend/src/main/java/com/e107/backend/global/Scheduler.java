@@ -28,6 +28,12 @@ public class Scheduler {
         System.out.println("topSeller update job start : " + LocalTime.now());
         sellerService.updateTopSeller();
         System.out.println("topSeller update job end : " + LocalTime.now());
+    }
 
+    @Scheduled(fixedRate = 60000 * 5) // 메소드 호출이 종료되는 시간에서 5분 이후 재 호출
+    public void updateDiscount() throws IOException {
+        System.out.println("topSeller update job start : " + LocalTime.now());
+        sellerService.updateDiscountSeller();
+        System.out.println("topSeller update job end : " + LocalTime.now());
     }
 }

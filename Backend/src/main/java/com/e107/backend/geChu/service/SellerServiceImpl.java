@@ -1,7 +1,10 @@
 package com.e107.backend.geChu.service;
 
+import com.e107.backend.geChu.domain.entity.Discount;
 import com.e107.backend.geChu.domain.entity.TopSeller;
+import com.e107.backend.geChu.domain.repository.DiscountRepository;
 import com.e107.backend.geChu.domain.repository.TopSellerRepository;
+import com.e107.backend.geChu.dto.response.DiscountRespDto;
 import com.e107.backend.geChu.dto.response.TopSellerRespDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,12 +28,21 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SellerServiceImpl implements SellerService {
     private final TopSellerRepository topSellerRepository;
+    private final DiscountRepository discountRepository;
 
     @Override
     public List<TopSellerRespDto> findAllTopSeller() {
         List<TopSeller> list = topSellerRepository.findAll();
         return list.stream()
                 .map(TopSellerRespDto::of)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    @Override
+    public List<DiscountRespDto> findAllDiscount() {
+        List<Discount> list = discountRepository.findAll();
+        return list.stream()
+                .map(DiscountRespDto::of)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
     @Override
@@ -79,15 +91,15 @@ public class SellerServiceImpl implements SellerService {
         org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
         org.json.JSONObject jo2 = (org.json.JSONObject)jo.get("specials");
         org.json.JSONArray jo3 = (org.json.JSONArray)jo2.get("items");
-        topSellerRepository.deleteAllInBatch();
+        discountRepository.deleteAllInBatch();
         for (Object j:jo3) {
-            if(topSellerRepository.existsByGameId(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))){
+            if(discountRepository.existsByGameId(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))){
                 continue;
             }
             if(!isGame(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))){
                 continue;
             }
-            topSellerRepository.save(TopSeller.builder()
+            discountRepository.save(Discount.builder()
                     .gameId(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))
                     .name(((org.json.JSONObject) j).get("name").toString())
                     .discountPercent(Long.parseLong(((org.json.JSONObject) j).get("discount_percent").toString()))
