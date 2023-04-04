@@ -29,14 +29,13 @@ export const AuthContextProvider = (props) => {
 
   // 로그인 여부 (토큰 여부)
   const userIsLoggedIn = !!token;
-
   const loginHandler = (token, userId, userNickname, avatarfull) => {
     setToken(token);
     // setUserSequence(userSequence);
     setUserId(userId);
     setUserNickname(userNickname);
     setAvatarfull(avatarfull);
-
+    console.log('동작')
     sessionStorage.setItem("token", token);
     // sessionStorage.setItem("userSequence", userSequence);
     sessionStorage.setItem("userId", userId);
