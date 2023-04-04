@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,9 +47,21 @@ public class GameServiceImpl implements GameService {
         Similarity s = similarityRepository.findById(gameId)
                 .orElseThrow(() -> new CommonException(2, "Game객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         String similarity = s.getSimilarity();
+        String[] arr = similarity.split(" ");
+        ArrayList<GameListRespDto> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            String[] item = similarity.split(":");
+            Long id = Long.parseLong(item[0]);
+            Game g = gameRepository.findByAppId(id);
+            if (g == null) {
+                throw new CommonException(2, "Game객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            list.add(GameListRespDto.of(g));
+
+        }
         log.info("similarity : " + similarity);
 
-        return null;
+        return list;
     }
 }
 
