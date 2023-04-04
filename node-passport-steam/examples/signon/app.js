@@ -42,8 +42,8 @@ passport.deserializeUser(function (obj, done) {
 passport.use(
   new SteamStrategy(
     {
-      returnURL: "https://j8e107.p.ssafy.io:4000/auth/steam/return",
-      realm: "https://j8e107.p.ssafy.io:4000/",
+      returnURL: "http://j8e107.p.ssafy.io:4000/auth/steam/return",
+      realm: "http://j8e107.p.ssafy.io:4000/",
       apiKey: "21680047922CC0CA013B6EFEC720919A",
     },
     function (identifier, profile, done) {
@@ -115,7 +115,7 @@ app.get("/logout", function (req, res) {
   console.log("##app.js -> /logout");
   req.logout();
   userInfoAllTime = null;
-  res.redirect("https://j8e107.p.ssafy.io/");
+  res.redirect("http://j8e107.p.ssafy.io/");
 });
 
 // GET /auth/steam
@@ -135,7 +135,7 @@ app.get("/auth/steam", passport.authenticate("steam", { failureRedirect: "/" }),
   console.log("app.js -> /auth/steam");
   console.log("----------app.get('/auth/steam')------------");
   console.log(res.data);
-  res.redirect("https://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
+  res.redirect("http://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
 });
 
 app.get("/auth/userinfo", (req, res) => {
@@ -155,7 +155,7 @@ app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: 
   console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
   console.log("----------app.get('/auth/steam/return')------------");
   console.log(res.data);
-  res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
+  res.redirect("http://j8e107.p.ssafy.io/"); //react로 리다이렉트
 });
 
 app.listen(4000);
