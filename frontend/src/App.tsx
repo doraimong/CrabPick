@@ -20,7 +20,8 @@ function App() {
       {/* 내비게이션 가드 설정 */}
       {!authCtx.isLoggedIn && <Route path="/signin" element={<SignInPage />} />}
 
-      {authCtx.isLoggedIn && <Route path="/mypage" element={<MyPage />} />}
+      {/* {authCtx.isLoggedIn && <Route path="/mypage" element={<MyPage />} />} */}
+      <Route path="/mypage" element={<MyPage />} />
 
       <Route path="/game-news" element={<GameNewsPage />} />
       <Route path="/search" element={<SearchPage />} />
