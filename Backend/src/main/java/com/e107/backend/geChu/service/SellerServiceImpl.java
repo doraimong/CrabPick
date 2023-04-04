@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 @Slf4j
-public class TopSellerServiceImpl implements TopSellerService{
+public class SellerServiceImpl implements SellerService {
     private final TopSellerRepository topSellerRepository;
 
     @Override
@@ -45,6 +45,39 @@ public class TopSellerServiceImpl implements TopSellerService{
         ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
         org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
         org.json.JSONObject jo2 = (org.json.JSONObject)jo.get("top_sellers");
+        org.json.JSONArray jo3 = (org.json.JSONArray)jo2.get("items");
+        topSellerRepository.deleteAllInBatch();
+        for (Object j:jo3) {
+            if(topSellerRepository.existsByGameId(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))){
+                continue;
+            }
+            if(!isGame(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))){
+                continue;
+            }
+            topSellerRepository.save(TopSeller.builder()
+                    .gameId(Long.parseLong(((org.json.JSONObject) j).get("id").toString()))
+                    .name(((org.json.JSONObject) j).get("name").toString())
+                    .discountPercent(Long.parseLong(((org.json.JSONObject) j).get("discount_percent").toString()))
+                    .originalPrice(Long.parseLong(((org.json.JSONObject) j).get("original_price").toString()) / 100)
+                    .finalPrice(Long.parseLong(((org.json.JSONObject) j).get("final_price").toString()) / 100)
+                    .imageLink(((org.json.JSONObject) j).get("large_capsule_image").toString())
+                    .build());
+        }
+
+    }
+
+    @Override
+    public void updateDiscountSeller() {
+        String url = "https://store.steampowered.com/api/featuredcategories/?l=koreana";
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders header = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(header);
+
+        UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
+        ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
+        org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
+        org.json.JSONObject jo2 = (org.json.JSONObject)jo.get("specials");
         org.json.JSONArray jo3 = (org.json.JSONArray)jo2.get("items");
         topSellerRepository.deleteAllInBatch();
         for (Object j:jo3) {
