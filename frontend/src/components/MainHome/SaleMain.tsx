@@ -5,7 +5,7 @@ const SaleGame = () => {
   const [saleGames, setSaleGames] = useState([]);
 
   useEffect(() => {
-    fetch("http://j8e107.p.ssafy.io:8080/api/game/discount")
+    fetch("https://j8e107.p.ssafy.io:8080/api/game/discount")
       .then((response) => response.json())
       .then((data) => {
         setSaleGames(data);

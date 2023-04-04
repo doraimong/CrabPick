@@ -17,14 +17,14 @@ const MainLayout = ({ children }: Props) => {
   const authCtx = useContext(AuthContext);
   // useEffect(() => {
   //로그인 했거나 or 로그인 안하고 단순 메인 화면 접속시 -> node.js 에 userinfo 데이터 요청 -> 데이터 있으면 바로 spring에 요청 보내기
-  axios.get("http://j8e107.p.ssafy.io:4000/auth/userinfo").then((response) => {
+  axios.get("https://j8e107.p.ssafy.io:4000/auth/userinfo").then((response) => {
     // console.log("메인 화면 응답" + JSON.stringify(response.data)); // 반환 데이터 전부 출력해보기
     // console.log("디테일 정보1 : " + response.data._json.steamid); // steamid : ex >76561199486116083
     // console.log("디테일 정보2 : " + response.data.displayName); // steam displayname ex> pjh6947
     // console.log("디테일 정보3 : " + response.data.key); // steam key ex>21680047922CC0CA013B6EFEC720919A
 
     axios
-      .post("http://j8e107.p.ssafy.io:8080/api/authenticate", {
+      .post("https://j8e107.p.ssafy.io:8080/api/authenticate", {
         username: response.data.id,
         // password: response.data._json.primaryclanid
         password: "password",
@@ -68,11 +68,11 @@ const MainLayout = ({ children }: Props) => {
         };
         // 회원 가입 요청
         axios
-          .post("http://j8e107.p.ssafy.io:8080/api/signup", userDto)
+          .post("https://j8e107.p.ssafy.io:8080/api/signup", userDto)
           .then((res) => {
             console.log("회원가입 성공", res.data);
             axios
-              .post("http://j8e107.p.ssafy.io:8080/api/authenticate", {
+              .post("https://j8e107.p.ssafy.io:8080/api/authenticate", {
                 username: response.data.id,
                 // password: response.data._json.primaryclanid
                 password: "password",

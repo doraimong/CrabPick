@@ -51,7 +51,7 @@ const Detail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`)
+      .get(`https://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`)
       .then((res) => {
         setIsFavorited(res.data.isFavorited);
       })
@@ -60,7 +60,7 @@ const Detail = () => {
       });
   }, [gameId, authCtx.userId]);
   const handleFavorite = () => {
-    const url = `http://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`;
+    const url = `https://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`;
     // 즐겨 찾기가 되어 있다면
     if (isFavorited) {
       // 삭제하기
@@ -106,7 +106,7 @@ const Detail = () => {
   /////////////////////////////데이터 받아와서 저장하기////////////////////////////////////
   useEffect(() => {
     axios
-      .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
+      .get(`https://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
       .then((res) => {
         setGameData(res.data);
       })

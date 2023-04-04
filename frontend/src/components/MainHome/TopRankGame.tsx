@@ -10,7 +10,7 @@ const TopRankGame = () => {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    fetch("http://j8e107.p.ssafy.io:8080/api/game")
+    fetch("https://j8e107.p.ssafy.io:8080/api/game")
       .then((response) => response.json())
       .then((data) => {
         setGames(data);
