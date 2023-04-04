@@ -15,6 +15,7 @@ public class Comment {
     @GeneratedValue
     private Long id;
 
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @org.hibernate.annotations.Comment("리뷰내용")

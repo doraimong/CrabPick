@@ -129,38 +129,38 @@ async function getUserProfileAndSendSpring(key, steamID) {
   });
   // console.log("=======================================userInfo test === ", util.inspect(userInfo, { depth: null }) + "\n============================================");
   //To spring boot ->
-  axios
-    .post(
-      "http://localhost:8080/test",
-      userInfo /*{
-      ownedGames: ownedGamesPromise,
-      userProfile: playerSummariesPromise,
-    }*/
-    ) //here
-    .then((res) => {
-      // console.log("#############strategy.js -> axios.get ->", res.data);
-      // console.log("******************************inner act doing******************************************");
-      // var formData = new FormData();
-      // formData.append("username", "76561199486116083");
-      // formData.append("password", "1234");
-      // axios
-      //   .post("http://localhost:8080/loginProc", formData /*{ body: formData } { formData } { steamid: "abcde" } { steamid: "abcde" } formData*/, {
-      //     // headers: {
-      //     //   "Content-Type": `application/x-www-form-urlencoded`, // x-www-form-urlencoded 타입 선언
-      //     // },
-      //   }) //here
-      //   .then((res) => {
-      //     console.log("loginProc is good");
-      //     console.log(res.data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-    })
-    .catch((err) => {
-      console.log(err);
-      // console.log("@@@@@@@@222what the ", playerSummariesPromise);
-    });
+  // axios
+  //   .post(
+  //     "http://localhost:8080/test",
+  //     userInfo /*{
+  //     ownedGames: ownedGamesPromise,
+  //     userProfile: playerSummariesPromise,
+  //   }*/
+  //   ) //here
+  //   .then((res) => {
+  //     // console.log("#############strategy.js -> axios.get ->", res.data);
+  //     // console.log("******************************inner act doing******************************************");
+  //     // var formData = new FormData();
+  //     // formData.append("username", "76561199486116083");
+  //     // formData.append("password", "1234");
+  //     // axios
+  //     //   .post("http://localhost:8080/loginProc", formData /*{ body: formData } { formData } { steamid: "abcde" } { steamid: "abcde" } formData*/, {
+  //     //     // headers: {
+  //     //     //   "Content-Type": `application/x-www-form-urlencoded`, // x-www-form-urlencoded 타입 선언
+  //     //     // },
+  //     //   }) //here
+  //     //   .then((res) => {
+  //     //     console.log("loginProc is good");
+  //     //     console.log(res.data);
+  //     //   })
+  //     //   .catch((err) => {
+  //     //     console.log(err);
+  //     //   });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     // console.log("@@@@@@@@222what the ", playerSummariesPromise);
+  //   });
 }
 
 /**
