@@ -25,7 +25,7 @@ const MenuBar = () => {
   useEffect(() => {
     async function getGameList() {
       await axios
-        .get("https://j8e107.p.ssafy.io:8080/api/game")
+        .get("http://j8e107.p.ssafy.io:8080/api/game")
         .then((res) => {
           setGameList(res.data);
         })
