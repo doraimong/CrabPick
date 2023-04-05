@@ -47,7 +47,7 @@ const Detail = () => {
   const [selectedImage, setSelectedImage] = useState<any>("");
   const [selectedIdx, setSelectedIdx] = useState<number>(0);
   const [simmilarGames, setSimmilarGames] = useState<any>();
-  const [simmilarGamesImage, setSimmilarGamesImage] = useState<any>();
+  const [simmilarGamesImage, setSimmilarGamesImage] = useState<any>([]);
 
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -61,6 +61,7 @@ const Detail = () => {
         console.log(err);
       });
   }, [gameId, authCtx.userId]);
+
   const handleFavorite = () => {
     const url = `https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`;
     // 즐겨 찾기가 되어 있다면
@@ -124,21 +125,23 @@ const Detail = () => {
     setSelectedImage("");
     if (gameData) {
       let trailerA = gameData.trailer_url;
-      const count = trailerA.split("id").length - 1;
-      if (count < 2) {
-        trailerA = trailerA.slice(1, trailerA.length - 1);
-      }
-      const trailerB = trailerA.replaceAll("'", '"');
-      const trailerC = trailerB.replaceAll("True", "true");
-      const trailerD = trailerC.replaceAll("False", "false");
-      const trailerE = trailerD.replaceAll('"s', "'");
-      const trailerF = trailerE.replaceAll('" ', "' ");
-      const trailerG = JSON.parse(trailerF.trim());
-      if (trailerG.length) {
-        setGameImage(trailerG);
-      } else {
-        setGameImage([trailerG]);
-      }
+      if (trailerA != "") {
+        const count = trailerA.split("id").length - 1;
+        if (count < 2) {
+          trailerA = trailerA.slice(1, trailerA.length - 1);
+        }
+        const trailerB = trailerA.replaceAll("'", '"');
+        const trailerC = trailerB.replaceAll("True", "true");
+        const trailerD = trailerC.replaceAll("False", "false");
+        const trailerE = trailerD.replaceAll('"s', "'");
+        const trailerF = trailerE.replaceAll('" ', "' ");
+        const trailerG = JSON.parse(trailerF.trim());
+        if (trailerG.length) {
+          setGameImage(trailerG);
+        } else {
+          setGameImage([trailerG]);
+        }
+      } else {setGameImage([])}
     }
   }, [gameData]);
 
@@ -177,9 +180,11 @@ const Detail = () => {
     if (gameData) {
       const genreA = gameData.genre;
       const genreB = genreA.replaceAll("'", '"');
+      console.log("genreB", gameData.appId, genreB);
       const genreC = JSON.parse(genreB);
       const genre = [];
-      for (let i = 0; i < genreC.length; i++) {
+      console.log("여기", genreC);
+      for (let i = 0; i < genreC.Length; i++) {
         genre.push(genreC[i].description);
       }
       setGameGenre(genre.join(", "));
@@ -218,21 +223,19 @@ const Detail = () => {
   }, [gameId]);
 
   // 비슷한 게임 이미지
-  useEffect(() => {
-    if (gameData && simmilarGames) {
-      simmilarGames.map((game: any, idx: number) => {
-        console.log("여기", game);
-        setSimmilarGamesImage((simmilarGamesImage: any) => [
-          ...simmilarGamesImage,
-          ...game.headerimg,
-        ]);
-        // setSimmilarGamesImage([...simmilarGamesImage, ...game.headerimg]);
-      });
-    }
-  }, [gameData, simmilarGames]);
+  // useEffect(() => {
+  //   if (gameData && simmilarGames) {
+  //     simmilarGames.map((game: any, idx: number) => {
+  //       console.log("여기", game.headerImg);
+  //       setSimmilarGamesImage([...simmilarGamesImage, game.headerImg]);
+  //     });
+  //   }
+  // }, [gameData, simmilarGames]);
 
-  console.log("simmilarGames", simmilarGames);
-  console.log("simmilarGamesImage", simmilarGamesImage);
+  const goDetail = (id) => {
+    // console.log('id', id)
+    navigate(`/detail/${id}`);
+  };
 
   /////////////////////////////코멘트////////////////////////////////////
 
@@ -407,13 +410,32 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      {/* <h2>비슷한 게임들</h2>
-      <div id="비슷한게임들" className={styles.simmilarGames}>
-        <div id="첫번째비슷한게임" className={styles.simmilarGame}></div>
+      <h2>비슷한 게임들</h2>
+
+      <div className={styles.simmilarGamesBox}>
+        {simmilarGames && simmilarGames.length > 0 ? (
+          <div id="비슷한게임들" className={styles.simmilarGames}>
+            {simmilarGames
+              ? simmilarGames.map((game: any, idx: number) => {
+                  return (
+                    <img
+                      key={idx}
+                      src={game.headerImg}
+                      alt={`similar game ${idx}`}
+                      className={styles.simmilarGame}
+                      onClick={() => goDetail(game.appId)}
+                      // onClick={() => goDetail(game)}
+                    />
+                  );
+                })
+              : null}
+          </div>
+        ) : null}
+      </div>
+      {/* <div id="첫번째비슷한게임" className={styles.simmilarGame}></div>
         <div id="두번째비슷한게임" className={styles.simmilarGame}></div>
         <div id="세번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="네번째비슷한게임" className={styles.simmilarGame}></div>
-      </div> */}
+        <div id="네번째비슷한게임" className={styles.simmilarGame}></div> */}
       {/* <div id="평점">
         <div id="" className={styles.evaluate}>
           <div>평점</div>
