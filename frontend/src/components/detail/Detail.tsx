@@ -51,13 +51,13 @@ const Detail = () => {
 
   const [isFavorited, setIsFavorited] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get(`https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`)
-      .then((res) => {
-        setIsFavorited(res.data.isFavorited);
-      });
-  }, [gameId, authCtx.userId]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`)
+  //     .then((res) => {
+  //       setIsFavorited(res.data.isFavorited);
+  //     });
+  // }, [gameId, authCtx.userId]);
 
   const handleFavorite = () => {
     const url = `https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`;
