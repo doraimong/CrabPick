@@ -17,9 +17,11 @@ const SignInForm = () => {
     // authCtx.login("sdfsdf334232", 412, 2);
     // navigate("/");
     console.log("스팀 로그인 핸들러");
-    window.location.replace("https://j8e107.p.ssafy.io/auth/steam");
+    // window.location.replace("https://j8e107.p.ssafy.io/auth/steam");
+    window.location.replace("http://localhost:4000/auth/steam");
 
-    axios.get("https://j8e107.p.ssafy.io/auth/userinfo").then((response) => {
+    // axios.get("https://j8e107.p.ssafy.io/auth/userinfo").then((response) => {
+    axios.get("http://localhost:4000/auth/userinfo").then((response) => {
       // console.log("메인 화면 응답" + JSON.stringify(response.data)); // 반환 데이터 전부 출력해보기
       // console.log("디테일 정보1 : " + response.data._json.steamid); // steamid : ex >76561199486116083
       // console.log("디테일 정보2 : " + response.data.displayName); // steam displayname ex> pjh6947
