@@ -78,10 +78,10 @@ passport.use(
       console.log(identifier);
       console.log("----------passport.use(new SteamStrategy)------------");
       console.log(profile);
-      res.writeHead(200, {
-        "Userinfo-Cookie": profile,
-      });
-      console.log("브라우저에 데이터 저장 완료");
+      // res.writeHead(200, {
+      //   "Userinfo-Cookie": profile,
+      // });
+      // console.log("브라우저에 데이터 저장 완료");
       // userInfoAllTime = profile;
       console.log("----------------------------------------------------");
       console.log(done);
@@ -203,10 +203,10 @@ const options = {
 // console.log("파일 경로 : " + __dirname);
 // app.listen(4000);
 
-https.createServer(options, app).listen(4000, function (req, res) {
-  res.writeHead(200, {
+https.createServer(options, app).listen(4000, function (/*req, res*/) {
+  /*res.writeHead(200, {
     "test-Cookie": "mycookie=test",
-  });
+  });*/
   console.log("브라우저에 데이터 저장을 위한 준비 완료");
   console.log("Steam login app listening on port 4000! Go to 4000/");
 });
