@@ -57,9 +57,6 @@ const Detail = () => {
       .then((res) => {
         setIsFavorited(res.data.isFavorited);
       })
-      .catch((err) => {
-        console.log(err);
-      });
   }, [gameId, authCtx.userId]);
 
   const handleFavorite = () => {
@@ -116,7 +113,6 @@ const Detail = () => {
       })
       .catch((err) => {
         navigate("/");
-        console.log(err);
       });
   }, [gameId]);
 
@@ -141,7 +137,9 @@ const Detail = () => {
         } else {
           setGameImage([trailerG]);
         }
-      } else {setGameImage([])}
+      } else {
+        setGameImage([]);
+      }
     }
   }, [gameData]);
 
@@ -180,10 +178,8 @@ const Detail = () => {
     if (gameData) {
       const genreA = gameData.genre;
       const genreB = genreA.replaceAll("'", '"');
-      console.log("genreB", gameData.appId, genreB);
       const genreC = JSON.parse(genreB);
       const genre = [];
-      console.log("여기", genreC);
       for (let i = 0; i < genreC.Length; i++) {
         genre.push(genreC[i].description);
       }
@@ -216,9 +212,6 @@ const Detail = () => {
       .get(`https://j8e107.p.ssafy.io/api/game/recommend/${gameId}`)
       .then((res) => {
         setSimmilarGames(res.data.slice(0, 10));
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }, [gameId]);
 
