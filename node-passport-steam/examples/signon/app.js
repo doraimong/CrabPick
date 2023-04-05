@@ -64,11 +64,11 @@ passport.use(
     {
       // returnURL: "http://j8e107.p.ssafy.io:4000/auth/steam/return",
 
-      returnURL: "https://j8e107.p.ssafy.io/node/auth/steam/return",
+      returnURL: "https://j8e107.p.ssafy.io/auth/steam/return",
 
       // realm: "http://j8e107.p.ssafy.io:4000/",
 
-      realm: "https://j8e107.p.ssafy.io/node",
+      realm: "https://j8e107.p.ssafy.io/",
 
       apiKey: "21680047922CC0CA013B6EFEC720919A",
     },
