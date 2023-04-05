@@ -47,7 +47,7 @@ const Detail = () => {
   const [selectedImage, setSelectedImage] = useState<any>("");
   const [selectedIdx, setSelectedIdx] = useState<number>(0);
   const [simmilarGames, setSimmilarGames] = useState<any>();
-  const [simmilarGamesImage, setSimmilarGamesImage] = useState<any>();
+  const [simmilarGamesImage, setSimmilarGamesImage] = useState<any>([]);
 
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -218,18 +218,14 @@ const Detail = () => {
   }, [gameId]);
 
   // 비슷한 게임 이미지
-  useEffect(() => {
-    if (gameData && simmilarGames) {
-      simmilarGames.map((game: any, idx: number) => {
-        console.log('여기', game)
-        setSimmilarGamesImage((simmilarGamesImage:any) => [...simmilarGamesImage, ...game.headerimg])
-        // setSimmilarGamesImage([...simmilarGamesImage, ...game.headerimg]);
-      });
-    }
-  }, [gameData, simmilarGames]);
-
-  console.log("simmilarGames", simmilarGames);
-  console.log("simmilarGamesImage", simmilarGamesImage);
+  // useEffect(() => {
+  //   if (gameData && simmilarGames) {
+  //     simmilarGames.map((game: any, idx: number) => {
+  //       console.log("여기", game.headerImg);
+  //       setSimmilarGamesImage([...simmilarGamesImage, game.headerImg]);
+  //     });
+  //   }
+  // }, [gameData, simmilarGames]);
 
   /////////////////////////////코멘트////////////////////////////////////
 
@@ -404,13 +400,30 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      {/* <h2>비슷한 게임들</h2>
-      <div id="비슷한게임들" className={styles.simmilarGames}>
-        <div id="첫번째비슷한게임" className={styles.simmilarGame}></div>
+      <h2>비슷한 게임들</h2>
+
+      <div className={styles.simmilarGamesBox}>
+        {simmilarGames && simmilarGames.length > 0 ? (
+          <div id="비슷한게임들" className={styles.simmilarGames}>
+            {simmilarGames
+              ? simmilarGames.map((game: any, idx: number) => {
+                  return (
+                      <img
+                        key={idx}
+                        src={game.headerImg}
+                        alt={`similar game ${idx}`}
+                        className={styles.simmilarGame}
+                      />
+                  );
+                })
+              : null}
+          </div>
+        ) : null}
+      </div>
+      {/* <div id="첫번째비슷한게임" className={styles.simmilarGame}></div>
         <div id="두번째비슷한게임" className={styles.simmilarGame}></div>
         <div id="세번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="네번째비슷한게임" className={styles.simmilarGame}></div>
-      </div> */}
+        <div id="네번째비슷한게임" className={styles.simmilarGame}></div> */}
       {/* <div id="평점">
         <div id="" className={styles.evaluate}>
           <div>평점</div>

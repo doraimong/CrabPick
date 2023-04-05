@@ -8,7 +8,7 @@
 }
 
 .bigImage {
-  border: solid black;  
+  border: solid black;
   width: 100%;
 }
 
@@ -45,12 +45,12 @@
 .smallImageBox {
   position: relative;
   width: 100%;
-  height: 6rem;
+  height: 7rem;
   overflow-x: scroll;
 }
 
 .smallImages {
-  display: grid ;
+  display: grid;
   /* grid-template-columns: 1fr 1fr 1fr 1fr; */
   position: absolute;
   height: 90%;
@@ -61,24 +61,42 @@
 }
 
 .smallImage {
-  width:100%;
-  height: 80%;
+  width: 100%;
+  height: fit-content;
   border: solid black;
+}
+
+.smallImage:hover {
+  cursor: pointer;
+  transform: scale(1.02)
+}
+
+.simmilarGamesBox {
+  position: relative;
+  width: 100%;
+  height: 11rem;
+  overflow-x: scroll;
 }
 
 .simmilarGames {
-  flex: 1;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  background-color: aliceblue;
-  height: 20vh;
+  /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  grid-auto-columns: 20rem;
+  grid-auto-flow: column;
 }
 
 .simmilarGame {
-  background-color: blanchedalmond;
+  width: 100%;
+  height: fit-content;
   border: solid black;
 }
-
+.simmilarGame:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
 .rateBar {
   height: 2em;
   width: 50%;
