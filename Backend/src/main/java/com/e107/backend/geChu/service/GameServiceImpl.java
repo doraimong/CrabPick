@@ -4,13 +4,13 @@ import com.e107.backend.geChu.domain.entity.Game;
 import com.e107.backend.geChu.domain.entity.Similarity;
 import com.e107.backend.geChu.domain.repository.GameRepository;
 import com.e107.backend.geChu.domain.repository.SimilarityRepository;
+import com.e107.backend.geChu.dto.request.MyGameReqDto;
 import com.e107.backend.geChu.dto.response.GameDetailRespDto;
 import com.e107.backend.geChu.dto.response.GameListRespDto;
 import com.e107.backend.global.common.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<GameListRespDto> findRecommendGame(Long gameId) {
+    public List<GameListRespDto> findRecommendByGame(Long gameId) {
         Similarity s = similarityRepository.findById(gameId)
                 .orElseThrow(() -> new CommonException(2, "Game객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         String similarity = s.getSimilarity();
@@ -62,6 +62,24 @@ public class GameServiceImpl implements GameService {
         log.info("similarity : " + similarity);
 
         return list;
+    }
+
+    @Override
+    public List<GameListRespDto> findRecommendByUser(Long userId, List<MyGameReqDto> dto) {
+        //# {(유져 보유 게임 id) : {playtime: (플레이시간), data: {게임 별 추천 목록 딕셔너리}}, (유져 보유 게임 id) : {playtime: (플레이시간) 형태의 딕셔너리 생각중}
+
+        return null;
+    }
+
+    @Override
+    public int calcPlaytimeFactor(int playtime) {
+        if (playtime < 200) return 1;
+        return (int)(log2(playtime/6000.0f)) + 1;
+    }
+
+    @Override
+    public double log2(float x) {
+        return Math.log(x) / Math.log(2);
     }
 }
 

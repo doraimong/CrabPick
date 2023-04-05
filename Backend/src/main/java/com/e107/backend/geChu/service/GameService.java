@@ -1,5 +1,6 @@
 package com.e107.backend.geChu.service;
 
+import com.e107.backend.geChu.dto.request.MyGameReqDto;
 import com.e107.backend.geChu.dto.response.GameDetailRespDto;
 import com.e107.backend.geChu.dto.response.GameListRespDto;
 import org.springframework.data.domain.Pageable;
@@ -12,5 +13,11 @@ public interface GameService {
     List<GameListRespDto> findAllGame(Pageable pageable);
 
 
-    List<GameListRespDto> findRecommendGame(Long gameId);
+    List<GameListRespDto> findRecommendByGame(Long gameId);
+
+    List<GameListRespDto> findRecommendByUser(Long userId,List<MyGameReqDto> dto);
+
+    int calcPlaytimeFactor(int playtime);
+
+    double log2(float x);
 }
