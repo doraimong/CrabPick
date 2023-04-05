@@ -42,8 +42,10 @@ passport.deserializeUser(function (obj, done) {
 passport.use(
   new SteamStrategy(
     {
-      returnURL: "http://j8e107.p.ssafy.io:4000/auth/steam/return",
-      realm: "http://j8e107.p.ssafy.io:4000/",
+      // returnURL: "http://j8e107.p.ssafy.io:4000/auth/steam/return",
+      returnURL: "https://j8e107.p.ssafy.io/auth/steam/return",
+      // realm: "http://j8e107.p.ssafy.io:4000/",
+      realm: "https://j8e107.p.ssafy.io/",
       apiKey: "21680047922CC0CA013B6EFEC720919A",
     },
     function (identifier, profile, done) {
@@ -115,8 +117,8 @@ app.get("/logout", function (req, res) {
   console.log("##app.js -> /logout");
   req.logout();
   userInfoAllTime = null;
-  // res.redirect("http://j8e107.p.ssafy.io/");
-  res.redirect("http://localhost/");
+  res.redirect("https://j8e107.p.ssafy.io/");
+  // res.redirect("http://localhost:3000/");
 });
 
 // GET /auth/steam
@@ -139,7 +141,8 @@ app.get(
     console.log("app.js -> /auth/steam");
     console.log("----------app.get('/auth/steam')------------");
     console.log(res.data);
-    res.redirect("http://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
+    res.redirect("https://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
+    // res.redirect("http://localhost:3000/"); //리액트로 리다이렉트
   }
 );
 
@@ -163,7 +166,8 @@ app.get(
     console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
     console.log("----------app.get('/auth/steam/return')------------");
     console.log(res.data);
-    res.redirect("http://j8e107.p.ssafy.io/"); //react로 리다이렉트
+    res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
+    // res.redirect("http://localhost:3000/"); //react로 리다이렉트
   }
 );
 

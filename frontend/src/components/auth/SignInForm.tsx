@@ -17,16 +17,16 @@ const SignInForm = () => {
     // authCtx.login("sdfsdf334232", 412, 2);
     // navigate("/");
     console.log("스팀 로그인 핸들러");
-    window.location.replace("http://localhost:4000/auth/steam");
+    window.location.replace("https://j8e107.p.ssafy.io/auth/steam");
 
-    axios.get("http://localhost:4000/auth/userinfo").then((response) => {
+    axios.get("https://j8e107.p.ssafy.io/auth/userinfo").then((response) => {
       // console.log("메인 화면 응답" + JSON.stringify(response.data)); // 반환 데이터 전부 출력해보기
       // console.log("디테일 정보1 : " + response.data._json.steamid); // steamid : ex >76561199486116083
       // console.log("디테일 정보2 : " + response.data.displayName); // steam displayname ex> pjh6947
       // console.log("디테일 정보3 : " + response.data.key); // steam key ex>21680047922CC0CA013B6EFEC720919A
-  
+
       axios
-        .post("http://j8e107.p.ssafy.io:8080/api/authenticate", {
+        .post("https://j8e107.p.ssafy.io/api/authenticate", {
           username: response.data.id,
           // password: response.data._json.primaryclanid
           password: "password",
@@ -42,11 +42,12 @@ const SignInForm = () => {
             response.data._json.avatarfull,
             res.data.memberId
           );
-          authCtx.userSequence = res.data.user_id;
+          console.log(res.data);
+          authCtx.token = res.data.token;
           authCtx.userId = response.data.id;
           authCtx.userNickname = response.data.displayName;
           authCtx.avatarfull = response.data._json.avatarfull;
-          authCtx.userSequence = res.data.memberId;
+          authCtx.memberId = res.data.memberId;
         })
         .catch((err) => {
           // 처음 방문한 손님이니까 우리 유저 db에 없음
@@ -58,9 +59,9 @@ const SignInForm = () => {
           // 로그인 axios를 보내 저기 위에 있는 api/authenticate 그대로
           // 실패하면
           // console.log(err) 출력
-  
+
           // 20220403 집에서 하기
-  
+
           // 회원 가입 시작
           //- 회원 가입 준비물 userDto
           let userDto = {
@@ -70,17 +71,17 @@ const SignInForm = () => {
           };
           // 회원 가입 요청
           axios
-            .post("http://j8e107.p.ssafy.io:8080/api/signup", userDto)
+            .post("https://j8e107.p.ssafy.io/api/signup", userDto)
             .then((res) => {
               console.log("회원가입 성공", res.data);
               axios
-                .post("http://j8e107.p.ssafy.io:8080/api/authenticate", {
+                .post("https://j8e107.p.ssafy.io/api/authenticate", {
                   username: response.data.id,
                   // password: response.data._json.primaryclanid
                   password: "password",
                 })
                 .then((res) => {
-                  // console.log(res.data);
+                  console.log(res.data);
                   // authCtx.token = res.data.token;
                   // authCtx.userId = response.data._json.steamid;
                   authCtx.login(
@@ -90,12 +91,12 @@ const SignInForm = () => {
                     response.data._json.avatarfull,
                     res.data.memberId
                   );
-                  authCtx.userSequence = res.data.user_id;
+                  authCtx.token = res.data.token;
                   authCtx.userId = response.data.id;
                   authCtx.userNickname = response.data.displayName;
                   authCtx.avatarfull = response.data._json.avatarfull;
-                  authCtx.userSequence = res.data.memberId;
-                window.location.reload()
+                  authCtx.memberId = res.data.memberId;
+                  // window.location.reload();
                 })
                 .catch((err) => {});
             })
@@ -109,7 +110,9 @@ const SignInForm = () => {
 
   return (
     <div className={styles.form}>
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "10%" }}>
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "10%" }}
+      >
         <img src={steamlogo} style={{ width: "10%", height: "auto" }} alt="" />
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -130,16 +133,18 @@ const SignInForm = () => {
       <div className={styles.logindescription}>
         <span style={{ textAlign: "center" }}>
           CRABPICK에 로그인하면 추가 기능에 액세스할 수 있습니다. <br />
-          <br /> 더 나은 서비스를 제공하기 위해 Steam Web API에서 귀하의 계정에 대한 공개 정보 (steamid, 프로필 이름,
-          아바타 및 게임 목록 포함)를가져옵니다. <br />
+          <br /> 더 나은 서비스를 제공하기 위해 Steam Web API에서 귀하의 계정에
+          대한 공개 정보 (steamid, 프로필 이름, 아바타 및 게임 목록
+          포함)를가져옵니다. <br />
           <br />
           이 웹사이트는 Valve Corporation 또는 Steam과 관련이 없습니다. <br />
           <br />
-          언제든지 계정과 모든 데이터를 삭제할 수 있습니다. 로그인한 세션을 활성 상태로 유지하기 위해 쿠키를 사용합니다.{" "}
-          <br />
-          <br /> 로그인 버튼을 클릭하면 https://steamcommunity.com 으로 리디렉션 되며 이미 Steam 커뮤니티에 로그인한
-          경우 해당 페이지에서 비밀번호를 입력하지 않고 "로그인"을 클릭하기만 하면 됩니다. CRABPICK은 사용자 이름이나
-          비밀번호를 얻지 않습니다.
+          언제든지 계정과 모든 데이터를 삭제할 수 있습니다. 로그인한 세션을 활성
+          상태로 유지하기 위해 쿠키를 사용합니다. <br />
+          <br /> 로그인 버튼을 클릭하면 https://steamcommunity.com 으로 리디렉션
+          되며 이미 Steam 커뮤니티에 로그인한 경우 해당 페이지에서 비밀번호를
+          입력하지 않고 "로그인"을 클릭하기만 하면 됩니다. CRABPICK은 사용자
+          이름이나 비밀번호를 얻지 않습니다.
         </span>
       </div>
     </div>
