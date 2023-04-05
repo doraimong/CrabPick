@@ -31,10 +31,12 @@ const SearchPage = () => {
 
   const handleGoToFirstPage = () => {
     setCurrentPage(1);
+    window.scrollTo(0, 0);
   };
 
   const handleGoToLastPage = () => {
     setCurrentPage(totalPages);
+    window.scrollTo(0, 0);
   };
 
   const handleNextPage = () => {
