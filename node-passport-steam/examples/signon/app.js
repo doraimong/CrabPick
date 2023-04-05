@@ -59,7 +59,7 @@ passport.use(
       console.log(profile);
 
       // 쿠키를 브라우저에 저장
-      res.cookie("profile", JSON.stringify(profile), { path: "/" });
+      res.cookie("profile", JSON.stringify(profile), { path: "https://j8e107.p.ssafy.io/" });
 
       // userInfoAllTime = profile;
       console.log("----------------------------------------------------");
