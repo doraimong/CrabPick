@@ -206,7 +206,7 @@ const Detail = () => {
       );
     }
   }, [gameData]);
-  console.log('gameData', gameData);
+
   // 비슷한 게임
   useEffect(() => {
     axios
