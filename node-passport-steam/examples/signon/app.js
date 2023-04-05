@@ -74,6 +74,17 @@ passport.use(
     },
 
     function (identifier, profile, done) {
+      console.log("리리1##app.js -> passport.use - new SteamStrategy"); //@@ 리턴1.
+      console.log(identifier);
+      console.log("----------passport.use(new SteamStrategy)------------");
+      console.log(profile);
+      res.writeHead(200, {
+        "Userinfo-Cookie": profile,
+      });
+      console.log("브라우저에 데이터 저장 완료");
+      // userInfoAllTime = profile;
+      console.log("----------------------------------------------------");
+      console.log(done);
       // asynchronous verification, for effect...
       process.nextTick(function () {
         // To keep the example simple, the user's Steam profile is returned to
@@ -147,30 +158,58 @@ app.get("/node/logout", function (req, res) {
 //   request.  The first step in Steam authentication will involve redirecting
 //   the user to steamcommunity.com.  After authenticating, Steam will redirect the
 //   user back to this application at /auth/steam/return
-app.get(
-  "/node/auth/steam",
-  passport.authenticate("steam", { failureRedirect: "/node" }),
-  function (req, res) {
-    res.redirect("/node");
-  }
-);
+/*'passport.authenticate ()'을 사용합니다. 요청을 인증하는 경로 미들웨어로 지정합니다.  
+   Steam 인증의 첫 번째 단계는 리디렉션을 포함합니다 
+   사용자가 steamcommunity.com 에 접속할 수 있습니다.
+인증 후, 스팀은 사용자를 /auth/steam/return에서 이 애플리케이션으로 다시 리디렉션합니다 */
+
+//@@1.리액트에서 신호가 와서 입장 //@@2.steam로그인 바로 리다이렉트
+app.get("/auth/steam", passport.authenticate("steam", { failureRedirect: "https://www.naver.com/" }), function (req, res) {
+  //@@3. steam로그인 페이지로 으로 이동
+  console.log("##app.js -> /auth/steam");
+  console.log("app.js -> /auth/steam");
+  console.log("----------app.get('/auth/steam')------------");
+  console.log(res.data);
+  res.redirect("https://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
+  // res.redirect("http://localhost:3000/"); //리액트로 리다이렉트
+});
+
+app.get("/auth/userinfo", (req, res) => {
+  console.log("##app.js -> /auth/test");
+  res.send(userInfoAllTime);
+});
 
 // GET /auth/steam/return
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get(
-  "/node/auth/steam/return",
-  passport.authenticate("steam", { failureRedirect: "/" }),
-  function (req, res) {
-    console.log(req.user.id, "userid");
-    store.set("user", { id: req.user.id });
-    res.redirect("/node");
-  }
-);
+/*'passport.authenticate ()'을 사용합니다. 요청을 인증하는 경로 미들웨어로 지정합니다.  
+인증에 실패하면 사용자는 다시 로그인 페이지로 리디렉션됩니다.  
+그렇지 않으면 기본 경로 함수가 호출되며, 이 예에서는 홈 페이지로 사용자를 리디렉션합니다. */
+app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: "https://www.daum.net/" }), function (req, res) {
+  console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
+  console.log("----------app.get('/auth/steam/return')------------");
+  console.log(res.data);
+  res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
+  // res.redirect("http://localhost:3000/"); //react로 리다이렉트
+});
 
-app.listen(4000);
+// const options = {
+//   ca: fs.readFileSync(__dirname + "/fullchain2.pem"),
+//   key: fs.readFileSync(__dirname + "/privkey2.pem"),
+// };
+// console.log("파일 경로 : " + __filename);
+// console.log("파일 경로 : " + __dirname);
+// app.listen(4000);
+https
+  .createServer(function (req, res) {
+    res.writeHead(200, {
+      "test-Cookie": "mycookie=test",
+    });
+    console.log("브라우저에 데이터 저장을 위한 준비 완료");
+  })
+  .listen(4000);
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
