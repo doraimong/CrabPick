@@ -9,6 +9,10 @@ var express = require("express"),
   util = require("util"),
   session = require("express-session"),
   SteamStrategy = require("../../").Strategy;
+const fs = require("fs");
+const path = require("path");
+const https = require("https");
+
 console.log("##app.js -> head====================");
 var userInfoAllTime;
 // Passport session setup.
@@ -102,18 +106,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + "/../../public"));
 
-app.get("/", function (req, res) {
-  console.log("리리5##app.js -> /"); //@@리턴5.
-  //res.redirect("/auth/steam");
-  res.render("index", { user: req.user });
-});
+// app.get("/auth", function (req, res) {
+//   console.log("리리5##app.js -> /"); //@@리턴5.
+//   // res.redirect("/auth/steam");
+//   res.render("index", { user: req.user });
+// });
 
-app.get("/account", ensureAuthenticated, function (req, res) {
-  console.log("##app.js -> /account");
-  res.render("account", { user: req.user });
-});
+// app.get("/account", ensureAuthenticated, function (req, res) {
+//   console.log("##app.js -> /account");
+//   res.render("account", { user: req.user });
+// });
 
-app.get("/logout", function (req, res) {
+app.get("/auth/logout", function (req, res) {
   console.log("##app.js -> /logout");
   req.logout();
   userInfoAllTime = null;
@@ -171,7 +175,17 @@ app.get(
   }
 );
 
-app.listen(4000);
+const options = {
+  ca: fs.readFileSync(__dirname + "/fullchain2.pem"),
+  key: fs.readFileSync(__dirname + "/privkey2.pem"),
+};
+// console.log("파일 경로 : " + __filename);
+// console.log("파일 경로 : " + __dirname);
+// app.listen(4000);
+
+https.createServer(options, app).listen(4000, function () {
+  console.log("Steam login app listening on port 4000! Go to 4000/");
+});
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If

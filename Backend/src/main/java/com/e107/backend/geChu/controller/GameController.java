@@ -26,7 +26,6 @@ public class GameController {
     @GetMapping
     public ResponseEntity<List<GameListRespDto>> getGameList(Pageable pageable) {
      return new ResponseEntity<>(gameService.findAllGame(pageable), HttpStatus.OK);
-
     }
 
     @GetMapping("/top")
@@ -45,6 +44,11 @@ public class GameController {
         List<CommentRespDto> l = commentService.findCommentByGameId(gameId);
         dto.setComments(l);
         return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @GetMapping("/recommend/{gameId}")
+    public ResponseEntity<List<GameListRespDto>> getRecommendGameList(@PathVariable Long gameId) {
+        return new ResponseEntity<>(gameService.findRecommendGame(gameId), HttpStatus.OK);
     }
 
 }

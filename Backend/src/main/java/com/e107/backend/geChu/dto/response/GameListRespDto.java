@@ -14,6 +14,7 @@ public class GameListRespDto {
     Long appId;
     String name;
     String imgUrl;
+    String headerImg;
     String genre;
 
 
@@ -23,6 +24,7 @@ public class GameListRespDto {
                 .name(g.getName())
                 .appId(g.getAppId())
                 .imgUrl(g.getImageLink())
+                .headerImg("https://cdn.cloudflare.steamstatic.com/steam/apps/" + g.getAppId() +"/header.jpg")
                 .genre(g.getGenre())
                 .build();
     }
