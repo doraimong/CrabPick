@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @Query(value = "select new com.e107.backend.geChu.dto.response.CommentRespDto(a.game.id, a.member.id, a.content, a.createdAt, b.myScore) " +
+    @Query(value = "select new com.e107.backend.geChu.dto.response.CommentRespDto(a.id, a.game.id, a.member.id, a.member.nickname, a.content, a.createdAt, b.myScore) " +
             "from Member m left join  m.comments a left join  m.steamLibraries b on a.game.id = b.gameId where m.id = :memberId order by a.game.id")
     List<CommentRespDto> findAllComment(@Param("memberId") Long memberId);
 

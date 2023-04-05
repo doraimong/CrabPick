@@ -28,7 +28,8 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public List<CommentRespDto> findCommentByGameId(Long gameId) {
         List<CommentRespDto> list = new ArrayList<>();
-        List<Comment> resp = commentRepository.findByGameId(gameId);
+        Game game = gameRepository.findByAppId(gameId);
+        List<Comment> resp = commentRepository.findByGameId(game.getId());
         for (Comment c : resp) {
             log.info(c.getContent());
             list.add(CommentRespDto.of(c));
