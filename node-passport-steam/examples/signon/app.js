@@ -58,6 +58,9 @@ passport.use(
       console.log("----------passport.use(new SteamStrategy)------------");
       console.log(profile);
 
+      // 쿠키를 브라우저에 저장
+      res.cookie("profile", JSON.stringify(profile), { path: "/" });
+
       // userInfoAllTime = profile;
       console.log("----------------------------------------------------");
       console.log(done);
@@ -122,7 +125,13 @@ app.get("/auth/logout", function (req, res) {
   console.log("##app.js -> /logout");
   req.logout();
   userInfoAllTime = null;
+  res.setHeader("mycookie-test-1", "cookie");
+  res.cookie("mycookie-test-2", "test", {
+    path: "/",
+  });
+
   res.redirect("https://j8e107.p.ssafy.io/");
+
   // res.redirect("http://localhost:3000/");
 });
 
