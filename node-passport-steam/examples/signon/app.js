@@ -47,9 +47,11 @@ passport.use(
   new SteamStrategy(
     {
       // returnURL: "http://j8e107.p.ssafy.io:4000/auth/steam/return",
-      returnURL: "https://j8e107.p.ssafy.io/auth/steam/return",
+      // returnURL: "https://j8e107.p.ssafy.io/auth/steam/return",
+      returnURL: "http://localhost:4000/auth/steam/return",
       // realm: "http://j8e107.p.ssafy.io:4000/",
-      realm: "https://j8e107.p.ssafy.io/",
+      // realm: "https://j8e107.p.ssafy.io/",
+      realm: "http://localhost:4000/",
       apiKey: "21680047922CC0CA013B6EFEC720919A",
     },
     function (identifier, profile, done) {
@@ -59,7 +61,7 @@ passport.use(
       console.log(profile);
 
       // 쿠키를 브라우저에 저장
-      res.cookie("profile", JSON.stringify(profile), { path: "https://j8e107.p.ssafy.io/" });
+      // res.cookie("profile", JSON.stringify(profile), { path: "https://j8e107.p.ssafy.io/" });
 
       // userInfoAllTime = profile;
       console.log("----------------------------------------------------");
@@ -152,8 +154,8 @@ app.get("/auth/steam", passport.authenticate("steam", { failureRedirect: "/" }),
   console.log("app.js -> /auth/steam");
   console.log("----------app.get('/auth/steam')------------");
   console.log(res.data);
-  res.redirect("https://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
-  // res.redirect("http://localhost:3000/"); //리액트로 리다이렉트
+  // res.redirect("https://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
+  res.redirect("http://localhost:3000/"); //리액트로 리다이렉트
 });
 
 app.get("/auth/userinfo", (req, res) => {
@@ -172,9 +174,13 @@ app.get("/auth/userinfo", (req, res) => {
 app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: "/" }), function (req, res) {
   console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
   console.log("----------app.get('/auth/steam/return')------------");
-  console.log(res.data);
-  res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
-  // res.redirect("http://localhost:3000/"); //react로 리다이렉트
+  console.log(req._passport);
+  console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+  console.log(req._passport.session.user);
+  //console.log(res);
+  // res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
+  res.send(req._passport.session.user);
+  res.redirect("http://localhost:3000/"); //react로 리다이렉트
 });
 
 const options = {
