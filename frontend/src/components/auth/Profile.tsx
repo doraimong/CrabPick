@@ -10,9 +10,11 @@ const Profile = () => {
   const authCtx = useContext(AuthContext);
 
   const logoutHandler = () => {
-    axios.get("https://j8e107.p.ssafy.io/auth/logout").catch((response) => {
-      authCtx.logout();
-    });
+    axios
+      .get("https://j8e107.p.ssafy.io/node/auth/logout")
+      .catch((response) => {
+        authCtx.logout();
+      });
     // authCtx.logout();
     navigate("/");
   };
