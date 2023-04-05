@@ -104,11 +104,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + "/../../public"));
 
-// app.get("/", function (req, res) {
-//   console.log("리리5##app.js -> /"); //@@리턴5.
-//   //res.redirect("/auth/steam");
-//   res.render("index", { user: req.user });
-// });
+app.get("/", function (req, res) {
+  console.log("리리5##app.js -> /"); //@@리턴5.
+  // res.redirect("/auth/steam");
+  res.render("index", { user: req.user });
+});
 
 // app.get("/account", ensureAuthenticated, function (req, res) {
 //   console.log("##app.js -> /account");
