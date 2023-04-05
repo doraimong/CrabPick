@@ -181,7 +181,7 @@ const Detail = () => {
       const genreB = genreA.replaceAll("'", '"');
       const genreC = JSON.parse(genreB);
       const genre = [];
-      for (let i = 0; i < genreC.Length; i++) {
+      for (let i = 0; i < genreC.length; i++) {
         genre.push(genreC[i].description);
       }
       setGameGenre(genre.join(", "));
@@ -206,7 +206,7 @@ const Detail = () => {
       );
     }
   }, [gameData]);
-
+  console.log('gameData', gameData);
   // 비슷한 게임
   useEffect(() => {
     axios
