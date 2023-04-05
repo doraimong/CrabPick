@@ -10,10 +10,8 @@ var express = require("express"),
   session = require("express-session"),
   SteamStrategy = require("../../").Strategy;
 const fs = require("fs");
-const path = require("path");
-const https = require("https");
+const store = require("store");
 
-console.log("##app.js -> head====================");
 var userInfoAllTime;
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -86,12 +84,6 @@ var app = express();
 const cors = require("cors");
 
 app.use(cors("*"));
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   res.header("Access-Control-Allow-Credentials", true);
-//   next();
-// });
 
 // configure Express
 app.set("views", __dirname + "/views"); //템플릿 파일이 저장된 디렉토리 경로를 설정합니다
@@ -118,19 +110,23 @@ app.use(express.static(__dirname + "/../../public"));
 //   res.render("index", { user: req.user });
 // });
 
-// app.get("/account", ensureAuthenticated, function (req, res) {
-//   console.log("##app.js -> /account");
-//   res.render("account", { user: req.user });
-// });
+app.get("/account", ensureAuthenticated, function (req, res) {
+  console.log("##app.js -> /account");
+  res.render("account", { user: req.user });
+});
+
+app.get("/auth/user/:id", (req, res) => {
+  //@@ 존재 확인하고 있으면 data반환 후 삭제 -> 없으면 로그인창 리다이렉트
+  console.log("/auth/:id경로 - store 확인");
+  console.log(req.params.id);
+  console.log(store.get(req.params.id));
+  store.remove(req.params.id);
+});
 
 app.get("/auth/logout", function (req, res) {
   console.log("##app.js -> /logout");
   req.logout();
   userInfoAllTime = null;
-  res.setHeader("mycookie-test-1", "cookie");
-  res.cookie("mycookie-test-2", "test", {
-    path: "/",
-  });
 
   res.redirect("https://j8e107.p.ssafy.io/");
 
@@ -172,15 +168,16 @@ app.get("/auth/userinfo", (req, res) => {
 인증에 실패하면 사용자는 다시 로그인 페이지로 리디렉션됩니다.  
 그렇지 않으면 기본 경로 함수가 호출되며, 이 예에서는 홈 페이지로 사용자를 리디렉션합니다. */
 app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: "/" }), function (req, res) {
+  //@@ 로그인 실패 시 리액트의 로그인 창으로 리다이렉트 ㄱㄱ
   console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
   console.log("----------app.get('/auth/steam/return')------------");
   console.log(req._passport);
   console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
   console.log(req._passport.session.user);
-  //console.log(res);
+  //res.send(req._passport.session.user);
+  store.set(req._passport.session.user._json.steamid, { data: req._passport.session.user }); //@@store에 저장
   // res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
-  res.send(req._passport.session.user);
-  res.redirect("http://localhost:3000/"); //react로 리다이렉트
+  res.redirect("http://localhost:3000/"); //react로 리다이렉트  -> 쿼리스트리으로 steamid 보내야함 -> 리액트에서 쿼리스트링으로 steamid를 받아야함 -> 리액트에서 노드 호출(steamid 포함해서) -> 노드에서 store에서 steamid로 찾아서 리액트로 리턴 -> 현재 유저 데이터 삭제 (로그아웃 노드로 보낼 필요 없음)
 });
 
 const options = {
