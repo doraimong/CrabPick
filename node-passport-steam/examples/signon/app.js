@@ -195,21 +195,30 @@ app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: 
   // res.redirect("http://localhost:3000/"); //react로 리다이렉트
 });
 
-// const options = {
-//   ca: fs.readFileSync(__dirname + "/fullchain2.pem"),
-//   key: fs.readFileSync(__dirname + "/privkey2.pem"),
-// };
+const options = {
+  ca: fs.readFileSync(__dirname + "/fullchain2.pem"),
+  key: fs.readFileSync(__dirname + "/privkey2.pem"),
+};
 // console.log("파일 경로 : " + __filename);
 // console.log("파일 경로 : " + __dirname);
 // app.listen(4000);
-https
-  .createServer(function (req, res) {
-    res.writeHead(200, {
-      "test-Cookie": "mycookie=test",
-    });
-    console.log("브라우저에 데이터 저장을 위한 준비 완료");
-  })
-  .listen(4000);
+
+https.createServer(options, app).listen(4000, function (req, res) {
+  res.writeHead(200, {
+    "test-Cookie": "mycookie=test",
+  });
+  console.log("브라우저에 데이터 저장을 위한 준비 완료");
+  console.log("Steam login app listening on port 4000! Go to 4000/");
+});
+
+// https
+//   .createServer(function (req, res) {
+//     res.writeHead(200, {
+//       "test-Cookie": "mycookie=test",
+//     });
+//     console.log("브라우저에 데이터 저장을 위한 준비 완료");
+//   })
+//   .listen(4000);
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
