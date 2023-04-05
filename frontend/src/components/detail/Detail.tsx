@@ -405,11 +405,13 @@ const Detail = () => {
         </div>
         <div>★★★★☆</div>
       </div> */}
-      <div id="코멘트란">
+
+
+      {/* <div id="코멘트란">
         <div style={{ width: "100%" }}>
-          <h2>코멘트</h2>
+          <h2>코멘트</h2> */}
           {/* <Comment /> */}
-          <div>
+          {/* <div>
             <form onSubmit={submitComment}>
               <textarea
                 maxLength={150}
@@ -475,9 +477,9 @@ const Detail = () => {
                         {comment.content}
                       </span>
                     </div>
-                    <div style={{ alignItems: "end", display: "flex" }}>
+                    <div style={{ alignItems: "end", display: "flex" }}> */}
                       {/* 삭제 */}
-                      <img
+                      {/* <img
                         src={deleteImg}
                         style={{
                           background: "none",
@@ -494,7 +496,7 @@ const Detail = () => {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
