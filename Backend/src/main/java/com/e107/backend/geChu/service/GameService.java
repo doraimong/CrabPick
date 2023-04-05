@@ -12,4 +12,5 @@ public interface GameService {
     List<GameListRespDto> findAllGame(Pageable pageable);
 
 
+    List<GameListRespDto> findRecommendGame(Long gameId);
 }
