@@ -56,7 +56,7 @@ const Detail = () => {
       .get(`https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`)
       .then((res) => {
         setIsFavorited(res.data.isFavorited);
-      })
+      });
   }, [gameId, authCtx.userId]);
 
   const handleFavorite = () => {
@@ -215,18 +215,7 @@ const Detail = () => {
       });
   }, [gameId]);
 
-  // 비슷한 게임 이미지
-  // useEffect(() => {
-  //   if (gameData && simmilarGames) {
-  //     simmilarGames.map((game: any, idx: number) => {
-  //       console.log("여기", game.headerImg);
-  //       setSimmilarGamesImage([...simmilarGamesImage, game.headerImg]);
-  //     });
-  //   }
-  // }, [gameData, simmilarGames]);
-
   const goDetail = (id) => {
-    // console.log('id', id)
     navigate(`/detail/${id}`);
   };
 
@@ -258,7 +247,6 @@ const Detail = () => {
       .get(`https://j8e107.p.ssafy.io/api/comment/${gameId}`)
       .then((response) => {
         setCommentList(response.data);
-        // console.log("sdfdsf");
       })
       .catch((err) => console.log(err));
   }, [gameId]);
@@ -425,10 +413,6 @@ const Detail = () => {
           </div>
         ) : null}
       </div>
-      {/* <div id="첫번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="두번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="세번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="네번째비슷한게임" className={styles.simmilarGame}></div> */}
       {/* <div id="평점">
         <div id="" className={styles.evaluate}>
           <div>평점</div>
