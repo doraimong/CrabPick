@@ -61,6 +61,7 @@ const Detail = () => {
         console.log(err);
       });
   }, [gameId, authCtx.userId]);
+
   const handleFavorite = () => {
     const url = `https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`;
     // 즐겨 찾기가 되어 있다면
@@ -124,21 +125,23 @@ const Detail = () => {
     setSelectedImage("");
     if (gameData) {
       let trailerA = gameData.trailer_url;
-      const count = trailerA.split("id").length - 1;
-      if (count < 2) {
-        trailerA = trailerA.slice(1, trailerA.length - 1);
-      }
-      const trailerB = trailerA.replaceAll("'", '"');
-      const trailerC = trailerB.replaceAll("True", "true");
-      const trailerD = trailerC.replaceAll("False", "false");
-      const trailerE = trailerD.replaceAll('"s', "'");
-      const trailerF = trailerE.replaceAll('" ', "' ");
-      const trailerG = JSON.parse(trailerF.trim());
-      if (trailerG.length) {
-        setGameImage(trailerG);
-      } else {
-        setGameImage([trailerG]);
-      }
+      if (trailerA != "") {
+        const count = trailerA.split("id").length - 1;
+        if (count < 2) {
+          trailerA = trailerA.slice(1, trailerA.length - 1);
+        }
+        const trailerB = trailerA.replaceAll("'", '"');
+        const trailerC = trailerB.replaceAll("True", "true");
+        const trailerD = trailerC.replaceAll("False", "false");
+        const trailerE = trailerD.replaceAll('"s', "'");
+        const trailerF = trailerE.replaceAll('" ', "' ");
+        const trailerG = JSON.parse(trailerF.trim());
+        if (trailerG.length) {
+          setGameImage(trailerG);
+        } else {
+          setGameImage([trailerG]);
+        }
+      } else {setGameImage([])}
     }
   }, [gameData]);
 
@@ -177,9 +180,11 @@ const Detail = () => {
     if (gameData) {
       const genreA = gameData.genre;
       const genreB = genreA.replaceAll("'", '"');
+      console.log("genreB", gameData.appId, genreB);
       const genreC = JSON.parse(genreB);
       const genre = [];
-      for (let i = 0; i < genreC.length; i++) {
+      console.log("여기", genreC);
+      for (let i = 0; i < genreC.Length; i++) {
         genre.push(genreC[i].description);
       }
       setGameGenre(genre.join(", "));
@@ -226,6 +231,11 @@ const Detail = () => {
   //     });
   //   }
   // }, [gameData, simmilarGames]);
+
+  const goDetail = (id) => {
+    // console.log('id', id)
+    navigate(`/detail/${id}`);
+  };
 
   /////////////////////////////코멘트////////////////////////////////////
 
@@ -408,12 +418,14 @@ const Detail = () => {
             {simmilarGames
               ? simmilarGames.map((game: any, idx: number) => {
                   return (
-                      <img
-                        key={idx}
-                        src={game.headerImg}
-                        alt={`similar game ${idx}`}
-                        className={styles.simmilarGame}
-                      />
+                    <img
+                      key={idx}
+                      src={game.headerImg}
+                      alt={`similar game ${idx}`}
+                      className={styles.simmilarGame}
+                      onClick={() => goDetail(game.appId)}
+                      // onClick={() => goDetail(game)}
+                    />
                   );
                 })
               : null}
