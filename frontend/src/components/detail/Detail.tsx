@@ -112,6 +112,7 @@ const Detail = () => {
         setGameData(res.data);
       })
       .catch((err) => {
+        alert('해당 ID를 가진 게임이 없습니다!!')
         navigate("/");
       });
   }, [gameId]);
@@ -215,7 +216,7 @@ const Detail = () => {
       });
   }, [gameId]);
 
-  const goDetail = (id) => {
+  const goDetail = (id: number) => {
     navigate(`/detail/${id}`);
   };
 
