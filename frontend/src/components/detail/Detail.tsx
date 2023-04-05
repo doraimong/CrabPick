@@ -208,7 +208,7 @@ const Detail = () => {
   // 비슷한 게임
   useEffect(() => {
     axios
-      .get(`http://j8e107.p.ssafy.io:8080/api/game/recommend/${gameId}`)
+      .get(`https://j8e107.p.ssafy.io/api/game/recommend/${gameId}`)
       .then((res) => {
         setSimmilarGames(res.data.slice(0, 10));
       })
