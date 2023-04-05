@@ -53,7 +53,7 @@ const Detail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`)
+      .get(`https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`)
       .then((res) => {
         setIsFavorited(res.data.isFavorited);
       })
@@ -62,7 +62,7 @@ const Detail = () => {
       });
   }, [gameId, authCtx.userId]);
   const handleFavorite = () => {
-    const url = `http://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`;
+    const url = `https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`;
     // 즐겨 찾기가 되어 있다면
     if (isFavorited) {
       // 삭제하기
@@ -109,7 +109,7 @@ const Detail = () => {
   // 게임 데이터
   useEffect(() => {
     axios
-      .get(`http://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
+      .get(`https://j8e107.p.ssafy.io/api/game/${gameId}`)
       .then((res) => {
         setGameData(res.data);
       })
@@ -208,7 +208,7 @@ const Detail = () => {
   // 비슷한 게임
   useEffect(() => {
     axios
-      .get(`http://j8e107.p.ssafy.io:8080/api/game/recommend/${gameId}`)
+      .get(`https://j8e107.p.ssafy.io/api/game/recommend/${gameId}`)
       .then((res) => {
         setSimmilarGames(res.data.slice(0, 10));
       })
@@ -252,7 +252,7 @@ const Detail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://j8e107.p.ssafy.io:8080/api/comment/${gameId}`)
+      .get(`https://j8e107.p.ssafy.io/api/comment/${gameId}`)
       .then((response) => {
         setCommentList(response.data);
         // console.log("sdfdsf");
@@ -267,7 +267,7 @@ const Detail = () => {
     if (textarea) {
       const commentText = textarea.value.trim();
       if (commentText) {
-        axios.post(`http://j8e107.p.ssafy.io:8080/api/comment`);
+        axios.post(`https://j8e107.p.ssafy.io/api/comment`);
         setCommentList((prevList) => [
           ...prevList,
           {
