@@ -28,7 +28,7 @@ class GameNewsList extends Component<{}, State> {
 
   componentDidMount(): void {
     axios
-      .get(`http://j8e107.p.ssafy.io:8080/api/news`)
+      .get(`https://j8e107.p.ssafy.io/api/news`)
       .then((response) => {
         console.log(response);
         this.setState({ news: response.data });
