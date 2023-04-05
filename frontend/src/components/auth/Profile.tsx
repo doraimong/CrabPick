@@ -10,10 +10,10 @@ const Profile = () => {
   const authCtx = useContext(AuthContext);
 
   const logoutHandler = () => {
-    axios.get("https://j8e107.p.ssafy.io:8080/logout").then((response) => {
+    axios.get("https://j8e107.p.ssafy.io/auth/logout").catch((response) => {
       authCtx.logout();
     });
-
+    // authCtx.logout();
     navigate("/");
   };
 
@@ -60,12 +60,7 @@ const Profile = () => {
           </div>
           {/* <p>수정하러가기~</p> */}
           <div className={styles.editdiv}>
-            <a
-              href="https://store.steampowered.com/account/"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.edit}
-            >
+            <a href="https://store.steampowered.com/account/" target="_blank" rel="noreferrer" className={styles.edit}>
               <img src={steamlogo} alt="" style={{ width: "30px" }} />
               <span>Steam에서 수정하기</span>
             </a>

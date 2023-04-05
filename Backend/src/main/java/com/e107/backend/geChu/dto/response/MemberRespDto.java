@@ -18,10 +18,8 @@ import java.util.stream.Collectors;
 public class MemberRespDto {
 
     private Long id;
-    private String name;
-    private String email;
-    private String steamToken;
-    private String steamNickname;
+    private String username;
+    private String nickname;
 
     @Builder.Default
     private List<FriendRespDto> friends = new ArrayList<>();
@@ -32,10 +30,8 @@ public class MemberRespDto {
     public static MemberRespDto of(Member m) {
         return MemberRespDto.builder()
                 .id(m.getId())
-                .name(m.getName())
-                .email(m.getEmail())
-                .steamToken(m.getSteamToken())
-                .steamNickname(m.getSteamNickname())
+                .username(m.getUsername())
+                .nickname(m.getNickname())
                 .bookmarks(m.getBookmarks().stream()
                         .map(bookmark -> BookmarkRespDto.builder()
                                 .id(bookmark.getId())

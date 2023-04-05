@@ -1,8 +1,7 @@
 package com.e107.backend.global;
 
-import com.e107.backend.geChu.domain.repository.TopSellerRepository;
 import com.e107.backend.geChu.service.NewsService;
-import com.e107.backend.geChu.service.TopSellerService;
+import com.e107.backend.geChu.service.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ import java.time.LocalTime;
 public class Scheduler {
 
     private final NewsService newsService;
-    private final TopSellerService topSellerService;
+    private final SellerService sellerService;
     @Scheduled(fixedRate = 60000 * 5) // 메소드 호출이 종료되는 시간에서 5분 이후 재 호출
     public void updateNews() throws IOException {
         System.out.println("fixedRate");
@@ -27,8 +26,14 @@ public class Scheduler {
     @Scheduled(fixedRate = 60000 * 5) // 메소드 호출이 종료되는 시간에서 5분 이후 재 호출
     public void updateTopSeller() throws IOException {
         System.out.println("topSeller update job start : " + LocalTime.now());
-        topSellerService.updateTopSeller();
+        sellerService.updateTopSeller();
         System.out.println("topSeller update job end : " + LocalTime.now());
+    }
 
+    @Scheduled(fixedRate = 60000 * 5) // 메소드 호출이 종료되는 시간에서 5분 이후 재 호출
+    public void updateDiscount() throws IOException {
+        System.out.println("topSeller update job start : " + LocalTime.now());
+        sellerService.updateDiscountSeller();
+        System.out.println("topSeller update job end : " + LocalTime.now());
     }
 }

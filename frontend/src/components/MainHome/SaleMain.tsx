@@ -5,14 +5,14 @@ const SaleGame = () => {
   const [saleGames, setSaleGames] = useState([]);
 
   useEffect(() => {
-    fetch("https://j8e107.p.ssafy.io:8080/api/game/discount")
+    fetch("https://j8e107.p.ssafy.io/api/game/discount")
       .then((response) => response.json())
       .then((data) => {
         setSaleGames(data);
       })
       .catch((error) => console.log(error));
   }, []);
-  console.log('여기', saleGames);
+
   return (
     <div style={{ paddingBottom: "50px" }}>
       <h2>Sale GAMES</h2>

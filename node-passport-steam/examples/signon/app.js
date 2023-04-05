@@ -9,6 +9,10 @@ var express = require("express"),
   util = require("util"),
   session = require("express-session"),
   SteamStrategy = require("../../").Strategy;
+const fs = require("fs");
+const path = require("path");
+const https = require("https");
+
 console.log("##app.js -> head====================");
 var userInfoAllTime;
 // Passport session setup.
@@ -42,8 +46,10 @@ passport.deserializeUser(function (obj, done) {
 passport.use(
   new SteamStrategy(
     {
-      returnURL: "http://localhost:4000/auth/steam/return",
-      realm: "http://localhost:4000/",
+      // returnURL: "http://j8e107.p.ssafy.io:4000/auth/steam/return",
+      returnURL: "https://j8e107.p.ssafy.io/auth/steam/return",
+      // realm: "http://j8e107.p.ssafy.io:4000/",
+      realm: "https://j8e107.p.ssafy.io/",
       apiKey: "21680047922CC0CA013B6EFEC720919A",
     },
     function (identifier, profile, done) {
@@ -51,7 +57,8 @@ passport.use(
       console.log(identifier);
       console.log("----------passport.use(new SteamStrategy)------------");
       console.log(profile);
-      userInfoAllTime = profile;
+
+      // userInfoAllTime = profile;
       console.log("----------------------------------------------------");
       console.log(done);
       // asynchronous verification, for effect...
@@ -100,22 +107,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + "/../../public"));
 
-app.get("/", function (req, res) {
-  console.log("리리5##app.js -> /"); //@@리턴5.
-  //res.redirect("/auth/steam");
-  res.render("index", { user: req.user });
-});
+// app.get("/auth", function (req, res) {
+//   console.log("리리5##app.js -> /"); //@@리턴5.
+//   // res.redirect("/auth/steam");
+//   res.render("index", { user: req.user });
+// });
 
-app.get("/account", ensureAuthenticated, function (req, res) {
-  console.log("##app.js -> /account");
-  res.render("account", { user: req.user });
-});
+// app.get("/account", ensureAuthenticated, function (req, res) {
+//   console.log("##app.js -> /account");
+//   res.render("account", { user: req.user });
+// });
 
-app.get("/logout", function (req, res) {
+app.get("/auth/logout", function (req, res) {
   console.log("##app.js -> /logout");
   req.logout();
   userInfoAllTime = null;
-  res.redirect("http://localhost:3000/");
+  res.redirect("https://j8e107.p.ssafy.io/");
+  // res.redirect("http://localhost:3000/");
 });
 
 // GET /auth/steam
@@ -129,18 +137,15 @@ app.get("/logout", function (req, res) {
 인증 후, 스팀은 사용자를 /auth/steam/return에서 이 애플리케이션으로 다시 리디렉션합니다 */
 
 //@@1.리액트에서 신호가 와서 입장 //@@2.steam로그인 바로 리다이렉트
-app.get(
-  "/auth/steam",
-  passport.authenticate("steam", { failureRedirect: "/" }),
-  function (req, res) {
-    //@@3. steam로그인 페이지로 으로 이동
-    console.log("##app.js -> /auth/steam");
-    console.log("app.js -> /auth/steam");
-    console.log("----------app.get('/auth/steam')------------");
-    console.log(res.data);
-    res.redirect("http://localhost:3000/"); //리액트로 리다이렉트
-  }
-);
+app.get("/auth/steam", passport.authenticate("steam", { failureRedirect: "https://www.naver.com/" }), function (req, res) {
+  //@@3. steam로그인 페이지로 으로 이동
+  console.log("##app.js -> /auth/steam");
+  console.log("app.js -> /auth/steam");
+  console.log("----------app.get('/auth/steam')------------");
+  console.log(res.data);
+  res.redirect("https://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
+  // res.redirect("http://localhost:3000/"); //리액트로 리다이렉트
+});
 
 app.get("/auth/userinfo", (req, res) => {
   console.log("##app.js -> /auth/test");
@@ -155,18 +160,25 @@ app.get("/auth/userinfo", (req, res) => {
 /*'passport.authenticate ()'을 사용합니다. 요청을 인증하는 경로 미들웨어로 지정합니다.  
 인증에 실패하면 사용자는 다시 로그인 페이지로 리디렉션됩니다.  
 그렇지 않으면 기본 경로 함수가 호출되며, 이 예에서는 홈 페이지로 사용자를 리디렉션합니다. */
-app.get(
-  "/auth/steam/return",
-  passport.authenticate("steam", { failureRedirect: "/" }),
-  function (req, res) {
-    console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
-    console.log("----------app.get('/auth/steam/return')------------");
-    console.log(res.data);
-    res.redirect("http://localhost:3000/"); //react로 리다이렉트
-  }
-);
+app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: "https://www.daum.net/" }), function (req, res) {
+  console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
+  console.log("----------app.get('/auth/steam/return')------------");
+  console.log(res.data);
+  res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
+  // res.redirect("http://localhost:3000/"); //react로 리다이렉트
+});
 
+const options = {
+  ca: fs.readFileSync(__dirname + "/fullchain2.pem"),
+  key: fs.readFileSync(__dirname + "/privkey2.pem"),
+};
+// console.log("파일 경로 : " + __filename);
+// console.log("파일 경로 : " + __dirname);
 app.listen(4000);
+
+// https.createServer(options, app).listen(4000, function () {
+//   console.log("Steam login app listening on port 4000! Go to 4000/");
+// });
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
