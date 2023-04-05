@@ -5,7 +5,7 @@ const BestSellerGame = () => {
   const [bestSellerGames, setBestSellerGames] = useState([]);
 
   useEffect(() => {
-    fetch("https://j8e107.p.ssafy.io:8080/api/game/top")
+    fetch("https://j8e107.p.ssafy.io/api/game/top")
       .then((response) => response.json())
       .then((data) => {
         setBestSellerGames(data);

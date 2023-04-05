@@ -3,7 +3,7 @@ package com.e107.backend.geChu.controller;
 import com.e107.backend.geChu.dto.response.*;
 import com.e107.backend.geChu.service.CommentService;
 import com.e107.backend.geChu.service.GameService;
-import com.e107.backend.geChu.service.TopSellerService;
+import com.e107.backend.geChu.service.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,18 +20,22 @@ public class GameController {
 
     private final GameService gameService;
     private final CommentService commentService;
-    private final TopSellerService topSellerService;
+    private final SellerService sellerService;
 
 
     @GetMapping
     public ResponseEntity<List<GameListRespDto>> getGameList(Pageable pageable) {
      return new ResponseEntity<>(gameService.findAllGame(pageable), HttpStatus.OK);
-
     }
 
     @GetMapping("/top")
     public ResponseEntity<List<TopSellerRespDto>> getTopGameList() {
-        return new ResponseEntity<>(topSellerService.findAllTopSeller(), HttpStatus.OK);
+        return new ResponseEntity<>(sellerService.findAllTopSeller(), HttpStatus.OK);
+    }
+
+    @GetMapping("/discount")
+    public ResponseEntity<List<DiscountRespDto>> getDiscountList() {
+        return new ResponseEntity<>(sellerService.findAllDiscount(), HttpStatus.OK);
     }
 
     @GetMapping("/{gameId}")
@@ -40,6 +44,11 @@ public class GameController {
         List<CommentRespDto> l = commentService.findCommentByGameId(gameId);
         dto.setComments(l);
         return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @GetMapping("/recommend/{gameId}")
+    public ResponseEntity<List<GameListRespDto>> getRecommendGameList(@PathVariable Long gameId) {
+        return new ResponseEntity<>(gameService.findRecommendGame(gameId), HttpStatus.OK);
     }
 
 }

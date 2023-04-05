@@ -1,5 +1,6 @@
 package com.e107.backend.geChu.security.controller;
 
+import com.e107.backend.geChu.domain.repository.MemberRepository;
 import com.e107.backend.geChu.security.dto.UserDto;
 import com.e107.backend.geChu.security.service.UserService;
 import org.slf4j.Logger;
@@ -18,9 +19,12 @@ import java.io.IOException;
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
+    private final MemberRepository memberRepository;
 
-    public UserController(UserService userService) {
+
+    public UserController(UserService userService, MemberRepository memberRepository) {
         this.userService = userService;
+        this.memberRepository = memberRepository;
     }
 
     @GetMapping("/hello")

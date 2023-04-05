@@ -46,21 +46,21 @@ const Detail = () => {
   const [gameImage, setGameImage] = useState<any>();
   const [selectedImage, setSelectedImage] = useState<any>("");
   const [selectedIdx, setSelectedIdx] = useState<number>(0);
+  const [simmilarGames, setSimmilarGames] = useState<any>();
+  const [simmilarGamesImage, setSimmilarGamesImage] = useState<any>([]);
 
   const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
     axios
-      .get(`https://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`)
+      .get(`https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`)
       .then((res) => {
         setIsFavorited(res.data.isFavorited);
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }, [gameId, authCtx.userId]);
+
   const handleFavorite = () => {
-    const url = `https://j8e107.p.ssafy.io:8080/api/${authCtx.userId}/${gameId}`;
+    const url = `https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`;
     // 즐겨 찾기가 되어 있다면
     if (isFavorited) {
       // 삭제하기
@@ -104,40 +104,46 @@ const Detail = () => {
   const navigate = useNavigate();
 
   /////////////////////////////데이터 받아와서 저장하기////////////////////////////////////
+  // 게임 데이터
   useEffect(() => {
     axios
-      .get(`https://j8e107.p.ssafy.io:8080/api/game/${gameId}`)
+      .get(`https://j8e107.p.ssafy.io/api/game/${gameId}`)
       .then((res) => {
         setGameData(res.data);
       })
       .catch((err) => {
         navigate("/");
-        console.log(err);
       });
   }, [gameId]);
 
+  // 게임 트레일러
   useEffect(() => {
     setSelectedImage("");
     if (gameData) {
       let trailerA = gameData.trailer_url;
-      const count = trailerA.split("id").length - 1;
-      if (count < 2) {
-        trailerA = trailerA.slice(1, trailerA.length - 1);
-      }
-      const trailerB = trailerA.replaceAll("'", '"');
-      const trailerC = trailerB.replaceAll("True", "true");
-      const trailerD = trailerC.replaceAll("False", "false");
-      const trailerE = trailerD.replaceAll('"s', "'");
-      const trailerF = trailerE.replaceAll('" ', "' ");
-      const trailerG = JSON.parse(trailerF.trim());
-      if (trailerG.length) {
-        setGameImage(trailerG);
+      if (trailerA != "") {
+        const count = trailerA.split("id").length - 1;
+        if (count < 2) {
+          trailerA = trailerA.slice(1, trailerA.length - 1);
+        }
+        const trailerB = trailerA.replaceAll("'", '"');
+        const trailerC = trailerB.replaceAll("True", "true");
+        const trailerD = trailerC.replaceAll("False", "false");
+        const trailerE = trailerD.replaceAll('"s', "'");
+        const trailerF = trailerE.replaceAll('" ', "' ");
+        const trailerG = JSON.parse(trailerF.trim());
+        if (trailerG.length) {
+          setGameImage(trailerG);
+        } else {
+          setGameImage([trailerG]);
+        }
       } else {
-        setGameImage([trailerG]);
+        setGameImage([]);
       }
     }
   }, [gameData]);
 
+  // 게임 이미지
   useEffect(() => {
     if (gameData) {
       let imageA = gameData.imgUrl;
@@ -167,13 +173,14 @@ const Detail = () => {
     }
   }, [selectedIdx, gameImage]);
 
+  // 게임 장르
   useEffect(() => {
     if (gameData) {
       const genreA = gameData.genre;
       const genreB = genreA.replaceAll("'", '"');
       const genreC = JSON.parse(genreB);
       const genre = [];
-      for (let i = 0; i < genreC.length; i++) {
+      for (let i = 0; i < genreC.Length; i++) {
         genre.push(genreC[i].description);
       }
       setGameGenre(genre.join(", "));
@@ -198,6 +205,19 @@ const Detail = () => {
       );
     }
   }, [gameData]);
+
+  // 비슷한 게임
+  useEffect(() => {
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/game/recommend/${gameId}`)
+      .then((res) => {
+        setSimmilarGames(res.data.slice(0, 10));
+      });
+  }, [gameId]);
+
+  const goDetail = (id) => {
+    navigate(`/detail/${id}`);
+  };
 
   /////////////////////////////코멘트////////////////////////////////////
   // const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
@@ -257,7 +277,7 @@ const Detail = () => {
             alignItems: "center",
           }}
         >
-          <div style={{marginRight: "1rem"}}>좋아요</div>
+          <div style={{ marginRight: "1rem" }}>좋아요</div>
           <div
             style={{
               flexDirection: "column",
@@ -355,13 +375,28 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      {/* <h2>비슷한 게임들</h2>
-      <div id="비슷한게임들" className={styles.simmilarGames}>
-        <div id="첫번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="두번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="세번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="네번째비슷한게임" className={styles.simmilarGame}></div>
-      </div> */}
+      <h2>비슷한 게임들</h2>
+
+      <div className={styles.simmilarGamesBox}>
+        {simmilarGames && simmilarGames.length > 0 ? (
+          <div id="비슷한게임들" className={styles.simmilarGames}>
+            {simmilarGames
+              ? simmilarGames.map((game: any, idx: number) => {
+                  return (
+                    <img
+                      key={idx}
+                      src={game.headerImg}
+                      alt={`similar game ${idx}`}
+                      className={styles.simmilarGame}
+                      onClick={() => goDetail(game.appId)}
+                      // onClick={() => goDetail(game)}
+                    />
+                  );
+                })
+              : null}
+          </div>
+        ) : null}
+      </div>
       {/* <div id="평점">
         <div id="" className={styles.evaluate}>
           <div>평점</div>
@@ -430,7 +465,7 @@ const Detail = () => {
                     wordBreak: "break-all",
                   }}
                 >
-                  <div>{comment.nickname}</div>
+                  <div>{comment.memberName}</div>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
