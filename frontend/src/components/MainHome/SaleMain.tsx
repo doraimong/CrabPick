@@ -12,7 +12,7 @@ const SaleGame = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  console.log('여기', saleGames);
+
   return (
     <div style={{ paddingBottom: "50px" }}>
       <h2>Sale GAMES</h2>
