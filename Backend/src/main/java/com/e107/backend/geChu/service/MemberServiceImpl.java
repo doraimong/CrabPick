@@ -77,6 +77,7 @@ public class MemberServiceImpl implements MemberService{
         String url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=A3D575B723452BBA3FA2AF8343FAD2F3&steamid="
                 + memberId + "&format=json&include_played_free_games=1";
         RestTemplate restTemplate = new RestTemplate();
+        
         HttpHeaders header = new HttpHeaders();
         HttpEntity<?> entity = new HttpEntity<>(header);
         UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
