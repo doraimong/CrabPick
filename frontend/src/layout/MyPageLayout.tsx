@@ -11,7 +11,7 @@ const MyPageLayout = ({ children }: Props) => {
   return (
     <div>
       <NavBar />
-      <div className={styles.bgcolor}>{children}</div>
+      <div>{children}</div>
       <Footer />
     </div>
   );
