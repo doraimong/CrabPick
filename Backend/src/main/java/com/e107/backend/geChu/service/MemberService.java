@@ -17,5 +17,7 @@ public interface MemberService {
     void deleteBookmark(Long bookmarkId);
 
     List<BookmarkRespDto> findAllBookmark(Long memberId);
+
+    Object findAllFriend(Long memberId);
 //    List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId);
 }
