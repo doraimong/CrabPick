@@ -10,6 +10,7 @@ import GameNewsPage from "./pages/GameNewsPage";
 // import SaleInfoPage from "./pages/SaleInfoPage";
 import DetailPage from "./pages/DetailPage";
 import SearchPage from "./pages/SearchPage";
+import SteamIdPage from "./pages/SteamIdPage";
 
 import AuthContext from "./store/auth-context";
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Route path="/search" element={<SearchPage />} />
       {/* <Route path="/sale-info" element={<SaleInfoPage />} /> */}
       <Route path="/detail/:gameId" element={<DetailPage />} />
+      <Route path="/steamid" element={<SteamIdPage />} />
     </Routes>
   );
 }
