@@ -51,8 +51,8 @@ const Profile = () => {
 
   useEffect(() => {
     axios
-      // .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
-      .get(`https://j8e107.p.ssafy.io/api/member/76561198086809301/game`)
+      .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
+      // .get(`https://j8e107.p.ssafy.io/api/member/76561198086809301/game`)
       .then((res) => {
         console.log(authCtx.userId);
         console.log(res.data);
