@@ -11,10 +11,14 @@ const RecommandGame = () => {
 
   useEffect(() => {
     axios
-    .get(`https://j8e107.p.ssafy.io/api/game/recommend/user/${authCtx.userId}`)
-    // .get(`https://j8e107.p.ssafy.io/api/game/recommend/user/76561198358343891`)
-    .then((res) => {setRecommandGames(res.data.data)})
-  }, [])
+      .get(
+        `https://j8e107.p.ssafy.io/api/game/recommend/user/${authCtx.userId}`
+      )
+      // .get(`https://j8e107.p.ssafy.io/api/game/recommend/user/76561198358343891`)
+      .then((res) => {
+        setRecommandGames(res.data.data);
+      });
+  }, []);
 
   // useEffect(() => {
   //   axios
@@ -52,10 +56,14 @@ const RecommandGame = () => {
 
   return (
     <div style={{ paddingBottom: "50px" }}>
-      <h2>CRABPICK GAMES</h2>
-      <div style={{ width: "70%", margin: "0 auto" }}>
-        <RecommendCarousel games={recommandGames} />
-      </div>
+      {recommandGames.length > 0 ? (
+        <div>
+          <h2>CRABPICK GAMES</h2>
+          <div style={{ width: "70%", margin: "0 auto" }}>
+            <RecommendCarousel games={recommandGames} />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -54,25 +54,47 @@ const RecommendCarousel: React.FC<Props> = ({ games }) => {
 
   return (
     <Slider {...settings}>
-      {games? games.slice(0, 10).map((game: any, index) => (
-        <div
-          key={index}
-          className={styles.carousel}
-          onClick={() => navigate(`/detail/${game.appId}`)}
-        >
-          <img
-            src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
-            // src={game.imageLink}
-            alt={`Slide ${index}`}
-            className={styles.image}
-          />
-          <div>
-            <h1>{game.name}</h1>
-            {/* {slider(game)} */}
-            <div></div>
-          </div>
-        </div>
-      )) : null}
+      {games
+        ? games.length > 10
+          ? games.slice(0, 10).map((game: any, index) => (
+              <div
+                key={index}
+                className={styles.carousel}
+                onClick={() => navigate(`/detail/${game.appId}`)}
+              >
+                <img
+                  src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
+                  // src={game.imageLink}
+                  alt={`Slide ${index}`}
+                  className={styles.image}
+                />
+                <div>
+                  <h1>{game.name}</h1>
+                  {/* {slider(game)} */}
+                  <div></div>
+                </div>
+              </div>
+            ))
+          : games.map((game: any, index) => (
+              <div
+                key={index}
+                className={styles.carousel}
+                onClick={() => navigate(`/detail/${game.appId}`)}
+              >
+                <img
+                  src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
+                  // src={game.imageLink}
+                  alt={`Slide ${index}`}
+                  className={styles.image}
+                />
+                <div>
+                  <h1>{game.name}</h1>
+                  {/* {slider(game)} */}
+                  <div></div>
+                </div>
+              </div>
+            ))
+        : null}
     </Slider>
   );
 };
