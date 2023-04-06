@@ -234,8 +234,8 @@ const Detail = () => {
   };
   const handleKeyPress = (event: any) => {
     // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
-    if (event.key === "Enter" && commentRows >= MAX_ROWS) {
-      event.preventDefault();
+    if (event.key === "Enter") {
+      submitComment
     }
   };
 
