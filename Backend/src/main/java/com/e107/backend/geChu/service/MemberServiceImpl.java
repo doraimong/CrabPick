@@ -10,8 +10,11 @@ import com.e107.backend.geChu.dto.response.*;
 import com.e107.backend.global.common.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -65,19 +68,23 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public List<SteamLibraryRespDto> findAllGame(Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new CommonException(2, "Member객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-        List<SteamLibraryRespDto> list = new ArrayList<>();
-        for (SteamLibrary s : member.getSteamLibraries()) {
-            list.add(SteamLibraryRespDto.of(s));
-        }
-        return list;
-    }
+    public List<SteamLibraryRespDto> findOwnedGame(Long memberId) {
+        String id = "76561198086809301";
+        String url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=F9AE0237066E8658B587ACC489C13AF9&steamid="
+                + id + "&format=json&include_played_free_games=1";
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders header = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(header);
 
-//    @Override
-//    public List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId) {
-//        return friendRepository.findOwnedFriend(memberId, gameId);
-//        return memberRepository.findOwnedFriend(memberId, gameId);
-//    }
+        UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
+        ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
+        org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
+        org.json.JSONObject jo2 = (org.json.JSONObject) jo.get("response");
+        org.json.JSONArray jo3 = (org.json.JSONArray) jo2.get("games");
+        for (Object j : jo3) {
+            System.out.println(((org.json.JSONObject) j).get("appid"));
+            System.out.println(Long.parseLong(((org.json.JSONObject) j).get("playtime_forever").toString()) / 60);
+        }
+        return null;
+    }
 }

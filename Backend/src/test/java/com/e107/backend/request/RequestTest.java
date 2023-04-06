@@ -76,6 +76,36 @@ public class RequestTest {
     }
 
     @Test
+    @Transactional
+    @Rollback(false)
+    public void getUpdate() throws ParseException {
+        String url = "https://store.steampowered.com/api/featuredcategories/?l=koreana";
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders header = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(header);
+
+        UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
+        ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
+        org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
+        org.json.JSONObject jo2 = (org.json.JSONObject) jo.get("specials");
+        org.json.JSONArray jo3 = (org.json.JSONArray) jo2.get("items");
+        topSellerRepository.deleteAllInBatch();
+        for (Object j : jo3) {
+            System.out.println(((org.json.JSONObject) j).get("name"));
+            System.out.println(((org.json.JSONObject) j).get("id"));
+            System.out.println(((org.json.JSONObject) j).get("discounted"));
+            System.out.println(((org.json.JSONObject) j).get("discount_percent"));
+            System.out.println(((org.json.JSONObject) j).get("original_price"));
+            System.out.println(((org.json.JSONObject) j).get("final_price"));
+            System.out.println(((org.json.JSONObject) j).get("currency"));
+            System.out.println(((org.json.JSONObject) j).get("large_capsule_image"));
+            System.out.println(((org.json.JSONObject) j).get("small_capsule_image"));
+            System.out.println(((org.json.JSONObject) j).get("header_image"));
+        }
+    }
+
+    @Test
     public void getGameApp() throws ParseException {
         String url = "https://store.steampowered.com/api/appdetails?appids=1983089";
         RestTemplate restTemplate = new RestTemplate();
@@ -90,5 +120,26 @@ public class RequestTest {
         org.json.JSONObject jo3 = (org.json.JSONObject) jo2.get("data");
         String jo4 = jo3.get("type").toString();
         System.out.println(jo4);
+    }
+
+    @Test
+    public void getOwnedApp() throws ParseException {
+        String id = "76561198086809301";
+        String url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=F9AE0237066E8658B587ACC489C13AF9&steamid="
+        + id + "&format=json&include_played_free_games=1";
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders header = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(header);
+
+        UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
+        ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
+        org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
+        org.json.JSONObject jo2 = (org.json.JSONObject) jo.get("response");
+        org.json.JSONArray jo3 = (org.json.JSONArray) jo2.get("games");
+        for (Object j : jo3) {
+            System.out.println(((org.json.JSONObject) j).get("appid"));
+            System.out.println(Long.parseLong(((org.json.JSONObject) j).get("playtime_forever").toString()) / 60);
+        }
     }
 }

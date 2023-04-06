@@ -25,18 +25,20 @@ public class MemberController {
     private final GameService gameService;
     private final CommentService commentService;
 
+    // ## 사용 안함
     @GetMapping
     public ResponseEntity<List<MemberRespDto>> getAllMember() {
         List<MemberRespDto> list = memberService.findAllMember();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+//## userservice에서 옮기기
     @GetMapping("/{memberId}")
     public ResponseEntity<MemberRespDto> getMember(@PathVariable Long memberId) {
         MemberRespDto dto = memberService.findMemberById(memberId);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
-
+    
     @GetMapping("/comment/{memberId}")
     public ResponseEntity<List<CommentRespDto>> getComment(@PathVariable Long memberId) {
         List<CommentRespDto> dto = commentService.findCommentByMemberId(memberId);
@@ -49,8 +51,8 @@ public class MemberController {
     }
 
     @GetMapping("/{memberId}/game")
-    public ResponseEntity<List<SteamLibraryRespDto>> getAllGame(@PathVariable Long memberId) {
-        return new ResponseEntity<>(memberService.findAllGame(memberId), HttpStatus.OK);
+    public ResponseEntity<List<SteamLibraryRespDto>> getOwnedGame(@PathVariable Long memberId) {
+        return new ResponseEntity<>(memberService.findOwnedGame(memberId), HttpStatus.OK);
     }
 
 
