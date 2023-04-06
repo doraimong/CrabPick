@@ -51,8 +51,8 @@ public class MemberController {
     }
 
     @GetMapping("/{memberId}/game")
-    public ResponseEntity<List<SteamLibraryRespDto>> getAllGame(@PathVariable Long memberId) {
-        return new ResponseEntity<>(memberService.findAllGame(memberId), HttpStatus.OK);
+    public ResponseEntity<List<SteamLibraryRespDto>> getOwnedGame(@PathVariable Long memberId) {
+        return new ResponseEntity<>(memberService.findOwnedGame(memberId), HttpStatus.OK);
     }
 
 
