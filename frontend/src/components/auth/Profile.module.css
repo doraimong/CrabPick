@@ -7,6 +7,10 @@
   margin: 0;
 }
 
+.ownedGame {
+  cursor: pointer;
+}
+
 .edit {
   text-decoration: none;
   color: white;
