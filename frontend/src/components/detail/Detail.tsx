@@ -63,7 +63,7 @@ const Detail = () => {
   // }, [gameId, authCtx.userId]);
 
   const handleFavorite = () => {
-    const url = `https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`;
+    const url = `https://j8e107.p.ssafy.io/api/member/bookmark/${authCtx.userId}/${gameId}`;
     // 즐겨 찾기가 되어 있다면
     if (isFavorited) {
       // 삭제하기
