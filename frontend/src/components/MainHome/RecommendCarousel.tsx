@@ -52,9 +52,16 @@ const RecommendCarousel: React.FC<Props> = ({ games }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
+  let recommendGames = []
+  if (games.length > 10) {
+    recommendGames = games.slice(0,10)
+  } else {
+    recommendGames = games
+  }
+
   return (
     <Slider {...settings}>
-      {games? games.map((game: any, index) => (
+      {recommendGames? recommendGames.map((game: any, index) => (
         <div
           key={index}
           className={styles.carousel}
