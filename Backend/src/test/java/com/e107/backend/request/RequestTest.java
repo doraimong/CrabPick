@@ -121,4 +121,25 @@ public class RequestTest {
         String jo4 = jo3.get("type").toString();
         System.out.println(jo4);
     }
+
+    @Test
+    public void getOwnedApp() throws ParseException {
+        String id = "76561198086809301";
+        String url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=F9AE0237066E8658B587ACC489C13AF9&steamid="
+        + id + "&format=json&include_played_free_games=1";
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders header = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(header);
+
+        UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
+        ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
+        org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
+        org.json.JSONObject jo2 = (org.json.JSONObject) jo.get("response");
+        org.json.JSONArray jo3 = (org.json.JSONArray) jo2.get("games");
+        for (Object j : jo3) {
+            System.out.println(((org.json.JSONObject) j).get("appid"));
+            System.out.println(Long.parseLong(((org.json.JSONObject) j).get("playtime_forever").toString()) / 60);
+        }
+    }
 }
