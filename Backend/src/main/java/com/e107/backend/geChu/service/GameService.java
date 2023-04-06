@@ -17,6 +17,8 @@ public interface GameService {
 
     List<GameListRespDto> findRecommendByUser(Long userId,List<MyGameReqDto> dto);
 
+    Map<Long, Double> listOfRecommend(Map<Long, Map<String, Object>> map);
+
     int calcPlaytimeFactor(int playtime);
 
     double log2(float x);
