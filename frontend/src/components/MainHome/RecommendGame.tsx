@@ -5,49 +5,56 @@ import axios from "axios";
 
 const RecommandGame = () => {
   const [recommandGames, setRecommandGames] = useState([]);
-  const [userGames, setUserGames] = useState<any>([]);
+  // const [userGames, setUserGames] = useState<any>([]);
 
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {
     axios
-      .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
-      .then((res: any) => {
-        console.log('성공', res.data);
-        res.data.map((game: any, idx: number) => {
-          setUserGames((userGames: any) => [
-            ...userGames,
-            { id: game.appId, playTime: game.playTime },
-          ]);
-        });
-        // .catch((err: any) => {
-        // console.log("err", err);
-      });
-  }, []);
-  console.log(userGames);
+    .get(`https://j8e107.p.ssafy.io/api/game/recommend/user/${authCtx.userId}`)
+    // .get(`https://j8e107.p.ssafy.io/api/game/recommend/user/76561198358343891`)
+    .then((res) => {setRecommandGames(res.data.data)})
+  }, [])
 
-  useEffect(() => {
-    axios({
-      method: "post", // [요청 타입]
-      url: `https://j8e107.p.ssafy.io/api/game/recommend/user/76561198358343891`,
-      // `https://j8e107.p.ssafy.io/api/game/recommend/user/${authCtx.userId}`,
-      data: { Body: JSON.stringify(userGames) }, // [요청 데이터]
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      }, // [요청 헤더]
-      //responseType: "json" // [응답 데이터 : stream , json]
-    }).then((res) => {
-      console.log("추천 요청 성공", res.data);
-      setRecommandGames(res.data);
-    });
-  }, [userGames]);
-  console.log("recommandGames", recommandGames);
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
+  //     .then((res: any) => {
+  //       console.log('성공', res.data);
+  //       res.data.map((game: any, idx: number) => {
+  //         setUserGames((userGames: any) => [
+  //           ...userGames,
+  //           { id: game.appId, playTime: game.playTime },
+  //         ]);
+  //       });
+  //       // .catch((err: any) => {
+  //       // console.log("err", err);
+  //     });
+  // }, []);
+  // console.log(userGames);
+
+  // useEffect(() => {
+  //   axios({
+  //     method: "post", // [요청 타입]
+  //     url: `https://j8e107.p.ssafy.io/api/game/recommend/user/76561198358343891`,
+  //     // `https://j8e107.p.ssafy.io/api/game/recommend/user/${authCtx.userId}`,
+  //     data: { Body: JSON.stringify(userGames) }, // [요청 데이터]
+  //     headers: {
+  //       "Content-Type": "application/json; charset=utf-8",
+  //     }, // [요청 헤더]
+  //     //responseType: "json" // [응답 데이터 : stream , json]
+  //   }).then((res) => {
+  //     console.log("추천 요청 성공", res.data);
+  //     setRecommandGames(res.data);
+  //   });
+  // }, [userGames]);
+  // console.log("recommandGames", recommandGames);
 
   return (
     <div style={{ paddingBottom: "50px" }}>
-      <h2>Recommand GAMES</h2>
+      <h2>CRABPICK GAMES</h2>
       <div style={{ width: "70%", margin: "0 auto" }}>
-        <RecommendCarousel games={recommandGames} />
+        <RecommendCarousel games={recommandGames.slice(0, 10)} />
       </div>
     </div>
   );

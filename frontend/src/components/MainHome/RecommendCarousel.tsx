@@ -52,17 +52,16 @@ const RecommendCarousel: React.FC<Props> = ({ games }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
-
   return (
     <Slider {...settings}>
-      {games.map((game: any, index) => (
+      {games? games.map((game: any, index) => (
         <div
           key={index}
           className={styles.carousel}
-          onClick={() => navigate(`/detail/${game.gameId}`)}
+          onClick={() => navigate(`/detail/${game.appId}`)}
         >
           <img
-            src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameId}/header.jpg`}
+            src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
             // src={game.imageLink}
             alt={`Slide ${index}`}
             className={styles.image}
@@ -73,7 +72,7 @@ const RecommendCarousel: React.FC<Props> = ({ games }) => {
             <div></div>
           </div>
         </div>
-      ))}
+      )) : null}
     </Slider>
   );
 };
