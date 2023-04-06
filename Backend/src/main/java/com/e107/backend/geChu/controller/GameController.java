@@ -31,6 +31,11 @@ public class GameController {
      return new ResponseEntity<>(gameService.findAllGame(pageable), HttpStatus.OK);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<GameListRespDto>> getGameByName(@PathVariable String name, Pageable pageable) {
+        return new ResponseEntity<>(gameService.findGameByName(name,pageable), HttpStatus.OK);
+    }
+
     @GetMapping("/top")
     public ResponseEntity<List<TopSellerRespDto>> getTopGameList() {
         return new ResponseEntity<>(sellerService.findAllTopSeller(), HttpStatus.OK);

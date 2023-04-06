@@ -43,6 +43,11 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public List<GameListRespDto> findGameByName(String name, Pageable pageable) {
+        return gameRepository.findByNameContaining(name, pageable).stream().map(GameListRespDto::of).collect(Collectors.toList());
+    }
+
+    @Override
     public List<GameListRespDto> findRecommendByGame(Long gameId) {
         Similarity s = similarityRepository.findById(gameId)
                 .orElseThrow(() -> new CommonException(2, "Game객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));

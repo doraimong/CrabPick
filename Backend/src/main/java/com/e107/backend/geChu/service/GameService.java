@@ -13,6 +13,8 @@ public interface GameService {
     List<GameListRespDto> findAllGame(Pageable pageable);
 
 
+    List<GameListRespDto> findGameByName(String name, Pageable pageable);
+
     List<GameListRespDto> findRecommendByGame(Long gameId);
 
     List<GameListRespDto> findRecommendByUser(Long userId,List<MyGameReqDto> dto);
