@@ -429,7 +429,7 @@ const Detail = () => {
         <div>★★★★☆</div>
       </div> */}
 
-      <div id="코멘트란">
+      <div style={{ marginBottom: "10%" }}>
         <div style={{ position: "relative" }}>
           <h2>코멘트</h2>
           {/* <Comment /> */}
