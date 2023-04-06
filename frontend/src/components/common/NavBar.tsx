@@ -100,12 +100,16 @@ const MenuBar = () => {
 
   // 검색창에 쓴 값으로 게임리스트 필터링 하기
   useEffect(() => {
-    const filteredGame = gameList.filter((itemList: any) => {
-      return itemList.name.toUpperCase().includes(searchInput.toUpperCase());
-    });
-    setFilteredGameList(filteredGame);
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/game/name/${searchInput}`)
+      .then((res) => {
+        const filteredGame = res.data;
+        setFilteredGameList(filteredGame);
+      })
+      .catch((e) => {
+      });
   }, [searchInput]);
-  // console.log(isLoggedIn)
+
   return (
     <>
       <div className={styles.navBar}>
