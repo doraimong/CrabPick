@@ -12,4 +12,7 @@ public class BookmarkRespDto {
     private Long id;
 
     private Long gameId;
+
+    private String name;
+    private String headerImg;
 }
