@@ -45,15 +45,15 @@ const Profile = () => {
       .get(`https://j8e107.p.ssafy.io/api/member/comment/${authCtx.memberId}`)
       .then((res) => {
         // console.log(res.data);
-        // setComments(res.data.reverse().slice(0, 10));
-        setComments(res.data.reverse());
+        setComments(res.data.reverse().slice(0, 10));
+        // setComments(res.data.reverse());
       });
   }, []);
 
   useEffect(() => {
     axios
-      .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
-      // .get(`https://j8e107.p.ssafy.io/api/member/76561198086809301/game`)
+      // .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
+      .get(`https://j8e107.p.ssafy.io/api/member/76561198086809301/game`)
       .then((res) => {
         console.log(authCtx.userId);
         console.log(res.data);
