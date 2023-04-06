@@ -46,13 +46,11 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-
-    public Map<Integer, List<GameListRespDto>> findGameByName(String name, Pageable pageable) {
+    public Map<String, Object> findGameByName(String name, Pageable pageable) {
         Page<Game> p = gameRepository.findByNameContaining(name, pageable);
-        Map<Integer,List<GameListRespDto>> map = new HashMap<>();
-
-        p.getTotalPages();
-        map.put(p.getTotalPages(), p.stream().map(GameListRespDto::of).collect(Collectors.toList()));
+        Map<String,Object> map = new HashMap<>();
+        map.put("pages",p.getTotalPages());
+        map.put("data", p.stream().map(GameListRespDto::of).collect(Collectors.toList()));
         return map;
     }
 

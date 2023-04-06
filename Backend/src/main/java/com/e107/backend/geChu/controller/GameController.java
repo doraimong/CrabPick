@@ -34,7 +34,7 @@ public class GameController {
 
     @GetMapping("/name/{name}")
 
-    public ResponseEntity<Map<Integer,List<GameListRespDto>>> getGameByName(@PathVariable String name, Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getGameByName(@PathVariable String name, Pageable pageable) {
         return new ResponseEntity<>(gameService.findGameByName(name,pageable), HttpStatus.OK);
     }
 
