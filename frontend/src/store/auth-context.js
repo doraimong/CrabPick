@@ -30,7 +30,7 @@ export const AuthContextProvider = (props) => {
 
   // 로그인 여부 (토큰 여부)
   const userIsLoggedIn = !!token;
-  const loginHandler = (token, userId, userNickname, avatarfull, memberId) => {
+  const loginHandler = (userId, userNickname, avatarfull) => {
     setToken(token);
     // setmemberId(memberId);
     setUserId(userId);
@@ -38,12 +38,12 @@ export const AuthContextProvider = (props) => {
     setAvatarfull(avatarfull);
     setmemberId(memberId);
     console.log("동작");
-    sessionStorage.setItem("token", token);
+    // sessionStorage.setItem("token", token);
     // sessionStorage.setItem("memberId", memberId);
     sessionStorage.setItem("userId", userId);
     sessionStorage.setItem("userNickname", userNickname);
     sessionStorage.setItem("avatarfull", avatarfull);
-    sessionStorage.setITem("memberId", memberId);
+    // sessionStorage.setITem("memberId", memberId);
   };
 
   const logoutHandler = () => {

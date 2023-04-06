@@ -144,19 +144,38 @@ app.get("/auth/logout", function (req, res) {
 인증 후, 스팀은 사용자를 /auth/steam/return에서 이 애플리케이션으로 다시 리디렉션합니다 */
 
 //@@1.리액트에서 신호가 와서 입장 //@@2.steam로그인 바로 리다이렉트
-app.get("/auth/steam", passport.authenticate("steam", { failureRedirect: "/" }), function (req, res) {
-  //@@3. steam로그인 페이지로 으로 이동
-  console.log("##app.js -> /auth/steam");
-  console.log("app.js -> /auth/steam");
-  console.log("----------app.get('/auth/steam')------------");
-  console.log(res.data);
-  // res.redirect("https://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
-  res.redirect("http://localhost:3000/"); //리액트로 리다이렉트
-});
+app.get(
+  "/auth/steam",
+  passport.authenticate("steam", { failureRedirect: "/" }),
+  function (req, res) {
+    // //@@3. steam로그인 페이지로 으로 이동
+    // console.log("##app.js -> /auth/steam");
+    // console.log("app.js -> /auth/steam");
+    // console.log("----------app.get('/auth/steam')------------");
+    // console.log(res.data);
+    // // res.redirect("https://j8e107.p.ssafy.io/"); //리액트로 리다이렉트
+    // res.redirect("http://localhost:3000/"); //리액트로 리다이렉트
+  }
+);
 
-app.get("/auth/userinfo", (req, res) => {
-  console.log("##app.js -> /auth/test");
-  res.send(userInfoAllTime);
+app.get("/auth/userinfo/:id", (req, res) => {
+  console.log("##app.js -> /auth/userinfo/:id[store확인]");
+  //@@ 존재 확인하고 있으면 data반환 후 삭제 -> 없으면 로그인창 리다이렉트
+  // console.log(req.params.id);
+  // console.log(store.get(req.params.id));
+  let data = store.get(req.params.id);
+
+  if (data) {
+    console.log("데이터가 이써요~~~!!!@!@!@");
+    console.log("data 출력 : ");
+    console.log(data);
+    store.remove(req.params.id);
+    res.send(data);
+  } else {
+    // res.redirect("https://j8e107.p.ssafy.io");
+    console.log("데이터가 없어요~~~");
+    res.redirect("http://localhost:3000/");
+  }
 });
 
 // GET /auth/steam/return
@@ -167,18 +186,27 @@ app.get("/auth/userinfo", (req, res) => {
 /*'passport.authenticate ()'을 사용합니다. 요청을 인증하는 경로 미들웨어로 지정합니다.  
 인증에 실패하면 사용자는 다시 로그인 페이지로 리디렉션됩니다.  
 그렇지 않으면 기본 경로 함수가 호출되며, 이 예에서는 홈 페이지로 사용자를 리디렉션합니다. */
-app.get("/auth/steam/return", passport.authenticate("steam", { failureRedirect: "/" }), function (req, res) {
-  //@@ 로그인 실패 시 리액트의 로그인 창으로 리다이렉트 ㄱㄱ
-  console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
-  console.log("----------app.get('/auth/steam/return')------------");
-  console.log(req._passport);
-  console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-  console.log(req._passport.session.user);
-  //res.send(req._passport.session.user);
-  store.set(req._passport.session.user._json.steamid, { data: req._passport.session.user }); //@@store에 저장
-  // res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
-  res.redirect("http://localhost:3000/"); //react로 리다이렉트  -> 쿼리스트리으로 steamid 보내야함 -> 리액트에서 쿼리스트링으로 steamid를 받아야함 -> 리액트에서 노드 호출(steamid 포함해서) -> 노드에서 store에서 steamid로 찾아서 리액트로 리턴 -> 현재 유저 데이터 삭제 (로그아웃 노드로 보낼 필요 없음)
-});
+app.get(
+  "/auth/steam/return",
+  passport.authenticate("steam", { failureRedirect: "http://localhost:3000/" }),
+  function (req, res) {
+    //@@ 로그인 실패 시 리액트의 로그인 창으로 리다이렉트 ㄱㄱ
+    console.log("리리3##app.js -> /auth/steam/return"); //@@ 리턴3.
+    console.log("----------app.get('/auth/steam/return')------------");
+    console.log(req._passport);
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    console.log(req._passport.session.user);
+    //res.send(req._passport.session.user);
+    store.set(req._passport.session.user._json.steamid, {
+      data: req._passport.session.user,
+    }); //@@store에 저장
+    // res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
+    res.redirect(
+      "http://localhost:3000/steamid?steamid=" +
+        req._passport.session.user._json.steamid
+    ); //react로 리다이렉트  -> 쿼리스트리으로 steamid 보내야함 -> 리액트에서 쿼리스트링으로 steamid를 받아야함 -> 리액트에서 노드 호출(steamid 포함해서) -> 노드에서 store에서 steamid로 찾아서 리액트로 리턴 -> 현재 유저 데이터 삭제 (로그아웃 노드로 보낼 필요 없음)
+  }
+);
 
 const options = {
   ca: fs.readFileSync(__dirname + "/fullchain2.pem"),
