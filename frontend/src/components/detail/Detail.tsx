@@ -250,7 +250,6 @@ const Detail = () => {
       .get(`https://j8e107.p.ssafy.io/api/comment/${gameId}`)
       .then((response) => {
         setCommentList(response.data);
-        console.log('실행')
       });
   }, [nextCommentId]);
 
@@ -449,7 +448,7 @@ const Detail = () => {
               <textarea
                 maxLength={150}
                 onChange={handleCommentChange}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 rows={commentRows}
                 style={{
                   width: "100%",
