@@ -9,7 +9,6 @@ public interface MemberService {
     void saveMember(Member member);
     List<MemberRespDto> findAllMember();
     MemberRespDto findMemberById(Long memberId);
-    List<CommentRespDto> findAllReview(Long memberId);
     List<OwnedGameResp> findOwnedGame(Long memberId);
 
     void addBookmark(Long memberId, Long gameId);
