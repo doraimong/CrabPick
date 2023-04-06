@@ -73,7 +73,6 @@ public class MemberServiceImpl implements MemberService{
         String url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=F9AE0237066E8658B587ACC489C13AF9&steamid="
                 + id + "&format=json&include_played_free_games=1";
         RestTemplate restTemplate = new RestTemplate();
-        List<>
         HttpHeaders header = new HttpHeaders();
         HttpEntity<?> entity = new HttpEntity<>(header);
 
@@ -86,6 +85,6 @@ public class MemberServiceImpl implements MemberService{
             System.out.println(((org.json.JSONObject) j).get("appid"));
             System.out.println(Long.parseLong(((org.json.JSONObject) j).get("playtime_forever").toString()) / 60);
         }
-        return list;
+        return null;
     }
 }
