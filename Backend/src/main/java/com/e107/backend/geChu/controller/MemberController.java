@@ -1,6 +1,8 @@
 package com.e107.backend.geChu.controller;
 
 import com.e107.backend.geChu.domain.entity.Friend;
+import com.e107.backend.geChu.domain.entity.Member;
+import com.e107.backend.geChu.domain.repository.MemberRepository;
 import com.e107.backend.geChu.dto.request.MemberAddReqDto;
 import com.e107.backend.geChu.dto.response.*;
 import com.e107.backend.geChu.service.CommentService;
@@ -11,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -77,5 +80,11 @@ public class MemberController {
     @GetMapping("/bookmark/{memberId}")
     public ResponseEntity<List<BookmarkRespDto>> getBookmarkList(@PathVariable Long memberId){
         return new ResponseEntity<>(memberService.findAllBookmark(memberId), HttpStatus.OK);
+    }
+
+    //해당 멤버의 친구 목록 반환
+    @GetMapping("/friend/{memberId}")
+    public ResponseEntity<Object> getFriendList(@PathVariable Long memberId){
+        return new ResponseEntity<>(memberService.findAllFriend(memberId), HttpStatus.OK);
     }
 }
