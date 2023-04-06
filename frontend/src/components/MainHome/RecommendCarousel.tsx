@@ -51,7 +51,7 @@ const RecommendCarousel: React.FC<Props> = ({ games }) => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
+  console.log('여기', games)
   let recommendGames = []
   if (games.length > 10) {
     recommendGames = games.slice(0,10)

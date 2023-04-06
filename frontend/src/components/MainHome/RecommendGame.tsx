@@ -53,7 +53,7 @@ const RecommandGame = () => {
   //   });
   // }, [userGames]);
   // console.log("recommandGames", recommandGames);
-
+  console.log('regame', recommandGames)
   return (
     <div style={{ paddingBottom: "50px" }}>
       <div>
