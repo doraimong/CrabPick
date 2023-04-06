@@ -13,6 +13,7 @@ import axios from "axios";
 const SearchPage = () => {
   const { state } = useLocation();
   const [currentItems, setCurrentItems] = useState<any>([]);
+  const [noResult, setNoResult] = useState<boolean>(false);
   // const [currentPage, setCurrentPage] = useState(1);
   // const itemsPerPage = 10;
   // const pageNumbersToShow = 5;
@@ -24,10 +25,20 @@ const SearchPage = () => {
     axios
       .get(`https://j8e107.p.ssafy.io/api/game/name/${state.searchInput}`)
       .then((res) => {
+        console.log('여기', res.data)
+        
         setCurrentItems(res.data);
       })
       .catch((e) => {});
   }, [state.searchInput]);
+
+  useEffect(() => {
+    if (currentItems) {
+      setNoResult(false);
+    } else {
+      setNoResult(true);
+    }
+  }, [currentItems]);
 
   // .slice(
   //   indexOfFirstItem,
@@ -88,15 +99,16 @@ const SearchPage = () => {
   //   }
   // }
 
+  console.log("currentItems", currentItems);
   return (
     <SearchLayout>
       <h3 className={styles.SearchInput}>검색 : {state.searchInput}</h3>
       <div className={styles.SearchPage}>
-        {currentItems && currentItems.length !== 0 ? (
+        {currentItems && currentItems.length != 0 ? (
           currentItems.map((game: any, i: number) => (
             <SearchResult key={i} game={game} />
           ))
-        ) : (
+        ) : noResult ? (
           <div className={styles.NoResult}>
             <div>
               <img src={image} alt="" />
@@ -105,7 +117,12 @@ const SearchPage = () => {
               </div>
             </div>
           </div>
+        ) : (
+          <div className={styles.NoResult}>
+            <h2>검색 중입니다</h2>
+          </div>
         )}
+
         {/* <div className={styles.pageButton}>
           <button onClick={handleGoToFirstPage}>First</button>
           <button onClick={handlePrevPage}>Prev</button>
