@@ -74,9 +74,8 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<OwnedGameResp> findOwnedGame(Long memberId) {
-        String id = memberId.toString();
         String url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=F9AE0237066E8658B587ACC489C13AF9&steamid="
-                + id + "&format=json&include_played_free_games=1";
+                + memberId + "&format=json&include_played_free_games=1";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders header = new HttpHeaders();
         HttpEntity<?> entity = new HttpEntity<>(header);
