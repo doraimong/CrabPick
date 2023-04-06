@@ -20,7 +20,7 @@ const TopRankGame = () => {
 
   return (
     <div style={{ paddingBottom: "50px" }}>
-      <h2>TOP RANKED GAMES</h2>
+      <h2>Recommand GAMES</h2>
       <div style={{ width: "70%", margin: "0 auto" }}>
         <TopRankGameCarousel games={games} />
       </div>
