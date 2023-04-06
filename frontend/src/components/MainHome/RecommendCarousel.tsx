@@ -54,7 +54,7 @@ const RecommendCarousel: React.FC<Props> = ({ games }) => {
 
   return (
     <Slider {...settings}>
-      {games? games.map((game: any, index) => (
+      {games? games.slice(0, 10).map((game: any, index) => (
         <div
           key={index}
           className={styles.carousel}

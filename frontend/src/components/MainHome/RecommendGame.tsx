@@ -54,7 +54,7 @@ const RecommandGame = () => {
     <div style={{ paddingBottom: "50px" }}>
       <h2>CRABPICK GAMES</h2>
       <div style={{ width: "70%", margin: "0 auto" }}>
-        <RecommendCarousel games={recommandGames.slice(0, 10)} />
+        <RecommendCarousel games={recommandGames} />
       </div>
     </div>
   );
