@@ -20,10 +20,9 @@ const RecommandGame = () => {
       )
       .then((res: any) => {
         // console.log("res.data", res.data);
-        // res.data.forEach((game: any) => {
+        // res.data.map((game: any) => {
         //   const playData = {"id": game.id, "playTime": game.playTime};
         //   setUserGames([...userGames, playData]);
-        // setUserGames(res.data);
       })
       .catch((err: any) => {
         // console.log("err", err);
