@@ -18,10 +18,17 @@ const SteamIdPage = () => {
         if (response.data.data) {
           console.log(response.data.data);
           console.log(response.data.data.id);
+          console.log(response.data.data._json.personaname);
+          console.log(response.data.data.id);
           // authCtx.userId = response.data.data.id;
           // authCtx.userNickname = response.data.data.displayName;
           // authCtx.avatarfull = response.data.data.avatarfull;
           // console.log(authCtx.userId, authCtx.userNickname, authCtx.avatarfull);
+          authCtx.login(
+            response.data.data.id,
+            response.data.data._json.personaname,
+            response.data.data.avatarfull
+          );
         } else {
           console.log("밑에는 두번째 보내는 겁니다.");
         }
