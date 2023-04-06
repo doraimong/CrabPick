@@ -18,11 +18,19 @@ type Comment = {
 
   headerImg: string;
 };
+
+type Game = {
+  appId: number;
+  name: String;
+  headerImg: string;
+  playTime: number;
+};
 const Profile = () => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
   const [comments, setComments] = useState<Comment[]>([]);
+  const [games, setGames] = useState<Game[]>([]);
 
   const logoutHandler = () => {
     axios.get("https://j8e107.p.ssafy.io/auth/logout").catch((response) => {
@@ -36,8 +44,19 @@ const Profile = () => {
     axios
       .get(`https://j8e107.p.ssafy.io/api/member/comment/${authCtx.memberId}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setComments(res.data.reverse().slice(0, 10));
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      // .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
+      .get(`https://j8e107.p.ssafy.io/api/member/76561198086809301/game`)
+      .then((res) => {
+        console.log(authCtx.userId);
+        console.log(res.data);
+        setGames(res.data);
       });
   }, []);
 
@@ -99,9 +118,34 @@ const Profile = () => {
       <div>
         <div style={{ marginTop: "5%" }}>
           <h2>보유중인 게임 목록</h2>
-          <div>
-            <p>게임목록들 나오기~~~ 캐러셀이든 뭐든</p>
-          </div>
+          {games.length === 0 ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div>
+                <p>
+                  프로필을 비공개로 했거나 보유중인 게임이 없습니다. 게임 세부
+                  정보를 공개해주세요{" "}
+                </p>
+                <div
+                  onClick={() =>
+                    (window.location.href = `https://steamcommunity.com/profiles/${authCtx.userId}/edit/settings`)
+                  }
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  수정하러 가기
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div>
+              {games.map((game) => (
+                <div>{game.name}</div>
+              ))}
+            </div>
+          )}
         </div>
         {/* <div style={{ marginTop: "5%" }}>
           <h2>찜 한 게임</h2>
