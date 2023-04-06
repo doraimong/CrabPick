@@ -65,7 +65,7 @@ const MenuBar = () => {
       setDropSearch(false);
       navigate("/search", {
         state: { searchInput: searchInput, page: filteredGamePage, filteredGameList: filteredGameList },
-      });
+      })
     }
   };
 
