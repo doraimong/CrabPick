@@ -110,28 +110,28 @@ app.use(express.static(__dirname + "/../../public"));
 //   res.render("index", { user: req.user });
 // });
 
-app.get("/account", ensureAuthenticated, function (req, res) {
-  console.log("##app.js -> /account");
-  res.render("account", { user: req.user });
-});
+// app.get("/account", ensureAuthenticated, function (req, res) {
+//   console.log("##app.js -> /account");
+//   res.render("account", { user: req.user });
+// });
 
-app.get("/auth/user/:id", (req, res) => {
-  //@@ 존재 확인하고 있으면 data반환 후 삭제 -> 없으면 로그인창 리다이렉트
-  console.log("/auth/:id경로 - store 확인");
-  console.log(req.params.id);
-  console.log(store.get(req.params.id));
-  store.remove(req.params.id);
-});
+// app.get("/auth/user/:id", (req, res) => {
+//   //@@ 존재 확인하고 있으면 data반환 후 삭제 -> 없으면 로그인창 리다이렉트
+//   console.log("/auth/:id경로 - store 확인");
+//   console.log(req.params.id);
+//   console.log(store.get(req.params.id));
+//   store.remove(req.params.id);
+// });
 
-app.get("/auth/logout", function (req, res) {
-  console.log("##app.js -> /logout");
-  req.logout();
-  userInfoAllTime = null;
+// app.get("/auth/logout", function (req, res) {
+//   console.log("##app.js -> /logout");
+//   req.logout();
+//   userInfoAllTime = null;
 
-  res.redirect("https://j8e107.p.ssafy.io/");
+//   res.redirect("https://j8e107.p.ssafy.io?steamid=116184846148616");
 
-  // res.redirect("http://localhost:3000/");
-});
+//   // res.redirect("http://localhost:3000/");
+// });
 
 // GET /auth/steam
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -144,6 +144,7 @@ app.get("/auth/logout", function (req, res) {
 인증 후, 스팀은 사용자를 /auth/steam/return에서 이 애플리케이션으로 다시 리디렉션합니다 */
 
 //@@1.리액트에서 신호가 와서 입장 //@@2.steam로그인 바로 리다이렉트
+
 app.get(
   "/auth/steam",
   passport.authenticate("steam", { failureRedirect: "/" }),
@@ -208,17 +209,9 @@ app.get(
   }
 );
 
-const options = {
-  ca: fs.readFileSync(__dirname + "/fullchain2.pem"),
-  key: fs.readFileSync(__dirname + "/privkey2.pem"),
-};
 // console.log("파일 경로 : " + __filename);
 // console.log("파일 경로 : " + __dirname);
 app.listen(4000);
-
-// https.createServer(options, app).listen(4000, function () {
-//   console.log("Steam login app listening on port 4000! Go to 4000/");
-// });
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
