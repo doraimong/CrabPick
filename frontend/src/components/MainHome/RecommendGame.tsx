@@ -1,55 +1,56 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import RecommendCarousel from "./RecommendCarousel";
+import AuthContext from "../../store/auth-context";
+import axios from "axios";
 
-import footballmanager from "../../asset/DUMMY/footballmanager.jpg";
-import battlegrounds from "../../asset/DUMMY/battlegrounds.jpg";
-import hogwarts from "../../asset/DUMMY/hogwarts.jpg";
-const RecommendGame = () => {
-  const games = [
-    {
-      url: footballmanager,
-      title: "Football Manager 2023",
-      id: 1,
-      genre: "시뮬레이션, 스포츠",
-      etc: "SEGA",
-      // description: ["Football Manager 2023", "시뮬레이션, 스포츠", "SEGA"],
-    },
-    {
-      url: battlegrounds,
-      title: "PUBG: BATTLEGROUNDS",
-      id: 2,
-      genre: "액션, 어드벤처, 무료, 대규모 멀티플레이어",
-      etc: "KRAFTON, Inc.",
-      // description: {
-      //   title: "PUBG: BATTLEGROUNDS",
-      //   genre: "액션, 어드벤처, 무료, 대규모 멀티플레이어",
+const RecommandGame = () => {
+  const [recommandGames, setRecommandGames] = useState([]);
+  const [userGames, setUserGames] = useState<any>([]);
 
-      //   etc: "KRAFTON, Inc.",
-      // },
-    },
-    {
-      url: hogwarts,
-      title: "호그와트 레거시",
-      id: 3,
-      genre: "액션, 어드벤처, RPG",
-      etc: "Avalanche Software",
-      // description: [
-      //   "호그와트 레거시",
-      //   "액션, 어드벤처, RPG",
-      //   "Avalanche Software",
-      // ],
-    },
-  ];
+  const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
+      .then((res: any) => {
+        console.log('성공', res.data);
+        res.data.map((game: any, idx: number) => {
+          setUserGames((userGames: any) => [
+            ...userGames,
+            { id: game.appId, playTime: game.playTime },
+          ]);
+        });
+        // .catch((err: any) => {
+        // console.log("err", err);
+      });
+  }, []);
+  console.log(userGames);
+
+  useEffect(() => {
+    axios({
+      method: "post", // [요청 타입]
+      url: `https://j8e107.p.ssafy.io/api/game/recommend/user/76561198358343891`,
+      // `https://j8e107.p.ssafy.io/api/game/recommend/user/${authCtx.userId}`,
+      data: { Body: JSON.stringify(userGames) }, // [요청 데이터]
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      }, // [요청 헤더]
+      //responseType: "json" // [응답 데이터 : stream , json]
+    }).then((res) => {
+      console.log("추천 요청 성공", res.data);
+      setRecommandGames(res.data);
+    });
+  }, [userGames]);
+  console.log("recommandGames", recommandGames);
 
   return (
     <div style={{ paddingBottom: "50px" }}>
-      <h2>CRABPICK GAMES</h2>
-      {/* <div style={{ width: "70%", margin: "0 auto" }}> */}
-      <RecommendCarousel games={games} />
-      {/* </div> */}
-      {/* <br /> */}
+      <h2>Recommand GAMES</h2>
+      <div style={{ width: "70%", margin: "0 auto" }}>
+        <RecommendCarousel games={recommandGames} />
+      </div>
     </div>
   );
 };
 
-export default RecommendGame;
+export default RecommandGame;

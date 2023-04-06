@@ -1,18 +1,34 @@
 import React, { useState } from "react";
-import { Dropdown, Icon } from "semantic-ui-react";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./DropDown.css";
-
+  
 const DropdownTrigger = (searchList: any) => {
-  const options: any = [];
-  searchList.filteredGameList.map((item: any, i: number) => {
-    options.push({
-      key: i,
-      text: item.name,
-      // 게임 이미지. 이미지가 별로라 안넣음. 게임 포스터 이미지가 없는듯
-      // image: { avartar: true, src: { img } },
-    });
-  });
-  return <Dropdown options={options} />;
+  const navigate = useNavigate();
+
+  function goToDetail(id: number) {
+    navigate(`/detail/${id}`);
+  }
+
+  return (
+    <div>
+      {searchList.filteredGameList?.map((item: any, i: number) => {
+        return (
+          <div
+            key={i}
+            className="gameSearch"
+            onClick={() => goToDetail(item.appId)}
+          >
+            <img
+              className="gameIcon"
+              src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${item.appId}/capsule_sm_120.jpg?`}
+              alt=""
+            />
+            <div className="gameName">{item.name}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default DropdownTrigger;

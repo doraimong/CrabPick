@@ -1,12 +1,103 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../../store/auth-context";
+import { useNavigate } from "react-router-dom";
 import styles from "./SignInForm.module.css";
-
+import axios from "axios";
 import steamlogo from "../../asset/steamlogo.png";
 import loginbuttonlogo from "../../asset/loginbuttonlogo.png";
+import { log } from "console";
 const SignInForm = () => {
   const [login, setLogin] = useState<Boolean>(false);
+  const navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
 
-  const loginHandler = () => {};
+  const loginHandler = () => {
+    // event.preventDefault();
+
+    // authCtx.login("sdfsdf334232", 412, 2);
+    // navigate("/");
+    console.log("스팀 로그인 핸들러");
+    // window.location.replace("http://localhost:4000/auth/steam");
+    // window.location.replace("http://localhost:4000/auth/steam");
+    window.location.replace("https://j8e107.p.ssafy.io/auth/steam");
+
+    // // axios.get("https://j8e107.p.ssafy.io/auth/userinfo").then((response) => {
+    // axios.get("http://localhost:4000/auth/userinfo").then((response) => {
+    //   // console.log("메인 화면 응답" + JSON.stringify(response.data)); // 반환 데이터 전부 출력해보기
+    //   // console.log("디테일 정보1 : " + response.data._json.steamid); // steamid : ex >76561199486116083
+    //   // console.log("디테일 정보2 : " + response.data.displayName); // steam displayname ex> pjh6947
+    //   // console.log("디테일 정보3 : " + response.data.key); // steam key ex>21680047922CC0CA013B6EFEC720919A
+
+    //   axios
+    //     .post("https://j8e107.p.ssafy.io/api/authenticate", {
+    //       username: response.data.id,
+    //       // password: response.data._json.primaryclanid
+    //       password: "password",
+    //     })
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       // authCtx.token = res.data.token;
+    //       // authCtx.userId = response.data._json.steamid;
+    //       authCtx.login(res.data.token, response.data.id, response.data.displayName, response.data._json.avatarfull, res.data.memberId);
+    //       console.log(res.data);
+    //       authCtx.token = res.data.token;
+    //       authCtx.userId = response.data.id;
+    //       authCtx.userNickname = response.data.displayName;
+    //       authCtx.avatarfull = response.data._json.avatarfull;
+    //       authCtx.memberId = res.data.memberId;
+    //     })
+    //     .catch((err) => {
+    //       // 처음 방문한 손님이니까 우리 유저 db에 없음
+    //       // 모달 띄워서 확인 누르면 회원가입 진행하도록
+    //       // 모달 컴포넌트 만들기
+    //       console.log(err);
+    //       // 만약 확인을 누르면 steaid와 primaryclanid(password)를 바디에 담아 axios 회원가입 요청
+    //       // 회원가입 성공하면
+    //       // 로그인 axios를 보내 저기 위에 있는 api/authenticate 그대로
+    //       // 실패하면
+    //       // console.log(err) 출력
+
+    //       // 20220403 집에서 하기
+
+    //       // 회원 가입 시작
+    //       //- 회원 가입 준비물 userDto
+    //       let userDto = {
+    //         username: response.data.id,
+    //         password: "password",
+    //         nickname: response.data.displayName,
+    //       };
+    //       // 회원 가입 요청
+    //       axios
+    //         .post("https://j8e107.p.ssafy.io/api/signup", userDto)
+    //         .then((res) => {
+    //           console.log("회원가입 성공", res.data);
+    //           axios
+    //             .post("https://j8e107.p.ssafy.io/api/authenticate", {
+    //               username: response.data.id,
+    //               // password: response.data._json.primaryclanid
+    //               password: "password",
+    //             })
+    //             .then((res) => {
+    //               console.log(res.data);
+    //               // authCtx.token = res.data.token;
+    //               // authCtx.userId = response.data._json.steamid;
+    //               authCtx.login(res.data.token, response.data.id, response.data.displayName, response.data._json.avatarfull, res.data.memberId);
+    //               authCtx.token = res.data.token;
+    //               authCtx.userId = response.data.id;
+    //               authCtx.userNickname = response.data.displayName;
+    //               authCtx.avatarfull = response.data._json.avatarfull;
+    //               authCtx.memberId = res.data.memberId;
+    //               // window.location.reload();
+    //             })
+    //             .catch((err) => {});
+    //         })
+    //         .catch((err) => {
+    //           console.log("회원가입 실패", err);
+    //         });
+    //       //   // 회원 가입 끝
+    //     });
+    // });
+  };
 
   return (
     <div className={styles.form}>
