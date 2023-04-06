@@ -49,8 +49,8 @@ public class GameServiceImpl implements GameService {
 
     public Map<String, Object> findGameByName(String name, Pageable pageable) {
         Page<Game> p = gameRepository.findByNameContaining(name, pageable);
-        Map<String,Object> map = new HashMap<>();
-        map.put("pages",p.getTotalPages());
+        Map<String, Object> map = new HashMap<>();
+        map.put("pages", p.getTotalPages());
         map.put("data", p.stream().map(GameListRespDto::of).collect(Collectors.toList()));
         return map;
     }
@@ -79,15 +79,59 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<GameListRespDto> findRecommendByUser(Long userId, List<MyGameReqDto> dto) {
-        //# {(유져 보유 게임 id) : {playtime: (플레이시간), data: {게임 별 추천 목록 딕셔너리}}, (유져 보유 게임 id) : {playtime: (플레이시간) 형태의 딕셔너리 생각중}
+        //# {(유져 보유 게임 id) : {playtime: 5, data: {1:3.2, 2:11, 3:45}}, (유져 보유 게임 id) : {playtime: (플레이시간) 형태의 딕셔너리 생각중}
+        Map<Long, Map<String, Object>> userGame = new HashMap<>();
+        for (MyGameReqDto d : dto) {
+            Similarity s = similarityRepository.findById(d.getId())
+                    .orElseThrow(() -> new CommonException(2, "Game객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+            if (s == null) continue;
+            String similarity = s.getSimilarity();
+            String[] arr = similarity.split(" ");
+            Map<Long, Double> data = new HashMap<>();
+            for (int i = 0; i < arr.length; i++) {
+                String[] item = arr[i].split(":");
+                Long id = Long.parseLong(item[0]);
+                Double val = Double.parseDouble(item[1]);
+                data.put(id, val);
+            }
+            Map<String, Object> map = new HashMap<>();
+            map.put("playtime", d.getPlayTime());
+            map.put("data", data);
 
+            userGame.put(d.getId(), map);
+        }
+
+
+        log.info("userGame : " + userGame);
+        return null;
+    }
+
+
+    @Override
+    public Map<Long, Double> listOfRecommend(Map<Long, Map<String, Object>> map) {
+        Map<Long, Double> totalDict = new HashMap<>();
+        for (Map<String, Object> m : map.values()) {
+            int playtime = (int) m.get("playtime");
+            if (playtime < 120) continue;
+            int playtimeFactor = calcPlaytimeFactor(playtime);
+            Map<Long, Double> data = (Map<Long, Double>) m.get("data");
+            for (Map.Entry<Long, Double> entry : data.entrySet()) {
+                Long key = entry.getKey();
+                Double value = entry.getValue();
+                if (totalDict.containsKey(key)) {
+                    totalDict.put(key, totalDict.get(key) + value * playtimeFactor);
+                } else {
+                    totalDict.put(key, value * playtimeFactor);
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public int calcPlaytimeFactor(int playtime) {
         if (playtime < 200) return 1;
-        return (int)(log2(playtime/6000.0f)) + 1;
+        return (int) (log2(playtime / 6000.0f)) + 1;
     }
 
     @Override
