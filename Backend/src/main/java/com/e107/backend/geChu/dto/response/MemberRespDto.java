@@ -36,6 +36,8 @@ public class MemberRespDto {
                         .map(bookmark -> BookmarkRespDto.builder()
                                 .id(bookmark.getId())
                                 .gameId(bookmark.getGame().getId())
+                                .name(bookmark.getGame().getName())
+                                .headerImg("https://cdn.cloudflare.steamstatic.com/steam/apps/" + bookmark.getGame().getAppId() +"/header.jpg")
                                 .build())
                                 .collect(Collectors.toList()))
                 .build();
