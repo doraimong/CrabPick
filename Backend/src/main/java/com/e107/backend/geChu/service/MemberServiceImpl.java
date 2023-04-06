@@ -12,8 +12,11 @@ import com.e107.backend.geChu.domain.entity.*;
 import com.e107.backend.geChu.domain.repository.*;
 import com.e107.backend.geChu.dto.response.*;
 import com.e107.backend.global.common.CommonException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,10 +24,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -145,6 +145,18 @@ public class MemberServiceImpl implements MemberService{
             bookmarkRespDtoList.add(dto);
         }
         return bookmarkRespDtoList;
+    }
+
+    @Override
+    public Object findAllFriend(Long memberId) {
+        Member memberEntity = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("해당 멤버가 없습니다. id=" + memberId));
+        RestTemplate restTemplate = new RestTemplate();
+
+        String url = "https://api.steampowered.com/ISteamUser/GetFriendList/v1?key=F9AE0237066E8658B587ACC489C13AF9&steamid=" + memberEntity.getUsername();
+
+        Object o = restTemplate.getForObject(url, Object.class);
+
+        return o;
     }
 
 
