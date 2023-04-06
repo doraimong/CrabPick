@@ -3,6 +3,7 @@ package com.e107.backend.geChu.service;
 import com.e107.backend.geChu.dto.request.MyGameReqDto;
 import com.e107.backend.geChu.dto.response.GameDetailRespDto;
 import com.e107.backend.geChu.dto.response.GameListRespDto;
+import com.e107.backend.geChu.dto.response.OwnedGameResp;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -17,11 +18,11 @@ public interface GameService {
 
     List<GameListRespDto> findRecommendByGame(Long gameId);
 
-    List<GameListRespDto> findRecommendByUser(Long userId,List<MyGameReqDto> dto);
+    Map<String, Map<Long, Double>> findRecommendByUser(Long userId);
 
-    Map<Long, Double> listOfRecommend(Map<Long, Map<String, Object>> map);
+    Map<Long, Double> listOfRecommend(Map<Long, Map<String, Object>> map,Map<Long,OwnedGameResp> dto);
 
-    int calcPlaytimeFactor(int playtime);
+    int calcPlaytimeFactor(Long playtime);
 
     double log2(float x);
 }
