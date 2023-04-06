@@ -7,21 +7,17 @@ const RecommandGame = () => {
   const [recommandGames, setRecommandGames] = useState([]);
   const [userGames, setUserGames] = useState<any>([]);
 
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 환경변수 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const steam = "CDE3E2A5463DD52AC6DA9314663F8A49";
-  const steamId = "76561197960434622";
   const authCtx = useContext(AuthContext);
 
+  const steamId = "76561197960434622";
+  // const steamId = "authCtx.memberId";
   useEffect(() => {
-    // axios.get(`https://j8e107.p.ssafy.io/api/member/${memberId}/game)`)    유저의 스팀 아이디
     axios
-      .get(
-        `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${steam}&steamid=${76561197960434622}&format=json`
-      )
+      .get(`https://j8e107.p.ssafy.io/api/member/${steamId}/game`)
       .then((res: any) => {
-        // console.log("res.data", res.data);
-        // res.data.map((game: any) => {
-        //   const playData = {"id": game.id, "playTime": game.playTime};
+        console.log("res.data", res.data.games);
+        // res.data.games.map((game: any) => {
+        //   const playData = {"id": game.appid, "playTime": game.playtime_forever};
         //   setUserGames([...userGames, playData]);
       })
       .catch((err: any) => {
