@@ -78,6 +78,7 @@ public class GameServiceImpl implements GameService {
     public Map<String, List<GameListRespDto>> findRecommendByUser(Long userId) {  //유저가 보유한 게임을 조회하기 위해 유저아이디를 받는다
         //# {(유져 보유 게임 id) : {playtime: 5, data: {1:3.2, 2:11, 3:45}}, (유져 보유 게임 id) : {playtime: (플레이시간) 형태의 딕셔너리 생각중}
         List<OwnedGameResp> ownedGame = memberService.findOwnedGame(userId); //유저가 보유한 게임을 조회한다
+        if (ownedGame == null) return null; //유저가 보유한 게임이 없다면 null을 반환한다
         LinkedHashMap<Long, OwnedGameResp> dto = new LinkedHashMap<>(); //추후에 추천할 게임을 담을떄 보유중 게임을 제외하기 위해 사용한다
         for (OwnedGameResp game : ownedGame) { //보유중인 게임을 dto에 담는다
             dto.put(game.getAppId(), game );
