@@ -65,10 +65,10 @@ const MenuBar = () => {
       setDropSearch(false);
       navigate("/search", {
         state: { searchInput: searchInput, page: filteredGamePage, filteredGameList: filteredGameList },
-      });
+      })
     }
   };
-
+  console.log('nav', filteredGamePage)
   useEffect(() => {
     setDropSearch(false);
     setSearchInput("");
