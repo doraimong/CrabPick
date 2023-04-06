@@ -12,9 +12,27 @@
   width: 100%;
 }
 
+/* .detailInfo {
+  margin-left: 2%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+} */
 .detailInfo {
   margin-left: 2%;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; /* 추가된 코드 */
+  gap: 10px;
+}
+
+.detailInfo p {
+  text-align: center; /* 추가된 코드 */
 }
 
 .evaluate {
