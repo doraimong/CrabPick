@@ -10,11 +10,10 @@ import styles from "./RecommendCarousel.module.css";
 
 interface Props {
   games: {
-    url: string;
-    title: string;
     id: number;
-    genre: string;
-    etc: string;
+    appId: number;
+    genre: [];
+    name: string;
   }[];
 }
 function SampleNextArrow(props: any) {
@@ -33,7 +32,6 @@ function SamplePrevArrow(props: any) {
   return (
     <div
       className={className}
-      // style={{ ...style, display: "block", background: "green" }}
       style={{ ...style, display: "block" }}
       onClick={onClick}
     />
@@ -41,8 +39,6 @@ function SamplePrevArrow(props: any) {
 }
 const Carousel: React.FC<Props> = ({ games }) => {
   const navigate = useNavigate();
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
-
   const settings: Settings = {
     dots: true,
     infinite: true,
@@ -56,19 +52,35 @@ const Carousel: React.FC<Props> = ({ games }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
+  const slider = (game: any) => {
+    const a = game.genre;
+    const b = a.replaceAll("'", '"');
+    const c = JSON.parse(b);
+    const genre = [];
+    for (let i = 0; i < c.length; i++) {
+      genre.push(c[i].description);
+    }
+    return genre.join(", ");
+  };
+
   return (
     <Slider {...settings}>
-      {games.map((game, index) => (
+      {games.map((game: any, index) => (
         <div
           key={index}
           className={styles.carousel}
-          onClick={() => navigate(`/detail/${game.id}`)}
+          onClick={() => navigate(`/detail/${game.appId}`)}
         >
-          <img src={game.url} alt={`Slide ${index}`} className={styles.image} />
+          <img
+            src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
+            // src={`https://cdn.akamai.steamstatic.com/steam/apps/${game.appId}/capsule_616x353.jpg?`}
+            alt={`Slide ${index}`}
+            className={styles.image}
+          />
           <div>
-            <h1>{game.title}</h1>
-            <h4>{game.genre}</h4>
-            <h4>{game.etc}</h4>
+            <h1>{game.name}</h1>
+            {slider(game)}
+            <div></div>
           </div>
         </div>
       ))}

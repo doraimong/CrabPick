@@ -28,7 +28,8 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public List<CommentRespDto> findCommentByGameId(Long gameId) {
         List<CommentRespDto> list = new ArrayList<>();
-        List<Comment> resp = commentRepository.findByGameId(gameId);
+        Game game = gameRepository.findByAppId(gameId);
+        List<Comment> resp = commentRepository.findByGameId(game.getId());
         for (Comment c : resp) {
             log.info(c.getContent());
             list.add(CommentRespDto.of(c));
@@ -51,8 +52,7 @@ public class CommentServiceImpl implements CommentService{
     public boolean saveComment(Long memberId, Long gameId, String content) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid member id"));
-        Game game = gameRepository.findById(gameId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid game id"));
+        Game game = gameRepository.findByAppId(gameId);
         if (game == null) {
             throw new IllegalArgumentException("Invalid game id");
         }

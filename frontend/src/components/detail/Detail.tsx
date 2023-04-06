@@ -1,67 +1,360 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+import Slider, { Settings } from "react-slick";
 import styles from "./Detail.module.css";
 import deleteImg from "../../asset/deleteImg.png";
+import steamlogo from "../../asset/steamlogo.png";
+import favorite from "../../asset/favorite.png";
+import no_favorite from "../../asset/no_favorite.png";
+import axios from "axios";
+
+import { useContext } from "react";
+import AuthContext from "../../store/auth-context";
+
 // import Comment from "./Comment";
 
+interface gameData {
+  ageLimit: number;
+  appId: number;
+  avgPlaytime: object;
+  comments: [];
+  developer: string;
+  genre: string;
+  id: number;
+  imgUrl: string;
+  mood: string;
+  name: string;
+  release: string;
+  steamLink: string;
+  trailer_url: string;
+  wordCloud: string;
+}
+
+interface months {
+  [key: string]: string;
+}
+
+const MAX_ROWS = 5; // 최대 줄 수
 const Detail = () => {
-  const [commentList, setCommentList] = useState<
-    { id: number; nickname: string; content: string }[]
-  >([]);
-  const [nextCommentId, setNextCommentId] = useState(1);
-  const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const textarea = event.currentTarget.querySelector("textarea");
-    if (textarea) {
-      const commentText = textarea.value.trim();
-      if (commentText) {
-        setCommentList((prevList) => [
-          ...prevList,
-          { id: nextCommentId, nickname: "Guest", content: commentText },
-        ]);
-        setNextCommentId(nextCommentId + 1);
-        textarea.value = "";
-      }
+  const authCtx = useContext(AuthContext);
+  const { gameId } = useParams();
+  const [gameData, setGameData] = useState<gameData>();
+  const [gameGenre, setGameGenre] = useState<string>("");
+  const [gameDeveloper, setGameDeveloper] = useState<string>("");
+  const [gameRelease, setGameRelease] = useState<string>("");
+  const [gameImage, setGameImage] = useState<any>();
+  const [selectedImage, setSelectedImage] = useState<any>("");
+  const [selectedIdx, setSelectedIdx] = useState<number>(0);
+  const [simmilarGames, setSimmilarGames] = useState<any>();
+  const [simmilarGamesImage, setSimmilarGamesImage] = useState<any>([]);
+
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`)
+  //     .then((res) => {
+  //       setIsFavorited(res.data.isFavorited);
+  //     });
+  // }, [gameId, authCtx.userId]);
+
+  const handleFavorite = () => {
+    const url = `https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`;
+    // 즐겨 찾기가 되어 있다면
+    if (isFavorited) {
+      // 삭제하기
+      // axios
+      //   .delete(url)
+      //   .then(() => setIsFavorited(false))
+      //   .catch((err) => console.log(err));
+      setIsFavorited(false);
+    } else {
+      // 즐겨찾기 안되어 있을 때
+      // axios
+      //   .post(url, {
+      //     userId: authCtx.userId,
+      //     gameId: gameId,
+      //   })
+      //   .then((res) => {
+      //     setIsFavorited(true);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      setIsFavorited(true);
     }
   };
-  const deleteComment = (id: number) => {
-    setCommentList((prevList) =>
-      prevList.filter((comment) => comment.id !== id)
-    );
+
+  const month: months = {
+    "Jan,": "1",
+    "Feb,": "2",
+    "Mar,": "3",
+    "Apr,": "4",
+    "May,": "5",
+    "Jun,": "6",
+    "Jul,": "7",
+    "Aug,": "8",
+    "Sep,": "9",
+    "Oct,": "10",
+    "Nov,": "11",
+    "Dec,": "12",
+  };
+
+  const navigate = useNavigate();
+
+  /////////////////////////////데이터 받아와서 저장하기////////////////////////////////////
+  // 게임 데이터
+  useEffect(() => {
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/game/${gameId}`)
+      .then((res) => {
+        setGameData(res.data);
+      })
+      .catch((err) => {
+        alert('해당 ID를 가진 게임이 없습니다!!')
+        navigate("/");
+      });
+  }, [gameId]);
+
+  // 게임 트레일러
+  useEffect(() => {
+    setSelectedImage("");
+    if (gameData) {
+      let trailerA = gameData.trailer_url;
+      if (trailerA != "") {
+        const count = trailerA.split("id").length - 1;
+        if (count < 2) {
+          trailerA = trailerA.slice(1, trailerA.length - 1);
+        }
+        const trailerB = trailerA.replaceAll("'", '"');
+        const trailerC = trailerB.replaceAll("True", "true");
+        const trailerD = trailerC.replaceAll("False", "false");
+        const trailerE = trailerD.replaceAll('"s', "'");
+        const trailerF = trailerE.replaceAll('" ', "' ");
+        const trailerG = JSON.parse(trailerF.trim());
+        if (trailerG.length) {
+          setGameImage(trailerG);
+        } else {
+          setGameImage([trailerG]);
+        }
+      } else {
+        setGameImage([]);
+      }
+    }
+  }, [gameData]);
+
+  // 게임 이미지
+  useEffect(() => {
+    if (gameData) {
+      let imageA = gameData.imgUrl;
+      const count = imageA.split("id").length - 1;
+      if (count < 2) {
+        imageA = imageA.slice(1, imageA.length - 1);
+      }
+      const imageB = imageA.replaceAll("'", '"');
+      const imageC = imageB.replaceAll("True", "true");
+      const imageD = imageC.replaceAll("False", "false");
+      const imageE = imageD.replaceAll('"s', "'");
+      const imageF = imageE.replaceAll('" ', "' ");
+      const imageG = JSON.parse(imageF.trim());
+      setGameImage((gameImage: any) => [...gameImage, ...imageG]);
+    }
+  }, [gameData]);
+
+  useEffect(() => {
+    if (gameData) {
+      setSelectedImage(gameImage[0]);
+    }
+  }, [gameImage]);
+
+  useEffect(() => {
+    if (gameImage) {
+      setSelectedImage(gameImage[selectedIdx]);
+    }
+  }, [selectedIdx, gameImage]);
+
+  // 게임 장르
+  useEffect(() => {
+    if (gameData) {
+      const genreA = gameData.genre;
+      const genreB = genreA.replaceAll("'", '"');
+      const genreC = JSON.parse(genreB);
+      const genre = [];
+      for (let i = 0; i < genreC.length; i++) {
+        genre.push(genreC[i].description);
+      }
+      setGameGenre(genre.join(", "));
+
+      const developerA = gameData.developer;
+      const developerB = developerA.replaceAll("'", '"');
+      const developerC = JSON.parse(developerB);
+      const developer = [];
+      for (let i = 0; i < developerC.length; i++) {
+        developer.push(developerC[i]);
+      }
+      setGameDeveloper(developer.join(", "));
+
+      const releaseDate = gameData?.release.split(" ");
+      setGameRelease(
+        releaseDate[2] +
+          "년 " +
+          month[releaseDate[1]] +
+          "월 " +
+          releaseDate[0] +
+          "일"
+      );
+    }
+  }, [gameData]);
+
+  // 비슷한 게임
+  useEffect(() => {
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/game/recommend/${gameId}`)
+      .then((res) => {
+        setSimmilarGames(res.data.slice(0, 10));
+      });
+  }, [gameId]);
+
+  const goDetail = (id: number) => {
+    navigate(`/detail/${id}`);
+  };
+
+  /////////////////////////////코멘트////////////////////////////////////
+  // const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
+  // const handleCommentChange = (event: any) => {
+  //   setCommentRows(event.target.value);
+  //   // 입력된 텍스트의 줄 수 체크
+  //   const rows = event.target.value.split("\n").length;
+  //   if (rows <= MAX_ROWS) {
+  //     setCommentRows(rows);
+  //   }
+  // };
+
+  // const handleKeyPress = (event: any) => {
+  //   // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
+  //   if (event.key === "Enter" && commentRows >= MAX_ROWS) {
+  //     event.preventDefault();
+  //   }
+  // };
+
+  // const [commentList, setCommentList] = useState<
+  //   { id: number; nickname: string; content: string }[]
+  // >([]);
+  // const [nextCommentId, setNextCommentId] = useState(1);
+  // const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const textarea = event.currentTarget.querySelector("textarea");
+  //   if (textarea) {
+  //     const commentText = textarea.value.trim();
+  //     if (commentText) {
+  //       setCommentList((prevList) => [
+  //         ...prevList,
+  //         { id: nextCommentId, nickname: "Guest", content: commentText },
+  //       ]);
+  //       setNextCommentId(nextCommentId + 1);
+  //       textarea.value = "";
+  //     }
+  //   }
+  // };
+  // const deleteComment = (id: number) => {
+  //   setCommentList((prevList) =>
+  //     prevList.filter((comment) => comment.id !== id)
+  //   );
+  // };
+
+  const steam = () => {
+    window.open(`https://store.steampowered.com/app/${gameData?.appId}/`);
   };
 
   return (
     <div className={styles.detail}>
-      <div>
-        <h1>게임 제목</h1>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <h1>{gameData?.name}</h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ marginRight: "1rem" }}>좋아요</div>
+          <div
+            style={{
+              flexDirection: "column",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            onClick={handleFavorite}
+          >
+            {isFavorited ? (
+              <img
+                src={favorite}
+                style={{ background: "none", width: "2rem" }}
+                alt=""
+              />
+            ) : (
+              <img
+                src={no_favorite}
+                style={{ background: "none", width: "2rem" }}
+              ></img>
+            )}
+          </div>
+        </div>
       </div>
       <div id="게임소개" className={styles.gameDetail}>
         <div id="게임이미지" className={styles.gameImage}>
-          <div id="큰이미지" className={styles.bigImage}></div>
-          <div id="작은이미지들" className={styles.smallImages}>
-            <div id="첫번째작은이미지" className={styles.smallImage}>
-              1
-            </div>
-            <div id="두번째작은이미지" className={styles.smallImage}>
-              2
-            </div>
-            <div id="세번째작은이미지" className={styles.smallImage}>
-              3
-            </div>
-            <div id="네번째작은이미지" className={styles.smallImage}>
-              4
-            </div>
-            <div id="다섯번째작은이미지" className={styles.smallImage}>
-              5
+          {selectedImage && selectedImage.thumbnail ? (
+            <video
+              controls
+              autoPlay
+              muted
+              src={selectedImage.mp4[480]}
+              id="큰이미지"
+              className={styles.bigImage}
+            ></video>
+          ) : (
+            <img src={selectedImage.path_thumbnail}></img>
+          )}
+          <div id="스크롤" className={styles.smallImageBox}>
+            <div id="작은이미지들" className={styles.smallImages}>
+              {gameImage
+                ? gameImage.map((image: any, idx: number) => {
+                    let thumbnail = "";
+                    let isVideo = false;
+                    if (image.thumbnail) {
+                      thumbnail = image.thumbnail;
+                      isVideo = true;
+                    } else {
+                      thumbnail = image.path_thumbnail;
+                    }
+                    return (
+                      <img
+                        key={idx}
+                        src={thumbnail}
+                        onClick={() => setSelectedIdx(idx)}
+                        className={styles.smallImage}
+                      ></img>
+                    );
+                  })
+                : null}
             </div>
           </div>
         </div>
         <div id="세부정보" className={styles.detailInfo}>
-          <p>장르</p>
-          <p>제작사</p>
-          <p>연령제한</p>
-          <p>출시일</p>
-          <p>평가 비율</p>
-          <div id="평가비율">
+          <p>장르 : {gameGenre}</p>
+          <p>제작사 : {gameDeveloper}</p>
+          <p>
+            연령제한 :{" "}
+            {gameData && gameData.ageLimit === 0
+              ? "없음"
+              : gameData
+              ? gameData.ageLimit + "세"
+              : null}
+          </p>
+          <p>출시일 : {gameRelease}</p>
+          {/* <p>평가 비율</p>
+          <div id="평가비율" className={styles.ratio}>
             <meter
               min="0"
               max="100"
@@ -71,32 +364,60 @@ const Detail = () => {
               id="평가비율바"
               className={styles.rateBar}
             ></meter>
+          </div> */}
+          <br />
+          <div id="스팀링크">
+            <img
+              src={steamlogo}
+              alt=""
+              onClick={steam}
+              className={styles.steamlogo}
+            />
           </div>
-          <div id="스팀링크"></div>
-          <div id="좋아요"></div>
         </div>
       </div>
       <h2>비슷한 게임들</h2>
-      <div id="비슷한게임들" className={styles.simmilarGames}>
-        <div id="첫번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="두번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="세번째비슷한게임" className={styles.simmilarGame}></div>
-        <div id="네번째비슷한게임" className={styles.simmilarGame}></div>
+
+      <div className={styles.simmilarGamesBox}>
+        {simmilarGames && simmilarGames.length > 0 ? (
+          <div id="비슷한게임들" className={styles.simmilarGames}>
+            {simmilarGames
+              ? simmilarGames.map((game: any, idx: number) => {
+                  return (
+                    <img
+                      key={idx}
+                      src={game.headerImg}
+                      alt={`similar game ${idx}`}
+                      className={styles.simmilarGame}
+                      onClick={() => goDetail(game.appId)}
+                      // onClick={() => goDetail(game)}
+                    />
+                  );
+                })
+              : null}
+          </div>
+        ) : null}
       </div>
-      <div id="평점">
+      {/* <div id="평점">
         <div id="" className={styles.evaluate}>
           <div>평점</div>
           <div className={styles.average}>평균 별점</div>
         </div>
         <div>★★★★☆</div>
-      </div>
-      <div id="코멘트란">
+      </div> */}
+
+
+      {/* <div id="코멘트란">
         <div style={{ width: "100%" }}>
-          <h2>코멘트</h2>
+          <h2>코멘트</h2> */}
           {/* <Comment /> */}
-          <div>
+          {/* <div>
             <form onSubmit={submitComment}>
               <textarea
+                maxLength={150}
+                onChange={handleCommentChange}
+                onKeyPress={handleKeyPress}
+                rows={commentRows}
                 style={{
                   width: "100%",
                   resize: "none",
@@ -143,9 +464,11 @@ const Detail = () => {
                     borderBottom: "1px solid #ccc",
                     margin: "10px",
                     padding: "10px",
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-all",
                   }}
                 >
-                  <div>{comment.nickname}</div>
+                  <div>{comment.memberName}</div>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
@@ -154,9 +477,9 @@ const Detail = () => {
                         {comment.content}
                       </span>
                     </div>
-                    <div>
+                    <div style={{ alignItems: "end", display: "flex" }}> */}
                       {/* 삭제 */}
-                      <img
+                      {/* <img
                         src={deleteImg}
                         style={{
                           background: "none",
@@ -173,7 +496,7 @@ const Detail = () => {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

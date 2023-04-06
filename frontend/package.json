@@ -22,6 +22,7 @@
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
     "slick-carousel": "^1.8.1",
+    "steam-web-api": "^0.0.1",
     "styled-components": "^5.3.9",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
@@ -50,7 +51,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://j8e107.p.ssafy.io:8080/",
   "devDependencies": {
     "@types/styled-components": "^5.1.26"
   }

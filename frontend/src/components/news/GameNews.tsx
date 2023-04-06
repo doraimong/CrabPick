@@ -6,7 +6,7 @@ interface NewsItem {
   id: number;
   subject: string;
   url: string;
-  img: string;
+  imageLink: string;
   date: string;
   sitename: string;
 }
@@ -21,159 +21,22 @@ class GameNewsList extends Component<{}, State> {
     super(props);
 
     this.state = {
-      news: [
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-        {
-          id: 1,
-          subject: "게임 뉴스 1",
-          url: "https://news.com/1",
-          img: "https://file.thisisgame.com/upload/nboard/news/2023/03/22/s_20230322170436_6223.jpg",
-          date: "2023-03-23 16:23",
-          sitename: "디스이즈게임",
-        },
-      ],
+      news: [],
       visibleNews: 10,
     };
   }
 
-  // componentDidMount(): void {
-  //   axios
-  //     .get(`http://j8e107.p.ssafy.io:8080/api/news`)
-  //     .then((response) => {
-  //       console.log(response);
-  //       this.setState({ news: response.data });
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }
+  componentDidMount(): void {
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/news`)
+      .then((response) => {
+        console.log(response);
+        this.setState({ news: response.data });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   loadMore = (): void => {
     this.setState((prevState) => ({
@@ -192,10 +55,15 @@ class GameNewsList extends Component<{}, State> {
           <ul className={styles.newsul}>
             {news.slice(0, visibleNews).map((item) => (
               <li key={item.id} className={styles.newsli}>
-                <a href={item.url} target="_blank" className={styles.newsa}>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.newsa}
+                >
                   <div className={styles.article}>
                     <div className={styles.article_left}>
-                      <img src={item.img} alt="" />
+                      <img src={item.imageLink} alt="" />
                       <div style={{ marginLeft: "5%" }}>
                         <h3>{item.subject}</h3>
                       </div>
