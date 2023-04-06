@@ -42,7 +42,7 @@ const SteamIdPage = () => {
               console.log(res.data);
               sessionStorage.setItem("token", res.data.token);
               sessionStorage.setItem("memberId", res.data.memberId);
-              // window.location.reload();
+              window.location.reload();
             })
             // 로그인 실패다? 그럼 처음 오는 거임 일단 회원가입 강제로 시켜버리기
             .catch(() => {
@@ -65,7 +65,7 @@ const SteamIdPage = () => {
                     .then((res) => {
                       sessionStorage.setItem("token", res.data.token);
                       sessionStorage.setItem("memberId", res.data.memberId);
-                      // window.location.reload();
+                      window.location.reload();
                     });
                 });
             });
@@ -76,7 +76,7 @@ const SteamIdPage = () => {
         navigate("/");
       })
       .catch((err) => console.log(err));
-  }, [sessionStorage]);
+  }, []);
 
   return (
     <div>
