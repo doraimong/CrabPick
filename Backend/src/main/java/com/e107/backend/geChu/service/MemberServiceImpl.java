@@ -72,7 +72,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<OwnedGameResp> findOwnedGame(Long memberId) {
-        String id = "76561198086809301";
+        String id = memberId.toString();
         String url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=F9AE0237066E8658B587ACC489C13AF9&steamid="
                 + id + "&format=json&include_played_free_games=1";
         RestTemplate restTemplate = new RestTemplate();
@@ -82,17 +82,15 @@ public class MemberServiceImpl implements MemberService{
         ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
         org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
         org.json.JSONObject jo2 = (org.json.JSONObject) jo.get("response");
+        if(!jo2.has("games")) return null;
         org.json.JSONArray jo3 = (org.json.JSONArray) jo2.get("games");
+        List<OwnedGameResp> l = new ArrayList<>();
         for (Object j : jo3) {
             Game game = gameRepository.findByAppId(Long.parseLong(((org.json.JSONObject) j).get("appid").toString()));
             Long playtime = Long.parseLong(((org.json.JSONObject) j).get("playtime_forever").toString()) / 60;
-            if (game == null) {
-                throw new CommonException(2, "게임이 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            OwnedGameResp.of(game.getAppId(),game.getName(),playtime);
-            System.out.println(Long.parseLong(((org.json.JSONObject) j).get("playtime_forever").toString()) / 60);
-
+            if (game == null) continue;
+            l.add(OwnedGameResp.of(game.getAppId(),game.getName(),playtime));
         }
-        return null;
+        return l;
     }
 }
