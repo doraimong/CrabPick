@@ -74,17 +74,16 @@ const Detail = () => {
       setIsFavorited(false);
     } else {
       // 즐겨찾기 안되어 있을 때
-      // axios
-      //   .post(url, {
-      //     userId: authCtx.userId,
-      //     gameId: gameId,
-      //   })
-      //   .then((res) => {
-      //     setIsFavorited(true);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      axios
+        .post(url, {
+          userId: authCtx.userId,
+          gameId: gameId,
+        })
+        .then((res) => {
+          console.log("성공");
+          setIsFavorited(true);
+        })
+        .catch((err) => {});
       setIsFavorited(true);
     }
   };
@@ -233,7 +232,6 @@ const Detail = () => {
       setCommentRows(rows);
     }
   };
-
   const handleKeyPress = (event: any) => {
     // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
     if (event.key === "Enter" && commentRows >= MAX_ROWS) {
@@ -242,7 +240,7 @@ const Detail = () => {
   };
 
   const [commentList, setCommentList] = useState<
-    { id: number; memberName: string; content: string }[]
+    { id: number; memberName: string; content: string; createdAt: string }[]
   >([]);
 
   const [nextCommentId, setNextCommentId] = useState(1);
@@ -252,9 +250,9 @@ const Detail = () => {
       .get(`https://j8e107.p.ssafy.io/api/comment/${gameId}`)
       .then((response) => {
         setCommentList(response.data);
-        // console.log(commentList);
+        console.log('실행')
       });
-  }, [commentList]);
+  }, [nextCommentId]);
 
   const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -301,7 +299,7 @@ const Detail = () => {
             alignItems: "center",
           }}
         >
-          <div style={{ marginRight: "1rem" }}>좋아요</div>
+          {/* <div style={{ marginRight: "1rem" }}>좋아요</div>
           <div
             style={{
               flexDirection: "column",
@@ -322,7 +320,7 @@ const Detail = () => {
                 style={{ background: "none", width: "2rem" }}
               ></img>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
       <div id="게임소개" className={styles.gameDetail}>
@@ -505,7 +503,16 @@ const Detail = () => {
                     wordBreak: "break-all",
                   }}
                 >
-                  <div>{comment.memberName}</div>
+                  <div style={{ display: "flex" }}>
+                    <div style={{ marginRight: "10px" }}>
+                      {comment.memberName}
+                    </div>
+                    <div>
+                      <span>
+                        {new Date(comment.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
