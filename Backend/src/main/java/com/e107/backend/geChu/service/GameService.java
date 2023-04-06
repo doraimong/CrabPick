@@ -13,7 +13,7 @@ public interface GameService {
     GameDetailRespDto findGameByAppId(Long gameId);
     List<GameListRespDto> findAllGame(Pageable pageable);
 
-    Map<Integer, List<GameListRespDto>> findGameByName(String name, Pageable pageable);
+    Map<String, Object>findGameByName(String name, Pageable pageable);
 
     List<GameListRespDto> findRecommendByGame(Long gameId);
 
