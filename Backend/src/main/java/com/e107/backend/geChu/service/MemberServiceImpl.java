@@ -22,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,6 +97,7 @@ public class MemberServiceImpl implements MemberService{
             if (game == null) continue;
             l.add(OwnedGameResp.of(game.getAppId(),game.getName(),playtime));
         }
+        l.sort(Comparator.comparing(OwnedGameResp::getPlayTime).reversed());
         return l;
     }
 
