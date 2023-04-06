@@ -13,7 +13,7 @@ public interface GameService {
     List<GameListRespDto> findAllGame(Pageable pageable);
 
 
-    List<GameListRespDto> findGameByName(String name);
+    List<GameListRespDto> findGameByName(String name, Pageable pageable);
 
     List<GameListRespDto> findRecommendByGame(Long gameId);
 
