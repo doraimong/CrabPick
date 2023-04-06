@@ -16,9 +16,9 @@ public interface GameService {
     Map<String, Object>findGameByName(String name, Pageable pageable);
     List<GameListRespDto> findRecommendByGame(Long gameId);
 
-    Map<String, Map<Long, Double>> findRecommendByUser(Long userId);
+    Map<String, List<GameListRespDto>> findRecommendByUser(Long userId);
 
-    Map<Long, Double> listOfRecommend(Map<Long, Map<String, Object>> map,Map<Long,OwnedGameResp> dto);
+    List<GameListRespDto> listOfRecommend(Map<Long, Map<String, Object>> map,Map<Long,OwnedGameResp> dto);
 
     int calcPlaytimeFactor(Long playtime);
 
