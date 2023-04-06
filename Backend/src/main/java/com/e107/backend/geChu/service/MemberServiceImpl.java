@@ -8,6 +8,8 @@ import com.e107.backend.geChu.domain.repository.FriendRepository;
 import com.e107.backend.geChu.domain.repository.GameRepository;
 import com.e107.backend.geChu.domain.repository.MemberRepository;
 import com.e107.backend.geChu.domain.repository.SteamLibraryRepository;
+import com.e107.backend.geChu.domain.entity.*;
+import com.e107.backend.geChu.domain.repository.*;
 import com.e107.backend.geChu.dto.response.*;
 import com.e107.backend.global.common.CommonException;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -31,6 +34,8 @@ public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
     private final GameRepository gameRepository;
     private final FriendRepository friendRepository;
+
+    private final BookmarkRepository bookmarkRepository;
     private final SteamLibraryRepository steamLibraryRepository;
 
     @Override
@@ -95,4 +100,52 @@ public class MemberServiceImpl implements MemberService{
         }
         return null;
     }
+
+    //찜 게임 추가
+    @Override
+    public void addBookmark(Long memberId, Long gameId){
+
+        Member memberEntity = memberRepository.findById(memberId).get();
+        Optional<Game> optionalGameEntity = gameRepository.findById(gameId);
+
+        if(optionalGameEntity.isEmpty()){
+            throw new CommonException(2, "게임이 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        //존재하는 게임 확인
+        for(Bookmark b : memberEntity.getBookmarks()){
+            if(b.getGame().getId().equals(gameId)){
+                throw new CommonException(2, "이미 찜한 게임입니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        bookmarkRepository.save(Bookmark.builder()
+                .member(memberEntity)
+                .game(optionalGameEntity.get())//엔티티에 저장
+                .build());
+    }
+
+    // 게임 찜 삭제
+    @Override
+    public void deleteBookmark(Long bookmarkId) {
+        bookmarkRepository.deleteById(bookmarkId);
+    }
+
+    @Override
+    public List<BookmarkRespDto> findAllBookmark(Long memberId) {
+        Member memberEntity = memberRepository.findById(memberId).get();
+        List<BookmarkRespDto> bookmarkRespDtoList = new ArrayList<>();
+        for(Bookmark b : memberEntity.getBookmarks()){
+            BookmarkRespDto dto = BookmarkRespDto.builder()
+                    .id(b.getId())
+                    .gameId(b.getGame().getId())
+                    .name(b.getGame().getName())
+                    .headerImg("https://cdn.cloudflare.steamstatic.com/steam/apps/" + b.getGame().getAppId() +"/header.jpg")
+                    .build();
+            bookmarkRespDtoList.add(dto);
+        }
+        return bookmarkRespDtoList;
+    }
+
+
 }

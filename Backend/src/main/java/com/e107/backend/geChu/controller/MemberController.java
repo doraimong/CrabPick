@@ -59,6 +59,28 @@ public class MemberController {
     @PostMapping
     public ResponseEntity<String> addMember(@RequestBody MemberAddReqDto dto) {
         memberService.saveMember(dto.toEntity());
-        return new ResponseEntity<>("ZZ", HttpStatus.OK);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+    //찜 관련
+    //게임 찜 목록 추가
+    @PostMapping("bookmark/{memberId}/{gameId}")
+    public ResponseEntity<String> addBookmark(@PathVariable Long memberId, @PathVariable Long gameId) {
+        memberService.addBookmark(memberId, gameId);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+
+    //게임 찜 목록 삭제
+    @DeleteMapping("/bookmark/{bookmarkId}")
+    public ResponseEntity<String> deleteBookmark(@PathVariable Long bookmarkId) {
+        memberService.deleteBookmark(bookmarkId);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+    //멤버의 게임 찜 조회
+    @GetMapping("/bookmark/{memberId}")
+    public ResponseEntity<List<BookmarkRespDto>> getBookmarkList(@PathVariable Long memberId){
+        return new ResponseEntity<>(memberService.findAllBookmark(memberId), HttpStatus.OK);
     }
 }
