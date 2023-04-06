@@ -1,13 +1,28 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../store/auth-context";
+// import AuthContext from "../../store/auth-context";
 import axios from "axios";
+
+import AuthContext from "../../store/auth-context";
 
 import styles from "./Profile.module.css";
 import steamlogo from "../../asset/steamlogo.png";
+
+type Comment = {
+  id: number;
+  content: string;
+  memberId: number;
+  createdAt: Date;
+  // updatedAt: Date;
+  gameId: number; // gameId 프로퍼티 추가
+
+  headerImg: string;
+};
 const Profile = () => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
+
+  const [comments, setComments] = useState<Comment[]>([]);
 
   const logoutHandler = () => {
     axios.get("https://j8e107.p.ssafy.io/auth/logout").catch((response) => {
@@ -17,9 +32,17 @@ const Profile = () => {
     navigate("/");
   };
 
+  useEffect(() => {
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/member/comment/${authCtx.memberId}`)
+      .then((res) => {
+        console.log(res.data);
+        setComments(res.data.reverse().slice(0, 10));
+      });
+  }, []);
+
   return (
     <div className={styles.profile}>
-      여기는 어디
       <div
         style={{
           marginTop: "3%",
@@ -54,14 +77,19 @@ const Profile = () => {
         >
           <div>
             {/* <h2>닉네임</h2> */}
-            <h2>{authCtx.userId}</h2>
+            {/* <h2>{authCtx.userId}</h2> */}
             <h2>{authCtx.userNickname}</h2>
-            <h2>{authCtx.avatarfull}</h2>
-            <p>한 줄 소개~~~ 뭐 잡다한거~~~</p>
+            {/* <h2>{authCtx.avatarfull}</h2> */}
+            {/* <p>한 줄 소개~~~ 뭐 잡다한거~~~</p> */}
           </div>
           {/* <p>수정하러가기~</p> */}
           <div className={styles.editdiv}>
-            <a href="https://store.steampowered.com/account/" target="_blank" rel="noreferrer" className={styles.edit}>
+            <a
+              href="https://store.steampowered.com/account/"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.edit}
+            >
               <img src={steamlogo} alt="" style={{ width: "30px" }} />
               <span>Steam에서 수정하기</span>
             </a>
@@ -75,13 +103,40 @@ const Profile = () => {
             <p>게임목록들 나오기~~~ 캐러셀이든 뭐든</p>
           </div>
         </div>
-        <div style={{ marginTop: "5%" }}>
+        {/* <div style={{ marginTop: "5%" }}>
           <h2>찜 한 게임</h2>
           <p>찜 한 게임 목록들 나오기~~~</p>
-        </div>
-        <div style={{ marginTop: "5%" }}>
-          <h2>나의 코멘트 모아보기</h2>
-          <p>리스트 형식으로 쭈루루룩~~~</p>
+        </div> */}
+        <div style={{ marginTop: "5%", marginBottom: "5%" }}>
+          <h2>나의 최근 {comments.length}개 코멘트 모아보기</h2>
+          {comments.map((comment) => (
+            // <div>{comment.memberId}</div>
+            <div>
+              <div style={{ width: "100%", display: "flex" }}>
+                <img
+                  src={comment.headerImg}
+                  alt=""
+                  style={{ width: "10%", marginRight: "30px" }}
+                />
+                <div
+                  style={{
+                    flexDirection: "column",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div>{comment.content}</div>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => navigate(`/detail/${comment.gameId}`)}
+                  >
+                    자세히 보러가기
+                  </div>
+                </div>
+              </div>
+              <hr />
+            </div>
+          ))}
         </div>
       </div>
     </div>
