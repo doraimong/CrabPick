@@ -17,9 +17,9 @@ const SignInForm = () => {
     // authCtx.login("sdfsdf334232", 412, 2);
     // navigate("/");
     console.log("스팀 로그인 핸들러");
-    // window.location.replace("https://j8e107.p.ssafy.io/auth/steam");
     // window.location.replace("http://localhost:4000/auth/steam");
-    window.location.replace("http://localhost:4000/auth/steam");
+    // window.location.replace("http://localhost:4000/auth/steam");
+    window.location.replace("https://j8e107.p.ssafy.io/auth/steam");
 
     // // axios.get("https://j8e107.p.ssafy.io/auth/userinfo").then((response) => {
     // axios.get("http://localhost:4000/auth/userinfo").then((response) => {

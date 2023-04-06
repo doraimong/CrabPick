@@ -13,7 +13,8 @@ const SteamIdPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/auth/userinfo/${steamid}`)
+      // .get(`http://localhost:4000/auth/userinfo/${steamid}`)
+      .get(`https://j8e107.p.ssafy.io/auth/userinfo/${steamid}`)
       .then((response) => {
         if (response.data.data) {
           console.log(response.data.data);
