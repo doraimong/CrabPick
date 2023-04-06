@@ -45,11 +45,11 @@ passport.use(
   new SteamStrategy(
     {
       // returnURL: "http://j8e107.p.ssafy.io:4000/auth/steam/return",
-      // returnURL: "https://j8e107.p.ssafy.io/auth/steam/return",
-      returnURL: "http://localhost:4000/auth/steam/return",
+      returnURL: "https://j8e107.p.ssafy.io/auth/steam/return",
+      // returnURL: "http://localhost:4000/auth/steam/return",
       // realm: "http://j8e107.p.ssafy.io:4000/",
-      // realm: "https://j8e107.p.ssafy.io/",
-      realm: "http://localhost:4000/",
+      realm: "https://j8e107.p.ssafy.io/",
+      // realm: "http://localhost:4000/",
       apiKey: "21680047922CC0CA013B6EFEC720919A",
     },
     function (identifier, profile, done) {
@@ -174,8 +174,8 @@ app.get("/auth/userinfo/:id", (req, res) => {
     res.send(data);
   } else {
     console.log("데이터가 없어요~~~");
-    res.redirect("http://localhost:3000/");
-    // res.redirect("https://j8e107.p.ssafy.io");
+    // res.redirect("http://localhost:3000/");
+    res.redirect("https://j8e107.p.ssafy.io");
   }
 });
 
@@ -205,14 +205,14 @@ app.get(
       data: req._passport.session.user,
     }); //@@store에 저장
     // res.redirect("https://j8e107.p.ssafy.io/"); //react로 리다이렉트
-    res.redirect(
-      "http://localhost:3000/steamid?steamid=" +
-        req._passport.session.user._json.steamid
-    ); //react로 리다이렉트  -> 쿼리스트리으로 steamid 보내야함 -> 리액트에서 쿼리스트링으로 steamid를 받아야함 -> 리액트에서 노드 호출(steamid 포함해서) -> 노드에서 store에서 steamid로 찾아서 리액트로 리턴 -> 현재 유저 데이터 삭제 (로그아웃 노드로 보낼 필요 없음)
     // res.redirect(
-    //   "https://j8e107.p.ssafy.io/steamid?steamid=" +
+    //   "http://localhost:3000/steamid?steamid=" +
     //     req._passport.session.user._json.steamid
     // ); //react로 리다이렉트  -> 쿼리스트리으로 steamid 보내야함 -> 리액트에서 쿼리스트링으로 steamid를 받아야함 -> 리액트에서 노드 호출(steamid 포함해서) -> 노드에서 store에서 steamid로 찾아서 리액트로 리턴 -> 현재 유저 데이터 삭제 (로그아웃 노드로 보낼 필요 없음)
+    res.redirect(
+      "https://j8e107.p.ssafy.io/steamid?steamid=" +
+        req._passport.session.user._json.steamid
+    ); //react로 리다이렉트  -> 쿼리스트리으로 steamid 보내야함 -> 리액트에서 쿼리스트링으로 steamid를 받아야함 -> 리액트에서 노드 호출(steamid 포함해서) -> 노드에서 store에서 steamid로 찾아서 리액트로 리턴 -> 현재 유저 데이터 삭제 (로그아웃 노드로 보낼 필요 없음)
   }
 );
 
