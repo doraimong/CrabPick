@@ -145,7 +145,7 @@ const Profile = () => {
           ) : (
             <div>
               {games.map((game) => (
-                <div onClick={() => navigate(`/detail/${game.appId}`)}>
+                <div className={styles.ownedGame} onClick={() => navigate(`/detail/${game.appId}`)}>
                   {game.name}
                 </div>
               ))}
