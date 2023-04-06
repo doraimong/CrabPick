@@ -55,7 +55,6 @@ public class MemberController {
         return new ResponseEntity<>(memberService.findOwnedGame(memberId), HttpStatus.OK);
     }
 
-
     @PostMapping
     public ResponseEntity<String> addMember(@RequestBody MemberAddReqDto dto) {
         memberService.saveMember(dto.toEntity());
