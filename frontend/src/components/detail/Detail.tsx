@@ -51,6 +51,9 @@ const Detail = () => {
 
   const [isFavorited, setIsFavorited] = useState(false);
 
+  // 댓글 더보기 버튼
+  const [showCount, setShowCount] = useState(10);
+
   // useEffect(() => {
   //   axios
   //     .get(`https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`)
@@ -112,7 +115,7 @@ const Detail = () => {
         setGameData(res.data);
       })
       .catch((err) => {
-        alert('해당 ID를 가진 게임이 없습니다!!')
+        alert("해당 ID를 가진 게임이 없습니다!!");
         navigate("/");
       });
   }, [gameId]);
@@ -221,47 +224,67 @@ const Detail = () => {
   };
 
   /////////////////////////////코멘트////////////////////////////////////
-  // const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
-  // const handleCommentChange = (event: any) => {
-  //   setCommentRows(event.target.value);
-  //   // 입력된 텍스트의 줄 수 체크
-  //   const rows = event.target.value.split("\n").length;
-  //   if (rows <= MAX_ROWS) {
-  //     setCommentRows(rows);
-  //   }
-  // };
+  const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
+  const handleCommentChange = (event: any) => {
+    setCommentRows(event.target.value);
+    // 입력된 텍스트의 줄 수 체크
+    const rows = event.target.value.split("\n").length;
+    if (rows <= MAX_ROWS) {
+      setCommentRows(rows);
+    }
+  };
 
-  // const handleKeyPress = (event: any) => {
-  //   // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
-  //   if (event.key === "Enter" && commentRows >= MAX_ROWS) {
-  //     event.preventDefault();
-  //   }
-  // };
+  const handleKeyPress = (event: any) => {
+    // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
+    if (event.key === "Enter" && commentRows >= MAX_ROWS) {
+      event.preventDefault();
+    }
+  };
 
-  // const [commentList, setCommentList] = useState<
-  //   { id: number; nickname: string; content: string }[]
-  // >([]);
-  // const [nextCommentId, setNextCommentId] = useState(1);
-  // const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const textarea = event.currentTarget.querySelector("textarea");
-  //   if (textarea) {
-  //     const commentText = textarea.value.trim();
-  //     if (commentText) {
-  //       setCommentList((prevList) => [
-  //         ...prevList,
-  //         { id: nextCommentId, nickname: "Guest", content: commentText },
-  //       ]);
-  //       setNextCommentId(nextCommentId + 1);
-  //       textarea.value = "";
-  //     }
-  //   }
-  // };
-  // const deleteComment = (id: number) => {
-  //   setCommentList((prevList) =>
-  //     prevList.filter((comment) => comment.id !== id)
-  //   );
-  // };
+  const [commentList, setCommentList] = useState<
+    { id: number; memberName: string; content: string }[]
+  >([]);
+
+  const [nextCommentId, setNextCommentId] = useState(1);
+
+  useEffect(() => {
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/comment/${gameId}`)
+      .then((response) => {
+        setCommentList(response.data);
+        // console.log(commentList);
+      });
+  }, [commentList]);
+
+  const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const textarea = event.currentTarget.querySelector("textarea");
+    if (textarea) {
+      const commentText = textarea.value.trim();
+      if (commentText) {
+        // setCommentList((prevList) => [
+        //   ...prevList,
+        //   { id: nextCommentId, nickname: "Guest", content: commentText },
+        // ]);
+        axios.post(
+          `https://j8e107.p.ssafy.io/api/comment/${authCtx.memberId}/${gameId}`,
+          {
+            content: commentText,
+          }
+        );
+        setNextCommentId(nextCommentId + 1);
+        textarea.value = "";
+      }
+    }
+  };
+  const deleteComment = (id: number) => {
+    axios.delete(`https://j8e107.p.ssafy.io/api/comment/${id}`).then((res) => {
+      console.log(res);
+      setCommentList((prevList) =>
+        prevList.filter((comment) => comment.id !== id)
+      );
+    });
+  };
 
   const steam = () => {
     window.open(`https://store.steampowered.com/app/${gameData?.appId}/`);
@@ -406,12 +429,11 @@ const Detail = () => {
         <div>★★★★☆</div>
       </div> */}
 
-
-      {/* <div id="코멘트란">
+      <div id="코멘트란">
         <div style={{ width: "100%" }}>
-          <h2>코멘트</h2> */}
+          <h2>코멘트</h2>
           {/* <Comment /> */}
-          {/* <div>
+          <div>
             <form onSubmit={submitComment}>
               <textarea
                 maxLength={150}
@@ -477,9 +499,9 @@ const Detail = () => {
                         {comment.content}
                       </span>
                     </div>
-                    <div style={{ alignItems: "end", display: "flex" }}> */}
+                    <div style={{ alignItems: "end", display: "flex" }}>
                       {/* 삭제 */}
-                      {/* <img
+                      <img
                         src={deleteImg}
                         style={{
                           background: "none",
@@ -496,7 +518,7 @@ const Detail = () => {
             </div>
           )}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
