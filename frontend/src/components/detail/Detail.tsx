@@ -430,11 +430,24 @@ const Detail = () => {
       </div> */}
 
       <div id="코멘트란">
-        <div style={{ width: "100%" }}>
+        <div style={{ position: "relative" }}>
           <h2>코멘트</h2>
           {/* <Comment /> */}
           <div>
-            <form onSubmit={submitComment}>
+            <div>
+              {!authCtx.isLoggedIn && (
+                <div
+                  className={styles.notlogincomment}
+                  onClick={() => navigate("/signin")}
+                >
+                  <span>로그인하고 댓글 작성하기</span>
+                </div>
+              )}
+            </div>
+            <form
+              onSubmit={submitComment}
+              style={{ filter: authCtx.isLoggedIn ? "none" : "blur(3px)" }}
+            >
               <textarea
                 maxLength={150}
                 onChange={handleCommentChange}
@@ -451,6 +464,7 @@ const Detail = () => {
                   padding: "0",
                   borderRadius: "4px",
                 }}
+                disabled={!authCtx.isLoggedIn}
               ></textarea>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <input
@@ -465,6 +479,7 @@ const Detail = () => {
                     borderRadius: "4px",
                     cursor: "pointer",
                   }}
+                  disabled={!authCtx.isLoggedIn}
                 />
               </div>
             </form>
@@ -499,19 +514,22 @@ const Detail = () => {
                         {comment.content}
                       </span>
                     </div>
-                    <div style={{ alignItems: "end", display: "flex" }}>
-                      {/* 삭제 */}
-                      <img
-                        src={deleteImg}
-                        style={{
-                          background: "none",
-                          width: "50px",
-                          cursor: "pointer",
-                        }}
-                        alt=""
-                        onClick={() => deleteComment(comment.id)}
-                      />
-                    </div>
+
+                    {/* 삭제 */}
+                    {authCtx.userNickname == comment.memberName && (
+                      <div style={{ alignItems: "end", display: "flex" }}>
+                        <img
+                          src={deleteImg}
+                          style={{
+                            background: "none",
+                            width: "50px",
+                            cursor: "pointer",
+                          }}
+                          alt=""
+                          onClick={() => deleteComment(comment.id)}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
