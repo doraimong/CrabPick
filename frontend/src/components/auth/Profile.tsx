@@ -142,9 +142,17 @@ const Profile = () => {
           ) : (
             <div>
               {games.map((game) => (
-                <p className={styles.ownedGame} onClick={() => navigate(`/detail/${game.appId}`)}>
-                  {game.name}
-                </p>
+                <div>
+                  <img src={game.headerImg} alt="" />
+
+                  <p
+                    className={styles.ownedGame}
+                    onClick={() => navigate(`/detail/${game.appId}`)}
+                  >
+                    {game.name}
+                  </p>
+                  <p>플레이타임: 약 {game.playTime}시간</p>
+                </div>
               ))}
             </div>
           )}
