@@ -240,7 +240,7 @@ const Detail = () => {
   };
 
   const [commentList, setCommentList] = useState<
-    { id: number; memberName: string; content: string }[]
+    { id: number; memberName: string; content: string; createdAt: string }[]
   >([]);
 
   const [nextCommentId, setNextCommentId] = useState(1);
@@ -299,7 +299,7 @@ const Detail = () => {
             alignItems: "center",
           }}
         >
-          <div style={{ marginRight: "1rem" }}>좋아요</div>
+          {/* <div style={{ marginRight: "1rem" }}>좋아요</div>
           <div
             style={{
               flexDirection: "column",
@@ -320,7 +320,7 @@ const Detail = () => {
                 style={{ background: "none", width: "2rem" }}
               ></img>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
       <div id="게임소개" className={styles.gameDetail}>
@@ -503,7 +503,16 @@ const Detail = () => {
                     wordBreak: "break-all",
                   }}
                 >
-                  <div>{comment.memberName}</div>
+                  <div style={{ display: "flex" }}>
+                    <div style={{ marginRight: "10px" }}>
+                      {comment.memberName}
+                    </div>
+                    <div>
+                      <span>
+                        {new Date(comment.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
