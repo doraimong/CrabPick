@@ -26,3 +26,13 @@
 /* .image {
   margin-right: 10px;
 } */
+
+.slick-prev::before {
+  display: none;
+  opacity: 0;
+}
+
+.slick-next::before {
+  display: none;
+  opacity: 0;
+}

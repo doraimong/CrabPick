@@ -45,6 +45,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+
     public Map<String, Object> findGameByName(String name, Pageable pageable) {
         Page<Game> p = gameRepository.findByNameContaining(name, pageable);
         Map<String, Object> map = new LinkedHashMap<>();
