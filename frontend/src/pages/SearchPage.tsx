@@ -22,7 +22,10 @@ const SearchPage = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
+
   useEffect(() => {
+    setNoResult(false)
+    setCurrentItems([])
     axios
       .get(
         `https://j8e107.p.ssafy.io/api/game/name/${state.searchInput}?page=0&size=10`
@@ -31,6 +34,7 @@ const SearchPage = () => {
         setCurrentItems(res.data.data);
         setCurrentPage(1);
         window.scrollTo(0, 0);
+        if (res.data.data.length == 0) {setNoResult(true)}
       })
       .catch((e) => {});
   }, [state.searchInput]);
@@ -44,18 +48,10 @@ const SearchPage = () => {
       )
       .then((res) => {
         setCurrentItems(res.data.data);
-        setTotalPages(res.data.pages)
+        setTotalPages(res.data.pages);
       })
       .catch((e) => {});
   }, [currentPage]);
-
-  useEffect(() => {
-    if (currentItems) {
-      setNoResult(false);
-    } else {
-      setNoResult(true);
-    }
-  }, [currentItems]);
 
   const handleClickPageNumber = (pageNumber: number) => {
     setCurrentPage(pageNumber);

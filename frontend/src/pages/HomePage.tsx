@@ -11,8 +11,8 @@ const Main = () => {
   return (
     <MainLayout>
       <div className={styles.page}>
-        {/* {authCtx.isLoggedIn ? <RecommendGame /> : null} */}
-        <RecommendGame />
+        {authCtx.isLoggedIn ? <RecommendGame /> : null}
+        {/* <RecommendGame /> */}
         {/* <TopRankGame /> */}
         <BestSellerGame />
         <SaleMain />
