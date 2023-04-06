@@ -56,14 +56,12 @@ const RecommandGame = () => {
 
   return (
     <div style={{ paddingBottom: "50px" }}>
-      {recommandGames.length > 0 ? (
-        <div>
-          <h2>CRABPICK GAMES</h2>
-          <div style={{ width: "70%", margin: "0 auto" }}>
-            <RecommendCarousel games={recommandGames} />
-          </div>
+      <div>
+        <h2>CRABPICK GAMES</h2>
+        <div style={{ width: "70%", margin: "0 auto" }}>
+          <RecommendCarousel games={recommandGames} />
         </div>
-      ) : null}
+      </div>
     </div>
   );
 };
