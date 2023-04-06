@@ -13,13 +13,13 @@ const RecommandGame = () => {
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {
-    // axios.get(`https://j8e107.p.ssafy.io/api/member/${memberId}/game)`)    유저의 스팀 아이디
-    axios
-      .get(
-        `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${steam}&steamid=${76561197960434622}&format=json`
-      )
+    axios.get(`https://j8e107.p.ssafy.io/api/member/${steamId}/game`)    
+    // axios
+    //   .get(
+    //     `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${steam}&steamid=${76561197960434622}&format=json`
+    //   )
       .then((res: any) => {
-        // console.log("res.data", res.data);
+        console.log("res.data", res.data);
         // res.data.forEach((game: any) => {
         //   const playData = {"id": game.id, "playTime": game.playTime};
         //   setUserGames([...userGames, playData]);

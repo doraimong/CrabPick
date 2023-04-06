@@ -19,6 +19,7 @@ const Profile = () => {
 
   return (
     <div className={styles.profile}>
+      여기는 어디
       <div
         style={{
           marginTop: "3%",
