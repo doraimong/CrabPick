@@ -45,9 +45,9 @@ const Profile = () => {
       .get(`https://j8e107.p.ssafy.io/api/member/comment/${authCtx.memberId}`)
       .then((res) => {
         // console.log(res.data);
-        if (res.data.length > 0) {
-          setComments(res.data.reverse().slice(0, 10));
-        }
+
+        setComments(res.data.reverse().slice(0, 10));
+
         // setComments(res.data.reverse());
       });
   }, []);
@@ -57,11 +57,9 @@ const Profile = () => {
       .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
       // .get(`https://j8e107.p.ssafy.io/api/member/76561198086809301/game`)
       .then((res) => {
-        if (res.data.length > 0) {
-          console.log(authCtx.userId);
-          console.log(res.data);
-          setGames(res.data);
-        }
+        console.log(authCtx.userId);
+        console.log(res.data);
+        setGames(res.data);
       });
   }, []);
 
