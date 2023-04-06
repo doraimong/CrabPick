@@ -71,10 +71,6 @@ public class MemberServiceImpl implements MemberService{
         return dto;
     }
 
-    @Override
-    public List<CommentRespDto> findAllReview(Long memberId) {
-        return memberRepository.findAllComment(memberId);
-    }
 
     @Override
     public List<OwnedGameResp> findOwnedGame(Long memberId) {

@@ -48,10 +48,6 @@ public class MemberController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @GetMapping("/{memberId}/review")
-    public ResponseEntity<List<CommentRespDto>> getReview(@PathVariable Long memberId) {
-        return new ResponseEntity<>(memberService.findAllReview(memberId), HttpStatus.OK);
-    }
 
     @GetMapping("/{memberId}/game")
     public ResponseEntity<List<OwnedGameResp>> getOwnedGame(@PathVariable Long memberId) {
