@@ -51,35 +51,42 @@ const RecommendCarousel: React.FC<Props> = ({ games }) => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  console.log('여기', games)
-  let recommendGames = []
-  if (games.length > 10) {
-    recommendGames = games.slice(0,10)
+
+  let recommendGames = null;
+
+  if (games == undefined) {
+    recommendGames = null;
   } else {
-    recommendGames = games
+    if (games.length > 10) {
+      recommendGames = games.slice(0, 10);
+    } else {
+      recommendGames = games;
+    }
   }
 
   return (
     <Slider {...settings}>
-      {recommendGames? recommendGames.map((game: any, index) => (
-        <div
-          key={index}
-          className={styles.carousel}
-          onClick={() => navigate(`/detail/${game.appId}`)}
-        >
-          <img
-            src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
-            // src={game.imageLink}
-            alt={`Slide ${index}`}
-            className={styles.image}
-          />
-          <div>
-            <h1>{game.name}</h1>
-            {/* {slider(game)} */}
-            <div></div>
-          </div>
-        </div>
-      )) : null}
+      {recommendGames
+        ? recommendGames.map((game: any, index) => (
+            <div
+              key={index}
+              className={styles.carousel}
+              onClick={() => navigate(`/detail/${game.appId}`)}
+            >
+              <img
+                src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
+                // src={game.imageLink}
+                alt={`Slide ${index}`}
+                className={styles.image}
+              />
+              <div>
+                <h1>{game.name}</h1>
+                {/* {slider(game)} */}
+                <div></div>
+              </div>
+            </div>
+          ))
+        : null}
     </Slider>
   );
 };
