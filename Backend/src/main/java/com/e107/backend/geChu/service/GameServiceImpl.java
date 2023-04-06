@@ -124,7 +124,7 @@ public class GameServiceImpl implements GameService {
                 }
             }
         }
-        return 
+        return null;
     }
 
     @Override
