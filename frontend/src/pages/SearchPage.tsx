@@ -39,7 +39,7 @@ const SearchPage = () => {
       })
       .catch((e) => {});
   }, [state.searchInput]);
-  console.log("search", state.page);
+
   useEffect(() => {
     axios
       .get(

@@ -68,7 +68,7 @@ const MenuBar = () => {
       })
     }
   };
-  console.log('nav', filteredGamePage)
+
   useEffect(() => {
     setDropSearch(false);
     setSearchInput("");
