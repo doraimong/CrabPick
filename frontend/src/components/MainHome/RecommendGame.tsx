@@ -53,15 +53,17 @@ const RecommandGame = () => {
   //   });
   // }, [userGames]);
   // console.log("recommandGames", recommandGames);
-  console.log('regame', recommandGames)
+
   return (
     <div style={{ paddingBottom: "50px" }}>
-      <div>
-        <h2>CRABPICK GAMES</h2>
-        <div style={{ width: "70%", margin: "0 auto" }}>
-          <RecommendCarousel games={recommandGames} />
+      {recommandGames.length === 0 ? null : (
+        <div>
+          <h2>CRABPICK GAMES</h2>
+          <div style={{ width: "70%", margin: "0 auto" }}>
+            <RecommendCarousel games={recommandGames} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
