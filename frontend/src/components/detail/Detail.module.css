@@ -68,7 +68,7 @@
 
 .smallImage:hover {
   cursor: pointer;
-  transform: scale(1.02)
+  transform: scale(1.02);
 }
 
 .simmilarGamesBox {
@@ -135,4 +135,17 @@
 
 .steamlogo:hover {
   cursor: pointer;
+}
+
+.notlogincomment {
+  position: absolute;
+  left: 45%;
+  top: 50%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.notlogincomment:hover {
+  transform: scale(1.02);
+  color: rgb(240, 70, 35);
 }
