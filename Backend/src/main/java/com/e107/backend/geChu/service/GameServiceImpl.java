@@ -43,8 +43,8 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<GameListRespDto> findGameByName(String name, Pageable pageable) {
-        return gameRepository.findByNameContaining(name, pageable).stream().map(GameListRespDto::of).collect(Collectors.toList());
+    public List<GameListRespDto> findGameByName(String name) {
+        return gameRepository.findByNameContaining(name).stream().map(GameListRespDto::of).collect(Collectors.toList());
     }
 
     @Override
