@@ -45,7 +45,8 @@ const Profile = () => {
       .get(`https://j8e107.p.ssafy.io/api/member/comment/${authCtx.memberId}`)
       .then((res) => {
         // console.log(res.data);
-        setComments(res.data.reverse().slice(0, 10));
+        // setComments(res.data.reverse().slice(0, 10));
+        setComments(res.data.reverse());
       });
   }, []);
 
