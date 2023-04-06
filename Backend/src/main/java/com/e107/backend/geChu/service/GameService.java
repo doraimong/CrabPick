@@ -6,15 +6,13 @@ import com.e107.backend.geChu.dto.response.GameListRespDto;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GameService {
 
     GameDetailRespDto findGameByAppId(Long gameId);
     List<GameListRespDto> findAllGame(Pageable pageable);
-
-
-    List<GameListRespDto> findGameByName(String name, Pageable pageable);
-
+    Map<String, Object>findGameByName(String name, Pageable pageable);
     List<GameListRespDto> findRecommendByGame(Long gameId);
 
     List<GameListRespDto> findRecommendByUser(Long userId,List<MyGameReqDto> dto);
