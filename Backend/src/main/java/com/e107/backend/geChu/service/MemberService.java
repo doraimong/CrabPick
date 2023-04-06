@@ -11,5 +11,11 @@ public interface MemberService {
     MemberRespDto findMemberById(Long memberId);
     List<CommentRespDto> findAllReview(Long memberId);
     List<OwnedGameResp> findOwnedGame(Long memberId);
+
+    void addBookmark(Long memberId, Long gameId);
+
+    void deleteBookmark(Long bookmarkId);
+
+    List<BookmarkRespDto> findAllBookmark(Long memberId);
 //    List<GameOwnedMemberRespDto> findGameOwnerById(Long memberId, Long gameId);
 }
