@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/game")
@@ -32,7 +33,7 @@ public class GameController {
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<List<GameListRespDto>> getGameByName(@PathVariable String name, Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getGameByName(@PathVariable String name, Pageable pageable) {
         return new ResponseEntity<>(gameService.findGameByName(name,pageable), HttpStatus.OK);
     }
 
