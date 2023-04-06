@@ -67,7 +67,7 @@ public class GameController {
     }
 
     @GetMapping("/recommend/user/{userId}")
-    public ResponseEntity<Map<String, Map<Long, Double>>> getUserRecommendList(@PathVariable Long userId) {
+    public ResponseEntity<Map<String, List<GameListRespDto>>> getUserRecommendList(@PathVariable Long userId) {
 
         return new ResponseEntity<>(gameService.findRecommendByUser(userId), OK);
     }

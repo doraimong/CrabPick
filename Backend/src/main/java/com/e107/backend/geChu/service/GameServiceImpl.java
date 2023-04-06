@@ -64,9 +64,7 @@ public class GameServiceImpl implements GameService {
             String[] item = arr[i].split(":");
             Long id = Long.parseLong(item[0]);
             Game g = gameRepository.findByAppId(id);
-            if (g == null) {
-                throw new CommonException(2, "Game객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            if (g == null) continue;
             list.add(GameListRespDto.of(g));
 
         }
@@ -76,7 +74,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Map<String, Map<Long, Double>> findRecommendByUser(Long userId) {  //유저가 보유한 게임을 조회하기 위해 유저아이디를 받는다
+    public Map<String, List<GameListRespDto>> findRecommendByUser(Long userId) {  //유저가 보유한 게임을 조회하기 위해 유저아이디를 받는다
         //# {(유져 보유 게임 id) : {playtime: 5, data: {1:3.2, 2:11, 3:45}}, (유져 보유 게임 id) : {playtime: (플레이시간) 형태의 딕셔너리 생각중}
         List<OwnedGameResp> ownedGame = memberService.findOwnedGame(userId); //유저가 보유한 게임을 조회한다
         LinkedHashMap<Long, OwnedGameResp> dto = new LinkedHashMap<>(); //추후에 추천할 게임을 담을떄 보유중 게임을 제외하기 위해 사용한다
@@ -104,16 +102,15 @@ public class GameServiceImpl implements GameService {
             userGame.put(d.getAppId(), map); //유저가 보유한 게임의 플레이시간과 유사도를 담는다
         }
 
-        Map<Long, Double> m = listOfRecommend(userGame, dto); //유사도 알고리즘을 계산하기 위한 메소드
-        log.info("userGame : " + userGame);
-        Map<String, Map<Long, Double>> result = new LinkedHashMap<>();
+        List<GameListRespDto> m = listOfRecommend(userGame, dto); //유사도 알고리즘을 계산하기 위한 메소드
+        Map<String, List<GameListRespDto>> result = new LinkedHashMap<>();
         result.put("data", m);
         return result;
     }
 
 
     @Override
-    public Map<Long, Double> listOfRecommend(Map<Long, Map<String, Object>> map, Map<Long,OwnedGameResp> dto) { //유사도 알고리즘을 계산하기 위한 메소드
+    public List<GameListRespDto> listOfRecommend(Map<Long, Map<String, Object>> map, Map<Long,OwnedGameResp> dto) { //유사도 알고리즘을 계산하기 위한 메소드
         Map<Long, Double> totalDict = new LinkedHashMap<>(); //유사도를 담을 맵
         for (Map<String, Object> m : map.values()) { //유사도를 담는다
             Long playtime = (Long)m.get("playtime"); //유저가 보유한 게임의 플레이시간을 가져온다
@@ -132,17 +129,19 @@ public class GameServiceImpl implements GameService {
         }
         List<Map.Entry<Long, Double>> e = new LinkedList<>(totalDict.entrySet()); //유사도를 정렬하기 위해 리스트로 변환
         e.sort((o1, o2) -> (int) (o2.getValue() - o1.getValue())); //유사도를 내림차순으로 정렬
-
-        HashMap<Long, Double> result = new LinkedHashMap<>();
         int i = 0;
+        ArrayList<GameListRespDto> list = new ArrayList<>();
         for(Map.Entry<Long, Double> entry : e){ //유사도를 담는다
             if (i == 30) break; //유사도가 높은 30개의 게임만 추천
             if (dto.containsKey(entry.getKey())) continue; //유저가 보유한게임 제외
+//            System.out.println("KEY==================");
 //            System.out.println("key : " + entry.getKey() + ", value : " + entry.getValue());
-            result.put(entry.getKey(), entry.getValue());
+            Game g = gameRepository.findByAppId(entry.getKey());
+            if (g == null) continue;
+            list.add(GameListRespDto.of(g));
             i++;
         }
-        return result;
+        return list;
     }
 
     @Override
