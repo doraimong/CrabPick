@@ -14,23 +14,40 @@ const SearchPage = () => {
   const { state } = useLocation();
   const [currentItems, setCurrentItems] = useState<any>([]);
   const [noResult, setNoResult] = useState<boolean>(false);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const itemsPerPage = 10;
-  // const pageNumbersToShow = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState<number>(state.page);
+  const itemsPerPage = 10;
+  const pageNumbersToShow = 5;
 
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   useEffect(() => {
     axios
-      .get(`https://j8e107.p.ssafy.io/api/game/name/${state.searchInput}`)
+      .get(
+        `https://j8e107.p.ssafy.io/api/game/name/${state.searchInput}?page=0&size=10`
+      )
       .then((res) => {
-        console.log('여기', res.data)
-        
-        setCurrentItems(res.data);
+        setCurrentItems(res.data.data);
+        setCurrentPage(1);
+        window.scrollTo(0, 0);
       })
       .catch((e) => {});
   }, [state.searchInput]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://j8e107.p.ssafy.io/api/game/name/${state.searchInput}?page=${
+          currentPage - 1
+        }&size=10`
+      )
+      .then((res) => {
+        setCurrentItems(res.data.data);
+        setTotalPages(res.data.pages)
+      })
+      .catch((e) => {});
+  }, [currentPage]);
 
   useEffect(() => {
     if (currentItems) {
@@ -40,66 +57,58 @@ const SearchPage = () => {
     }
   }, [currentItems]);
 
-  // .slice(
-  //   indexOfFirstItem,
-  //   indexOfLastItem
-  // );
+  const handleClickPageNumber = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
 
-  // const totalPages = Math.ceil(state.filteredGameList.length / itemsPerPage);
+  const handleGoToFirstPage = () => {
+    setCurrentPage(1);
+    window.scrollTo(0, 0);
+  };
 
-  // const handleClickPageNumber = (pageNumber: number) => {
-  //   setCurrentPage(pageNumber);
-  //   window.scrollTo(0, 0);
-  // };
+  const handleGoToLastPage = () => {
+    setCurrentPage(totalPages);
+    window.scrollTo(0, 0);
+  };
 
-  // const handleGoToFirstPage = () => {
-  //   setCurrentPage(1);
-  //   window.scrollTo(0, 0);
-  // };
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      window.scrollTo(0, 0);
+    }
+  };
 
-  // const handleGoToLastPage = () => {
-  //   setCurrentPage(totalPages);
-  //   window.scrollTo(0, 0);
-  // };
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo(0, 0);
+    }
+  };
 
-  // const handleNextPage = () => {
-  //   if (currentPage < totalPages) {
-  //     setCurrentPage(currentPage + 1);
-  //     window.scrollTo(0, 0);
-  //   }
-  // };
+  const pageNumbers = [];
+  if (totalPages <= pageNumbersToShow) {
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+  } else {
+    const halfPageNumbersToShow = Math.floor(pageNumbersToShow / 2);
+    let startPageNumber = currentPage - halfPageNumbersToShow;
+    let endPageNumber = currentPage + halfPageNumbersToShow;
 
-  // const handlePrevPage = () => {
-  //   if (currentPage > 1) {
-  //     setCurrentPage(currentPage - 1);
-  //     window.scrollTo(0, 0);
-  //   }
-  // };
+    if (startPageNumber < 1) {
+      endPageNumber += Math.abs(startPageNumber) + 1;
+      startPageNumber = 1;
+    } else if (endPageNumber > totalPages) {
+      startPageNumber -= endPageNumber - totalPages;
+      endPageNumber = totalPages;
+    }
 
-  // const pageNumbers = [];
-  // if (totalPages <= pageNumbersToShow) {
-  //   for (let i = 1; i <= totalPages; i++) {
-  //     pageNumbers.push(i);
-  //   }
-  // } else {
-  //   const halfPageNumbersToShow = Math.floor(pageNumbersToShow / 2);
-  //   let startPageNumber = currentPage - halfPageNumbersToShow;
-  //   let endPageNumber = currentPage + halfPageNumbersToShow;
+    for (let i = startPageNumber; i <= endPageNumber; i++) {
+      pageNumbers.push(i);
+    }
+  }
 
-  //   if (startPageNumber < 1) {
-  //     endPageNumber += Math.abs(startPageNumber) + 1;
-  //     startPageNumber = 1;
-  //   } else if (endPageNumber > totalPages) {
-  //     startPageNumber -= endPageNumber - totalPages;
-  //     endPageNumber = totalPages;
-  //   }
-
-  //   for (let i = startPageNumber; i <= endPageNumber; i++) {
-  //     pageNumbers.push(i);
-  //   }
-  // }
-
-  console.log("currentItems", currentItems);
   return (
     <SearchLayout>
       <h3 className={styles.SearchInput}>검색 : {state.searchInput}</h3>
@@ -123,7 +132,7 @@ const SearchPage = () => {
           </div>
         )}
 
-        {/* <div className={styles.pageButton}>
+        <div className={styles.pageButton}>
           <button onClick={handleGoToFirstPage}>First</button>
           <button onClick={handlePrevPage}>Prev</button>
           <div className={styles.pagenation}>
@@ -131,7 +140,11 @@ const SearchPage = () => {
               <p
                 key={pageNumber}
                 onClick={() => handleClickPageNumber(pageNumber)}
-                className={currentPage === pageNumber ? styles.pageActive : styles.pageNumber}
+                className={
+                  currentPage === pageNumber
+                    ? styles.pageActive
+                    : styles.pageNumber
+                }
               >
                 {pageNumber}
               </p>
@@ -139,7 +152,7 @@ const SearchPage = () => {
           </div>
           <button onClick={handleNextPage}>Next</button>
           <button onClick={handleGoToLastPage}>Last</button>
-        </div> */}
+        </div>
       </div>
     </SearchLayout>
   );
