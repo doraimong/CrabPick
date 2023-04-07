@@ -154,14 +154,14 @@ const Profile = () => {
           ) : (
             <div style={{ display: "flex", flexWrap: "wrap" }}>
               {games.map((game, index) => (
-                <div style={{ flex: "1 0 20%", padding: "10px" }} key={index}>
+                <div
+                  className={styles.owned}
+                  style={{ flex: "1 0 20%", padding: "10px" }}
+                  key={index}
+                  onClick={() => navigate(`/detail/${game.appId}`)}
+                >
                   <img src={game.headerImg} alt="" />
-                  <p
-                    className={styles.ownedGame}
-                    onClick={() => navigate(`/detail/${game.appId}`)}
-                  >
-                    {game.name}
-                  </p>
+                  <p className={styles.ownedGame}>{game.name}</p>
                   <p>플레이타임: 약 {game.playTime}시간</p>
                 </div>
               ))}
