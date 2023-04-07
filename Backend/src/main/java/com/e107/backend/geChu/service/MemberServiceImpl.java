@@ -86,6 +86,7 @@ public class MemberServiceImpl implements MemberService{
         ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
         org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
         org.json.JSONObject jo2 = (org.json.JSONObject) jo.get("response");
+        log.info(resultMap.getStatusCode().toString());
         log.info(jo2.toString());
         if(!jo2.has("games")) return null;
         org.json.JSONArray jo3 = (org.json.JSONArray) jo2.get("games");
