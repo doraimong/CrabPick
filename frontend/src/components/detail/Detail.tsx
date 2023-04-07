@@ -245,7 +245,7 @@ const Detail = () => {
       .then((response) => {
         setCommentList(response.data);
       });
-  }, [nextCommentId]);
+  }, [nextCommentId, gameId]);
 
   const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
