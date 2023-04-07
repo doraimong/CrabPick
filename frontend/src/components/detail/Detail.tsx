@@ -258,19 +258,6 @@ const Detail = () => {
         //   { id: nextCommentId, nickname: "Guest", content: commentText },
         // ]);
         axios.post(
-  }, [nextCommentId]);
-
-  const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const textarea = event.currentTarget.querySelector("textarea");
-    if (textarea) {
-      const commentText = textarea.value.trim();
-      if (commentText) {
-        // setCommentList((prevList) => [
-        //   ...prevList,
-        //   { id: nextCommentId, nickname: "Guest", content: commentText },
-        // ]);
-        axios.post(
           `https://j8e107.p.ssafy.io/api/comment/${authCtx.memberId}/${gameId}`,
           {
             content: commentText,
@@ -285,19 +272,7 @@ const Detail = () => {
   };
   const deleteComment = (id: number) => {
     axios.delete(`https://j8e107.p.ssafy.io/api/comment/${id}`).then((res) => {
-      console.log(res);
       setCommentList((prevList) =>
-        );
-        setNextCommentId(nextCommentId + 1);
-        textarea.value = "";
-        window.location.reload();
-        document.body.scrollTop = document.body.scrollHeight;
-      }
-    };
-    const deleteComment = (id: number) => {
-      axios.delete(`https://j8e107.p.ssafy.io/api/comment/${id}`).then((res) => {
-        console.log(res);
-        setCommentList((prevList) =>
         prevList.filter((comment) => comment.id !== id)
       );
     });
@@ -309,10 +284,6 @@ const Detail = () => {
   //     submitComment(event)
   //   }
   // };
-
-  const steam = () => {
-    window.open(`https://store.steampowered.com/app/${gameData?.appId}/`);
-  };
 
   const steam = () => {
     window.open(`https://store.steampowered.com/app/${gameData?.appId}/`);
@@ -479,7 +450,6 @@ const Detail = () => {
               <textarea
                 maxLength={150}
                 onChange={handleCommentChange}
-                onKeyDown={handleKeyPress}
                 rows={commentRows}
                 style={{
                   width: "100%",
