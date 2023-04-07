@@ -4,7 +4,7 @@ import AuthContext from "../../store/auth-context";
 import axios from "axios";
 
 const RecommandGame = () => {
-  const [recommandGames, setRecommandGames] = useState([]);
+  const [recommendGames, setRecommendGames] = useState([]);
   // const [userGames, setUserGames] = useState<any>([]);
 
   const authCtx = useContext(AuthContext);
@@ -16,7 +16,7 @@ const RecommandGame = () => {
       )
       // .get(`https://j8e107.p.ssafy.io/api/game/recommend/user/76561198358343891`)
       .then((res) => {
-        setRecommandGames(res.data.data);
+        setRecommendGames(res.data.data);
       });
   }, []);
 
@@ -56,11 +56,11 @@ const RecommandGame = () => {
 
   return (
     <div style={{ paddingBottom: "50px" }}>
-      {recommandGames.length === 0 ? null : (
+      {recommendGames === undefined || recommendGames.length === 0 ? null : (
         <div>
           <h2>CRABPICK GAMES</h2>
           <div style={{ width: "70%", margin: "0 auto" }}>
-            <RecommendCarousel games={recommandGames} />
+            <RecommendCarousel games={recommendGames} />
           </div>
         </div>
       )}

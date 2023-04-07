@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 
-import styles from "./Page.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import styles from "./Profile.module.css";
 import axios from "axios";
 
 type Game = {
