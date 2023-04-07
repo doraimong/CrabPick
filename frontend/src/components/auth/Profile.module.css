@@ -30,3 +30,8 @@
   color: red;
   transform: scale(1.02);
 }
+
+.owned {
+  cursor: pointer;
+  transform: scale(1.02);
+}
