@@ -20,11 +20,7 @@ const OwnedGame = () => {
     axios
       .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
       .then((res) => {
-        if (res.data.length > 6) {
-          setGames(res.data.slice(0, 6));
-        } else {
-          setGames(res.data);
-        }
+        setGames(res.data);
       });
   }, []);
 
