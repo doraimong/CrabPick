@@ -37,7 +37,7 @@ function SamplePrevArrow(props: any) {
     />
   );
 }
-const RecommandCarousel: React.FC<Props> = ({ games }) => {
+const RecommendCarousel: React.FC<Props> = ({ games }) => {
   const navigate = useNavigate();
   const settings: Settings = {
     dots: true,
@@ -52,30 +52,43 @@ const RecommandCarousel: React.FC<Props> = ({ games }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
+  let recommendGames = null;
+
+  if (games == undefined) {
+    recommendGames = null;
+  } else {
+    if (games.length > 10) {
+      recommendGames = games.slice(0, 10);
+    } else {
+      recommendGames = games;
+    }
+  }
 
   return (
     <Slider {...settings}>
-      {games.map((game: any, index) => (
-        <div
-          key={index}
-          className={styles.carousel}
-          onClick={() => navigate(`/detail/${game.gameId}`)}
-        >
-          <img
-            src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameId}/header.jpg`}
-            // src={game.imageLink}
-            alt={`Slide ${index}`}
-            className={styles.image}
-          />
-          <div>
-            <h1>{game.name}</h1>
-            {/* {slider(game)} */}
-            <div></div>
-          </div>
-        </div>
-      ))}
+      {recommendGames
+        ? recommendGames.map((game: any, index) => (
+            <div
+              key={index}
+              className={styles.carousel}
+              onClick={() => navigate(`/detail/${game.appId}`)}
+            >
+              <img
+                src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`}
+                // src={game.imageLink}
+                alt={`Slide ${index}`}
+                className={styles.image}
+              />
+              <div>
+                <h1>{game.name}</h1>
+                {/* {slider(game)} */}
+                <div></div>
+              </div>
+            </div>
+          ))
+        : null}
     </Slider>
   );
 };
 
-export default RecommandCarousel;
+export default RecommendCarousel;

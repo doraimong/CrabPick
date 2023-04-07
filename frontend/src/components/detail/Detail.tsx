@@ -51,6 +51,9 @@ const Detail = () => {
 
   const [isFavorited, setIsFavorited] = useState(false);
 
+  // 댓글 더보기 버튼
+  const [showCount, setShowCount] = useState(10);
+
   // useEffect(() => {
   //   axios
   //     .get(`https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`)
@@ -60,7 +63,7 @@ const Detail = () => {
   // }, [gameId, authCtx.userId]);
 
   const handleFavorite = () => {
-    const url = `https://j8e107.p.ssafy.io/api/${authCtx.userId}/${gameId}`;
+    const url = `https://j8e107.p.ssafy.io/api/member/bookmark/${authCtx.userId}/${gameId}`;
     // 즐겨 찾기가 되어 있다면
     if (isFavorited) {
       // 삭제하기
@@ -71,17 +74,16 @@ const Detail = () => {
       setIsFavorited(false);
     } else {
       // 즐겨찾기 안되어 있을 때
-      // axios
-      //   .post(url, {
-      //     userId: authCtx.userId,
-      //     gameId: gameId,
-      //   })
-      //   .then((res) => {
-      //     setIsFavorited(true);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      axios
+        .post(url, {
+          userId: authCtx.userId,
+          gameId: gameId,
+        })
+        .then((res) => {
+          console.log("성공");
+          setIsFavorited(true);
+        })
+        .catch((err) => {});
       setIsFavorited(true);
     }
   };
@@ -112,7 +114,7 @@ const Detail = () => {
         setGameData(res.data);
       })
       .catch((err) => {
-        alert('해당 ID를 가진 게임이 없습니다!!')
+        alert("해당 ID를 가진 게임이 없습니다!!");
         navigate("/");
       });
   }, [gameId]);
@@ -221,46 +223,66 @@ const Detail = () => {
   };
 
   /////////////////////////////코멘트////////////////////////////////////
-  // const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
-  // const handleCommentChange = (event: any) => {
-  //   setCommentRows(event.target.value);
-  //   // 입력된 텍스트의 줄 수 체크
-  //   const rows = event.target.value.split("\n").length;
-  //   if (rows <= MAX_ROWS) {
-  //     setCommentRows(rows);
-  //   }
-  // };
+  const [commentRows, setCommentRows] = useState(1); // 현재 줄 수
+  const handleCommentChange = (event: any) => {
+    setCommentRows(event.target.value);
+    // 입력된 텍스트의 줄 수 체크
+    const rows = event.target.value.split("\n").length;
+    if (rows <= MAX_ROWS) {
+      setCommentRows(rows);
+    }
+  };
+
+  const [commentList, setCommentList] = useState<
+    { id: number; memberName: string; content: string; createdAt: string }[]
+  >([]);
+
+  const [nextCommentId, setNextCommentId] = useState(1);
+
+  useEffect(() => {
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/comment/${gameId}`)
+      .then((response) => {
+        setCommentList(response.data);
+      });
+  }, [nextCommentId, gameId]);
+
+  const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const textarea = event.currentTarget.querySelector("textarea");
+    if (textarea) {
+      const commentText = textarea.value.trim();
+      if (commentText) {
+        // setCommentList((prevList) => [
+        //   ...prevList,
+        //   { id: nextCommentId, nickname: "Guest", content: commentText },
+        // ]);
+        axios.post(
+          `https://j8e107.p.ssafy.io/api/comment/${authCtx.memberId}/${gameId}`,
+          {
+            content: commentText,
+          }
+        );
+        setNextCommentId(nextCommentId + 1);
+        textarea.value = "";
+        window.location.reload();
+        document.body.scrollTop = document.body.scrollHeight;
+      }
+    }
+  };
+  const deleteComment = (id: number) => {
+    axios.delete(`https://j8e107.p.ssafy.io/api/comment/${id}`).then((res) => {
+      setCommentList((prevList) =>
+        prevList.filter((comment) => comment.id !== id)
+      );
+    });
+  };
 
   // const handleKeyPress = (event: any) => {
   //   // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
-  //   if (event.key === "Enter" && commentRows >= MAX_ROWS) {
-  //     event.preventDefault();
+  //   if (event.key === "Enter") {
+  //     submitComment(event)
   //   }
-  // };
-
-  // const [commentList, setCommentList] = useState<
-  //   { id: number; nickname: string; content: string }[]
-  // >([]);
-  // const [nextCommentId, setNextCommentId] = useState(1);
-  // const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const textarea = event.currentTarget.querySelector("textarea");
-  //   if (textarea) {
-  //     const commentText = textarea.value.trim();
-  //     if (commentText) {
-  //       setCommentList((prevList) => [
-  //         ...prevList,
-  //         { id: nextCommentId, nickname: "Guest", content: commentText },
-  //       ]);
-  //       setNextCommentId(nextCommentId + 1);
-  //       textarea.value = "";
-  //     }
-  //   }
-  // };
-  // const deleteComment = (id: number) => {
-  //   setCommentList((prevList) =>
-  //     prevList.filter((comment) => comment.id !== id)
-  //   );
   // };
 
   const steam = () => {
@@ -278,7 +300,7 @@ const Detail = () => {
             alignItems: "center",
           }}
         >
-          <div style={{ marginRight: "1rem" }}>좋아요</div>
+          {/* <div style={{ marginRight: "1rem" }}>좋아요</div>
           <div
             style={{
               flexDirection: "column",
@@ -299,7 +321,7 @@ const Detail = () => {
                 style={{ background: "none", width: "2rem" }}
               ></img>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
       <div id="게임소개" className={styles.gameDetail}>
@@ -406,17 +428,28 @@ const Detail = () => {
         <div>★★★★☆</div>
       </div> */}
 
-
-      {/* <div id="코멘트란">
-        <div style={{ width: "100%" }}>
-          <h2>코멘트</h2> */}
+      <div style={{ marginBottom: "10%" }}>
+        <div style={{ position: "relative" }}>
+          <h2>코멘트</h2>
           {/* <Comment /> */}
-          {/* <div>
-            <form onSubmit={submitComment}>
+          <div>
+            <div>
+              {!authCtx.isLoggedIn && (
+                <div
+                  className={styles.notlogincomment}
+                  onClick={() => navigate("/signin")}
+                >
+                  <span>로그인하고 댓글 작성하기</span>
+                </div>
+              )}
+            </div>
+            <form
+              onSubmit={submitComment}
+              style={{ filter: authCtx.isLoggedIn ? "none" : "blur(3px)" }}
+            >
               <textarea
                 maxLength={150}
                 onChange={handleCommentChange}
-                onKeyPress={handleKeyPress}
                 rows={commentRows}
                 style={{
                   width: "100%",
@@ -429,6 +462,7 @@ const Detail = () => {
                   padding: "0",
                   borderRadius: "4px",
                 }}
+                disabled={!authCtx.isLoggedIn}
               ></textarea>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <input
@@ -443,6 +477,7 @@ const Detail = () => {
                     borderRadius: "4px",
                     cursor: "pointer",
                   }}
+                  disabled={!authCtx.isLoggedIn}
                 />
               </div>
             </form>
@@ -468,7 +503,16 @@ const Detail = () => {
                     wordBreak: "break-all",
                   }}
                 >
-                  <div>{comment.memberName}</div>
+                  <div style={{ display: "flex" }}>
+                    <div style={{ marginRight: "10px" }}>
+                      {comment.memberName}
+                    </div>
+                    <div>
+                      <span>
+                        {new Date(comment.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
@@ -477,26 +521,29 @@ const Detail = () => {
                         {comment.content}
                       </span>
                     </div>
-                    <div style={{ alignItems: "end", display: "flex" }}> */}
-                      {/* 삭제 */}
-                      {/* <img
-                        src={deleteImg}
-                        style={{
-                          background: "none",
-                          width: "50px",
-                          cursor: "pointer",
-                        }}
-                        alt=""
-                        onClick={() => deleteComment(comment.id)}
-                      />
-                    </div>
+
+                    {/* 삭제 */}
+                    {authCtx.userNickname == comment.memberName && (
+                      <div style={{ alignItems: "end", display: "flex" }}>
+                        <img
+                          src={deleteImg}
+                          style={{
+                            background: "none",
+                            width: "50px",
+                            cursor: "pointer",
+                          }}
+                          alt=""
+                          onClick={() => deleteComment(comment.id)}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           )}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

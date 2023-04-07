@@ -1,17 +1,17 @@
 import React from "react";
 import MyPageLayout from "../layout/MyPageLayout";
 import MainLayout from "../layout/MainLayout";
-import Profile from "../components/auth/Profile";
+import OwnedGame from "../components/auth/OwnedGame";
 import styles from "./Page.module.css";
 
-const MyPage = () => {
+const OwnedPage = () => {
   return (
     <MainLayout>
       <div className={styles.page}>
-        <Profile />
+        <OwnedGame />
       </div>
     </MainLayout>
   );
 };
 
-export default MyPage;
+export default OwnedPage;

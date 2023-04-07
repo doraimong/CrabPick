@@ -18,7 +18,6 @@ interface Props {
   }[];
 }
 
-
 const Carousel: React.FC<Props> = ({ salegames }) => {
   const navigate = useNavigate();
   const settings = {
@@ -40,18 +39,19 @@ const Carousel: React.FC<Props> = ({ salegames }) => {
         <div className={classes.centerimg} key={index}>
           <div onClick={() => handleClick(game.gameId)}>
             <img src={game.imageLink} alt="" />
-            {/* <h3 style={{ textAlign: "center", marginTop: "0" }}>
-              {game.title}
-            </h3> */}
             <div className={styles.discount_block}>
-              <div className={styles.discount_pct}>-{game.discountPercent}%</div>
+              <div className={styles.discount_pct}>
+                -{game.discountPercent}%
+              </div>
               <div className={styles.discount_prices}>
                 <div
                   className={`${styles.discount_original_price} ${styles.cancelled_price}`}
                 >
-                  ￦ {game.originalPrice}
+                  ￦ {game.originalPrice.toLocaleString()}
                 </div>
-                <div className={styles.discount_final_price}>￦ {game.finalPrice}</div>
+                <div className={styles.discount_final_price}>
+                  ￦ {game.finalPrice.toLocaleString()}
+                </div>
               </div>
             </div>
           </div>
