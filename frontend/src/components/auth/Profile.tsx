@@ -56,7 +56,11 @@ const Profile = () => {
       .then((res) => {
         console.log(authCtx.userId);
         console.log(res.data);
-        setGames(res.data);
+        if (res.data.length > 6) {
+          setGames(res.data.slice(0, 6));
+        } else {
+          setGames(res.data);
+        }
       });
   }, []);
 
@@ -117,7 +121,15 @@ const Profile = () => {
       </div>
       <div>
         <div style={{ marginTop: "5%" }}>
-          <h2>보유중인 게임 목록</h2>
+          <div style={{ display: "flex", alignItems: "end" }}>
+            <h2 style={{ marginRight: "10px" }}>보유중인 게임 목록</h2>
+            <p
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/owned-games")}
+            >
+              보유중인 모든게임보기{">>"}
+            </p>
+          </div>
           {games.length === 0 ? (
             <div style={{ display: "flex", justifyContent: "center" }}>
               <div>
@@ -140,11 +152,10 @@ const Profile = () => {
               </div>
             </div>
           ) : (
-            <div>
-              {games.map((game) => (
-                <div>
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
+              {games.map((game, index) => (
+                <div style={{ flex: "1 0 20%", padding: "10px" }} key={index}>
                   <img src={game.headerImg} alt="" />
-
                   <p
                     className={styles.ownedGame}
                     onClick={() => navigate(`/detail/${game.appId}`)}
