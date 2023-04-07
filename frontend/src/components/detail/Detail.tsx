@@ -258,6 +258,19 @@ const Detail = () => {
         //   { id: nextCommentId, nickname: "Guest", content: commentText },
         // ]);
         axios.post(
+  }, [nextCommentId]);
+
+  const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const textarea = event.currentTarget.querySelector("textarea");
+    if (textarea) {
+      const commentText = textarea.value.trim();
+      if (commentText) {
+        // setCommentList((prevList) => [
+        //   ...prevList,
+        //   { id: nextCommentId, nickname: "Guest", content: commentText },
+        // ]);
+        axios.post(
           `https://j8e107.p.ssafy.io/api/comment/${authCtx.memberId}/${gameId}`,
           {
             content: commentText,
@@ -274,21 +287,31 @@ const Detail = () => {
     axios.delete(`https://j8e107.p.ssafy.io/api/comment/${id}`).then((res) => {
       console.log(res);
       setCommentList((prevList) =>
+        );
+        setNextCommentId(nextCommentId + 1);
+        textarea.value = "";
+        window.location.reload();
+        document.body.scrollTop = document.body.scrollHeight;
+      }
+    };
+    const deleteComment = (id: number) => {
+      axios.delete(`https://j8e107.p.ssafy.io/api/comment/${id}`).then((res) => {
+        console.log(res);
+        setCommentList((prevList) =>
         prevList.filter((comment) => comment.id !== id)
       );
     });
   };
 
-  const handleKeyPress = (event: any) => {
-    // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
-    if (event.which === 13) {
-      if (!event.repeat) {
-        const newEvent = new Event("submit", { cancelable: true });
-        event.target.form.dispatchEvent(newEvent);
-      }
+  // const handleKeyPress = (event: any) => {
+  //   // 현재 줄 수가 최대 줄 수와 같을 때 입력되지 않도록 처리
+  //   if (event.key === "Enter") {
+  //     submitComment(event)
+  //   }
+  // };
 
-      event.preventDefault();
-    }
+  const steam = () => {
+    window.open(`https://store.steampowered.com/app/${gameData?.appId}/`);
   };
 
   const steam = () => {
