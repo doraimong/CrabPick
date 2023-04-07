@@ -76,6 +76,8 @@ public class MemberServiceImpl implements MemberService{
     public List<OwnedGameResp> findOwnedGame(Long memberId) {
         String url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=A3D575B723452BBA3FA2AF8343FAD2F3&steamid="
                 + memberId + "&format=json&include_played_free_games=1";
+        // https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=A3D575B723452BBA3FA2AF8343FAD2F3&steamid=76561199052447135&format=json&include_played_free_games=1
+        // https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=A3D575B723452BBA3FA2AF8343FAD2F3&steamid=76561199052447135&format=json&include_played_free_games=1
         RestTemplate restTemplate = new RestTemplate();
         
         HttpHeaders header = new HttpHeaders();
@@ -84,6 +86,7 @@ public class MemberServiceImpl implements MemberService{
         ResponseEntity<?> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, String.class);
         org.json.JSONObject jo = new org.json.JSONObject(resultMap.getBody().toString());
         org.json.JSONObject jo2 = (org.json.JSONObject) jo.get("response");
+        log.info(jo2.toString());
         if(!jo2.has("games")) return null;
         org.json.JSONArray jo3 = (org.json.JSONArray) jo2.get("games");
         List<OwnedGameResp> l = new ArrayList<>();
