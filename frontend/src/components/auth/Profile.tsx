@@ -57,8 +57,6 @@ const Profile = () => {
       .get(`https://j8e107.p.ssafy.io/api/member/${authCtx.userId}/game`)
       // .get(`https://j8e107.p.ssafy.io/api/member/76561198086809301/game`)
       .then((res) => {
-        console.log(authCtx.userId);
-        console.log(res.data);
         if (res.data.length > 6) {
           setGames(res.data.slice(0, 6));
         } else {
@@ -157,14 +155,14 @@ const Profile = () => {
           ) : (
             <div style={{ display: "flex", flexWrap: "wrap" }}>
               {games.map((game, index) => (
-                <div style={{ flex: "1 0 20%", padding: "10px" }} key={index}>
+                <div
+                  className={styles.owned}
+                  style={{ flex: "1 0 20%", padding: "10px" }}
+                  key={index}
+                  onClick={() => navigate(`/detail/${game.appId}`)}
+                >
                   <img src={game.headerImg} alt="" />
-                  <p
-                    className={styles.ownedGame}
-                    onClick={() => navigate(`/detail/${game.appId}`)}
-                  >
-                    {game.name}
-                  </p>
+                  <p className={styles.ownedGame}>{game.name}</p>
                   <p>플레이타임: 약 {game.playTime}시간</p>
                 </div>
               ))}
