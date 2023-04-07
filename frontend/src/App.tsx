@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-
+import OwnedGame from "./components/auth/OwnedGame";
 import Main from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
+import OwnedPage from "./pages/OwnedPage";
 import MyPage from "./pages/MyPage";
 // import GamebtiPage from "./pages/GamebtiPage";
 import GameNewsPage from "./pages/GameNewsPage";
@@ -23,6 +24,8 @@ function App() {
 
       {/* {authCtx.isLoggedIn && <Route path="/mypage" element={<MyPage />} />} */}
       <Route path="/mypage" element={<MyPage />} />
+      {/* <Route path="/owned-games" element={<OwnedGame />} /> */}
+      <Route path="/owned-games" element={<OwnedPage />} />
 
       <Route path="/game-news" element={<GameNewsPage />} />
       <Route path="/search" element={<SearchPage />} />

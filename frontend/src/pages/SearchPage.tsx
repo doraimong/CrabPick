@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DetailLayout from "../layout/DetailLayout";
 import Detail from "../components/detail/Detail";
 
@@ -8,21 +8,51 @@ import SearchResult from "../components/search/SearchResult";
 import { useLocation } from "react-router-dom";
 
 import image from "../asset/ddd.png";
+import axios from "axios";
 
 const SearchPage = () => {
   const { state } = useLocation();
+  const [currentItems, setCurrentItems] = useState<any>([]);
+  const [noResult, setNoResult] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState<number>(state.page);
   const itemsPerPage = 10;
   const pageNumbersToShow = 5;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = state.filteredGameList.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
 
-  const totalPages = Math.ceil(state.filteredGameList.length / itemsPerPage);
+  useEffect(() => {
+    setNoResult(false);
+    setCurrentItems([]);
+    axios
+      .get(
+        `https://j8e107.p.ssafy.io/api/game/name/${state.searchInput}?page=0&size=10`
+      )
+      .then((res) => {
+        setCurrentItems(res.data.data);
+        setCurrentPage(1);
+        window.scrollTo(0, 0);
+        if (res.data.data.length == 0) {
+          setNoResult(true);
+        }
+      })
+      .catch((e) => {});
+  }, [state.searchInput]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://j8e107.p.ssafy.io/api/game/name/${state.searchInput}?page=${
+          currentPage - 1
+        }&size=10`
+      )
+      .then((res) => {
+        setCurrentItems(res.data.data);
+        setTotalPages(res.data.pages);
+      })
+      .catch((e) => {});
+  }, [currentPage]);
 
   const handleClickPageNumber = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -80,11 +110,13 @@ const SearchPage = () => {
     <SearchLayout>
       <h3 className={styles.SearchInput}>검색 : {state.searchInput}</h3>
       <div className={styles.SearchPage}>
-        {currentItems.length !== 0 ? (
-          currentItems.map((game: any, i: number) => (
-            <SearchResult key={i} game={game} />
-          ))
-        ) : (
+        {currentItems && currentItems.length != 0 ? (
+          <div>
+            {currentItems.map((game: any, i: number) => (
+              <SearchResult key={i} game={game} />
+            ))}
+          </div>
+        ) : noResult ? (
           <div className={styles.NoResult}>
             <div>
               <img src={image} alt="" />
@@ -93,24 +125,34 @@ const SearchPage = () => {
               </div>
             </div>
           </div>
-        )}
-        <div className={styles.pageButton}>
-          <button onClick={handleGoToFirstPage}>First</button>
-          <button onClick={handlePrevPage}>Prev</button>
-          <div className={styles.pagenation}>
-            {pageNumbers.map((pageNumber) => (
-              <p
-                key={pageNumber}
-                onClick={() => handleClickPageNumber(pageNumber)}
-                className={currentPage === pageNumber ? styles.pageActive : styles.pageNumber}
-              >
-                {pageNumber}
-              </p>
-            ))}
+        ) : (
+          <div className={styles.NoResult}>
+            <h2>검색 중입니다</h2>
           </div>
-          <button onClick={handleNextPage}>Next</button>
-          <button onClick={handleGoToLastPage}>Last</button>
-        </div>
+        )}
+        {noResult ? null : (
+          <div className={styles.pageButton}>
+            <button onClick={handleGoToFirstPage}>First</button>
+            <button onClick={handlePrevPage}>Prev</button>
+            <div className={styles.pagenation}>
+              {pageNumbers.map((pageNumber) => (
+                <p
+                  key={pageNumber}
+                  onClick={() => handleClickPageNumber(pageNumber)}
+                  className={
+                    currentPage === pageNumber
+                      ? styles.pageActive
+                      : styles.pageNumber
+                  }
+                >
+                  {pageNumber}
+                </p>
+              ))}
+            </div>
+            <button onClick={handleNextPage}>Next</button>
+            <button onClick={handleGoToLastPage}>Last</button>
+          </div>
+        )}
       </div>
     </SearchLayout>
   );

@@ -13,6 +13,7 @@ const MenuBar = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [gameList, setGameList] = useState<any>([]);
   const [filteredGameList, setFilteredGameList] = useState<any>(null);
+  const [filteredGamePage, setFilteredGamePage] = useState<number>(1);
 
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
@@ -55,7 +56,7 @@ const MenuBar = () => {
   const searchHandler = (e: any) => {
     setDropSearch(false);
     navigate("/search", {
-      state: { searchInput: searchInput, filteredGameList: filteredGameList },
+      state: { searchInput: searchInput, page: filteredGamePage, filteredGameList: filteredGameList },
     });
   };
   // Enter로 검색하기
@@ -63,8 +64,8 @@ const MenuBar = () => {
     if (e.key === "Enter") {
       setDropSearch(false);
       navigate("/search", {
-        state: { searchInput: searchInput, filteredGameList: filteredGameList },
-      });
+        state: { searchInput: searchInput, page: filteredGamePage, filteredGameList: filteredGameList },
+      })
     }
   };
 
@@ -100,12 +101,16 @@ const MenuBar = () => {
 
   // 검색창에 쓴 값으로 게임리스트 필터링 하기
   useEffect(() => {
-    const filteredGame = gameList.filter((itemList: any) => {
-      return itemList.name.toUpperCase().includes(searchInput.toUpperCase());
-    });
-    setFilteredGameList(filteredGame);
+    axios
+      .get(`https://j8e107.p.ssafy.io/api/game/name/${searchInput}`)
+      .then((res) => {
+        setFilteredGameList(res.data.data);
+        setFilteredGamePage(res.data.pages)
+      })
+      .catch((e) => {
+      });
   }, [searchInput]);
-  // console.log(isLoggedIn)
+
   return (
     <>
       <div className={styles.navBar}>
